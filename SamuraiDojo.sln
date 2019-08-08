@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamuraiDojo", "SamuraiDojo\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamuraiDojo.Test", "SamuraiDojo.Test\SamuraiDojo.Test.csproj", "{0E85B929-B27F-48FA-8A6C-944C887BBCEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamuraiDojo.Spar", "SamuraiDojo.Spar\SamuraiDojo.Spar.csproj", "{36598A33-96C5-42F9-8AFC-D191513B1712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36598A33-96C5-42F9-8AFC-D191513B1712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36598A33-96C5-42F9-8AFC-D191513B1712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36598A33-96C5-42F9-8AFC-D191513B1712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36598A33-96C5-42F9-8AFC-D191513B1712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
