@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamuraiDojo", "SamuraiDojo\SamuraiDojo.csproj", "{1068EC3F-8811-419D-9D30-B2AC29B8F6FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamuraiDojo.Test", "SamuraiDojo.Test\SamuraiDojo.Test.csproj", "{0E85B929-B27F-48FA-8A6C-944C887BBCEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1068EC3F-8811-419D-9D30-B2AC29B8F6FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1068EC3F-8811-419D-9D30-B2AC29B8F6FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1068EC3F-8811-419D-9D30-B2AC29B8F6FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1068EC3F-8811-419D-9D30-B2AC29B8F6FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E85B929-B27F-48FA-8A6C-944C887BBCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2BBB69DF-CE54-4946-8DF5-D62B5338DF38}
+	EndGlobalSection
+EndGlobal
