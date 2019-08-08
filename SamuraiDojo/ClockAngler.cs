@@ -18,7 +18,7 @@ namespace SamuraiDojo
 
         public static int Dustin_CalculateAngleBetweenHands(int hour, int minute)
         {
-            //comment to test push
+            
             int angle = 0;
                                  
             if (hour == 12)
