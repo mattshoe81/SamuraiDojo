@@ -12,8 +12,8 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         [TestMethod]
         public void TestMethod1()
         {
-            int angle = Calculate(12, 15);
-            int expected = 90;
+            int angle = Calculate(12, 16);
+            int expected = 272;
 
             AssertAngle(expected, angle);
         }
@@ -31,7 +31,7 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         public void TestMethod3()
         {
             int angle = Calculate(12, 30);
-            int expected = 180;
+            int expected = 195;
 
             AssertAngle(expected, angle);
         }
@@ -39,8 +39,8 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         [TestMethod]
         public void TestMethod4()
         {
-            int angle = Calculate(12, 45);
-            int expected = 270;
+            int angle = Calculate(12, 46);
+            int expected = 107;
 
             AssertAngle(expected, angle);
         }
@@ -49,7 +49,7 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         public void TestMethod5()
         {
             int angle = Calculate(3, 30);
-            int expected = 90;
+            int expected = 75;
 
             AssertAngle(expected, angle);
         }
@@ -57,8 +57,8 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         [TestMethod]
         public void TestMethod6()
         {
-            int angle = Calculate(3, 45);
-            int expected = 180;
+            int angle = Calculate(3, 46);
+            int expected = 163;
 
             AssertAngle(expected, angle);
         }
@@ -67,7 +67,7 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         public void TestMethod7()
         {
             int angle = Calculate(6, 30);
-            int expected = 0;
+            int expected = 15;
 
             AssertAngle(expected, angle);
         }
@@ -75,8 +75,8 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         [TestMethod]
         public void TestMethod8()
         {
-            int angle = Calculate(6, 15);
-            int expected = 90;
+            int angle = Calculate(6, 14);
+            int expected = 103;
 
             AssertAngle(expected, angle);
         }
@@ -84,8 +84,8 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         [TestMethod]
         public void TestMethod9()
         {
-            int angle = Calculate(9, 15);
-            int expected = 180;
+            int angle = Calculate(9, 14);
+            int expected = 193;
 
             AssertAngle(expected, angle);
         }
@@ -94,7 +94,7 @@ namespace SamuraiDojo.Test.ClockAnglerTest
         public void TestMethod10()
         {
             int angle = Calculate(9, 0);
-            int expected = 90;
+            int expected = 270;
 
             AssertAngle(expected, angle);
         }
