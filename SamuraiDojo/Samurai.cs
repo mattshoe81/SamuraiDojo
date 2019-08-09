@@ -15,7 +15,7 @@ namespace SamuraiDojo
         public const string JEFF = "Jeff Moore";
         public const string SANJOG = "Sanjog Jain";
 
-        private readonly static Dictionary<string, Score> Score;
+        public readonly static Dictionary<string, Score> Score;
 
         static Samurai()
         {
