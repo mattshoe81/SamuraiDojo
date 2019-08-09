@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.Challenges;
 using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo
@@ -16,24 +17,24 @@ namespace SamuraiDojo
         public const string SANJOG = "Sanjog Jain";
 
         public readonly static Dictionary<string, Score> Score;
-        public readonly static Type CurrentChallenge;
+        public readonly static Type CurrentChallenge = typeof(ClockAngler);
 
         static Samurai()
         {
             Score = new Dictionary<string, Score>();
         }
 
-        public static void AddPoint(string winner, Type challenge)
+        public static void AddPoint(string samurai, Type challenge)
         {
-            if (Score.ContainsKey(winner))
+            if (Score.ContainsKey(samurai))
             {
-                Score[winner].AllTimeTotal++;
-                int challengePoints = Score[winner].PointsByChallenge[challenge];
-                Score[winner].PointsByChallenge[challenge] = ++challengePoints;
+                Score[samurai].AllTimeTotal++;
+                int challengePoints = Score[samurai].PointsByChallenge[challenge];
+                Score[samurai].PointsByChallenge[challenge] = ++challengePoints;
             }
             else
             {
-                Score.Add(winner, new Score
+                Score.Add(samurai, new Score
                 {
                     AllTimeTotal = 1,
                     PointsByChallenge = new Dictionary<Type, int>
