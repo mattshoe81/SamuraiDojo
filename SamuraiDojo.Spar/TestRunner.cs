@@ -18,8 +18,7 @@ namespace SamuraiDojo.Spar
                     MemberInfo[] methods = type.GetMethods();
                     foreach (MemberInfo method in methods)
                     {
-                        if (method.ReflectedType.IsPublic)
-                            method
+
                     }
                 }
             }

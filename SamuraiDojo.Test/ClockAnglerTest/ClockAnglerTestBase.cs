@@ -4,15 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SamuraiDojo.Test.ClockAnglerTest
 {
     [TestClass]
-    public abstract class ClockAnglerTestBase : DojoTest
+    public abstract class ClockAnglerTestBase
     {
 
         protected abstract int Calculate(int hour, int minute);
-
-        protected override void RegisterTests()
-        {
-            
-        }
 
         [TestMethod]
         public void TestMethod1()

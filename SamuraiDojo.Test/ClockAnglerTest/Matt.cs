@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo;
+using SamuraiDojo.Challenges;
 
 namespace SamuraiDojo.Test.ClockAnglerTest
 {

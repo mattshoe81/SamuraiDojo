@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo
 {
@@ -14,11 +15,11 @@ namespace SamuraiDojo
         public const string JEFF = "Jeff Moore";
         public const string SANJOG = "Sanjog Jain";
 
-        private readonly static Dictionary<string, SamuraiScore> Score;
+        private readonly static Dictionary<string, Score> Score;
 
         static Samurai()
         {
-            Score = new Dictionary<string, SamuraiScore>();
+            Score = new Dictionary<string, Score>();
         }
 
         public static void AddWin(string winner)
@@ -26,7 +27,7 @@ namespace SamuraiDojo
             if (Score.ContainsKey(winner))
                  Score[winner].Wins++;
             else
-                Score.Add(winner, new SamuraiScore
+                Score.Add(winner, new Score
                 {
                     Wins = 1
                 });
@@ -37,7 +38,7 @@ namespace SamuraiDojo
             if (Score.ContainsKey(sensei))
                 Score[sensei].SenseiCount++;
             else
-                Score.Add(sensei, new SamuraiScore
+                Score.Add(sensei, new Score
                 {
                     SenseiCount = 1
                 });
