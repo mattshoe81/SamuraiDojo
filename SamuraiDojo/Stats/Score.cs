@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.SamuraiStats
 {
-    public class SamuraiScore
+    public class Score
     {
         public int Wins { get; set; }
 

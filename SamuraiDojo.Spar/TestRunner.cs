@@ -12,6 +12,7 @@ namespace SamuraiDojo.Spar
             foreach (Type type in types)
             {
                 object instance = Activator.CreateInstance(type);
+
                 if (type.IsPublic && !type.IsAbstract)
                 {
                     MemberInfo[] methods = type.GetMethods();
