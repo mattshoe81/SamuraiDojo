@@ -12,9 +12,7 @@ namespace SamuraiDojo.Spar
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Press any key to analyze rankings. ");
-            Console.ReadKey();
-            Console.WriteLine($"{Environment.NewLine}Loading...{Environment.NewLine}");
+            Console.WriteLine($"Loading...{Environment.NewLine}");
 
             new TestRunner().Run();
 
