@@ -153,6 +153,15 @@ namespace SamuraiDojo.Test.ClockAnglerTest
             AssertAngle(expected, angle);
         }
 
+        [TestMethod]
+        public void TestMethod_OddMinute()
+        {
+            int angle = Calculate(0, 1);
+            int expected = 5;
+
+            AssertAngle(expected, angle);
+        }
+
         private void AssertAngle(int expected, int angle)
         {
             Assert.IsTrue(angle == expected || angle == 360 - expected, $"Expected {expected} or {360 - expected} but found {angle}");

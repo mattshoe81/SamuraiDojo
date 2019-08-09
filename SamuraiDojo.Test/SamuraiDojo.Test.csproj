@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClockAnglerTest\ClockAnglerTestBase.cs" />
+    <Compile Include="ClockAnglerTest\Jeff.cs" />
     <Compile Include="ClockAnglerTest\Matt.cs" />
     <Compile Include="ClockAnglerTest\JT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

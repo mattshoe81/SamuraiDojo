@@ -46,8 +46,13 @@ namespace SamuraiDojo.Challenges
         [SolutionBy(Samurai.JEFF)]
         public static int Jeff_CalculateAngleBetweenHands(int hour, int minute)
         {
-            int angle = 0;
-            return angle;
+            float degreesPerMinute = 6;
+            float degreesPerHour = 30;
+            float hourDrift = minute * .5f;
+            float givenMinuteDegree = minute * degreesPerMinute;
+            float givenHourDegree = (hour > 11 ? (hour - 12f) * degreesPerHour : hour * degreesPerHour) + hourDrift;
+            float angleBetweenHourAndMinute = Math.Abs(givenHourDegree - givenMinuteDegree);
+            return (int)angleBetweenHourAndMinute;
         }
     }
 }
