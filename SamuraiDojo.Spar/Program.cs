@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.SamuraiStats;
+using SamuraiDojo.Test;
 
 namespace SamuraiDojo.Spar
 {
@@ -10,11 +12,17 @@ namespace SamuraiDojo.Spar
     {
         static void Main(string[] args)
         {
-            Console.Write("Ready? ");
-            string input = Console.ReadLine();
+            Console.WriteLine("Press any key to analyze rankings. ");
+            Console.ReadKey();
+            Console.WriteLine($"{Environment.NewLine}Loading...{Environment.NewLine}");
 
-            Console.WriteLine("FATALITYYYY");
-            Console.ReadLine();
+            new TestRunner().Run();
+
+            foreach (KeyValuePair<string, Score> pair in Samurai.Score)
+                Console.WriteLine($"{pair.Key}:\t{pair.Value.Wins}");
+
+            Console.WriteLine($"{Environment.NewLine}Press any key to close.{Environment.NewLine}");
+            Console.ReadKey();
         }
     }
 }

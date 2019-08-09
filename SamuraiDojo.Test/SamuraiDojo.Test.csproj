@@ -53,6 +53,7 @@
     <Compile Include="ClockAnglerTest\Matt.cs" />
     <Compile Include="ClockAnglerTest\JT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
