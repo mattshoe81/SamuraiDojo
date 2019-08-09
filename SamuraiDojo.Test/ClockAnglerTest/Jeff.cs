@@ -5,7 +5,7 @@ using SamuraiDojo.Challenges;
 namespace SamuraiDojo.Test.ClockAnglerTest
 {
     [TestClass]
-    [SolutionBy(Samurai.JEFF)]
+    [SolutionByAttribute(Samurai.JEFF)]
     public class Jeff : ClockAnglerTestBase
     {
         protected override int Calculate(int hour, int minute)

@@ -4,11 +4,11 @@ using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo.Challenges
 {
-    [Challenge("Angler of Time")]
+    [ChallengeAttribute("Angler of Time")]
     public class ClockAngler
     {
-        [Sensei(Samurai.MATT)]
-        [SolutionBy(Samurai.MATT)]
+        [SenseiAttribute(Samurai.MATT)]
+        [SolutionByAttribute(Samurai.MATT)]
         public static int Matt_CalculateAngleBetweenHands(int hour, int minute)
         {
             int degreesPerHour = 360 / 12;
@@ -21,15 +21,15 @@ namespace SamuraiDojo.Challenges
             return angle;
         }
         
-        [SolutionBy(Samurai.JT)]
+        [SolutionByAttribute(Samurai.JT)]
         public static int JT_CalculateAngleBetweenHands(int hour, int minute)
         {
             int angle = 0;
             return angle;
         }
 
-        [Winner(Samurai.DUSTIN)]
-        [SolutionBy(Samurai.DUSTIN)]
+        [WinnerAttribute(Samurai.DUSTIN)]
+        [SolutionByAttribute(Samurai.DUSTIN)]
         public static int Dustin_CalculateAngleBetweenHands(int hour, int minute)
         {
             int angle = 0;
@@ -48,14 +48,14 @@ namespace SamuraiDojo.Challenges
             return angle;
         }
 
-        [SolutionBy(Samurai.SANJOG)]
+        [SolutionByAttribute(Samurai.SANJOG)]
         public static int Sanjog_CalculateAngleBetweenHands(int hour, int minute)
         {
             int angle = 0;
             return angle;
         }
 
-        [SolutionBy(Samurai.JEFF)]
+        [SolutionByAttribute(Samurai.JEFF)]
         public static int Jeff_CalculateAngleBetweenHands(int hour, int minute)
         {
             float degreesPerMinute = 6;

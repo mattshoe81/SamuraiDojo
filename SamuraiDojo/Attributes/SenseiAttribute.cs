@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo.Attributes
 {
-    public class Challenge : Attribute
+    public class SenseiAttribute : Attribute
     {
         public string Name { get; set; }
 
-        public Challenge(string name)
+        public SenseiAttribute(string sensei)
         {
-            Name = name;
+            Name = sensei;
+            Samurai.AddSensei(sensei);
         }
     }
 }

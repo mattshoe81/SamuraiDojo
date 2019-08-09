@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Attributes
 {
-    public class SolutionBy : Attribute
+    public class ChallengeAttribute : Attribute
     {
         public string Name { get; set; }
 
-        public SolutionBy(string samurai)
+        public ChallengeAttribute(string name)
         {
-            Name = samurai;
+            Name = name;
         }
     }
 }

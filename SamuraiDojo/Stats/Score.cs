@@ -8,8 +8,10 @@ namespace SamuraiDojo.SamuraiStats
 {
     public class Score
     {
-        public int Wins { get; set; }
+        public int AllTimeTotal { get; set; }
 
         public int SenseiCount { get; set; }
+
+        public Dictionary<Type, int> PointsByChallenge { get; set; }
     }
 }

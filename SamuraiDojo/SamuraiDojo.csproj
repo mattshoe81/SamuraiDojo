@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\Challenge.cs" />
-    <Compile Include="Attributes\Sensei.cs" />
-    <Compile Include="Attributes\SolutionBy.cs" />
-    <Compile Include="Attributes\Winner.cs" />
+    <Compile Include="Attributes\ChallengeAttribute.cs" />
+    <Compile Include="Attributes\SenseiAttribute.cs" />
+    <Compile Include="Attributes\SolutionByAttribute.cs" />
+    <Compile Include="Attributes\WinnerAttribute.cs" />
     <Compile Include="Challenges\ClockAngler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />

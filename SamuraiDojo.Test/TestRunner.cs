@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test
 {
@@ -17,7 +18,7 @@ namespace SamuraiDojo.Test
             Type[] types = assembly.GetTypes();
             foreach (Type type in types)
             {
-                if (HasAttribute<SolutionBy>(type))
+                if (HasAttribute<SolutionByAttribute>(type))
                 {
                     MethodInfo[] methods = type.GetMethods();
                     foreach (MethodInfo method in methods)
@@ -36,12 +37,11 @@ namespace SamuraiDojo.Test
                 object instance = Activator.CreateInstance(type);
                 method.Invoke(instance, null);
 
-                SolutionBy solutionBy = (SolutionBy)Attribute.GetCustomAttribute(type, typeof(SolutionBy));
-                Samurai.AddWin(solutionBy.Name);
+                SolutionByAttribute solutionBy = (SolutionByAttribute)Attribute.GetCustomAttribute(type, typeof(SolutionByAttribute));
+                UnderTestAttribute underTest = (UnderTestAttribute)Attribute.GetCustomAttribute(type, typeof(UnderTestAttribute));
+                Samurai.AddPoint(solutionBy.Name, underTest.Type);
             }
-            catch (Exception ex)
-            {
-            }
+            catch { }
         }
 
         private bool HasAttribute<T>(Type type)
@@ -52,7 +52,7 @@ namespace SamuraiDojo.Test
                 Attribute attribute = Attribute.GetCustomAttribute(type, typeof(T));
                 result = attribute != null;
             }
-            catch (Exception ex)
+            catch
             {
                 result = false;
             }
@@ -68,7 +68,7 @@ namespace SamuraiDojo.Test
                 Attribute attribute = Attribute.GetCustomAttribute(member, typeof(T));
                 result = attribute != null;
             }
-            catch (Exception ex)
+            catch
             {
                 result = false;
             }

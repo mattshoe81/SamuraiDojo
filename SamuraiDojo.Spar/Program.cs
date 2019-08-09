@@ -17,7 +17,7 @@ namespace SamuraiDojo.Spar
             new TestRunner().Run();
 
             foreach (KeyValuePair<string, Score> pair in Samurai.Score)
-                Console.WriteLine($"{pair.Key}:\t{pair.Value.Wins}");
+                Console.WriteLine($"{pair.Key}:\t{pair.Value.AllTimeTotal}");
 
             Console.WriteLine($"{Environment.NewLine}Press any key to close.{Environment.NewLine}");
             Console.ReadKey();

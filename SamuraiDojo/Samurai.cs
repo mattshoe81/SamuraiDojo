@@ -16,21 +16,32 @@ namespace SamuraiDojo
         public const string SANJOG = "Sanjog Jain";
 
         public readonly static Dictionary<string, Score> Score;
+        public readonly static Type CurrentChallenge;
 
         static Samurai()
         {
             Score = new Dictionary<string, Score>();
         }
 
-        public static void AddWin(string winner)
+        public static void AddPoint(string winner, Type challenge)
         {
             if (Score.ContainsKey(winner))
-                 Score[winner].Wins++;
+            {
+                Score[winner].AllTimeTotal++;
+                int challengePoints = Score[winner].PointsByChallenge[challenge];
+                Score[winner].PointsByChallenge[challenge] = ++challengePoints;
+            }
             else
+            {
                 Score.Add(winner, new Score
                 {
-                    Wins = 1
+                    AllTimeTotal = 1,
+                    PointsByChallenge = new Dictionary<Type, int>
+                    {
+                        { challenge, 1 }
+                    }
                 });
+            }
         }
 
         public static void AddSensei(string sensei)

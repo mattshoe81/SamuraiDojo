@@ -1,8 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SamuraiDojo.Challenges;
+using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test.ClockAnglerTest
 {
+    [UnderTest(typeof(ClockAngler))]
     [TestClass]
     public abstract class ClockAnglerTestBase
     {

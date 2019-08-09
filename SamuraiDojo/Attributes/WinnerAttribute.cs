@@ -3,14 +3,14 @@ using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo.Attributes
 {
-    public class Winner : Attribute
+    public class WinnerAttribute : Attribute
     {
         public string Name { get; set; }
 
-        public Winner(string winner)
+        public WinnerAttribute(string winner)
         {
             Name = winner;
-            Samurai.AddWin(winner);
+            Samurai.AddPoint(winner);
         }
     }
 }
