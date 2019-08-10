@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.Attributes;
 using SamuraiDojo.SamuraiStats;
 using SamuraiDojo.Stats;
 using SamuraiDojo.Test;
+using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Spar
 {
@@ -19,6 +21,8 @@ namespace SamuraiDojo.Spar
             testRunner.OnTestPass = (context) =>
             {
                 ScoreKeeper.AddPoint(context.WrittenBy, context.ClassUnderTest);
+                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
+
             };
             testRunner.Run();
 

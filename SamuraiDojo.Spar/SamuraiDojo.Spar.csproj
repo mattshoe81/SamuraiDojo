@@ -54,6 +54,10 @@
       <Project>{0e85b929-b27f-48fa-8a6c-944c887bbcef}</Project>
       <Name>SamuraiDojo.Test</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
+      <Project>{0DC773C1-7F74-4718-88A4-886B0036CB90}</Project>
+      <Name>SamuraiDojo.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo\SamuraiDojo.csproj">
       <Project>{1068ec3f-8811-419d-9d30-b2ac29b8f6fd}</Project>
       <Name>SamuraiDojo</Name>

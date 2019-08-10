@@ -4,7 +4,7 @@ using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo.Challenges.Week1
 {
-    [Challenge("Angler of Time", 1)]
+    [Challenge("8/9/2019", "Angler of Time")]
     public class ClockAngler
     {
         [Sensei(Samurai.MATT)]
