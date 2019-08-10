@@ -131,10 +131,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ChallengeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\ScoreController.cs" />
+    <Compile Include="Controllers\SamuraiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +145,7 @@
   <ItemGroup>
     <Content Include="Angular\app.js" />
     <Content Include="Angular\Controllers\HomePageController.js" />
+    <Content Include="Angular\Controllers\MyProfileController.js" />
     <Content Include="Angular\Directives\DirectivesApp.js" />
     <Content Include="Angular\Services\DataService.js" />
     <Content Include="Angular\Services\RequestService.js" />
@@ -968,6 +970,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Samurai\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

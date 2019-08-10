@@ -1,32 +1,30 @@
 ﻿<div class="container" ng-controller="HomePageController as vm">
 
-    <h3>This week's challenge: <span class="bold italic">'{{vm.CurrentChallenge}}'</span></h3>
-    <div class="row">
+    <h3>This week's challenge: <span class="bold italic">'{{vm.CurrentChallenge.Name}}'</span></h3>
+
+    <div class="spacer-25"></div>
+
+    <div class="row center-block">
         <div class="col-sm-4">
-            Your Stats:
             <table class="table table-condensed">
-                <tbody>
+                <thead>
                     <tr>
-                        <td>Username:</td>
-                        <td>{{vm.Player.Username}}</td>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Points</th>
+                        <th>Challenges</th>
                     </tr>
+                </thead>
+                <tbody ng-repeat="player in vm.AllPlayers">
                     <tr>
-                        <td>Rank:</td>
-                        <td>{{vm.Player.Rank}}</td>
-                    </tr>
-                    <tr>
-                        <td>Total Points:</td>
-                        <td>{{vm.Player.TotalPoints}}</td>
-                    </tr>
-                    <tr>
-                        <td>Challenges Completed:</td>
-                        <td>{{vm.Player.ChallengesCompleted}}</td>
+                        <td>{{player.Rank}}</td>
+                        <td>{{player.Username}}</td>
+                        <td>{{player.TotalPoints}}</td>
+                        <td>{{player.ChallengesCompleted}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
-
 
 </div>

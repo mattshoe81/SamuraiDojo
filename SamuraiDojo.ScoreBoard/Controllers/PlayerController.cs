@@ -6,6 +6,7 @@ using SamuraiDojo.ScoreBoard.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
+using System.Linq;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
@@ -40,41 +41,15 @@ namespace SamuraiDojo.ScoreBoard.Controllers
                 if (player != null) 
                     players.Add(player);
             }
+            players.Sort();
+
             return Request.CreateResponse(HttpStatusCode.OK, players);
         }
         
         private PlayerStats GetPlayer(string playerName)
         {
             PlayerStats player = ScoreKeeper.GetPlayer(playerName);
-            if (player != null)
-            {
-                player.Username = playerName;
-                player.ChallengesCompleted = player.PointsByChallenge.Keys.Count;
-                player.Rank = CalculateRank(player);
-            }
-
             return player;
         } 
-
-        private int CalculateRank(PlayerStats player)
-        {
-            int rank = 1;
-            foreach (KeyValuePair<string, PlayerStats> pair in ScoreKeeper.Players)
-            {
-                PlayerStats opponent = pair.Value;
-                if (opponent.TotalPoints > player.TotalPoints)
-                    rank++;
-                else if (opponent.TotalPoints == player.TotalPoints)
-                {
-                    // If opponent has achieved as many points as you in fewer challenges, then he outranks you
-                    if (player.PointsByChallenge.Keys.Count > opponent.PointsByChallenge.Keys.Count)
-                        rank++;
-                    else if (player.SenseiCount > opponent.SenseiCount)
-                        rank++;
-                }
-            }
-
-            return rank;
-        }
     }
 }

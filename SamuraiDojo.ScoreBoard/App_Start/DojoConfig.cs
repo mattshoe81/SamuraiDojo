@@ -23,9 +23,32 @@ namespace SamuraiDojo.ScoreBoard.App_Start
 
             };
             testRunner.Run();
+            CalculateRanks();
 
             foreach (KeyValuePair<string, PlayerStats> pair in ScoreKeeper.Players)
                 Debug.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
+        }
+
+        private static void CalculateRanks()
+        {
+            List<PlayerStats> players = ScoreKeeper.Players.Values.ToList();
+            players.Sort();
+
+            HashSet<int> rankings = new HashSet<int>();
+            int currentRank = 1;
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (!rankings.Contains(currentRank))
+                {
+                    players[i].Rank = currentRank;
+                    rankings.Add(currentRank);
+                }
+                else
+                    players[i].Rank = currentRank;
+
+                if (i < players.Count - 1)
+                    currentRank += Math.Abs(players[i].CompareTo(players[i + 1]));
+            }
         }
     }
 }

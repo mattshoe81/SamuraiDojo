@@ -45,11 +45,17 @@
     <Compile Include="Attributes\SenseiAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Challenges\Week1\ClockAngler.cs" />
+    <Compile Include="Models\Challenge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
     <Compile Include="Stats\PlayerStats.cs" />
     <Compile Include="Stats\ScoreKeeper.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Descriptions\08-09-2019.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

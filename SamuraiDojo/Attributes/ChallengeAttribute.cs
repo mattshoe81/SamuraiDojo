@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,18 +13,22 @@ namespace SamuraiDojo.Attributes
     {
         public string Name { get; set; }
         public DateTime Deadline { get; set; }
+        public string Description { get; set; }
+
+        private string deadlineString;
 
         public ChallengeAttribute(string date, string name)
         {
             Name = name;
             Deadline = ParseDate(date);
+            //Description = LoadDescription();
         }
 
         private DateTime ParseDate(string date)
         {
             string[] dateParts = date.Split('/');
-            string formatted = $"{dateParts[0].PadLeft(2, '0')}/{dateParts[1].PadLeft(2, '0')}/{FormatYearString(dateParts[2])}";
-            DateTime deadline = DateTime.ParseExact(formatted, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            deadlineString = $"{dateParts[0].PadLeft(2, '0')}-{dateParts[1].PadLeft(2, '0')}-{FormatYearString(dateParts[2])}";
+            DateTime deadline = DateTime.ParseExact(deadlineString, "MM-dd-yyyy", CultureInfo.InvariantCulture);
 
             return deadline;
         }
@@ -34,7 +40,24 @@ namespace SamuraiDojo.Attributes
                 result = $"20{year.Substring(year.Length - 2)}";
 
             return result;
+        }
 
+        private string LoadDescription()
+        {
+            // TODO - this is broken. probably a better way
+            string directory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(directory, "Descriptions", $"{deadlineString}.txt");
+            string description = "DESCRIPTION NOT FOUND";
+            if (File.Exists(path))
+            {
+                try
+                {
+                    description = File.ReadAllText(path);
+                }
+                catch (Exception ex) { }
+            }
+
+            return description;
         }
 
         

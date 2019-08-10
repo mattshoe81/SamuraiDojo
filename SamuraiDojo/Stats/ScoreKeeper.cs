@@ -42,6 +42,8 @@ namespace SamuraiDojo.Stats
             {
                 Players.Add(samurai, new PlayerStats
                 {
+                    Username = samurai.ToUpper(),
+
                     TotalPoints = 1,
                     PointsByChallenge = new Dictionary<Type, int>
                     {
