@@ -50,11 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UnderTestAttribute.cs" />
-    <Compile Include="ClockAnglerTest\ClockAnglerTestBase.cs" />
-    <Compile Include="ClockAnglerTest\Dustin.cs" />
-    <Compile Include="ClockAnglerTest\Jeff.cs" />
-    <Compile Include="ClockAnglerTest\Matt.cs" />
-    <Compile Include="ClockAnglerTest\JT.cs" />
+    <Compile Include="Week1\ClockAnglerTestBase.cs" />
+    <Compile Include="Week1\Dustin.cs" />
+    <Compile Include="Week1\Jeff.cs" />
+    <Compile Include="Week1\Matt.cs" />
+    <Compile Include="Week1\JT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestExecutionContext.cs" />
     <Compile Include="TestRunner.cs" />

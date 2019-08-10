@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}

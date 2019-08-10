@@ -1,6 +1,6 @@
 ﻿using System;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.SamuraiStats;
+using SamuraiDojo.Stats;
 
 namespace SamuraiDojo.Challenges.Week1
 {

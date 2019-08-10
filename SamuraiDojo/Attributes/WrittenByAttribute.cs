@@ -12,7 +12,7 @@ namespace SamuraiDojo.Attributes
 
         public WrittenByAttribute(string samurai)
         {
-            Name = samurai;
+            Name = samurai.ToUpper();
         }
     }
 }

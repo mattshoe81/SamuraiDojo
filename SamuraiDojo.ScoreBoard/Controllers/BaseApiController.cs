@@ -11,14 +11,30 @@ namespace SamuraiDojo.ScoreBoard.Controllers
     {
         protected MediaTypeFormatter Formatter;
 
-        public BaseApiController()
+        public BaseApiController() : base()
         {
             Init();
         }
 
         private void Init()
         {
-            //Formatter = Configuration.Formatters.JsonFormatter;
+
+        }
+
+        protected string GetCurrentUsername()
+        {
+            string username;
+            try
+            {
+                string full = HttpContext.Current.User.Identity.Name;
+                username = full.Substring(full.LastIndexOf('\\') + 1);
+            }
+            catch
+            {
+                username = string.Empty;
+            }
+
+            return username;
         }
     }
 }

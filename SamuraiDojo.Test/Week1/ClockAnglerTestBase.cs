@@ -2,7 +2,7 @@
 using SamuraiDojo.Challenges.Week1;
 using SamuraiDojo.Test.Attributes;
 
-namespace SamuraiDojo.Test.ClockAnglerTest
+namespace SamuraiDojo.Test.Week1
 {
     [UnderTest(typeof(ClockAngler))]
     [TestClass]

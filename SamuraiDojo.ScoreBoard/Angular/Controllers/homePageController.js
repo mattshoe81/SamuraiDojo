@@ -7,12 +7,21 @@
         var vm = this;
         vm.CurrentChallenge = "Angler of Time - hardcoded";
 
-        var request = RequestService.SendRequest("/api/Score", null, "GET");
-        request.Success(function (response) {
-            vm.Response = response.data;
+        var playerRequest = RequestService.SendRequest("/api/Player", null, "GET");
+        playerRequest.Success(function (response) {
+            vm.Player = response.data;
         });
-        request.Error(function (error) {
-            vm.Response = response.data;
+        playerRequest.Error(function (error) {
+            vm.Player = error.ExceptionMessage;
+        });
+
+
+        var allPlayersRequest = RequestService.SendRequest("/api/Player/All", null, "GET");
+        allPlayersRequest.Success(function (response) {
+            vm.AllPlayers = response.data;
+        });
+        allPlayersRequest.Error(function (error) {
+            vm.AllPlayers = error.ExceptionMessage;
         });
 
     }]);

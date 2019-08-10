@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Stats;
 using SamuraiDojo.Stats;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
 
-namespace SamuraiDojo.Spar
+namespace SamuraiDojo.ScoreBoard.App_Start
 {
-    class Program
+    public static class DojoConfig
     {
-        static void Main(string[] args)
+        public static void Init()
         {
-            Console.WriteLine($"Loading...{Environment.NewLine}");
-
             TestRunner testRunner = new TestRunner();
             testRunner.OnTestPass = (context) =>
             {
@@ -27,10 +25,7 @@ namespace SamuraiDojo.Spar
             testRunner.Run();
 
             foreach (KeyValuePair<string, PlayerStats> pair in ScoreKeeper.Players)
-                Console.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
-
-            Console.WriteLine($"{Environment.NewLine}Press any key to close.{Environment.NewLine}");
-            Console.ReadKey();
+                Debug.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
         }
     }
 }

@@ -1,9 +1,32 @@
 ﻿<div class="container" ng-controller="HomePageController as vm">
 
-    <h1>This week's challenge: <span>{{vm.CurrentChallenge}}</span></h1>
+    <h3>This week's challenge: <span class="bold italic">'{{vm.CurrentChallenge}}'</span></h3>
+    <div class="row">
+        <div class="col-sm-4">
+            Your Stats:
+            <table class="table table-condensed">
+                <tbody>
+                    <tr>
+                        <td>Username:</td>
+                        <td>{{vm.Player.Username}}</td>
+                    </tr>
+                    <tr>
+                        <td>Rank:</td>
+                        <td>{{vm.Player.Rank}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Points:</td>
+                        <td>{{vm.Player.TotalPoints}}</td>
+                    </tr>
+                    <tr>
+                        <td>Challenges Completed:</td>
+                        <td>{{vm.Player.ChallengesCompleted}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <h2>Response: {{vm.Response}}</h2>
 
-    <h3>{{vm.Response.error}}</h3>
 
 </div>

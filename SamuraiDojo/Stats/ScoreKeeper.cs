@@ -1,33 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using SamuraiDojo.Challenges.Week1;
-using SamuraiDojo.SamuraiStats;
+using SamuraiDojo.Stats;
 
 namespace SamuraiDojo.Stats
 {
-    public class ScoreKeeper
+    public class ScoreKeeper 
     {
-        public readonly static Dictionary<string, Score> Score;
+        public readonly static Dictionary<string, PlayerStats> Players;
         public readonly static List<Type> Challenges;
         public readonly static Type CurrentChallenge = typeof(ClockAngler);
 
         static ScoreKeeper()
         {
-            Score = new Dictionary<string, Score>();
+            Players = new Dictionary<string, PlayerStats>();
             Challenges = new List<Type>();
+        }
+
+        public static PlayerStats GetPlayer(string name)
+        {
+            PlayerStats player = null;
+            if (name != null)
+            {
+                name = name.ToUpper();
+                if (Players.ContainsKey(name))
+                    player = Players[name];
+            }
+
+            return player;
         }
 
         public static void AddPoint(string samurai, Type challenge)
         {
-            if (Score.ContainsKey(samurai))
+            if (Players.ContainsKey(samurai))
             {
-                Score[samurai].TotalPoints++;
-                int challengePoints = Score[samurai].PointsByChallenge[challenge];
-                Score[samurai].PointsByChallenge[challenge] = ++challengePoints;
+                Players[samurai].TotalPoints++;
+                int challengePoints = Players[samurai].PointsByChallenge[challenge];
+                Players[samurai].PointsByChallenge[challenge] = ++challengePoints;
             }
             else
             {
-                Score.Add(samurai, new Score
+                Players.Add(samurai, new PlayerStats
                 {
                     TotalPoints = 1,
                     PointsByChallenge = new Dictionary<Type, int>
