@@ -11,6 +11,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "Home";
             return View();
         }
     }
