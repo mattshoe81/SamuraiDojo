@@ -7,7 +7,7 @@ using System;
 namespace SamuraiDojo.Test.ClockAnglerTest
 {
     [TestClass]
-    [SolutionByAttribute(Samurai.DUSTIN)]
+    [WrittenBy(Samurai.DUSTIN)]
     public class Dustin : ClockAnglerTestBase
     {
         protected override int Calculate(int hour, int minute)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.SamuraiStats;
+using SamuraiDojo.Stats;
 using SamuraiDojo.Test;
 
 namespace SamuraiDojo.Spar
@@ -17,12 +18,12 @@ namespace SamuraiDojo.Spar
             TestRunner testRunner = new TestRunner();
             testRunner.OnTestPass = (context) =>
             {
-                Samurai.AddPoint(context.WrittenBy, context.ClassUnderTest);
+                ScoreKeeper.AddPoint(context.WrittenBy, context.ClassUnderTest);
             };
             testRunner.Run();
 
             foreach (KeyValuePair<string, Score> pair in Samurai.Score)
-                Console.WriteLine($"{pair.Key}:\t{pair.Value.AllTimeTotal}");
+                Console.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
 
             Console.WriteLine($"{Environment.NewLine}Press any key to close.{Environment.NewLine}");
             Console.ReadKey();

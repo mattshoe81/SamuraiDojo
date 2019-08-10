@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.SamuraiStats;
+using SamuraiDojo.Stats;
 
 namespace SamuraiDojo.Attributes
 {
@@ -14,7 +15,7 @@ namespace SamuraiDojo.Attributes
         public SenseiAttribute(string sensei)
         {
             Name = sensei;
-            Samurai.AddSensei(sensei);
+            ScoreKeeper.RegisterSensei(sensei);
         }
     }
 }

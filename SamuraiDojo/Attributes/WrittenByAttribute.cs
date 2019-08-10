@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Attributes
 {
-    public class SolutionByAttribute : Attribute
+    public class WrittenByAttribute : Attribute
     {
         public string Name { get; set; }
 
-        public SolutionByAttribute(string samurai)
+        public WrittenByAttribute(string samurai)
         {
             Name = samurai;
         }

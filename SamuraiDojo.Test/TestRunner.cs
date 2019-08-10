@@ -6,6 +6,15 @@ using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test
 {
+    /// <summary>
+    /// This class will execute all tests in this assembly. 
+    /// You may provide an Action to be executed upon successful test,
+    /// and you may provide an Action to be executed upon failed test.
+    /// The context in which the test was executed will provided to each 
+    /// action.
+    /// 
+    /// No Action is required for execution.
+    /// </summary>
     public class TestRunner
     {
         public Action<TestExecutionContext> OnTestPass { get; set; }
@@ -17,7 +26,7 @@ namespace SamuraiDojo.Test
             Type[] types = assembly.GetTypes();
             foreach (Type type in types)
             {
-                if (HasAttribute<SolutionByAttribute>(type))
+                if (HasAttribute<WrittenByAttribute>(type))
                 {
                     MethodInfo[] methods = type.GetMethods();
                     foreach (MethodInfo method in methods)
@@ -31,7 +40,7 @@ namespace SamuraiDojo.Test
 
         public void EvaluteTest(Type type, MethodInfo method)
         {
-            SolutionByAttribute solutionBy = GetAttribute<SolutionByAttribute>(type);
+            WrittenByAttribute solutionBy = GetAttribute<WrittenByAttribute>(type);
             UnderTestAttribute classUnderTest = GetAttribute<UnderTestAttribute>(type);
             TestExecutionContext testExecutionContext = new TestExecutionContext
             {
@@ -46,6 +55,7 @@ namespace SamuraiDojo.Test
                 object instance = Activator.CreateInstance(type);
                 method.Invoke(instance, null);
 
+                // No exception, so test was passed
                 OnTestPass?.Invoke(testExecutionContext);
             }
             catch
