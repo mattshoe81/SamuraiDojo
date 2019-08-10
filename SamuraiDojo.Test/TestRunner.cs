@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SamuraiDojo.Attributes;
 using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test
 {
     public class TestRunner
     {
+        public Action<TestExecutionContext> OnTestPass { get; set; }
+        public Action<TestExecutionContext> OnTestFail { get; set; }
+
         public void Run()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -32,21 +31,32 @@ namespace SamuraiDojo.Test
 
         public void EvaluteTest(Type type, MethodInfo method)
         {
+            SolutionByAttribute solutionBy = GetAttribute<SolutionByAttribute>(type);
+            UnderTestAttribute classUnderTest = GetAttribute<UnderTestAttribute>(type);
+            TestExecutionContext testExecutionContext = new TestExecutionContext
+            {
+                TestClass = type,
+                ClassUnderTest = classUnderTest?.Type,
+                Method = method,
+                WrittenBy = solutionBy?.Name
+            };
+
             try
             {
                 object instance = Activator.CreateInstance(type);
                 method.Invoke(instance, null);
 
-                SolutionByAttribute solutionBy = (SolutionByAttribute)Attribute.GetCustomAttribute(type, typeof(SolutionByAttribute));
-                UnderTestAttribute underTest = (UnderTestAttribute)Attribute.GetCustomAttribute(type, typeof(UnderTestAttribute));
-                Samurai.AddPoint(solutionBy.Name, underTest.Type);
+                OnTestPass?.Invoke(testExecutionContext);
             }
-            catch { }
+            catch
+            {
+                OnTestFail?.Invoke(testExecutionContext);
+            }
         }
 
         private bool HasAttribute<T>(Type type)
         {
-            bool result = false;
+            bool result;
             try
             {
                 Attribute attribute = Attribute.GetCustomAttribute(type, typeof(T));
@@ -62,7 +72,7 @@ namespace SamuraiDojo.Test
 
         private bool HasAttribute<T>(MemberInfo member)
         {
-            bool result = false;
+            bool result;
             try
             {
                 Attribute attribute = Attribute.GetCustomAttribute(member, typeof(T));
@@ -74,6 +84,21 @@ namespace SamuraiDojo.Test
             }
 
             return result;
+        }
+
+        private T GetAttribute<T>(Type type) where T : Attribute
+        {
+            T attribute;
+            try
+            {
+                attribute = (T)Attribute.GetCustomAttribute(type, typeof(T));
+            }
+            catch
+            {
+                attribute = null;
+            }
+
+            return attribute;
         }
     }
 }

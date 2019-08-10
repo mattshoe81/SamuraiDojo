@@ -14,7 +14,12 @@ namespace SamuraiDojo.Spar
         {
             Console.WriteLine($"Loading...{Environment.NewLine}");
 
-            new TestRunner().Run();
+            TestRunner testRunner = new TestRunner();
+            testRunner.OnTestPass = (context) =>
+            {
+                Samurai.AddPoint(context.WrittenBy, context.ClassUnderTest);
+            };
+            testRunner.Run();
 
             foreach (KeyValuePair<string, Score> pair in Samurai.Score)
                 Console.WriteLine($"{pair.Key}:\t{pair.Value.AllTimeTotal}");
