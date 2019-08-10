@@ -2,6 +2,7 @@
 using SamuraiDojo;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Challenges;
+using SamuraiDojo.Challenges.Week1;
 
 namespace SamuraiDojo.Test.ClockAnglerTest
 {

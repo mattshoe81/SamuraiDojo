@@ -22,7 +22,7 @@ namespace SamuraiDojo.Spar
             };
             testRunner.Run();
 
-            foreach (KeyValuePair<string, Score> pair in Samurai.Score)
+            foreach (KeyValuePair<string, Score> pair in ScoreKeeper.Score)
                 Console.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
 
             Console.WriteLine($"{Environment.NewLine}Press any key to close.{Environment.NewLine}");

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Challenges;
-using System;
+using SamuraiDojo.Challenges.Week1;
 
 
 namespace SamuraiDojo.Test.ClockAnglerTest

@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Test.Attributes;
+using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Test
 {
@@ -26,12 +27,12 @@ namespace SamuraiDojo.Test
             Type[] types = assembly.GetTypes();
             foreach (Type type in types)
             {
-                if (HasAttribute<WrittenByAttribute>(type))
+                if (AttributeUtility.HasAttribute<WrittenByAttribute>(type))
                 {
                     MethodInfo[] methods = type.GetMethods();
                     foreach (MethodInfo method in methods)
                     {
-                        if (HasAttribute<TestMethodAttribute>(method))
+                        if (AttributeUtility.HasAttribute<TestMethodAttribute>(method))
                             EvaluteTest(type, method);
                     }
                 }
@@ -40,8 +41,8 @@ namespace SamuraiDojo.Test
 
         public void EvaluteTest(Type type, MethodInfo method)
         {
-            WrittenByAttribute solutionBy = GetAttribute<WrittenByAttribute>(type);
-            UnderTestAttribute classUnderTest = GetAttribute<UnderTestAttribute>(type);
+            WrittenByAttribute solutionBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
             TestExecutionContext testExecutionContext = new TestExecutionContext
             {
                 TestClass = type,
@@ -62,53 +63,6 @@ namespace SamuraiDojo.Test
             {
                 OnTestFail?.Invoke(testExecutionContext);
             }
-        }
-
-        private bool HasAttribute<T>(Type type)
-        {
-            bool result;
-            try
-            {
-                Attribute attribute = Attribute.GetCustomAttribute(type, typeof(T));
-                result = attribute != null;
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
-        }
-
-        private bool HasAttribute<T>(MemberInfo member)
-        {
-            bool result;
-            try
-            {
-                Attribute attribute = Attribute.GetCustomAttribute(member, typeof(T));
-                result = attribute != null;
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
-        }
-
-        private T GetAttribute<T>(Type type) where T : Attribute
-        {
-            T attribute;
-            try
-            {
-                attribute = (T)Attribute.GetCustomAttribute(type, typeof(T));
-            }
-            catch
-            {
-                attribute = null;
-            }
-
-            return attribute;
         }
     }
 }

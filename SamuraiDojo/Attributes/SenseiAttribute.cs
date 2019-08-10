@@ -15,7 +15,6 @@ namespace SamuraiDojo.Attributes
         public SenseiAttribute(string sensei)
         {
             Name = sensei;
-            ScoreKeeper.RegisterSensei(sensei);
         }
     }
 }

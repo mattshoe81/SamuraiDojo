@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.Challenges;
+using SamuraiDojo.Challenges.Week1;
 using SamuraiDojo.SamuraiStats;
 
 namespace SamuraiDojo.Stats
@@ -8,11 +8,13 @@ namespace SamuraiDojo.Stats
     public class ScoreKeeper
     {
         public readonly static Dictionary<string, Score> Score;
+        public readonly static List<Type> Challenges;
         public readonly static Type CurrentChallenge = typeof(ClockAngler);
 
         static ScoreKeeper()
         {
             Score = new Dictionary<string, Score>();
+            Challenges = new List<Type>();
         }
 
         public static void AddPoint(string samurai, Type challenge)
@@ -34,17 +36,6 @@ namespace SamuraiDojo.Stats
                     }
                 });
             }
-        }
-
-        public static void RegisterSensei(string sensei, Type type)
-        {
-            if (Score.ContainsKey(sensei))
-                Score[sensei].SenseiCount++;
-            else
-                Score.Add(sensei, new Score
-                {
-                    SenseiCount = 1
-                });
         }
     }
 }

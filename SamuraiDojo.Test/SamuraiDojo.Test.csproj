@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
+      <Project>{0dc773c1-7f74-4718-88a4-886b0036cb90}</Project>
+      <Name>SamuraiDojo.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo\SamuraiDojo.csproj">
       <Project>{1068ec3f-8811-419d-9d30-b2ac29b8f6fd}</Project>
       <Name>SamuraiDojo</Name>
