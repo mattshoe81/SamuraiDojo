@@ -47,6 +47,7 @@
     <Compile Include="Auditor.cs" />
     <Compile Include="Challenges\Week1\ClockAngler.cs" />
     <Compile Include="Challenges\Week2\ICharacterCounter.cs" />
+    <Compile Include="Challenges\Week2\Matt.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
     <Compile Include="Models\ChallengeResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

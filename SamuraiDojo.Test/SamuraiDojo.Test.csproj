@@ -58,6 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestExecutionContext.cs" />
     <Compile Include="TestRunner.cs" />
+    <Compile Include="Week2\BaseCharacterCounterTest.cs" />
+    <Compile Include="Week2\Matt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

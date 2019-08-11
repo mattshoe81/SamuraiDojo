@@ -28,7 +28,6 @@ namespace SamuraiDojo.Challenges.Week2
         /// 
         /// ASSUMPTIONS:
         ///     - You may assume all characters are an integer 1-9 (zero is not allowed)
-        ///     - You may assume you will never receive an empty string
         ///     - You may assume every character will be an integer
         ///     
         /// Examples:
