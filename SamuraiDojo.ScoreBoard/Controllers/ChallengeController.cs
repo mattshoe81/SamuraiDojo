@@ -17,10 +17,9 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            Type currentChallenge = ScoreKeeper.CurrentChallenge;
-            ChallengeAttribute challengeAttribute = AttributeUtility.GetAttribute<ChallengeAttribute>(currentChallenge);
+            ChallengeResults challenge = ChallengeRepository.CurrentChallenge();
 
-            return Request.CreateResponse(HttpStatusCode.OK, challengeAttribute);
+            return Request.CreateResponse(HttpStatusCode.OK, challenge);
         }
 
         [HttpGet]

@@ -3,7 +3,7 @@
     <div class="spacer-25"></div>
 
     <div class="row">
-        <h3 class="underline">Your Profile:</h3>
+        <h3 class="underline">Your Stats:</h3>
         <div class="col-sm-6">
             <table class="table table-condensed">
                 <tbody>
@@ -33,8 +33,9 @@
 
         <h3 class="underline">Your History:</h3>
         <div class="spacer-10"></div>
-        <div ng-repeat="challenge in vm.Challenges">
-            <div class="col-sm-4">
+        <div>
+            <div class="row">
+            <div class="col-sm-6">
                 <table class="table table-condensed">
                     <thead>
                         <tr>
@@ -43,15 +44,15 @@
                             <th>Deadline</th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat="result in challenge.Results"
-                           ng-show="result.Player.Name === vm.Player.Name">
-                        <tr>
+                    <tbody>
+                        <tr ng-repeat="challenge in vm.Challenges">
                             <td>{{challenge.Challenge.Name}}</td>
-                            <td>{{result.Points}}</td>
+                            <td>{{vm.GetPointsFromChallenge(challenge, vm.Player)}}</td>
                             <td>{{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
 

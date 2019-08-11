@@ -65,6 +65,16 @@ div.spacer-25 {
     width: 100%;
 }
 
+.w-35 {
+    width: 35px;
+    background-color: transparent;
+}
+
+.w-30 {
+    width: 30px;
+    background-color: transparent;
+}
+
 .w-25 {
     width: 25px;
     background-color: transparent;
@@ -96,4 +106,23 @@ div.spacer-25 {
 
 .lowercase {
     text-transform: lowercase;
+}
+
+hr {
+    border-top: 1px solid black;
+    margin-left: -10px;
+    margin-right:-10px;
+}
+
+.row-buffer {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+iframe {
+    width: 100%;
+}
+
+.border {
+    border: 1px solid black;
 }

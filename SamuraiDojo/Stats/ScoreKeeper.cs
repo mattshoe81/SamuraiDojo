@@ -9,7 +9,6 @@ namespace SamuraiDojo.Stats
     {
         public readonly static Dictionary<string, PlayerStats> Players;
         public readonly static List<Type> Challenges;
-        public readonly static Type CurrentChallenge = typeof(ClockAngler);
 
         static ScoreKeeper()
         {

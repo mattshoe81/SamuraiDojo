@@ -2,9 +2,78 @@
 
     <div class="spacer-25"></div>
 
-    <div class="row center-block">
-        <h3>Leader Board:</h3>
+    <div class="row">
+
+        <h3><span class="italic">'{{vm.CurrentChallenge.Challenge.Name}}'</span></h3>
+        <h4>Deadline: <span class="italic">{{vm.CurrentChallenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
+        <pre>
+        <code>
+using SamuraiDojo.Attributes;
+
+namespace SamuraiDojo.Challenges.Week2
+{
+    [Challenge("8/16/19", "Permutations of Character")]
+    public interface ICharacterCounter
+    {
+        /// &lt;summary&gt;
+        /// 
+        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy challenge:
+        /// 
+        /// Given a string of integers (i.e. "65743243263286740547241403725756"), determine the maximum number
+        /// of alphabetic characters that we could have mapped according to the following map of 
+        /// integers to alphabetic characters. You ONLY need to count the number of possible characters you 
+        /// could have mapped from the string. You do not need to construct any new strings. This is just a 
+        /// maximization algorithm.
+        /// 
+        /// Character Map:
+        ///     A = 1,
+        ///     B = 2,
+        ///     C = 3,
+        ///     .
+        ///     .
+        ///     .
+        ///     X = 24,
+        ///     Y = 25,
+        ///     z = 26
+        /// 
+        /// ASSUMPTIONS:
+        ///     - You may assume all characters are an integer 1-9 (zero is not allowed)
+        ///     - You may assume you will never receive an empty string
+        ///     - You may assume every character will be an integer
+        ///     
+        /// Examples:
+        ///     "123"  =&gt; 5 since [1=A, 2=B, 3=C, 12=L, 23=W]. Thus we could have mapped 5 characters given this string.
+        ///     "2412" =&gt; 6 since [2=B, 4=D, 1=A, 2=B, 24=X, 12=L]. Thus we could have mapped 6 characters given this string. (NOTICE we do count duplicates!)
+        ///     "927"  =&gt; 3 since [9=I, 2=B, 7=G]. Thus we could have mapped only 3 characters given this string.
+        ///     "7321" =&gt; 5 since [7=G, 3=C, 2=B, 1=A, 21=U]. Thus we could have mapped 5 possible characters given this string.
+        ///     "99"   =&gt; 2 since [9=I, 9=I]. Thus we could have mapped 2 characters given the string. (note that duplicates DO count)
+        /// 
+        /// NOTES:
+        ///     - There DOES exist an algorithm to perform this search in linear time (i.e. with a SINGLE loop).
+        ///     - The most elegant solution should NOT use any arrays or collections to check any mapping.
+        ///     - You are NOT required to implement it in linear time, but you will earn extra points if you 
+        ///       are the most efficient solution!
+        /// 
+        /// &lt;/summary&gt;
+        /// &lt;param name="integers"&gt;A string whose characters are all some integer between 1-9 inclusive.&lt;/param&gt;
+        /// &lt;returns&gt;
+        ///     The maximum number of possible alphabetic characters that could have been mapped from the string of 
+        ///     integers, where A=1, B=2, C=3, ... , Y=25, Z=26.
+        /// &lt;/returns&gt;
+        int CountPossibleCharacters(string integers);
+    }
+}
+            </code>
+
+        </pre>
+
+    </div>
+
+    <div class="spacer-25"></div>
+
+    <div class="row">
         <div class="col-sm-4">
+            <h3 class="inline-block underline">Leader Board:</h3>
             <table class="table table-condensed">
                 <thead>
                     <tr>
@@ -24,37 +93,48 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    
-    <div class="spacer-25"></div>
+        <div class="col-sm-1"></div>
 
-    <div class="row center-block">
-
-        <h3 class="underline">Historical Results:</h3>
-        <div class="spacer-10"></div>
-        <div ng-repeat="challenge in vm.Challenges">
-            <h4>
-                <span class="bold italic">'{{challenge.Challenge.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
-            <div class="col-sm-4">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Points</th>
-                            <th>Player</th>
-                            <th>Rank</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="result in challenge.Results">
-                        <tr>
-                            <td>{{result.Points}}</td>
-                            <td class="lowercase">{{result.Player.Name}}</td>
-                            <td>{{vm.GetRank(result.Player)}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-sm-6">
+            <h3 class="underline inline-block">Historical Results:</h3>
+            <hr />
+            <div class="spacer-10"></div>
+            <div ng-repeat="challenge in vm.Challenges">
+                <div class="row">
+                    <h4 class="row-buffer">
+                        <span class="bold italic">'{{challenge.Challenge.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
+                    </h4>
+                    <div class="col-sm-6"
+                         ng-show="challenge.Results.length">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Points</th>
+                                    <th>Player</th>
+                                    <th>Rank</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="result in challenge.Results">
+                                <tr>
+                                    <td>{{result.Points}}</td>
+                                    <td class="lowercase">{{result.Player.Name}}</td>
+                                    <td>{{vm.GetRank(result.Player)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-hide="challenge.Results.length">
+                        <span class="w-35 inline-block"></span><h4 class="inline-block inline">Nobody has registered for '{{challenge.Challenge.Name}}' yet!</h4>
+                    </div>
+                </div>
+                <hr />
             </div>
         </div>
+    </div>
 
+    <div class="spacer-25"></div>
+
+    <div class="row">
     </div>
 
 </div>

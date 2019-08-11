@@ -53,6 +53,25 @@
             return count > 0;
         };
 
+        vm.GetPointsFromChallenge = function (challenge, player) {
+            var points = 0;
+            if (player) 
+                points = getPointsFromChallenge(challenge);
+
+            return points;
+        };
+
+        var getPointsFromChallenge = function (challenge) {
+            var points = 0;
+            for (var i = 0; i < challenge.Results.length; i++) {
+                var player = challenge.Results[i].Player;
+                if (player.Name === vm.Player.Name)
+                    points = challenge.Results[i].Points;
+            }
+
+            return points;
+        }
+
         vm.ParticipatedInChallenge = function (challenge) {
             var result = false;
             if (request.Promise.Resolved) {

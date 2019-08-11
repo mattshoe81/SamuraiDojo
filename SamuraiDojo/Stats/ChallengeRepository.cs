@@ -65,5 +65,14 @@ namespace SamuraiDojo.Stats
 
             return hasChallenge;
         }
+
+        public static ChallengeResults CurrentChallenge()
+        {
+            List<ChallengeResults> challenges = GetAllChallengeResults();
+            DateTime max = challenges.Max((challenge) => challenge.Challenge.Deadline);
+            ChallengeResults current = GetAllChallengeResults().Where((challenge) => challenge.Challenge.Deadline == max).FirstOrDefault();
+
+            return current;
+        }
     }
 }

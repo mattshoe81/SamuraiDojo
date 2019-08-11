@@ -46,6 +46,7 @@
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
     <Compile Include="Challenges\Week1\ClockAngler.cs" />
+    <Compile Include="Challenges\Week2\ICharacterCounter.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
     <Compile Include="Models\ChallengeResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,11 +60,6 @@
       <Project>{0DC773C1-7F74-4718-88A4-886B0036CB90}</Project>
       <Name>SamuraiDojo.Utility</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Descriptions\08-09-2019.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
