@@ -1,0 +1,15 @@
+﻿
+IMPLEMENT:
+	1. Branch your solution off master (not develop) with the form solution/week#/name
+	2. Locate the current week's folder in SamuraiDojo/Challenges/{Week#}
+	3. Create a class in that folder and implement the provided interface
+	4. Go to the SamuraiDojo.Test project and find the current week.
+	5. Extend the base test for that week
+	6. IMPORTANT! - Decorate ALL of your classes (including tests) with the [WrittenBy(Samurai.YOU)] attribute or you won't get credit.
+
+SUBMIT:
+	1. Open a pull request from your branch (should be named solution/week#/name) into master and request the week's Sensei for approval.
+	2. DON'T MERGE. The sensei will merge upon the deadline.
+
+That's it!
+ 

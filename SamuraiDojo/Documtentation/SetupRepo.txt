@@ -1,0 +1,12 @@
+﻿
+When you are first setting up the repository, follow these steps:
+
+	1. Go to the SamuraiDojo.Samurai.cs file and add your name.
+		- NOTE: this must be your 'first.last' windows login
+
+	2. Highlight the SamuraiDojo.ScoreBoard project and click the Properties tray (probably on the right)
+		- Set Windows Authentication to 'Enabled'
+		- Set Anonymous Authentication to 'Disabled'
+
+	3. If you cloned the repository in Matt's personal Github account, you have to accept the invite to 
+	   collaborate before you can push.

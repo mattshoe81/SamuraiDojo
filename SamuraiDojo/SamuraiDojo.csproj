@@ -62,5 +62,9 @@
       <Name>SamuraiDojo.Utility</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documtentation\SetupRepo.txt" />
+    <Content Include="Documtentation\SubmitSolution.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
