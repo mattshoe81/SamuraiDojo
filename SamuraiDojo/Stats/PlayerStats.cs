@@ -8,7 +8,7 @@ namespace SamuraiDojo.Stats
 {
     public class PlayerStats : IComparable<PlayerStats>
     {
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         public int SenseiCount { get; set; }
 

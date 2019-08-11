@@ -1,30 +1,60 @@
-﻿<div class="container" ng-controller="HomePageController as vm">
-    
+﻿<div class="container" ng-controller="MyProfileController as vm">
+
     <div class="spacer-25"></div>
 
     <div class="row">
+        <h3 class="underline">Your Profile:</h3>
         <div class="col-sm-6">
             <table class="table table-condensed">
                 <tbody>
                     <tr>
-                        <td>Username:</td>
-                        <td>{{vm.Player.Username}}</td>
+                        <td class="bold">Username:</td>
+                        <td class="italic lowercase">{{vm.Player.Name}}</td>
                     </tr>
                     <tr>
-                        <td>Rank:</td>
-                        <td>{{vm.Player.Rank}}</td>
+                        <td class="bold">Rank:</td>
+                        <td class="italic">{{vm.Player.Rank}}</td>
                     </tr>
                     <tr>
-                        <td>Total Points:</td>
-                        <td>{{vm.Player.TotalPoints}}</td>
+                        <td class="bold">Total Points:</td>
+                        <td class="italic">{{vm.Player.TotalPoints}}</td>
                     </tr>
                     <tr>
-                        <td>Challenges Completed:</td>
-                        <td>{{vm.Player.ChallengesCompleted}}</td>
+                        <td class="bold">Challenges Completed:</td>
+                        <td class="italic">{{vm.Player.ChallengesCompleted}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+
+    <div class="row">
+
+        <h3 class="underline">Your History:</h3>
+        <div class="spacer-10"></div>
+        <div ng-repeat="challenge in vm.Challenges">
+            <div class="col-sm-4">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Your Points</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="result in challenge.Results"
+                           ng-show="result.Player.Name === vm.Player.Name">
+                        <tr>
+                            <td>{{challenge.Challenge.Name}}</td>
+                            <td>{{result.Points}}</td>
+                            <td>{{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 </div>

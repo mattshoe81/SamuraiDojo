@@ -1,10 +1,9 @@
 ﻿<div class="container" ng-controller="HomePageController as vm">
 
-    <h3>This week's challenge: <span class="bold italic">'{{vm.CurrentChallenge.Name}}'</span></h3>
-
     <div class="spacer-25"></div>
 
     <div class="row center-block">
+        <h3>Leader Board:</h3>
         <div class="col-sm-4">
             <table class="table table-condensed">
                 <thead>
@@ -18,13 +17,44 @@
                 <tbody ng-repeat="player in vm.AllPlayers">
                     <tr>
                         <td>{{player.Rank}}</td>
-                        <td>{{player.Username}}</td>
+                        <td class="lowercase">{{player.Name}}</td>
                         <td>{{player.TotalPoints}}</td>
                         <td>{{player.ChallengesCompleted}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    
+    <div class="spacer-25"></div>
+
+    <div class="row center-block">
+
+        <h3 class="underline">Historical Results:</h3>
+        <div class="spacer-10"></div>
+        <div ng-repeat="challenge in vm.Challenges">
+            <h4>
+                <span class="bold italic">'{{challenge.Challenge.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
+            <div class="col-sm-4">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Points</th>
+                            <th>Player</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="result in challenge.Results">
+                        <tr>
+                            <td>{{result.Points}}</td>
+                            <td class="lowercase">{{result.Player.Name}}</td>
+                            <td>{{vm.GetRank(result.Player)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 </div>

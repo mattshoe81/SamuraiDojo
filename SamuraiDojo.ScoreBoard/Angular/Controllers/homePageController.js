@@ -6,6 +6,7 @@
     app.controller("HomePageController", ["RequestService",  function (RequestService) {
         var vm = this;
         vm.CurrentChallenge = {};
+        vm.Challenges = [];
 
         var playerRequest = RequestService.SendRequest("/api/Player", null, "GET");
         playerRequest.Success(function (response) {
@@ -30,6 +31,25 @@
         currentChallengeRequest.Error(function (error) {
             vm.CurrentChallenge = error.ExceptionMessage;
         });
+        
+        var allChallengesRequest = RequestService.SendRequest("/api/Challenge/All", null, "GET");
+        allChallengesRequest.Success(function (response) {
+            vm.Challenges = response.data;
+        });
+        allChallengesRequest.Error(function (error) {
+            vm.Challenges = error.ExceptionMessage;
+        });
+
+
+        vm.GetRank = function (player) {
+            for (var i = 0; i < vm.AllPlayers.length; i++) {
+                if (vm.AllPlayers[i].Name === player.Name)
+                    return vm.AllPlayers[i].Rank;
+            }
+
+            return 0;
+        };
+
 
     }]);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
@@ -23,32 +24,26 @@ namespace SamuraiDojo.Test
 
         public void Run()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Type[] types = assembly.GetTypes();
+            Type[] types = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
+
             foreach (Type type in types)
             {
-                if (AttributeUtility.HasAttribute<WrittenByAttribute>(type))
-                {
-                    MethodInfo[] methods = type.GetMethods();
-                    foreach (MethodInfo method in methods)
-                    {
-                        if (AttributeUtility.HasAttribute<TestMethodAttribute>(method))
-                            EvaluteTest(type, method);
-                    }
-                }
+                List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
+                foreach (MethodInfo method in methods)
+                    EvaluteTest(type, method);
             }
         }
 
         public void EvaluteTest(Type type, MethodInfo method)
         {
-            WrittenByAttribute solutionBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
             UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
             TestExecutionContext testExecutionContext = new TestExecutionContext
             {
                 TestClass = type,
                 ClassUnderTest = classUnderTest?.Type,
                 Method = method,
-                WrittenBy = solutionBy?.Name
+                WrittenBy = writtenBy
             };
 
             try

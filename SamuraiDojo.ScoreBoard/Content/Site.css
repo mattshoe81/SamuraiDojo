@@ -31,6 +31,10 @@ textarea {
     font-style: italic;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
 div.spacer-5 {
     height: 5px;
     background-color: transparent;
@@ -59,4 +63,37 @@ div.spacer-25 {
     height: 25px;
     background-color: transparent;
     width: 100%;
+}
+
+.w-25 {
+    width: 25px;
+    background-color: transparent;
+}
+
+.w-20 {
+    width: 20px;
+    background-color: transparent;
+}
+
+.w-15 {
+    width: 15px;
+    background-color: transparent;
+}
+
+.w-10 {
+    width: 10px;
+    background-color: transparent;
+}
+
+.w-5 {
+    width: 5px;
+    background-color: transparent;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.lowercase {
+    text-transform: lowercase;
 }

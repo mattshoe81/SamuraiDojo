@@ -42,6 +42,18 @@ namespace SamuraiDojo.Attributes
             return result;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+                return false;
+            else if (object.ReferenceEquals(this, obj))
+                return true;
+            else if (obj is ChallengeAttribute)
+                return Name == ((ChallengeAttribute)obj).Name;
+
+            return false;
+        }
+
         private string LoadDescription()
         {
             // TODO - this is broken. probably a better way
@@ -59,6 +71,7 @@ namespace SamuraiDojo.Attributes
 
             return description;
         }
+
 
         
     }

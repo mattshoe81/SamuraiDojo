@@ -20,12 +20,14 @@
 
             response.Promise.then(
                 function (data) {
+                    response.Promise.Resolved = true;
                     if (onSuccess)
                         onSuccess(data);
                     if (response.successCallback)
                             response.successCallback(data);
                 },
                 function (data, status) {
+                    response.Promise.Resolved = true;
                     if (onError)
                         onError(data, status);
                     if (response.errorCallback)

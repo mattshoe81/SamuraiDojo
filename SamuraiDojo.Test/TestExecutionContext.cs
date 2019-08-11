@@ -16,6 +16,6 @@ namespace SamuraiDojo.Test
 
         public MethodInfo Method { get; set; }
 
-        public string WrittenBy { get; set; }  
+        public WrittenByAttribute WrittenBy { get; set; }  
     }
 }

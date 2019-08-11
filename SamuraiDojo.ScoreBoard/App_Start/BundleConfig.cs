@@ -52,7 +52,8 @@ namespace SamuraiDojo.ScoreBoard
                 new ScriptBundle("~/bundles/angularjs/controllers")
                 .Include(
                     "~/Angular/app.js",
-                    "~/Angular/Controllers/HomePageController.js"
+                    "~/Angular/Controllers/HomePageController.js",
+                    "~/Angular/Controllers/MyProfileController.js"
                 )
             );
 

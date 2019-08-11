@@ -15,12 +15,20 @@ namespace SamuraiDojo.ScoreBoard.App_Start
     {
         public static void Init()
         {
+            RunUnitTests();
+            RunSamuraiAuditor();
+        }
+
+        private static void RunUnitTests()
+        {
             TestRunner testRunner = new TestRunner();
+
             testRunner.OnTestPass = (context) =>
             {
-                ScoreKeeper.AddPoint(context.WrittenBy, context.ClassUnderTest);
-                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
+                ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest);
 
+                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
+                ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy);
             };
             testRunner.Run();
             CalculateRanks();
@@ -49,6 +57,11 @@ namespace SamuraiDojo.ScoreBoard.App_Start
                 if (i < players.Count - 1)
                     currentRank += Math.Abs(players[i].CompareTo(players[i + 1]));
             }
+        }
+
+        public static void RunSamuraiAuditor()
+        {
+            SamuraiDojo.Auditor.Audit();
         }
     }
 }
