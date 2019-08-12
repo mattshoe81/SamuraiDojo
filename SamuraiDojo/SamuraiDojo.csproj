@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ChallengeAttribute.cs" />
+    <Compile Include="Attributes\MostEfficientAttribute.cs" />
+    <Compile Include="Attributes\MostElegantAttribute.cs" />
     <Compile Include="Attributes\SenseiAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
@@ -63,8 +65,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documtentation\SetupRepo.txt" />
-    <Content Include="Documtentation\SubmitSolution.txt" />
+    <Content Include="Documentation\Scoring.txt" />
+    <Content Include="Documentation\SetupRepo.txt" />
+    <Content Include="Documentation\SubmitSolution.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
