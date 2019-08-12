@@ -50,6 +50,18 @@
             return 0;
         };
 
+        vm.GetSenseiCount = function (player, challenges) {
+            var count = 0;
+            if (challenges) {
+                for (var i = 0; i < challenges.length; i++) {
+                    if (challenges[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
+                        count++;
+                }
+            }
+
+            return count;
+        };
+
 
     }]);
 

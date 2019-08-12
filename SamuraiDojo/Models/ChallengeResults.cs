@@ -10,6 +10,9 @@ namespace SamuraiDojo.Models
     public class ChallengeResults : IComparable<ChallengeResults>
     {
         public ChallengeAttribute Challenge { get; set; }
+
+        public SenseiAttribute Sensei { get; set; }
+
         public List<ChallengeResult> Results { get; set; }
 
         public ChallengeResults()
@@ -17,12 +20,13 @@ namespace SamuraiDojo.Models
             Results = new List<ChallengeResult>();
         }
 
-        public void Add(ChallengeResult result)
+        public void Add(ChallengeResult result, SenseiAttribute sensei)
         {
             Results.Add(result);
+            Sensei = sensei;
         }
 
-        public void AddPoint(WrittenByAttribute writtenBy)
+        public void AddPoint(WrittenByAttribute writtenBy, int points = 1)
         {
             ChallengeResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
             if (playerResult == null)
@@ -30,7 +34,7 @@ namespace SamuraiDojo.Models
                 Results.Add(new ChallengeResult
                 {
                     Player = writtenBy,
-                    Points = 1
+                    Points = points
                 });
             }
             else

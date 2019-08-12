@@ -4,10 +4,10 @@ using SamuraiDojo.Stats;
 
 namespace SamuraiDojo.Challenges.Week1
 {
+    [Sensei(Samurai.MATT)]
     [Challenge("8/9/2019", "Angler of Time")]
     public class ClockAngler
     {
-        [Sensei(Samurai.MATT)]
         [WrittenBy(Samurai.MATT)]
         public static int Matt_CalculateAngleBetweenHands(int hour, int minute)
         {

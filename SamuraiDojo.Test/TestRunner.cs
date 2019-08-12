@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
@@ -19,6 +20,7 @@ namespace SamuraiDojo.Test
     /// </summary>
     public class TestRunner
     {
+        public Action<TestExecutionContext> PreTest { get; set; }
         public Action<TestExecutionContext> OnTestPass { get; set; }
         public Action<TestExecutionContext> OnTestFail { get; set; }
 
@@ -48,15 +50,28 @@ namespace SamuraiDojo.Test
 
             try
             {
+                InvokeAction(PreTest, testExecutionContext);
                 object instance = Activator.CreateInstance(type);
                 method.Invoke(instance, null);
 
-                // No exception, so test was passed
-                OnTestPass?.Invoke(testExecutionContext);
+                InvokeAction(OnTestPass, testExecutionContext);
             }
             catch
             {
-                OnTestFail?.Invoke(testExecutionContext);
+                InvokeAction(OnTestFail, testExecutionContext);
+            }
+        }
+
+        private void InvokeAction(Action<TestExecutionContext> action, TestExecutionContext testExecutionContext)
+        {
+            try
+            {
+                // No exception, so test was passed
+                action?.Invoke(testExecutionContext);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
             }
         }
     }

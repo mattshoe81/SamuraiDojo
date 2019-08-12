@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Stats;
-using SamuraiDojo.Stats;
 
 namespace SamuraiDojo.Attributes
 {

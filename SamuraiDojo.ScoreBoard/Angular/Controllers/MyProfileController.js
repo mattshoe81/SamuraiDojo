@@ -36,6 +36,25 @@
             return participated;
         };
 
+        vm.GetSenseiCount = function (player, challenges) {
+            var count = 0;
+            if (challenges) {
+                for (var i = 0; i < challenges.length; i++) {
+                    if (challenges[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
+                        count++;
+                }
+            }
+
+            return count;
+        };
+
+        vm.IsSensei = function (challenge, player) {
+            var sensei = challenge.Challenge.Sensei.Name.toUpperCase();
+            var playerName = player.Name.toUpperCase();
+
+            return sensei === playerName;
+        };
+
         var checkForParticipationHistory = function () {
             var count = 0;
             for (var i = 0; i < vm.Challenges.length; i++) {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Models;
 using SamuraiDojo.Stats;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
@@ -23,12 +24,27 @@ namespace SamuraiDojo.ScoreBoard.App_Start
         {
             TestRunner testRunner = new TestRunner();
 
+            testRunner.PreTest = (context) =>
+            {
+                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
+                challenge.Sensei = sensei;
+                ScoreKeeper.AddPlayer(sensei.Name);
+
+                ChallengeRepository.AddChallenge(challenge, sensei);
+            };
+
             testRunner.OnTestPass = (context) =>
             {
-                ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest);
-
                 ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
-                ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy);
+                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+
+                if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
+                {
+                    ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest);
+                    ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy);
+                }
+
             };
             testRunner.Run();
             CalculateRanks();
@@ -59,7 +75,7 @@ namespace SamuraiDojo.ScoreBoard.App_Start
             }
         }
 
-        public static void RunSamuraiAuditor()
+        private static void RunSamuraiAuditor()
         {
             SamuraiDojo.Auditor.Audit();
         }

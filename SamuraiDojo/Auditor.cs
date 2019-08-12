@@ -17,7 +17,8 @@ namespace SamuraiDojo
             foreach (Type type in types)
             {
                 ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(type);
-                ChallengeRepository.AddChallenge(challenge);
+                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(type);
+                ChallengeRepository.AddChallenge(challenge, sensei);
             }
         }
     }

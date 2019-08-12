@@ -17,6 +17,11 @@ namespace SamuraiDojo.Stats
             challenges = new List<ChallengeResults>();
         }
 
+        public static void RegisterSensei(SenseiAttribute sensei, ChallengeAttribute challenge)
+        {
+            
+        }
+
         public static void AddPlayerPoint(ChallengeAttribute challenge, WrittenByAttribute writtenBy)
         {
             if (HasChallenge(challenge))
@@ -33,12 +38,13 @@ namespace SamuraiDojo.Stats
             }
         }
 
-        public static void AddChallenge(ChallengeAttribute challenge)
+        public static void AddChallenge(ChallengeAttribute challenge, SenseiAttribute sensei)
         {
             if (!HasChallenge(challenge))
             {
                 ChallengeResults challengeResults = new ChallengeResults();
                 challengeResults.Challenge = challenge;
+                challengeResults.Sensei = sensei;
                 challenges.Add(challengeResults);
             }
         }

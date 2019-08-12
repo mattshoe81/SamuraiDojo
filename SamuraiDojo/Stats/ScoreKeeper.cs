@@ -31,23 +31,48 @@ namespace SamuraiDojo.Stats
 
         public static void AddPoint(string samurai, Type challenge)
         {
+            if (samurai != null)
+                samurai = samurai.ToUpper();
+
             if (Players.ContainsKey(samurai))
             {
                 Players[samurai].TotalPoints++;
-                int challengePoints = Players[samurai].PointsByChallenge[challenge];
-                Players[samurai].PointsByChallenge[challenge] = ++challengePoints;
+                if (Players[samurai].PointsByChallenge.ContainsKey(challenge))
+                {
+                    int challengePoints = Players[samurai].PointsByChallenge[challenge];
+                    Players[samurai].PointsByChallenge[challenge] = ++challengePoints;
+                }
+                else
+                {
+                    Players[samurai].PointsByChallenge.Add(challenge, 1);
+                }
             }
             else
             {
                 Players.Add(samurai, new PlayerStats
                 {
-                    Name = samurai.ToUpper(),
-
+                    Name = samurai,
                     TotalPoints = 1,
                     PointsByChallenge = new Dictionary<Type, int>
                     {
                         { challenge, 1 }
                     }
+                });
+            }
+        }
+
+        public static void AddPlayer(string samurai)
+        {
+            if (samurai != null)
+                samurai = samurai.ToUpper();
+
+            if (!Players.ContainsKey(samurai))
+            {
+                Players.Add(samurai, new PlayerStats
+                {
+                    Name = samurai,
+                    TotalPoints = 0,
+                    PointsByChallenge = new Dictionary<Type, int>()
                 });
             }
         }

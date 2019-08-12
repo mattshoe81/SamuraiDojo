@@ -12,15 +12,19 @@
                         <td class="lowercase">{{vm.Player.Name}}</td>
                     </tr>
                     <tr>
-                        <td class="bold">Rank:</td>
-                        <td>{{vm.Player.Rank}}</td>
-                    </tr>
-                    <tr>
                         <td class="bold">Total Points:</td>
                         <td>{{vm.Player.TotalPoints}}</td>
                     </tr>
                     <tr>
-                        <td class="bold">Challenges Completed:</td>
+                        <td class="bold">Rank:</td>
+                        <td>{{vm.Player.Rank}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Battles As Sensei:</td>
+                        <td>{{vm.GetSenseiCount(vm.Player, vm.Challenges)}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Battles Fought:</td>
                         <td>{{vm.Player.ChallengesCompleted}}</td>
                     </tr>
                 </tbody>
@@ -42,6 +46,7 @@
                             <th>Challenge</th>
                             <th>Your Points</th>
                             <th>Deadline</th>
+                            <th>Sensei</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +54,7 @@
                             <td>{{challenge.Challenge.Name}}</td>
                             <td>{{vm.GetPointsFromChallenge(challenge, vm.Player)}}</td>
                             <td>{{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</td>
+                            <td>{{vm.IsSensei(challenge, vm.Player) ? 'Yes' : 'No'}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,6 +2,7 @@
 
 namespace SamuraiDojo.Challenges.Week2
 {
+    [Sensei(Samurai.MATT)]
     [Challenge("8/16/19", "Permutations of Character")]
     public interface ICharacterCounter
     {
