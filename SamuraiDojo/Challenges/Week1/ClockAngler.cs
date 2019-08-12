@@ -24,7 +24,7 @@ namespace SamuraiDojo.Challenges.Week1
         [WrittenBy(Samurai.JT)]
         public static int JT_CalculateAngleBetweenHands(int hour, int minute)
         {
-            int angle = 0;
+            int angle = Math.Abs((minute - hour * 5) * 6);
             return angle;
         }
 
