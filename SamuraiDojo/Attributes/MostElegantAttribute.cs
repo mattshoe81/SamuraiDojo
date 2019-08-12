@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace SamuraiDojo.Attributes
 {
     public class MostElegantAttribute : Attribute
-    {
+    { 
     }
 }

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Models;
 using SamuraiDojo.Stats;
 using SamuraiDojo.Test;
+using SamuraiDojo.Test.Attributes;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.App_Start
@@ -16,8 +14,8 @@ namespace SamuraiDojo.ScoreBoard.App_Start
     {
         public static void Init()
         {
+            RunSamuraiDojoAuditor();
             RunUnitTests();
-            RunSamuraiAuditor();
         }
 
         private static void RunUnitTests()
@@ -41,8 +39,9 @@ namespace SamuraiDojo.ScoreBoard.App_Start
 
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
-                    ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest);
-                    ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy);
+                    int points = 1;
+                    ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy, points);
                 }
 
             };
@@ -75,7 +74,7 @@ namespace SamuraiDojo.ScoreBoard.App_Start
             }
         }
 
-        private static void RunSamuraiAuditor()
+        private static void RunSamuraiDojoAuditor()
         {
             SamuraiDojo.Auditor.Audit();
         }

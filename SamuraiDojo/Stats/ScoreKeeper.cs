@@ -29,22 +29,22 @@ namespace SamuraiDojo.Stats
             return player;
         }
 
-        public static void AddPoint(string samurai, Type challenge)
+        public static void AddPoint(string samurai, Type challenge, int points = 1)
         {
             if (samurai != null)
                 samurai = samurai.ToUpper();
 
             if (Players.ContainsKey(samurai))
             {
-                Players[samurai].TotalPoints++;
+                Players[samurai].TotalPoints += points;
                 if (Players[samurai].PointsByChallenge.ContainsKey(challenge))
                 {
                     int challengePoints = Players[samurai].PointsByChallenge[challenge];
-                    Players[samurai].PointsByChallenge[challenge] = ++challengePoints;
+                    Players[samurai].PointsByChallenge[challenge] = challengePoints + points;
                 }
                 else
                 {
-                    Players[samurai].PointsByChallenge.Add(challenge, 1);
+                    Players[samurai].PointsByChallenge.Add(challenge, points);
                 }
             }
             else
@@ -52,10 +52,10 @@ namespace SamuraiDojo.Stats
                 Players.Add(samurai, new PlayerStats
                 {
                     Name = samurai,
-                    TotalPoints = 1,
+                    TotalPoints = points,
                     PointsByChallenge = new Dictionary<Type, int>
                     {
-                        { challenge, 1 }
+                        { challenge, points }
                     }
                 });
             }

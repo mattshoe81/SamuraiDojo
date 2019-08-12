@@ -22,18 +22,18 @@ namespace SamuraiDojo.Stats
             
         }
 
-        public static void AddPlayerPoint(ChallengeAttribute challenge, WrittenByAttribute writtenBy)
+        public static void AddPlayerPoint(ChallengeAttribute challenge, WrittenByAttribute writtenBy, int points = 1)
         {
             if (HasChallenge(challenge))
             {
                 ChallengeResults challengeResults = GetChallengeResults(challenge);
-                challengeResults.AddPoint(writtenBy);
+                challengeResults.AddPoint(writtenBy, points);
             }
             else
             {
                 ChallengeResults challengeResults = new ChallengeResults();
                 challengeResults.Challenge = challenge;
-                challengeResults.AddPoint(writtenBy);
+                challengeResults.AddPoint(writtenBy, points);
                 challenges.Add(challengeResults);
             }
         }

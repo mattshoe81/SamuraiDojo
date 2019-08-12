@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ImplementationAttribute.cs" />
     <Compile Include="Attributes\UnderTestAttribute.cs" />
     <Compile Include="Week1\ClockAnglerTestBase.cs" />
     <Compile Include="Week1\Dustin.cs" />

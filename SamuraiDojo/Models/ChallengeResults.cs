@@ -40,7 +40,7 @@ namespace SamuraiDojo.Models
             else
             {
                 int index = Results.FindIndex(item => item.Player.Equals(writtenBy));
-                Results[index].Points++;
+                Results[index].Points += points;
             }
         }
 

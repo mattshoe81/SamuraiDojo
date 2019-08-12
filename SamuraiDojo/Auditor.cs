@@ -20,6 +20,27 @@ namespace SamuraiDojo
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(type);
                 ChallengeRepository.AddChallenge(challenge, sensei);
             }
+
+            Type[] solutionTypes = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
+            foreach (Type type in solutionTypes)
+            {
+                WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+
+                // Code smell if i ever smelt one
+                Type challengeType = type.GetInterfaces().FirstOrDefault();
+                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(challengeType);
+
+
+                int bonusPoints = 0;
+
+                if (AttributeUtility.HasAttribute<MostEfficientAttribute>(type))
+                    bonusPoints += 5;
+                if (AttributeUtility.HasAttribute<MostElegantAttribute>(type))
+                    bonusPoints += 5;
+
+                ScoreKeeper.AddPoint(writtenBy.Name, challengeType, bonusPoints);
+                ChallengeRepository.AddPlayerPoint(challenge, writtenBy, bonusPoints);
+            }
         }
     }
 }
