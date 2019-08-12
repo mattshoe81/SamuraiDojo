@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Challenges;
-using SamuraiDojo.Stats;
+using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
 {
-    public class Samurai : Dictionary<string, string>
+    public class Samurai
     {
         public const string MATT = "matthew.shoemaker";
         public const string DUSTIN = "dustin.mattox";

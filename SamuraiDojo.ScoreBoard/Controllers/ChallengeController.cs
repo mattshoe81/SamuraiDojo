@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Models;
-using SamuraiDojo.Stats;
+using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers

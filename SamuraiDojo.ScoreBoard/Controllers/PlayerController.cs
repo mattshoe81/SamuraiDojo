@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using SamuraiDojo.Stats;
-using SamuraiDojo.ScoreBoard.Models;
+using SamuraiDojo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
 using System.Linq;
+using SamuraiDojo.Models;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
@@ -35,7 +35,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         public HttpResponseMessage All()
         {
             List<PlayerStats> players = new List<PlayerStats>();
-            foreach (KeyValuePair<string, PlayerStats> pair in ScoreKeeper.Players)
+            foreach (KeyValuePair<string, PlayerStats> pair in PlayerRepository.Players)
             {
                 PlayerStats player = GetPlayer(pair.Key);
                 if (player != null) 
@@ -48,7 +48,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         
         private PlayerStats GetPlayer(string playerName)
         {
-            PlayerStats player = ScoreKeeper.GetPlayer(playerName);
+            PlayerStats player = PlayerRepository.GetPlayer(playerName);
             return player;
         } 
     }

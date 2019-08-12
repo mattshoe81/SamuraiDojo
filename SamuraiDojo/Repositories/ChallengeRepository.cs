@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Models;
 
-namespace SamuraiDojo.Stats
+namespace SamuraiDojo.Repositories
 {
     public class ChallengeRepository
     {
@@ -15,11 +15,6 @@ namespace SamuraiDojo.Stats
         static ChallengeRepository()
         {
             challenges = new List<ChallengeResults>();
-        }
-
-        public static void RegisterSensei(SenseiAttribute sensei, ChallengeAttribute challenge)
-        {
-            
         }
 
         public static void AddPlayerPoint(ChallengeAttribute challenge, WrittenByAttribute writtenBy, int points = 1)

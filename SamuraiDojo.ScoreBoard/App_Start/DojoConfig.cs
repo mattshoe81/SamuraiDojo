@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Stats;
+using SamuraiDojo.Models;
+using SamuraiDojo.Repositories;
 using SamuraiDojo.Test;
 using SamuraiDojo.Test.Attributes;
 using SamuraiDojo.Utility;
@@ -14,24 +15,36 @@ namespace SamuraiDojo.ScoreBoard.App_Start
     {
         public static void Init()
         {
-            RunSamuraiDojoAuditor();
+            SamuraiDojo.Auditor.Audit();
             RunUnitTests();
+            CalculateRanks();
         }
 
         private static void RunUnitTests()
         {
             TestRunner testRunner = new TestRunner();
 
+            SetPreTestAction(testRunner);
+            SetPassedTestAction(testRunner);
+
+            testRunner.Run();
+        }
+
+        private static void SetPreTestAction(TestRunner testRunner)
+        {
             testRunner.PreTest = (context) =>
             {
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
                 ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
                 challenge.Sensei = sensei;
-                ScoreKeeper.AddPlayer(sensei.Name);
+                PlayerRepository.AddPlayer(sensei.Name);
 
                 ChallengeRepository.AddChallenge(challenge, sensei);
             };
+        }
 
+        private static void SetPassedTestAction(TestRunner testRunner)
+        {
             testRunner.OnTestPass = (context) =>
             {
                 ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
@@ -40,21 +53,16 @@ namespace SamuraiDojo.ScoreBoard.App_Start
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
-                    ScoreKeeper.AddPoint(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    PlayerRepository.AddPoint(context.WrittenBy.Name, context.ClassUnderTest, points);
                     ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy, points);
                 }
 
             };
-            testRunner.Run();
-            CalculateRanks();
-
-            foreach (KeyValuePair<string, PlayerStats> pair in ScoreKeeper.Players)
-                Debug.WriteLine($"{pair.Key}:\t{pair.Value.TotalPoints}");
         }
 
         private static void CalculateRanks()
         {
-            List<PlayerStats> players = ScoreKeeper.Players.Values.ToList();
+            List<PlayerStats> players = PlayerRepository.Players.Values.ToList();
             players.Sort();
 
             HashSet<int> rankings = new HashSet<int>();
@@ -72,11 +80,6 @@ namespace SamuraiDojo.ScoreBoard.App_Start
                 if (i < players.Count - 1)
                     currentRank += Math.Abs(players[i].CompareTo(players[i + 1]));
             }
-        }
-
-        private static void RunSamuraiDojoAuditor()
-        {
-            SamuraiDojo.Auditor.Audit();
         }
     }
 }

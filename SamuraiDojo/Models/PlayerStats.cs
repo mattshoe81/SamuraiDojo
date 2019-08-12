@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamuraiDojo.Stats
+namespace SamuraiDojo.Models
 {
     public class PlayerStats : IComparable<PlayerStats>
     {
@@ -23,6 +23,11 @@ namespace SamuraiDojo.Stats
 
         public int Rank { get; set; }
 
+        /// <summary>
+        /// This is essentially the ranking algorithm.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public int CompareTo(PlayerStats player)
         {
             int result = 0;

@@ -92,6 +92,11 @@ namespace SamuraiDojo.Utility
             return GetAttribute(type, attribute) != null;
         }
 
+        public static bool HasAttribute(MemberInfo member, Attribute attribute)
+        {
+            return GetAttribute(member, attribute) != null;
+        }
+
         public static bool HasAnyAttribute(Type type, params Attribute[] attributes)
         {
             foreach (Attribute attribute in attributes)
@@ -101,11 +106,6 @@ namespace SamuraiDojo.Utility
             }
 
             return false;
-        }
-
-        public static bool HasAttribute(MemberInfo member, Attribute attribute)
-        {
-            return GetAttribute(member, attribute) != null;
         }
 
         public static bool HasAnyAttribute(MemberInfo member, params Attribute[] attributes)

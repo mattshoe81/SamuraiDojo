@@ -54,9 +54,9 @@
     <Compile Include="Models\ChallengeResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
-    <Compile Include="Stats\ChallengeRepository.cs" />
-    <Compile Include="Stats\PlayerStats.cs" />
-    <Compile Include="Stats\ScoreKeeper.cs" />
+    <Compile Include="Repositories\ChallengeRepository.cs" />
+    <Compile Include="Models\PlayerStats.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">

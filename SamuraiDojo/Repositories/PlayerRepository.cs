@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using SamuraiDojo.Challenges.Week1;
-using SamuraiDojo.Stats;
+using SamuraiDojo.Models;
+using SamuraiDojo.Repositories;
 
-namespace SamuraiDojo.Stats
+namespace SamuraiDojo.Repositories
 {
-    public class ScoreKeeper 
+    public class PlayerRepository 
     {
         public readonly static Dictionary<string, PlayerStats> Players;
-        public readonly static List<Type> Challenges;
 
-        static ScoreKeeper()
+        static PlayerRepository()
         {
             Players = new Dictionary<string, PlayerStats>();
-            Challenges = new List<Type>();
         }
 
         public static PlayerStats GetPlayer(string name)
