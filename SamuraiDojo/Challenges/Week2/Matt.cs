@@ -7,8 +7,6 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Challenges.Week2
 {
-    [MostEfficient]
-    [MostElegant]
     [WrittenBy(Samurai.MATT)]
     public class Matt : ICharacterCounter
     {
