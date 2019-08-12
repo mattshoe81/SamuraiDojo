@@ -6,7 +6,7 @@
 
         <h3><span class="italic">'{{vm.CurrentChallenge.Challenge.Name}}'</span></h3>
         <h4>Deadline: <span class="italic">{{vm.CurrentChallenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
-        <h4>Sensei: <span class="italic">{{vm.CurrentChallenge.Challenge.Sensei.Name}}</span></h4>
+        <h4>Sensei: <span class="italic">{{vm.CurrentChallenge.Sensei.Name}}</span></h4>
         <pre>
         <code>
 using SamuraiDojo.Attributes;
@@ -107,7 +107,7 @@ namespace SamuraiDojo.Challenges.Week2
                         <span class="bold italic">'{{challenge.Challenge.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
                     </h4>
                     <h5 class="row-buffer">
-                        <span class="bold">Sensei: </span><span class="italic">{{challenge.Challenge.Sensei.Name}}</span>
+                        <span class="bold">Sensei: </span><span class="italic">{{challenge.Sensei.Name}}</span>
                     </h5>
                     <div class="col-sm-6"
                          ng-show="challenge.Results.length">

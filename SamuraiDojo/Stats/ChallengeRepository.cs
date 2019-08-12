@@ -76,7 +76,7 @@ namespace SamuraiDojo.Stats
         {
             List<ChallengeResults> challenges = GetAllChallengeResults();
             DateTime max = challenges.Max((challenge) => challenge.Challenge.Deadline);
-            ChallengeResults current = GetAllChallengeResults().Where((challenge) => challenge.Challenge.Deadline == max).FirstOrDefault();
+            ChallengeResults current = challenges.Where((challenge) => challenge.Challenge.Deadline == max).FirstOrDefault();
 
             return current;
         }

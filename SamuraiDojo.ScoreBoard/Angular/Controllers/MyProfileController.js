@@ -49,10 +49,14 @@
         };
 
         vm.IsSensei = function (challenge, player) {
-            var sensei = challenge.Challenge.Sensei.Name.toUpperCase();
-            var playerName = player.Name.toUpperCase();
+            if (challenge && player) {
+                var sensei = challenge.Sensei.Name.toUpperCase();
+                var playerName = player.Name.toUpperCase();
 
-            return sensei === playerName;
+                return sensei === playerName;
+            }
+
+            return false;
         };
 
         var checkForParticipationHistory = function () {
