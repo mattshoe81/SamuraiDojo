@@ -32,14 +32,16 @@ namespace SamuraiDojo
 
 
                 int bonusPoints = 0;
-
                 if (AttributeUtility.HasAttribute<MostEfficientAttribute>(type))
                     bonusPoints += 5;
                 if (AttributeUtility.HasAttribute<MostElegantAttribute>(type))
                     bonusPoints += 5;
 
-                ScoreKeeper.AddPoint(writtenBy.Name, challengeType, bonusPoints);
-                ChallengeRepository.AddPlayerPoint(challenge, writtenBy, bonusPoints);
+                if (bonusPoints > 0)
+                {
+                    ScoreKeeper.AddPoint(writtenBy.Name, challengeType, bonusPoints);
+                    ChallengeRepository.AddPlayerPoint(challenge, writtenBy, bonusPoints);
+                }
             }
         }
     }
