@@ -1,7 +1,7 @@
 ﻿
 IMPLEMENT:
 	1. Branch your solution off master (not develop) as 'solution/week#/name'
-	2. Implement the current week's interface (SamuraiDojo/Challenges/Week#)
+	2. Extend the Base class for the week's challenge (SamuraiDojo/Challenges/Week#)
 	3. Extend the Base Test for the current week (SamuraiDojo.Test/Week#)
 	4. Decorate ALL of your classes (including tests) with the [WrittenBy(Samurai.<YOU>)] attribute or you won't get credit.
 
