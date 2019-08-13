@@ -13,13 +13,6 @@ namespace SamuraiDojo
 {
     public class Auditor
     {
-        private static string AssemblyName;
-
-        static Auditor()
-        {
-            AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-        }
-
         public static void Audit()
         {
             try
@@ -36,7 +29,7 @@ namespace SamuraiDojo
         private static void AssignSenseisToChallenges()
         {
             // Load up all of the challenges and assign their sensei.
-            Type[] types = ReflectionUtility.LoadTypesWithAttribute<ChallengeAttribute>(AssemblyName);
+            Type[] types = ReflectionUtility.LoadTypesWithAttribute<ChallengeAttribute>("SamuraiDojo");
             foreach (Type type in types)
             {
                 ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(type);
@@ -48,16 +41,18 @@ namespace SamuraiDojo
         private static void GrantBonusPoints()
         {
 
-            Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>(AssemblyName);
+            Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
             foreach (Type type in battleClasses)
             {
                 int bonusPoints = RetrieveBonusPoints(type);
                 if (bonusPoints > 0)
                 {
                     WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-                    ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(type);
 
-                    PlayerRepository.AddPoint(writtenBy.Name, type.BaseType, bonusPoints);
+                    Type challengeType = type.GetInterfaces().FirstOrDefault();
+                    ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(challengeType);
+
+                    PlayerRepository.AddPoint(writtenBy.Name, challengeType, bonusPoints);
                     ChallengeRepository.AddPlayerPoint(challenge, writtenBy, bonusPoints);
                 }
             }

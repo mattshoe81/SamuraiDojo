@@ -6,10 +6,10 @@ using SamuraiDojo.Test.Attributes;
 namespace SamuraiDojo.Test.Week2
 {
     [TestClass]
-    [UnderTest(typeof(CharacterCounter))]
+    [UnderTest(typeof(ICharacterCounter))]
     public abstract class BaseCharacterCounterTest
     {
-        protected abstract CharacterCounter GetInstance();
+        protected abstract ICharacterCounter GetInstance();
 
         [TestMethod]
         public void TestMethod1()
@@ -133,7 +133,7 @@ namespace SamuraiDojo.Test.Week2
 
         private void RunTest(string integers, int expected)
         {
-            CharacterCounter counter = GetInstance();
+            ICharacterCounter counter = GetInstance();
             int actual = counter.CountPossibleCharacters(integers);
 
             Assert.AreEqual(expected, actual, $"Expected {expected} but found {actual} for string '{integers}'");

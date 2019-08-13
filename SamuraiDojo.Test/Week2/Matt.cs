@@ -9,7 +9,7 @@ namespace SamuraiDojo.Test.Week2
     [WrittenBy(Samurai.MATT)]
     public class Matt : BaseCharacterCounterTest
     {
-        protected override CharacterCounter GetInstance()
+        protected override ICharacterCounter GetInstance()
         {
             return new SamuraiDojo.Challenges.Week2.Matt();
         }

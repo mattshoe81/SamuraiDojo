@@ -4,7 +4,7 @@ namespace SamuraiDojo.Challenges.Week2
 {
     [Sensei(Samurai.MATT)]
     [Challenge("8/16/19", "Permutations of Character")]
-    public abstract class CharacterCounter
+    public interface ICharacterCounter
     {
         /// <summary>
         /// 
@@ -50,6 +50,6 @@ namespace SamuraiDojo.Challenges.Week2
         ///     The maximum number of possible alphabetic characters that could have been mapped from the string of 
         ///     integers, where A=1, B=2, C=3, ... , Y=25, Z=26.
         /// </returns>
-        public abstract int CountPossibleCharacters(string integers);
+        int CountPossibleCharacters(string integers);
     }
 }

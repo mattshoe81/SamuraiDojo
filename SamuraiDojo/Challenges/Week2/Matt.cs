@@ -7,12 +7,10 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Challenges.Week2
 {
-    [MostEfficient]
     [WrittenBy(Samurai.MATT)]
-    public class Matt : CharacterCounter
+    public class Matt : ICharacterCounter
     {
-
-        public override int CountPossibleCharacters(string integers)
+        public int CountPossibleCharacters(string integers)
         {
             int permutations = 0;
 
