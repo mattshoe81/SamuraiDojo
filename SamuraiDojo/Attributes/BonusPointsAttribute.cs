@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Attributes
 {
-    public class MostElegantAttribute : BonusPointsAttribute
+    public abstract class BonusPointsAttribute : Attribute
     {
-        public override int Points { get; } = 5;
+        public abstract int Points { get; }
     }
 }

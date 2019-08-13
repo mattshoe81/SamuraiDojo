@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BonusPointsAttribute.cs" />
     <Compile Include="Attributes\ChallengeAttribute.cs" />
     <Compile Include="Attributes\MostEfficientAttribute.cs" />
     <Compile Include="Attributes\MostElegantAttribute.cs" />

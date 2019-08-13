@@ -60,10 +60,12 @@ namespace SamuraiDojo
         private static int DetermineBonusPoints(Type type)
         {
             int bonusPoints = 0;
-            if (AttributeUtility.HasAttribute<MostEfficientAttribute>(type))
-                bonusPoints += 5;
-            if (AttributeUtility.HasAttribute<MostElegantAttribute>(type))
-                bonusPoints += 5;
+
+            foreach (Attribute attribute in type.GetCustomAttributes(false))
+            {
+                if (attribute is BonusPointsAttribute)
+                    bonusPoints += ((BonusPointsAttribute)attribute).Points;
+            }
 
             return bonusPoints;
         }
