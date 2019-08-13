@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
@@ -29,8 +30,9 @@ namespace SamuraiDojo.ScoreBoard.Controllers
                 string full = HttpContext.Current.User.Identity.Name;
                 username = full.Substring(full.LastIndexOf('\\') + 1);
             }
-            catch
+            catch (Exception ex)
             {
+                Log.Exception(ex, "Unable to get user name");
                 username = string.Empty;
             }
 

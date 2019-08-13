@@ -18,8 +18,9 @@ namespace SamuraiDojo.Utility
                 Attribute attribute = Attribute.GetCustomAttribute(type, typeof(T));
                 result = attribute != null;
             }
-            catch
+            catch (Exception ex) 
             {
+                LogException(ex);
                 result = false;
             }
 
@@ -34,8 +35,9 @@ namespace SamuraiDojo.Utility
                 Attribute attribute = Attribute.GetCustomAttribute(member, typeof(T));
                 result = attribute != null;
             }
-            catch
+            catch (Exception ex)
             {
+                LogException(ex);
                 result = false;
             }
 
@@ -49,8 +51,9 @@ namespace SamuraiDojo.Utility
             {
                 attribute = (T)Attribute.GetCustomAttribute(type, typeof(T));
             }
-            catch
+            catch (Exception ex)
             {
+                LogException(ex);
                 attribute = null;
             }
 
@@ -64,8 +67,9 @@ namespace SamuraiDojo.Utility
             {
                 result = Attribute.GetCustomAttribute(type, attribute.GetType());
             }
-            catch
+            catch (Exception ex)
             {
+                LogException(ex);
                 result = null;
             }
 
@@ -79,8 +83,9 @@ namespace SamuraiDojo.Utility
             {
                 result = Attribute.GetCustomAttribute(member, attribute.GetType());
             }
-            catch
+            catch (Exception ex)
             {
+                LogException(ex);
                 result = null;
             }
 
@@ -117,6 +122,11 @@ namespace SamuraiDojo.Utility
             }
 
             return false;
+        }
+
+        private static void LogException(Exception ex)
+        {
+            Log.Exception(ex, "Exception in AttributeUtility");
         }
     }
 }

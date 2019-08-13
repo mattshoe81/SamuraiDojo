@@ -56,8 +56,9 @@ namespace SamuraiDojo.Test
 
                 InvokeAction(OnTestPass, testExecutionContext);
             }
-            catch
+            catch (Exception ex)
             {
+                Log.Warning($"Failed Test: {ex?.InnerException?.Message}");
                 InvokeAction(OnTestFail, testExecutionContext);
             }
         }
@@ -71,7 +72,7 @@ namespace SamuraiDojo.Test
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                Log.Exception(ex);
             }
         }
     }

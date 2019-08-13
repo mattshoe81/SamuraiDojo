@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
@@ -21,7 +22,7 @@ namespace SamuraiDojo
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                Log.Exception(ex);
             }
         }
 
@@ -40,10 +41,10 @@ namespace SamuraiDojo
         private static void GrantBonusPoints()
         {
 
-            Type[] solutionTypes = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
-            foreach (Type type in solutionTypes)
+            Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
+            foreach (Type type in battleClasses)
             {
-                int bonusPoints = DetermineBonusPoints(type);
+                int bonusPoints = RetrieveBonusPoints(type);
                 if (bonusPoints > 0)
                 {
                     WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
@@ -57,7 +58,7 @@ namespace SamuraiDojo
             }
         }
 
-        private static int DetermineBonusPoints(Type type)
+        private static int RetrieveBonusPoints(Type type)
         {
             int bonusPoints = 0;
 
