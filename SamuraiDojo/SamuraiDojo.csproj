@@ -49,6 +49,7 @@
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
     <Compile Include="Challenges\Week1\ClockAngler.cs" />
+    <Compile Include="Challenges\Week2\Dustin.cs" />
     <Compile Include="Challenges\Week2\ICharacterCounter.cs" />
     <Compile Include="Challenges\Week2\Matt.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
