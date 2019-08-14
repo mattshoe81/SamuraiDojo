@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.Challenges.Week1;
+using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
 
@@ -8,16 +8,16 @@ namespace SamuraiDojo.Repositories
 {
     public class PlayerRepository 
     {
-        public readonly static Dictionary<string, PlayerStats> Players;
+        public readonly static Dictionary<string, Player> Players;
 
         static PlayerRepository()
         {
-            Players = new Dictionary<string, PlayerStats>();
+            Players = new Dictionary<string, Player>();
         }
 
-        public static PlayerStats GetPlayer(string name)
+        public static Player GetPlayer(string name)
         {
-            PlayerStats player = null;
+            Player player = null;
             if (name != null)
             {
                 name = name.ToUpper();
@@ -28,7 +28,7 @@ namespace SamuraiDojo.Repositories
             return player;
         }
 
-        public static void AddPoint(string samurai, Type challenge, int points = 1)
+        public static void AddPoint(string samurai, Type battle, int points = 1)
         {
             if (samurai != null)
                 samurai = samurai.ToUpper();
@@ -36,25 +36,25 @@ namespace SamuraiDojo.Repositories
             if (Players.ContainsKey(samurai))
             {
                 Players[samurai].TotalPoints += points;
-                if (Players[samurai].PointsByChallenge.ContainsKey(challenge))
+                if (Players[samurai].PointsByBattle.ContainsKey(battle))
                 {
-                    int challengePoints = Players[samurai].PointsByChallenge[challenge];
-                    Players[samurai].PointsByChallenge[challenge] = challengePoints + points;
+                    int battlePoints = Players[samurai].PointsByBattle[battle];
+                    Players[samurai].PointsByBattle[battle] = battlePoints + points;
                 }
                 else
                 {
-                    Players[samurai].PointsByChallenge.Add(challenge, points);
+                    Players[samurai].PointsByBattle.Add(battle, points);
                 }
             }
             else
             {
-                Players.Add(samurai, new PlayerStats
+                Players.Add(samurai, new Player
                 {
                     Name = samurai,
                     TotalPoints = points,
-                    PointsByChallenge = new Dictionary<Type, int>
+                    PointsByBattle = new Dictionary<Type, int>
                     {
-                        { challenge, points }
+                        { battle, points }
                     }
                 });
             }
@@ -67,11 +67,11 @@ namespace SamuraiDojo.Repositories
 
             if (!Players.ContainsKey(samurai))
             {
-                Players.Add(samurai, new PlayerStats
+                Players.Add(samurai, new Player
                 {
                     Name = samurai,
                     TotalPoints = 0,
-                    PointsByChallenge = new Dictionary<Type, int>()
+                    PointsByBattle = new Dictionary<Type, int>()
                 });
             }
         }

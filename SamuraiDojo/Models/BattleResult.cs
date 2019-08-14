@@ -7,13 +7,18 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Models
 {
-    public class ChallengeResult : IComparable<ChallengeResult>
+    /// <summary>
+    /// The outcome of a battle for a specific player.
+    /// </summary>
+    public class BattleResult : IComparable<BattleResult>
     {
         public WrittenByAttribute Player { get; set; }
 
         public int Points { get; set; }
 
-        public int CompareTo(ChallengeResult other)
+        public double Efficiency { get; set; }
+
+        public int CompareTo(BattleResult other)
         {
             int comparison = other.Points - Points;
             return comparison;
@@ -25,10 +30,16 @@ namespace SamuraiDojo.Models
                 return false;
             else if (object.ReferenceEquals(this, obj))
                 return true;
-            else if (obj is ChallengeResult)
-                return Player.Name == ((ChallengeResult)obj).Player.Name;
+            else if (obj is BattleResult)
+                return Player.Name == ((BattleResult)obj).Player.Name;
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            return Player.GetHashCode();
+        }
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SamuraiDojo.Challenges;
+using SamuraiDojo.Battles;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo

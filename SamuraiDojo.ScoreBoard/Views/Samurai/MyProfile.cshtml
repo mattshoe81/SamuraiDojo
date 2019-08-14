@@ -21,11 +21,11 @@
                     </tr>
                     <tr>
                         <td class="bold">Battles As Sensei:</td>
-                        <td>{{vm.GetSenseiCount(vm.Player, vm.Challenges)}}</td>
+                        <td>{{vm.GetSenseiCount(vm.Player, vm.Battles)}}</td>
                     </tr>
                     <tr>
                         <td class="bold">Battles Fought:</td>
-                        <td>{{vm.Player.ChallengesCompleted}}</td>
+                        <td>{{vm.Player.BattlesCompleted}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,11 +50,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="challenge in vm.Challenges">
-                            <td>{{challenge.Challenge.Name}}</td>
-                            <td>{{vm.GetPointsFromChallenge(challenge, vm.Player)}}</td>
-                            <td>{{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</td>
-                            <td>{{vm.IsSensei(challenge, vm.Player) ? 'Yes' : 'No'}}</td>
+                        <tr ng-repeat="battle in vm.Battles">
+                            <td>{{battle.Battle.Name}}</td>
+                            <td>{{vm.GetPointsFromBattle(battle, vm.Player)}}</td>
+                            <td>{{battle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</td>
+                            <td>{{vm.IsSensei(battle, vm.Player) ? 'Yes' : 'No'}}</td>
                         </tr>
                     </tbody>
                 </table>

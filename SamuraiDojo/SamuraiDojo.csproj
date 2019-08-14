@@ -42,21 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\BonusPointsAttribute.cs" />
-    <Compile Include="Attributes\ChallengeAttribute.cs" />
+    <Compile Include="Attributes\BattleAttribute.cs" />
     <Compile Include="Attributes\MostEfficientAttribute.cs" />
     <Compile Include="Attributes\MostElegantAttribute.cs" />
     <Compile Include="Attributes\SenseiAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
-    <Compile Include="Challenges\Week1\ClockAngler.cs" />
-    <Compile Include="Challenges\Week2\ICharacterCounter.cs" />
-    <Compile Include="Challenges\Week2\Matt.cs" />
-    <Compile Include="Models\ChallengeResult.cs" />
-    <Compile Include="Models\ChallengeResults.cs" />
+    <Compile Include="Battles\Week1\ClockAngler.cs" />
+    <Compile Include="Battles\Week2\CharacterCounter.cs" />
+    <Compile Include="Battles\Week2\Matt.cs" />
+    <Compile Include="Models\BattleResult.cs" />
+    <Compile Include="Models\BattleOutcome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
-    <Compile Include="Repositories\ChallengeRepository.cs" />
-    <Compile Include="Models\PlayerStats.cs" />
+    <Compile Include="Repositories\BattleRepository.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Repositories\PlayerRepository.cs" />
   </ItemGroup>
   <ItemGroup>

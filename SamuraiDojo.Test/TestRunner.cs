@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
@@ -29,14 +30,28 @@ namespace SamuraiDojo.Test
             Type[] types = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
 
             foreach (Type type in types)
-            {
-                List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
-                foreach (MethodInfo method in methods)
-                    EvaluteTest(type, method);
-            }
+                RunTests(type);
         }
 
-        public void EvaluteTest(Type type, MethodInfo method)
+        public void Run(WrittenByAttribute writtenBy, BattleAttribute battle)
+        {
+            Type[] allBattleTests = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
+                .Where(test => AttributeUtility.GetAttribute<WrittenByAttribute>(test) == writtenBy)?.ToArray();
+
+            Type battleTest = allBattleTests
+                .Where(testClass => AttributeUtility.GetAttribute<UnderTestAttribute>(testClass).Type.FullName == battle.Type.FullName).FirstOrDefault();
+
+            RunTests(battleTest);
+        }
+
+        public void RunTests(Type type)
+        {
+            List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
+            foreach (MethodInfo method in methods)
+                EvaluteTest(type, method);
+        }
+
+        private void EvaluteTest(Type type, MethodInfo method)
         {
             WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
             UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);

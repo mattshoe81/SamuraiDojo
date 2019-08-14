@@ -5,8 +5,8 @@
     var app = angular.module("SamuraiDojo");
     app.controller("HomePageController", ["RequestService",  function (RequestService) {
         var vm = this;
-        vm.CurrentChallenge = {};
-        vm.Challenges = [];
+        vm.CurrentBattle = {};
+        vm.Battles = [];
 
         var playerRequest = RequestService.SendRequest("/api/Player", null, "GET");
         playerRequest.Success(function (response) {
@@ -24,20 +24,20 @@
             vm.AllPlayers = error.ExceptionMessage;
         });
 
-        var currentChallengeRequest = RequestService.SendRequest("/api/Challenge", null, "GET");
-        currentChallengeRequest.Success(function (response) {
-            vm.CurrentChallenge = response.data;
+        var currentBattleRequest = RequestService.SendRequest("/api/Battle", null, "GET");
+        currentBattleRequest.Success(function (response) {
+            vm.CurrentBattle = response.data;
         });
-        currentChallengeRequest.Error(function (error) {
-            vm.CurrentChallenge = error.ExceptionMessage;
+        currentBattleRequest.Error(function (error) {
+            vm.CurrentBattle = error.ExceptionMessage;
         });
         
-        var allChallengesRequest = RequestService.SendRequest("/api/Challenge/All", null, "GET");
-        allChallengesRequest.Success(function (response) {
-            vm.Challenges = response.data;
+        var allBattlesRequest = RequestService.SendRequest("/api/Battle/All", null, "GET");
+        allBattlesRequest.Success(function (response) {
+            vm.Battles = response.data;
         });
-        allChallengesRequest.Error(function (error) {
-            vm.Challenges = error.ExceptionMessage;
+        allBattlesRequest.Error(function (error) {
+            vm.Battles = error.ExceptionMessage;
         });
 
 
@@ -50,11 +50,11 @@
             return 0;
         };
 
-        vm.GetSenseiCount = function (player, challenges) {
+        vm.GetSenseiCount = function (player, battles) {
             var count = 0;
-            if (challenges) {
-                for (var i = 0; i < challenges.length; i++) {
-                    if (challenges[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
+            if (battles) {
+                for (var i = 0; i < battles.length; i++) {
+                    if (battles[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
                         count++;
                 }
             }

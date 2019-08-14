@@ -1,14 +1,14 @@
 ﻿using SamuraiDojo.Attributes;
 
-namespace SamuraiDojo.Challenges.Week2
+namespace SamuraiDojo.Battles.Week2
 {
     [Sensei(Samurai.MATT)]
-    [Challenge("8/16/19", "Permutations of Character")]
-    public interface ICharacterCounter
+    [Battle("8/16/19", "Permutations of Character", typeof(CharacterCounter))]
+    public abstract class CharacterCounter
     {
         /// <summary>
         /// 
-        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy challenge:
+        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy battle:
         /// 
         /// Given a string of integers (i.e. "657403204326320867405004724140372057560"), determine the maximum number
         /// of alphabetic characters that we could map according to the following map of integers to alphabetic 
@@ -50,6 +50,6 @@ namespace SamuraiDojo.Challenges.Week2
         ///     The maximum number of possible alphabetic characters that could have been mapped from the string of 
         ///     integers, where A=1, B=2, C=3, ... , Y=25, Z=26.
         /// </returns>
-        int CountPossibleCharacters(string integers);
+        public abstract int CountPossibleCharacters(string integers);
     }
 }

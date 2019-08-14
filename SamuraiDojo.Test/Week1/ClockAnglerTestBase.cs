@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SamuraiDojo.Challenges.Week1;
+using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test.Week1

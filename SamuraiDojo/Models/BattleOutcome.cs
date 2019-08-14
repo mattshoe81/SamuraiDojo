@@ -7,20 +7,20 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Models
 {
-    public class ChallengeResults : IComparable<ChallengeResults>
+    public class BattleOutcome : IComparable<BattleOutcome>
     {
-        public ChallengeAttribute Challenge { get; set; }
+        public BattleAttribute Battle { get; set; }
 
         public SenseiAttribute Sensei { get; set; }
 
-        public List<ChallengeResult> Results { get; set; }
+        public List<BattleResult> Results { get; set; }
 
-        public ChallengeResults()
+        public BattleOutcome()
         {
-            Results = new List<ChallengeResult>();
+            Results = new List<BattleResult>();
         }
 
-        public void Add(ChallengeResult result, SenseiAttribute sensei)
+        public void Add(BattleResult result, SenseiAttribute sensei)
         {
             Results.Add(result);
             Sensei = sensei;
@@ -28,10 +28,10 @@ namespace SamuraiDojo.Models
 
         public void AddPoint(WrittenByAttribute writtenBy, int points = 1)
         {
-            ChallengeResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
+            BattleResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
             if (playerResult == null)
             {
-                Results.Add(new ChallengeResult
+                Results.Add(new BattleResult
                 {
                     Player = writtenBy,
                     Points = points
@@ -44,22 +44,30 @@ namespace SamuraiDojo.Models
             }
         }
 
-        public ChallengeResult Get(string player)
+        public void SetEfficiencyScore(WrittenByAttribute writtenBy, double efficiencyScore)
         {
-            ChallengeResult result = Results.Where((challengeResult) => challengeResult.Player.Name == player).FirstOrDefault();
+            BattleResult result = Get(writtenBy.Name);
+
+            if (result != null)
+                result.Efficiency = efficiencyScore;
+        }
+
+        public BattleResult Get(string player)
+        {
+            BattleResult result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
             return result;
         }
 
-        public List<ChallengeResult> All()
+        public List<BattleResult> All()
         {
             Results.Sort();
             return Results;
         }
 
-        public int CompareTo(ChallengeResults other)
+        public int CompareTo(BattleOutcome other)
         {
-            DateTime thisDeadline = Challenge.Deadline;
-            DateTime otherDeadline = other.Challenge.Deadline;
+            DateTime thisDeadline = Battle.Deadline;
+            DateTime otherDeadline = other.Battle.Deadline;
 
             int result = 0;
             if (thisDeadline > otherDeadline)

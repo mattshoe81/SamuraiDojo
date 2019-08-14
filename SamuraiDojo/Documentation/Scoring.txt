@@ -1,7 +1,6 @@
-﻿Rules for scoring:
-
-	1. You will be scored weekly by how many test cases you pass.
-	2. You will not be penalized for failed tests, but you won't get points for them.
-		- This means you can get partial credit for a partial solution!
-	3. The prestigious "Most Efficient" and "Most Elegant" prize is a bonus 5 points each!
+﻿
+1. You will be scored weekly by how many test cases you pass.
+2. You will not be penalized for failed tests, but you won't get points for them.
+	- This means you can get partial credit for a partial solution
+3. The prestigious "Most Efficient" and "Most Elegant" prize is a bonus 5 points each!
 	

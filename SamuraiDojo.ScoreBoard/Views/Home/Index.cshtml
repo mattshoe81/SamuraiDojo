@@ -4,21 +4,21 @@
 
     <div class="row">
 
-        <h3><span class="italic">'{{vm.CurrentChallenge.Challenge.Name}}'</span></h3>
-        <h4>Deadline: <span class="italic">{{vm.CurrentChallenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
-        <h4>Sensei: <span class="italic">{{vm.CurrentChallenge.Sensei.Name}}</span></h4>
+        <h3><span class="italic">'{{vm.CurrentBattle.Battle.Name}}'</span></h3>
+        <h4>Deadline: <span class="italic">{{vm.CurrentBattle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
+        <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
         <pre>
         <code>
 using SamuraiDojo.Attributes;
 
-namespace SamuraiDojo.Challenges.Week2
+namespace SamuraiDojo.Battles.Week2
 {
-    [Challenge("8/16/19", "Permutations of Character")]
+    [Battle("8/16/19", "Permutations of Character")]
     public interface ICharacterCounter
     {
         /// &lt;summary&gt;
         /// 
-        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy challenge:
+        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy battle:
         /// 
         /// Given a string of integers (i.e. "657403204326320867405004724140372057560"), determine the maximum number
         /// of alphabetic characters that we could map according to the following map of integers to alphabetic 
@@ -90,8 +90,8 @@ namespace SamuraiDojo.Challenges.Week2
                         <td>{{player.Rank}}</td>
                         <td class="lowercase">{{player.Name}}</td>
                         <td>{{player.TotalPoints}}</td>
-                        <td>{{player.ChallengesCompleted}}</td>
-                        <td>{{vm.GetSenseiCount(player, vm.Challenges)}}</td>
+                        <td>{{player.BattlesCompleted}}</td>
+                        <td>{{vm.GetSenseiCount(player, vm.Battles)}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -101,16 +101,16 @@ namespace SamuraiDojo.Challenges.Week2
         <div class="col-sm-6">
             <h3 class="underline inline-block">History:</h3>
             <div class="spacer-10"></div>
-            <div ng-repeat="challenge in vm.Challenges">
+            <div ng-repeat="battle in vm.Battles">
                 <div class="row">
                     <h4 class="row-buffer">
-                        <span class="bold italic">'{{challenge.Challenge.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{challenge.Challenge.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
+                        <span class="bold italic">'{{battle.Battle.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{battle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
                     </h4>
                     <h5 class="row-buffer">
-                        <span class="bold">Sensei: </span><span class="italic">{{challenge.Sensei.Name}}</span>
+                        <span class="bold">Sensei: </span><span class="italic">{{battle.Sensei.Name}}</span>
                     </h5>
                     <div class="col-sm-6"
-                         ng-show="challenge.Results.length">
+                         ng-show="battle.Results.length">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
@@ -119,7 +119,7 @@ namespace SamuraiDojo.Challenges.Week2
                                     <th>Rank</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="result in challenge.Results">
+                            <tbody ng-repeat="result in battle.Results">
                                 <tr>
                                     <td>{{result.Points}}</td>
                                     <td class="lowercase">{{result.Player.Name}}</td>
@@ -128,8 +128,8 @@ namespace SamuraiDojo.Challenges.Week2
                             </tbody>
                         </table>
                     </div>
-                    <div ng-hide="challenge.Results.length">
-                        <span class="w-35 inline-block"></span><h4 class="inline-block inline">Nobody has solved <span class="italic">'{{challenge.Challenge.Name}}'</span> yet!</h4>
+                    <div ng-hide="battle.Results.length">
+                        <span class="w-35 inline-block"></span><h4 class="inline-block inline">Nobody has solved <span class="italic">'{{battle.Battle.Name}}'</span> yet!</h4>
                     </div>
                 </div>
                 <hr />

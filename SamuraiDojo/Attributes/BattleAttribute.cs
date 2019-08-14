@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Attributes
 {
-    public class ChallengeAttribute : Attribute
+    public class BattleAttribute : Attribute
     {
         public string Name { get; set; }
+
         public DateTime Deadline { get; set; }
+
         public SenseiAttribute Sensei { get; set; }
+
+        public Type Type { get; set; }
+
 
         private string deadlineString;
 
-        public ChallengeAttribute(string date, string name)
+        public BattleAttribute(string date, string name, Type type)
         {
             Name = name;
             Deadline = ParseDate(date);
@@ -48,8 +53,8 @@ namespace SamuraiDojo.Attributes
                 return false;
             else if (object.ReferenceEquals(this, obj))
                 return true;
-            else if (obj is ChallengeAttribute)
-                return Name == ((ChallengeAttribute)obj).Name;
+            else if (obj is BattleAttribute)
+                return Name == ((BattleAttribute)obj).Name;
 
             return false;
         }
@@ -72,7 +77,10 @@ namespace SamuraiDojo.Attributes
             return description;
         }
 
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
 
-        
     }
 }
