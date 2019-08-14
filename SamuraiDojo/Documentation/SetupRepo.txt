@@ -7,3 +7,6 @@ When you are first setting up the repository, follow these steps:
 	2. Highlight the SamuraiDojo.ScoreBoard project and click the Properties tray (probably on the right)
 		- Set Windows Authentication to 'Enabled'
 		- Set Anonymous Authentication to 'Disabled'
+
+	3. Set SamuraiDojo.ScoreBoard as your startup project
+		- Do NOT set a specific startup page for the application
