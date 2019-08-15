@@ -16,7 +16,7 @@ namespace SamuraiDojo.Models
 
         public int Points { get; set; }
 
-        public double Efficiency { get; set; }
+        public EfficiencyResult Efficiency { get; set; }
 
         public int CompareTo(BattleResult other)
         {

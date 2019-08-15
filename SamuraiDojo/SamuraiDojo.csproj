@@ -51,8 +51,10 @@
     <Compile Include="Battles\Week1\ClockAngler.cs" />
     <Compile Include="Battles\Week2\CharacterCounter.cs" />
     <Compile Include="Battles\Week2\Matt.cs" />
+    <Compile Include="Models\BattleCollection.cs" />
     <Compile Include="Models\BattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
+    <Compile Include="Models\EfficiencyResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
     <Compile Include="Repositories\BattleRepository.cs" />

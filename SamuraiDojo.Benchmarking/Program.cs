@@ -19,142 +19,83 @@ namespace SamuraiDojo.Benchmarking
 {
     public class Program
     {
-        private static List<BattleResult> battleResults;
+        private static readonly ConsoleColor TEXT_COLOR;
+
+        static Program()
+        {
+            TEXT_COLOR = ConsoleColor.Green;
+        }
 
         public static void Main(string[] args)
         {
 #if DEBUG
-            Console.ForegroundColor = ConsoleColor.Red;
+            RejectStart();
+            return;
+#endif
+            Console.WindowWidth = 200;
+            Console.ForegroundColor = TEXT_COLOR;
+
+            while (true)
+                Iterate();
+        }
+
+        private static void RejectStart()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
             Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
             Console.ReadKey();
-            return;
-#endif
-            battleResults = new List<BattleResult>();
-
-            Type[] battleTypes = 
-                ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo")
-                .Where(type => !AttributeUtility.HasAttribute<WrittenByAttribute>(type))
-                .OrderByDescending(type => AttributeUtility.GetAttribute<BattleAttribute>(type).Deadline).ToArray();
-
-            Tuple<Type, BattleAttribute>[] battles = new Tuple<Type, BattleAttribute>[battleTypes.Length];
-            for (int i = 0; i < battleTypes.Length; i++)
-            {
-                BattleAttribute battleAttribute = AttributeUtility.GetAttribute<BattleAttribute>(battleTypes[i]);
-                battles[i] = new Tuple<Type, BattleAttribute>(battleTypes[i], battleAttribute);
-            }
-
-            while (true)
-            {
-                battleResults.Clear();
-                PrintBattleOptions(battles);
-                Console.Write($"Select the above index for the challenge you wish to Benchmark: ");
-                string input = Console.ReadLine();
-                int battleIndex = 0;
-                if (int.TryParse(input, out battleIndex))
-                {
-                    PerformBenchmarking(battles[battleIndex].Item1);
-                    PrintBenchmarkingResults();
-                }
-                else
-                {
-                    Console.WriteLine($"Invalid Input!{Environment.NewLine}");
-                }
-            }
         }
 
-        private static void PrintBattleOptions(Tuple<Type, BattleAttribute>[] battles)
+        private static void Iterate()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int i = 0; i < battles.Length; i++)
-                Console.WriteLine($"\t{i}:\t''{battles[i].Item2.Name}', {battles[i].Item2.Deadline.ToShortDateString()}");
+            PrintBattleOptions(BattleCollection.All);
+            Console.Write($"Select the above index for the challenge you wish to Benchmark: ");
+            string input = Console.ReadLine();
 
-            Console.ForegroundColor = ConsoleColor.White;
-        } 
-
-        private static void PerformBenchmarking(Type battleType)
-        {
-            Type[] battleSolutions = 
-                ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
-                .Where(type => AttributeUtility.GetAttribute<UnderTestAttribute>(type).Type.FullName == battleType.FullName).ToArray();
-
-            foreach (Type type in battleSolutions)
+            int battleIndex = 0;
+            if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
             {
-                double efficiency = CalculateAlgorithmEfficiency(type);
+                BattleAttribute battle = BattleCollection.Get(battleIndex);
+                List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(battle);
 
-                WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-                BattleResult battleResult = new BattleResult
-                {
-                    Efficiency = efficiency,
-                    Player = writtenBy
-                };
-                battleResults.Add(battleResult);
-            }
-        }
-
-        private static double CalculateAlgorithmEfficiency(Type type)
-        {
-            Summary summary = RunBenchmarking(type);
-            double efficiency = GetEfficiencyScore(summary);
-            //double efficiency = new EfficiencyCalculator().AnalyzeTests(type);
-
-            return efficiency;
-        }
-
-        private static Summary RunBenchmarking(Type type)
-        {
-            IConfig config = DefaultConfig.Instance.With(ConfigOptions.DisableOptimizationsValidator);
-            TestRunner testRunner = new TestRunner();
-            BattleBenchmarkRunner.Action = () =>
-            {
-                testRunner.RunTests(type);
-            };
-#if DEBUG
-            Summary summary = BenchmarkRunner.Run<BattleBenchmarkRunner>(config);
-#endif
-#if !DEBUG
-            Summary summary = BenchmarkRunner.Run<BattleBenchmarkRunner>();
-#endif
-            if (summary.ValidationErrors != null && summary.ValidationErrors.Length > 0)
-            {
-                foreach (ValidationError error in summary.ValidationErrors)
-                    Log.Error($"Benchmarking Validation Error: {Environment.NewLine}\t{error.Message}");
+                EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
+                EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
+                PrintBenchmarkingResults(ranks, efficiencyCalculator);
             }
             else
-                Log.Info($"No Validation Errors encountered.");
-
-            return summary;
+            {
+                Console.WriteLine($"Invalid Input!{Environment.NewLine}");
+            }
         }
 
-        private static double GetEfficiencyScore(Summary summary)
+        private static void PrintBattleOptions(List<BattleAttribute> battles)
         {
-            double meanEfficiency = 0;
-            try
-            {
-                BenchmarkCase benchmark = summary.BenchmarksCases[0];
-                IColumn meanColumn = summary.GetColumns().Where(column => column.ColumnName.ToUpper() == "MEAN").FirstOrDefault();
-                string meanString = meanColumn.GetValue(summary, benchmark, new SummaryStyle(true, SizeUnit.B, TimeUnit.Nanosecond, false));
-                Log.Info("Mean String: " + meanString);
-                meanEfficiency = double.Parse(meanString.Replace(",", ""));
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex);
-                meanEfficiency = 0;
-            }
+            for (int i = 0; i < battles.Count; i++)
+                Console.WriteLine($"\t{i}:\t''{battles[i].Name}', {battles[i].Deadline.ToShortDateString()}");
+        } 
 
-            return meanEfficiency;
-        }
-
-        private static void PrintBenchmarkingResults()
+        private static void PrintBenchmarkingResults(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            battleResults = battleResults.OrderBy(result => result.Efficiency).ToList();
-            Console.WriteLine($"Benchmarking results in order of efficiency:{Environment.NewLine}");
-            for (int i = 0; i < battleResults.Count; i++)
-                Console.WriteLine($"{i + 1}: \t {battleResults[i].Player.Name} -- {battleResults[i].Efficiency} ticks");
+            Console.WriteLine($"Benchmarking results:");
+            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}   --   ({efficiencyCalculator.MarginScalar} of Minimum StdDev)");
 
-            Console.ForegroundColor = ConsoleColor.White;
+            int rank = 1;
+            while (efficiencyBuckets.HasRank(rank))
+            {
+                List<BattleResult> results = efficiencyBuckets.Get(rank);
+                Console.WriteLine($"Rank {rank}");
+                foreach (BattleResult result in results)
+                {
+                    Console.WriteLine($"\t{result.Player.Name}");
+                    Console.WriteLine($"\t\tAverage Exec Time: \t{result.Efficiency.AverageExecutionTime} nanoseconds");
+                }
+                rank++;
+            }
+
+            Console.ForegroundColor = TEXT_COLOR;
+            Console.WriteLine();
             Console.WriteLine();
         }
     }

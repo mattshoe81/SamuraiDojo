@@ -48,8 +48,8 @@ namespace SamuraiDojo.Models
         {
             BattleResult result = Get(writtenBy.Name);
 
-            if (result != null)
-                result.Efficiency = efficiencyScore;
+            //if (result != null)
+            //    result.Efficiency = efficiencyScore;
         }
 
         public BattleResult Get(string player)

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using BenchmarkDotNet.Attributes;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class BattleBenchmarkRunner
+    public class BenchmarkInvoker
     {
         public static Action Action { get; set; }
 
