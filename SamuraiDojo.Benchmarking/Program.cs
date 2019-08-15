@@ -1,44 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BenchmarkDotNet.Columns;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Horology;
-using BenchmarkDotNet.Reports;
-using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Validators;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Models;
-using SamuraiDojo.Repositories;
-using SamuraiDojo.Test;
-using SamuraiDojo.Test.Attributes;
-using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
     public class Program
     {
-        private static readonly ConsoleColor TEXT_COLOR;
+        private static readonly ConsoleColor DEFAULT_COLOR;
+        private static readonly ConsoleColor INFO_COLOR;
+        private static readonly ConsoleColor ERROR_COLOR;
         private static readonly int WIDTH;
         private static readonly int HEIGHT;
+
+        private static BattleAttribute CurrentBattle;
 
         static Program()
         {
             WIDTH = 180;
             HEIGHT = 40;
-            TEXT_COLOR = ConsoleColor.Green;
+            DEFAULT_COLOR = ConsoleColor.Yellow;
+            INFO_COLOR = ConsoleColor.DarkYellow;
+            ERROR_COLOR = ConsoleColor.DarkRed;
+
 
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
-            Console.ForegroundColor = TEXT_COLOR;
+            Console.ForegroundColor = DEFAULT_COLOR;
+            
         }
 
         public static void Main(string[] args)
         {
 #if DEBUG
             RejectStart();
-            //return;
+            return;
 #endif
             while (true)
                 Iterate();
@@ -46,39 +42,53 @@ namespace SamuraiDojo.Benchmarking
 
         private static void Iterate()
         {
-            PrintBattleOptions(BattleCollection.All);
-            Console.Write($"Select the above index for the challenge you wish to Benchmark: ");
-            string input = Console.ReadLine();
-
             int battleIndex = 0;
+            string input = GetInput();
             if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
-            {
-                BattleAttribute battle = BattleCollection.Get(battleIndex);
-                Console.WriteLine("Starting benchmarking");
-                List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(battle);
-                Console.WriteLine("Benchmarking completed");
-
-                EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
-                EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
-                PrintBenchmarkingResults(ranks, efficiencyCalculator);
-            }
+                BenchmarkBattle(battleIndex);
             else
-            {
-                Console.WriteLine($"Invalid Input!{Environment.NewLine}");
-            }
+                PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
+        }
+
+        private static string GetInput()
+        {
+            PrintBattleOptions(BattleCollection.All);
+            Console.Write($"Enter the index of the battle you wish to Benchmark: ");
+            string input = Console.ReadLine();
+            Console.WriteLine();
+
+            return input;
+        }
+
+        private static void BenchmarkBattle(int index)
+        {
+            CurrentBattle = BattleCollection.Get(index);
+            List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
+
+            EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
+            EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
+            PrintBenchmarkingResults(ranks, efficiencyCalculator);
         }
 
         private static void PrintBattleOptions(List<BattleAttribute> battles)
         {
+            Console.ForegroundColor = INFO_COLOR;
+            Console.WriteLine();
+            string battleOptionsHeader = $"History of All Battles{Environment.NewLine}";
+            int dividerLength = 80;
+            PrintDivider(dividerLength);
+            Console.WriteLine(battleOptionsHeader);
             for (int i = 0; i < battles.Count; i++)
                 Console.WriteLine($"\t{i}:\t''{battles[i].Name}', {battles[i].Deadline.ToShortDateString()}");
-        } 
+            PrintDivider(dividerLength);
+            Console.WriteLine();
+            Console.ForegroundColor = DEFAULT_COLOR;
+        }
 
         private static void PrintBenchmarkingResults(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Benchmarking results:");
-            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}   --   ({efficiencyCalculator.MarginScalar * 100}% of Minimum Standard Deviation)");
+            Console.ForegroundColor = INFO_COLOR;
+            int headerLength = PrintBenchmarkHeader(efficiencyBuckets, efficiencyCalculator);
 
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
@@ -93,17 +103,53 @@ namespace SamuraiDojo.Benchmarking
                 rank++;
             }
 
-            Console.ForegroundColor = TEXT_COLOR;
+            PrintBenchmarkFooter(headerLength);
+        }
+
+        private static int PrintBenchmarkHeader(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
+        {
             Console.WriteLine();
             Console.WriteLine();
+
+            string headerString = $"=====   Benchmarking for '{CurrentBattle.Name}'   ======";
+            PrintDivider(headerString.Length);
+            Console.WriteLine(headerString);
+            PrintDivider(headerString.Length);
+            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}  --  (Within {efficiencyCalculator.MarginScalar * 100}% of Minimum Standard Deviation)");
+            Console.WriteLine();
+
+            return headerString.Length;
+        }
+
+        private static void PrintDivider(int length)
+        {
+            for (int i = 0; i < length; i++)
+                Console.Write("=");
+            Console.WriteLine();
+        }
+
+        private static void PrintBenchmarkFooter(int headerLength)
+        {
+            Console.WriteLine();
+            PrintDivider(headerLength);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.ForegroundColor = DEFAULT_COLOR;
         }
 
         private static void RejectStart()
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ERROR_COLOR;
             Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
             Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
             Console.ReadKey();
+        }
+
+        private static void PrintError(string message)
+        {
+            Console.ForegroundColor = ERROR_COLOR;
+            Console.WriteLine(message);
+            Console.ForegroundColor = DEFAULT_COLOR;
         }
     }
 }

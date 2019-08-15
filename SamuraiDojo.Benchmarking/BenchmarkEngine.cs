@@ -38,7 +38,6 @@ namespace SamuraiDojo.Benchmarking
                 };
 
                 battleResults.Add(battleResult);
-                Console.WriteLine($"Completed Benchmarking for {battleResult.Player.Name}");
             }
 
             return battleResults;
