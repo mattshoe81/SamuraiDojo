@@ -51,17 +51,17 @@ namespace SamuraiDojo.Test
                 EvaluteTest(type, method);
         }
 
-        private void EvaluteTest(Type type, MethodInfo method)
+        public void RunTests(Type type, MethodInfo[] tests, bool useCallbacks = true)
         {
-            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
-            TestExecutionContext testExecutionContext = new TestExecutionContext
-            {
-                TestClass = type,
-                ClassUnderTest = classUnderTest?.Type,
-                Method = method,
-                WrittenBy = writtenBy
-            };
+            foreach (MethodInfo method in tests)
+                EvaluteTest(type, method, false);
+        }
+
+        private void EvaluteTest(Type type, MethodInfo method, bool useCallbacks = true)
+        {
+            TestExecutionContext testExecutionContext = null;
+            if (useCallbacks)
+                testExecutionContext = BuildTestExecutionContext(type, method);
 
             try
             {
@@ -76,6 +76,21 @@ namespace SamuraiDojo.Test
                 Log.Warning($"Failed Test: {ex?.InnerException?.Message}");
                 InvokeAction(OnTestFail, testExecutionContext);
             }
+        }
+
+        public TestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
+        {
+            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
+            TestExecutionContext testExecutionContext = new TestExecutionContext
+            {
+                TestClass = type,
+                ClassUnderTest = classUnderTest?.Type,
+                Method = method,
+                WrittenBy = writtenBy
+            };
+
+            return testExecutionContext;
         }
 
         private void InvokeAction(Action<TestExecutionContext> action, TestExecutionContext testExecutionContext)

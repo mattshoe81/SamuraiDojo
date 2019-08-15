@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Columns;
@@ -8,6 +9,7 @@ using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Validators;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Test;
 using SamuraiDojo.Test.Attributes;
@@ -17,27 +19,86 @@ namespace SamuraiDojo.Benchmarking
 {
     public class Program
     {
+        private static List<BattleResult> battleResults;
+
         public static void Main(string[] args)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            PerformBenchmarking();
+#if DEBUG
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
+            Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
+            Console.ReadKey();
+            return;
+#endif
+            battleResults = new List<BattleResult>();
 
-            Console.WriteLine(stringBuilder.ToString());
+            Type[] battleTypes = 
+                ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo")
+                .Where(type => !AttributeUtility.HasAttribute<WrittenByAttribute>(type))
+                .OrderByDescending(type => AttributeUtility.GetAttribute<BattleAttribute>(type).Deadline).ToArray();
+
+            Tuple<Type, BattleAttribute>[] battles = new Tuple<Type, BattleAttribute>[battleTypes.Length];
+            for (int i = 0; i < battleTypes.Length; i++)
+            {
+                BattleAttribute battleAttribute = AttributeUtility.GetAttribute<BattleAttribute>(battleTypes[i]);
+                battles[i] = new Tuple<Type, BattleAttribute>(battleTypes[i], battleAttribute);
+            }
+
+            while (true)
+            {
+                battleResults.Clear();
+                PrintBattleOptions(battles);
+                Console.Write($"Select the above index for the challenge you wish to Benchmark: ");
+                string input = Console.ReadLine();
+                int battleIndex = 0;
+                if (int.TryParse(input, out battleIndex))
+                {
+                    PerformBenchmarking(battles[battleIndex].Item1);
+                    PrintBenchmarkingResults();
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid Input!{Environment.NewLine}");
+                }
+            }
         }
 
-        private static void PerformBenchmarking()
+        private static void PrintBattleOptions(Tuple<Type, BattleAttribute>[] battles)
         {
-            Type[] battleSolutions = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < battles.Length; i++)
+                Console.WriteLine($"\t{i}:\t''{battles[i].Item2.Name}', {battles[i].Item2.Deadline.ToShortDateString()}");
+
+            Console.ForegroundColor = ConsoleColor.White;
+        } 
+
+        private static void PerformBenchmarking(Type battleType)
+        {
+            Type[] battleSolutions = 
+                ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
+                .Where(type => AttributeUtility.GetAttribute<UnderTestAttribute>(type).Type.FullName == battleType.FullName).ToArray();
+
             foreach (Type type in battleSolutions)
             {
-                Summary summary = RunBenchmarking(type);
-                double efficiency = GetEfficiencyScore(summary);
+                double efficiency = CalculateAlgorithmEfficiency(type);
 
-                UnderTestAttribute underTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(underTest.Type);
                 WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-                BattleRepository.SetEfficiencyScore(battle, writtenBy, efficiency);
+                BattleResult battleResult = new BattleResult
+                {
+                    Efficiency = efficiency,
+                    Player = writtenBy
+                };
+                battleResults.Add(battleResult);
             }
+        }
+
+        private static double CalculateAlgorithmEfficiency(Type type)
+        {
+            Summary summary = RunBenchmarking(type);
+            double efficiency = GetEfficiencyScore(summary);
+            //double efficiency = new EfficiencyCalculator().AnalyzeTests(type);
+
+            return efficiency;
         }
 
         private static Summary RunBenchmarking(Type type)
@@ -83,6 +144,18 @@ namespace SamuraiDojo.Benchmarking
             }
 
             return meanEfficiency;
+        }
+
+        private static void PrintBenchmarkingResults()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            battleResults = battleResults.OrderBy(result => result.Efficiency).ToList();
+            Console.WriteLine($"Benchmarking results in order of efficiency:{Environment.NewLine}");
+            for (int i = 0; i < battleResults.Count; i++)
+                Console.WriteLine($"{i + 1}: \t {battleResults[i].Player.Name} -- {battleResults[i].Efficiency} ticks");
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
         }
     }
 }
