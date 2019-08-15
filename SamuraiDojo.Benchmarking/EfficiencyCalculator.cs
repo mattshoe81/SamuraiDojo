@@ -17,19 +17,20 @@ namespace SamuraiDojo.Benchmarking
     {
         public double MarginScalar { get; set; } = 1.0;
 
-        public int Margin { get; private set; }
+        public double Margin { get; private set; }
 
         private double minStdDev;
 
         public EfficiencyRankCollection RankBattleResults(List<BattleResult> battleResults)
         {
+
             EfficiencyRankCollection efficiencyRankCollection = new EfficiencyRankCollection();
             minStdDev = battleResults.Min(result => result.Efficiency.StandardDeviation);
             int rank = 1;
             while (battleResults.Count > 0)
             {
                 BattleResult nextMostEfficient = battleResults[0];
-                double margin = CalculateMargin(nextMostEfficient);
+                Margin = CalculateMargin(nextMostEfficient);
                 double baseline = nextMostEfficient.Efficiency.AverageExecutionTime;
 
                 BattleResult[] resultsWithSimilarEfficiency =
@@ -54,7 +55,7 @@ namespace SamuraiDojo.Benchmarking
         private bool IsWithinMargin(BattleResult battleResult, double baseline)
         {
             double difference = battleResult.Efficiency.AverageExecutionTime - baseline;
-            bool result = Math.Abs(difference) < Margin;
+            bool result = Math.Abs(difference) <= Margin;
 
             return result;
         }

@@ -38,6 +38,7 @@ namespace SamuraiDojo.Benchmarking
                 };
 
                 battleResults.Add(battleResult);
+                Console.WriteLine($"Completed Benchmarking for {battleResult.Player.Name}");
             }
 
             return battleResults;
@@ -67,7 +68,7 @@ namespace SamuraiDojo.Benchmarking
                 testRunner.RunTests(type);
             };
 #if DEBUG
-            Summary summary = BenchmarkRunner.Run<BenchmarkTestRunner>(config);
+            Summary summary = BenchmarkRunner.Run<BenchmarkInvoker>(config);
 #endif
 #if !DEBUG
             Summary summary = BenchmarkRunner.Run<BenchmarkInvoker>();

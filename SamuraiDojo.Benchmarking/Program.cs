@@ -20,31 +20,28 @@ namespace SamuraiDojo.Benchmarking
     public class Program
     {
         private static readonly ConsoleColor TEXT_COLOR;
+        private static readonly int WIDTH;
+        private static readonly int HEIGHT;
 
         static Program()
         {
+            WIDTH = 180;
+            HEIGHT = 40;
             TEXT_COLOR = ConsoleColor.Green;
+
+            Console.WindowWidth = WIDTH;
+            Console.WindowHeight = HEIGHT;
+            Console.ForegroundColor = TEXT_COLOR;
         }
 
         public static void Main(string[] args)
         {
 #if DEBUG
             RejectStart();
-            return;
+            //return;
 #endif
-            Console.WindowWidth = 200;
-            Console.ForegroundColor = TEXT_COLOR;
-
             while (true)
                 Iterate();
-        }
-
-        private static void RejectStart()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
-            Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
-            Console.ReadKey();
         }
 
         private static void Iterate()
@@ -57,7 +54,9 @@ namespace SamuraiDojo.Benchmarking
             if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
             {
                 BattleAttribute battle = BattleCollection.Get(battleIndex);
+                Console.WriteLine("Starting benchmarking");
                 List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(battle);
+                Console.WriteLine("Benchmarking completed");
 
                 EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
                 EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
@@ -79,7 +78,7 @@ namespace SamuraiDojo.Benchmarking
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Benchmarking results:");
-            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}   --   ({efficiencyCalculator.MarginScalar} of Minimum StdDev)");
+            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}   --   ({efficiencyCalculator.MarginScalar * 100}% of Minimum Standard Deviation)");
 
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
@@ -97,6 +96,14 @@ namespace SamuraiDojo.Benchmarking
             Console.ForegroundColor = TEXT_COLOR;
             Console.WriteLine();
             Console.WriteLine();
+        }
+
+        private static void RejectStart()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
+            Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
+            Console.ReadKey();
         }
     }
 }
