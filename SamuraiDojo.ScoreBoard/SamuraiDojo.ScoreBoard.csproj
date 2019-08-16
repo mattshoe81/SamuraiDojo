@@ -297,7 +297,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BattleBenchmarkRunner.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DojoConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

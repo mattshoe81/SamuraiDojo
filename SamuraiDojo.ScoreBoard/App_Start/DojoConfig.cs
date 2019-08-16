@@ -24,7 +24,6 @@ namespace SamuraiDojo.ScoreBoard.App_Start
             ClearLogFile();
             SamuraiDojo.Auditor.Audit();
             RunUnitTests();
-            RunBenchmarking();
             CalculateRanks();
         }
 
@@ -78,11 +77,6 @@ namespace SamuraiDojo.ScoreBoard.App_Start
                 }
 
             };
-        }
-
-        private static void RunBenchmarking()
-        {
-            Benchmarking.Program.Main(new string[0]);
         }
 
         private static void CalculateRanks()

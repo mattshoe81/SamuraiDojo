@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
 
