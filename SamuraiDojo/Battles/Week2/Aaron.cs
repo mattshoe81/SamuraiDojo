@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
 
-namespace SamuraiDojo.Challenges.Week2
+namespace SamuraiDojo.Battles.Week2
 {
     [WrittenBy(Samurai.Aaron)]
-    public class Aaron : ICharacterCounter
+    public class Aaron : CharacterCounter
     {
-        public int CountPossibleCharacters(string integers)
+        public override int CountPossibleCharacters(string integers)
         {
             var validCharCount = 0;
             if(integers.Length == 0) { return 0; }

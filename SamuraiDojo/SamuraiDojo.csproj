@@ -49,7 +49,7 @@
     <Compile Include="Attributes\Bonus\TigerAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
-    <Compile Include="Challenges\Week2\Dustin.cs" />
+    <Compile Include="Battles\Week2\Dustin.cs" />
     <Compile Include="Battles\Week1\ClockAngler.cs" />
     <Compile Include="Battles\Week2\CharacterCounter.cs" />
     <Compile Include="Battles\Week2\Matt.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Models\BattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
     <Compile Include="Models\EfficiencyResult.cs" />
-    <Compile Include="Challenges\Week2\Aaron.cs" />
+    <Compile Include="Battles\Week2\Aaron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
     <Compile Include="Repositories\BattleRepository.cs" />
@@ -75,5 +75,6 @@
     <Content Include="Documentation\SetupRepo.txt" />
     <Content Include="Documentation\SubmitSolution.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

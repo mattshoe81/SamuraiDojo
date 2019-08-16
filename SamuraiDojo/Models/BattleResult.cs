@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Models
 {
@@ -21,6 +22,19 @@ namespace SamuraiDojo.Models
         public int CompareTo(BattleResult other)
         {
             int comparison = other.Points - Points;
+            if (comparison == 0)
+            {
+                Player thisPlayer = PlayerRepository.GetPlayer(Player.Name);
+                Player otherPlayer = PlayerRepository.GetPlayer(other.Player.Name);
+
+                if (thisPlayer.Rank < otherPlayer.Rank)
+                    comparison = -1;
+                else if (thisPlayer.Rank > otherPlayer.Rank)
+                    comparison = 1;
+                else
+                    comparison = string.Compare(thisPlayer.Name, otherPlayer.Name);
+            }
+
             return comparison;
         }
 
