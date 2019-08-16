@@ -49,11 +49,11 @@ namespace SamuraiDojo
                 if (bonusPoints > 0)
                 {
                     WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+                    BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(type);
 
-                    Type battleType = type.GetInterfaces().FirstOrDefault();
-                    BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(battleType);
 
-                    PlayerRepository.AddPoint(writtenBy.Name, battleType, bonusPoints);
+
+                    PlayerRepository.AddPoint(writtenBy.Name, battle.Type, bonusPoints);
                     BattleRepository.AddPlayerPoint(battle, writtenBy, bonusPoints);
                 }
             }

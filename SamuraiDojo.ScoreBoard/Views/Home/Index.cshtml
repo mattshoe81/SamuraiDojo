@@ -101,7 +101,7 @@ namespace SamuraiDojo.Battles.Week2
         <div class="col-sm-6">
             <h3 class="underline inline-block">History:</h3>
             <div class="spacer-10"></div>
-            <div ng-repeat="battle in vm.Battles">
+            <div ng-repeat="battle in vm.Battles | orderBy: '-Battle.Deadline'">
                 <div class="row">
                     <h4 class="row-buffer">
                         <span class="bold italic">'{{battle.Battle.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{battle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>

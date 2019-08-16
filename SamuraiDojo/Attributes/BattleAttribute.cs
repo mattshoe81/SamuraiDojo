@@ -26,7 +26,7 @@ namespace SamuraiDojo.Attributes
         {
             Name = name;
             Deadline = ParseDate(date);
-            //Description = LoadDescription();
+            Type = type;
         }
 
         private DateTime ParseDate(string date)

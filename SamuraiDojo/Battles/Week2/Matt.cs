@@ -14,7 +14,16 @@ namespace SamuraiDojo.Battles.Week2
         {
             int permutations = 0;
 
-            //TODO - implement algorithm
+            for (int i = 0; i < integers.Length; i++)
+            {
+                if (int.Parse(integers.Substring(i, 1)) > 0)
+                {
+                    permutations++;
+
+                    if (i < integers.Length - 1 && int.Parse(integers.Substring(i, 2)) <= 26)
+                        permutations++;
+                }
+            }
 
             return permutations;
         }

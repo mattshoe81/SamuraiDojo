@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week2
 {
+    [MostEfficient]
     [WrittenBy(Samurai.Aaron)]
     public class Aaron : CharacterCounter
     {

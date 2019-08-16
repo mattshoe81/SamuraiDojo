@@ -42,9 +42,11 @@
 
 
         vm.GetRank = function (player) {
-            for (var i = 0; i < vm.AllPlayers.length; i++) {
-                if (vm.AllPlayers[i].Name === player.Name)
-                    return vm.AllPlayers[i].Rank;
+            if (player) {
+                for (var i = 0; i < vm.AllPlayers.length; i++) {
+                    if (vm.AllPlayers[i].Name === player.Name)
+                        return vm.AllPlayers[i].Rank;
+                }
             }
 
             return 0;
