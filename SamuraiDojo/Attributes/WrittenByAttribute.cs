@@ -26,5 +26,10 @@ namespace SamuraiDojo.Attributes
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

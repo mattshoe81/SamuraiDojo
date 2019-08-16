@@ -12,23 +12,23 @@ using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
-    public class ChallengeController : BaseApiController
+    public class BattleController : BaseApiController
     {
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            ChallengeResults challenge = ChallengeRepository.CurrentChallenge();
+            BattleOutcome battle = BattleRepository.CurrentBattle();
 
-            return Request.CreateResponse(HttpStatusCode.OK, challenge);
+            return Request.CreateResponse(HttpStatusCode.OK, battle);
         }
 
         [HttpGet]
-        [Route("api/Challenge/All")]
+        [Route("api/Battle/All")]
         public HttpResponseMessage All()
         {
-            List<ChallengeResults> challenges = ChallengeRepository.GetAllChallengeResults();
+            List<BattleOutcome> battles = BattleRepository.GetAllBattleOutcomes();
 
-            return Request.CreateResponse(HttpStatusCode.OK, challenges);
+            return Request.CreateResponse(HttpStatusCode.OK, battles);
         }
     }
 }

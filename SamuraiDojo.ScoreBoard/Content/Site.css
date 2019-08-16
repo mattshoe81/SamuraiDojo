@@ -126,3 +126,11 @@ iframe {
 .border {
     border: 1px solid black;
 }
+
+.scroll-y {
+    overflow-y: auto;
+}
+
+.h-50 {
+    height: 200px;
+}

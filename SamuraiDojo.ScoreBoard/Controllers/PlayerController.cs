@@ -26,7 +26,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             if (playerName == null)
                 playerName = GetCurrentUsername();
 
-            PlayerStats player = GetPlayer(playerName);
+            Player player = GetPlayer(playerName);
             return Request.CreateResponse(HttpStatusCode.OK, player);
         }
         
@@ -34,10 +34,10 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         [Route("api/Player/All")]
         public HttpResponseMessage All()
         {
-            List<PlayerStats> players = new List<PlayerStats>();
-            foreach (KeyValuePair<string, PlayerStats> pair in PlayerRepository.Players)
+            List<Player> players = new List<Player>();
+            foreach (KeyValuePair<string, Player> pair in PlayerRepository.Players)
             {
-                PlayerStats player = GetPlayer(pair.Key);
+                Player player = GetPlayer(pair.Key);
                 if (player != null) 
                     players.Add(player);
             }
@@ -46,9 +46,9 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, players);
         }
         
-        private PlayerStats GetPlayer(string playerName)
+        private Player GetPlayer(string playerName)
         {
-            PlayerStats player = PlayerRepository.GetPlayer(playerName);
+            Player player = PlayerRepository.GetPlayer(playerName);
             return player;
         } 
     }

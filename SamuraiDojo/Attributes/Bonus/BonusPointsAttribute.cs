@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamuraiDojo.Attributes
+namespace SamuraiDojo.Attributes.Bonus
 {
     public abstract class BonusPointsAttribute : Attribute
     {

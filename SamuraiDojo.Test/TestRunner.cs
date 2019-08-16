@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
@@ -29,24 +30,38 @@ namespace SamuraiDojo.Test
             Type[] types = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
 
             foreach (Type type in types)
-            {
-                List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
-                foreach (MethodInfo method in methods)
-                    EvaluteTest(type, method);
-            }
+                RunTests(type);
         }
 
-        public void EvaluteTest(Type type, MethodInfo method)
+        public void Run(WrittenByAttribute writtenBy, BattleAttribute battle)
         {
-            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
-            TestExecutionContext testExecutionContext = new TestExecutionContext
-            {
-                TestClass = type,
-                ClassUnderTest = classUnderTest?.Type,
-                Method = method,
-                WrittenBy = writtenBy
-            };
+            Type[] allBattleTests = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
+                .Where(test => AttributeUtility.GetAttribute<WrittenByAttribute>(test) == writtenBy)?.ToArray();
+
+            Type battleTest = allBattleTests
+                .Where(testClass => AttributeUtility.GetAttribute<UnderTestAttribute>(testClass).Type.FullName == battle.Type.FullName).FirstOrDefault();
+
+            RunTests(battleTest);
+        }
+
+        public void RunTests(Type type)
+        {
+            List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
+            foreach (MethodInfo method in methods)
+                EvaluteTest(type, method);
+        }
+
+        public void RunTests(Type type, MethodInfo[] tests, bool useCallbacks = true)
+        {
+            foreach (MethodInfo method in tests)
+                EvaluteTest(type, method, false);
+        }
+
+        private void EvaluteTest(Type type, MethodInfo method, bool useCallbacks = true)
+        {
+            TestExecutionContext testExecutionContext = null;
+            if (useCallbacks)
+                testExecutionContext = BuildTestExecutionContext(type, method);
 
             try
             {
@@ -61,6 +76,21 @@ namespace SamuraiDojo.Test
                 Log.Warning($"Failed Test: {ex?.InnerException?.Message}");
                 InvokeAction(OnTestFail, testExecutionContext);
             }
+        }
+
+        public TestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
+        {
+            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
+            TestExecutionContext testExecutionContext = new TestExecutionContext
+            {
+                TestClass = type,
+                ClassUnderTest = classUnderTest?.Type,
+                Method = method,
+                WrittenBy = writtenBy
+            };
+
+            return testExecutionContext;
         }
 
         private void InvokeAction(Action<TestExecutionContext> action, TestExecutionContext testExecutionContext)

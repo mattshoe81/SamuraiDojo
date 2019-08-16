@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Models
 {
-    public class PlayerStats : IComparable<PlayerStats>
+    public class Player : IComparable<Player>
     {
         public string Name { get; set; }
 
@@ -14,11 +14,11 @@ namespace SamuraiDojo.Models
 
         public int TotalPoints { get; set; }
 
-        public Dictionary<Type, int> PointsByChallenge { get; set; }
+        public Dictionary<Type, int> PointsByBattle { get; set; }
 
-        public int ChallengesCompleted
+        public int BattlesCompleted
         {
-            get => PointsByChallenge == null ? 0 : PointsByChallenge.Keys.Count;
+            get => PointsByBattle == null ? 0 : PointsByBattle.Keys.Count;
         }
 
         public int Rank { get; set; }
@@ -28,7 +28,7 @@ namespace SamuraiDojo.Models
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public int CompareTo(PlayerStats player)
+        public int CompareTo(Player player)
         {
             int result = 0;
             if (TotalPoints > player.TotalPoints)
@@ -37,13 +37,30 @@ namespace SamuraiDojo.Models
                 result = 1;
             else
             {
-                if (ChallengesCompleted > player.ChallengesCompleted)
+                if (BattlesCompleted > player.BattlesCompleted)
                     result = 1;
-                else if (ChallengesCompleted < player.ChallengesCompleted)
+                else if (BattlesCompleted < player.BattlesCompleted)
                     result = -1;
             }
 
             return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+                return false;
+            else if (object.ReferenceEquals(this, obj))
+                return true;
+            else if (obj is Player)
+                return Name == ((Player)obj).Name;
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
         }
     }
 }

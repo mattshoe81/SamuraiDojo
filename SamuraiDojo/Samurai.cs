@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SamuraiDojo.Challenges;
+using SamuraiDojo.Battles;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
@@ -15,5 +15,6 @@ namespace SamuraiDojo
         public const string JT = "jonathan.turner";
         public const string JEFF = "jeff.moore";
         public const string SANJOG = "sanjog.jain";
+        public const string Aaron = "aaron.petry";
     }
 }

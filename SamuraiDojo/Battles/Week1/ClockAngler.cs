@@ -2,10 +2,10 @@
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Repositories;
 
-namespace SamuraiDojo.Challenges.Week1
+namespace SamuraiDojo.Battles.Week1
 {
     [Sensei(Samurai.MATT)]
-    [Challenge("8/9/2019", "Angler of Time")]
+    [Battle("8/9/2019", "Angler of Time", typeof(ClockAngler))]
     public class ClockAngler
     {
         [WrittenBy(Samurai.MATT)]

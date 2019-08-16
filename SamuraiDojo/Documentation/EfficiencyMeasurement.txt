@@ -1,0 +1,6 @@
+﻿
+Efficiency is measured objectively using a benchmarking tool called BenchmarkDotNet.
+
+Players' efficiency is grouped into ranks according to the results of the benchmarking.
+Players whose execution time falls within 1 standard deviation of the leading score 
+will all be grouped into the same rank.

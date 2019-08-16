@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
 
-namespace SamuraiDojo.Challenges.Week2
+namespace SamuraiDojo.Battles.Week2
 {
     [WrittenBy(Samurai.DUSTIN)]
-    public class Dustin : ICharacterCounter
+    public class Dustin : CharacterCounter
     {
-        public int CountPossibleCharacters(string integers)
+        public override int CountPossibleCharacters(string integers)
         {
             int permutations = 0;
 

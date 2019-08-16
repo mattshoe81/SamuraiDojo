@@ -5,7 +5,7 @@
     var app = angular.module("SamuraiDojo");
     app.controller("MyProfileController", ["RequestService", function (RequestService) {
         var vm = this;
-        vm.CurrentChallenge = "Angler of Time - hardcoded";
+        vm.CurrentBattle = "Angler of Time - hardcoded";
 
         var request = RequestService.SendRequest("/api/Player", null, "GET");
         request.Success(function (response) {
@@ -15,12 +15,12 @@
             vm.Player = error.ExceptionMessage;
         });
 
-        var allChallengesRequest = RequestService.SendRequest("/api/Challenge/All", null, "GET");
-        allChallengesRequest.Success(function (response) {
-            vm.Challenges = response.data;
+        var allBattlesRequest = RequestService.SendRequest("/api/Battle/All", null, "GET");
+        allBattlesRequest.Success(function (response) {
+            vm.Battles = response.data;
         });
-        allChallengesRequest.Error(function (error) {
-            vm.Challenges = error.ExceptionMessage;
+        allBattlesRequest.Error(function (error) {
+            vm.Battles = error.ExceptionMessage;
         });
 
         vm.HasParticipated = function () {
@@ -36,11 +36,11 @@
             return participated;
         };
 
-        vm.GetSenseiCount = function (player, challenges) {
+        vm.GetSenseiCount = function (player, battles) {
             var count = 0;
-            if (challenges) {
-                for (var i = 0; i < challenges.length; i++) {
-                    if (challenges[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
+            if (battles) {
+                for (var i = 0; i < battles.length; i++) {
+                    if (battles[i].Sensei.Name.toUpperCase() === player.Name.toUpperCase())
                         count++;
                 }
             }
@@ -48,9 +48,9 @@
             return count;
         };
 
-        vm.IsSensei = function (challenge, player) {
-            if (challenge && player) {
-                var sensei = challenge.Sensei.Name.toUpperCase();
+        vm.IsSensei = function (battle, player) {
+            if (battle && player) {
+                var sensei = battle.Sensei.Name.toUpperCase();
                 var playerName = player.Name.toUpperCase();
 
                 return sensei === playerName;
@@ -61,10 +61,10 @@
 
         var checkForParticipationHistory = function () {
             var count = 0;
-            for (var i = 0; i < vm.Challenges.length; i++) {
-                var challenge = vm.Challenges[i];
-                for (var k = 0; k < challenge.Results.length; k++) {
-                    var result = challenge.Results[k];
+            for (var i = 0; i < vm.Battles.length; i++) {
+                var battle = vm.Battles[i];
+                for (var k = 0; k < battle.Results.length; k++) {
+                    var result = battle.Results[k];
                     var player = result.Player;
                     if (player.Name === vm.Player.Name) {
                         count++;
@@ -76,41 +76,41 @@
             return count > 0;
         };
 
-        vm.GetPointsFromChallenge = function (challenge, player) {
+        vm.GetPointsFromBattle = function (battle, player) {
             var points = 0;
             if (player) 
-                points = getPointsFromChallenge(challenge);
+                points = getPointsFromBattle(battle);
 
             return points;
         };
 
-        var getPointsFromChallenge = function (challenge) {
+        var getPointsFromBattle = function (battle) {
             var points = 0;
-            for (var i = 0; i < challenge.Results.length; i++) {
-                var player = challenge.Results[i].Player;
+            for (var i = 0; i < battle.Results.length; i++) {
+                var player = battle.Results[i].Player;
                 if (player.Name === vm.Player.Name)
-                    points = challenge.Results[i].Points;
+                    points = battle.Results[i].Points;
             }
 
             return points;
         }
 
-        vm.ParticipatedInChallenge = function (challenge) {
+        vm.ParticipatedInBattle = function (battle) {
             var result = false;
             if (request.Promise.Resolved) {
-                result = participatedInChallenge(challenge);
+                result = participatedInBattle(battle);
             } else {
                 RequestService.Resolve(request).Then(function () {
-                    result = participatedInChallenge(challenge);
+                    result = participatedInBattle(battle);
                 });
             }
 
             return result;
         };
 
-        var participatedInChallenge = function (challenge) {
-            for (var i = 0; i < challenge.Results.length; i++) {
-                if (challenge.Results[i].Player.Name === vm.Player.Name)
+        var participatedInBattle = function (battle) {
+            for (var i = 0; i < battle.Results.length; i++) {
+                if (battle.Results[i].Player.Name === vm.Player.Name)
                     return true;
             }
 

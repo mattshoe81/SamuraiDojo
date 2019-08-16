@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Horology;
+using BenchmarkDotNet.Reports;
+using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Validators;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
@@ -15,9 +21,22 @@ namespace SamuraiDojo.ScoreBoard.App_Start
     {
         public static void Init()
         {
+            ClearLogFile();
             SamuraiDojo.Auditor.Audit();
             RunUnitTests();
             CalculateRanks();
+        }
+
+        private static void ClearLogFile()
+        {
+            try
+            {
+                File.WriteAllText(Log.OUTPUT_PATH, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex);
+            }
         }
 
         private static void RunUnitTests()
@@ -35,11 +54,11 @@ namespace SamuraiDojo.ScoreBoard.App_Start
             testRunner.PreTest = (context) =>
             {
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
-                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
-                challenge.Sensei = sensei;
+                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
+                battle.Sensei = sensei;
                 PlayerRepository.AddPlayer(sensei.Name);
 
-                ChallengeRepository.AddChallenge(challenge, sensei);
+                BattleRepository.AddBattle(battle, sensei);
             };
         }
 
@@ -47,14 +66,14 @@ namespace SamuraiDojo.ScoreBoard.App_Start
         {
             testRunner.OnTestPass = (context) =>
             {
-                ChallengeAttribute challenge = AttributeUtility.GetAttribute<ChallengeAttribute>(context.ClassUnderTest);
+                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
 
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
                     PlayerRepository.AddPoint(context.WrittenBy.Name, context.ClassUnderTest, points);
-                    ChallengeRepository.AddPlayerPoint(challenge, context.WrittenBy, points);
+                    BattleRepository.AddPlayerPoint(battle, context.WrittenBy, points);
                 }
 
             };
@@ -62,7 +81,7 @@ namespace SamuraiDojo.ScoreBoard.App_Start
 
         private static void CalculateRanks()
         {
-            List<PlayerStats> players = PlayerRepository.Players.Values.ToList();
+            List<Player> players = PlayerRepository.Players.Values.ToList();
             players.Sort();
 
             HashSet<int> rankings = new HashSet<int>();
