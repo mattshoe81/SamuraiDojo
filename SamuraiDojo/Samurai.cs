@@ -15,5 +15,6 @@ namespace SamuraiDojo
         public const string JT = "jonathan.turner";
         public const string JEFF = "jeff.moore";
         public const string SANJOG = "sanjog.jain";
+        public const string Aaron = "aaron.petry";
     }
 }

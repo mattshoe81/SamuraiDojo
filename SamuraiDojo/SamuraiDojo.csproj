@@ -56,6 +56,7 @@
     <Compile Include="Models\BattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
     <Compile Include="Models\EfficiencyResult.cs" />
+    <Compile Include="Challenges\Week2\Aaron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
     <Compile Include="Repositories\BattleRepository.cs" />
