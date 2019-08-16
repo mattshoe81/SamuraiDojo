@@ -71,9 +71,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentation\EfficiencyMeasurement.txt" />
     <Content Include="Documentation\Scoring.txt" />
     <Content Include="Documentation\SetupRepo.txt" />
     <Content Include="Documentation\SubmitSolution.txt" />
+    <Content Include="Documentation\Benchmarking.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

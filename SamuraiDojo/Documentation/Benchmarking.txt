@@ -1,0 +1,11 @@
+﻿
+To run benchmarking:
+	- Set SamuraiDojo.Benchmarking as your startup project
+	- Switch to release mode 
+	- Use Debug -> Start Without Debuggin
+		- You wont get accurate results if you start with debugging in release mode
+	- When the console appears, just select the battle you wish to benchmark
+		- This will load up all of the test classes for that battle and run each of 
+		  them through the benchmarking tool.
+	- This will take some time, but you should see a nice printout of the ranking of efficiency
+		  
