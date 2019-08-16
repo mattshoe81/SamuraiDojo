@@ -234,6 +234,7 @@
     <Compile Include="TestRunner.cs" />
     <Compile Include="Week2\AaronTests.cs" />
     <Compile Include="Week2\BaseCharacterCounterTest.cs" />
+    <Compile Include="Week2\Dustin.cs" />
     <Compile Include="Week2\Matt.cs" />
   </ItemGroup>
   <ItemGroup>
