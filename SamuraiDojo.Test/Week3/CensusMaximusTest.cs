@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Battles.Week3;
+using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test.Week3
 {
     [TestClass]
-    public abstract class CensusMaximusTest
+    [UnderTest(typeof(CensusMaximus))]
+    public abstract class CensusMaximusTest : DojoTest
     {
         protected abstract CensusMaximus GetInstance();
 
@@ -35,25 +37,27 @@ namespace SamuraiDojo.Test.Week3
             return people;
         }
 
-        private void AssertExpected(int expected, List<Person> people, CensusMaximus maximizer)
+        private void AssertExpected(int expected, int actual, List<Person> people)
         {
-            int actual = maximizer.MostPopulousYear(people);
             Assert.AreEqual(expected, actual, $"Expected {expected}, but found {actual}");
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public int TestMethod1()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
                 new int[] { 1936, 1984 }
             );
 
-            AssertExpected(1936, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1936, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public int TestMethod2()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -61,11 +65,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1951, 1999 }
             );
 
-            AssertExpected(1951, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1951, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public int TestMethod3()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -73,22 +80,28 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1900, 1999 }
             );
 
-            AssertExpected(1900, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1900, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod4()
+        public int TestMethod4()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
                 new int[] { 2000, 2000 }
             );
 
-            AssertExpected(2000, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(2000, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod5()
+        public int TestMethod5()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -96,11 +109,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1916, 1917 }
             );
 
-            AssertExpected(1914, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1914, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod6()
+        public int TestMethod6()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -108,11 +124,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1900, 1901 }
             );
 
-            AssertExpected(1900, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1900, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod7()
+        public int TestMethod7()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -124,11 +143,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1950, 1953 }
             );
 
-            AssertExpected(1901, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1901, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod8()
+        public int TestMethod8()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -140,11 +162,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1919, 2000 }
             );
 
-            AssertExpected(1901, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1901, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod9()
+        public int TestMethod9()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -175,11 +200,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1987, 1989 }
             );
 
-            AssertExpected(1962, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1962, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod10()
+        public int TestMethod10()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -235,11 +263,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1968, 1985 }
             );
 
-            AssertExpected(1947, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1947, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod11()
+        public int TestMethod11()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -295,11 +326,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1991, 1999 }
             );
 
-            AssertExpected(1954, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1954, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod12()
+        public int TestMethod12()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -355,11 +389,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1991, 1999 }
             );
 
-            AssertExpected(1954, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1954, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod13()
+        public int TestMethod13()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -415,11 +452,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1941, 1947 }
             );
 
-            AssertExpected(1967, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1967, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod14()
+        public int TestMethod14()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -475,11 +515,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 2000, 2000 }
             );
 
-            AssertExpected(1954, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1954, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod15()
+        public int TestMethod15()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -585,11 +628,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1909, 1917 }
             );
 
-            AssertExpected(1961, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1961, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod16()
+        public int TestMethod16()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -695,11 +741,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1932, 1987 }
             );
 
-            AssertExpected(1968, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1968, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod17()
+        public int TestMethod17()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -805,11 +854,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1945, 1997 }
             );
 
-            AssertExpected(1964, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1964, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod18()
+        public int TestMethod18()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -915,11 +967,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1937, 1938 }
             );
 
-            AssertExpected(1973, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1973, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod19()
+        public int TestMethod19()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -1025,11 +1080,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1960, 1970 }
             );
 
-            AssertExpected(1947, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1947, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod20()
+        public int TestMethod20()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -1135,11 +1193,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1906, 2000 }
             );
 
-            AssertExpected(1948, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1948, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod21()
+        public int TestMethod21()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -1643,14 +1704,16 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1999, 1999 },
                 new int[] { 1912, 1925 },
                 new int[] { 1965, 2000 }
-
             );
 
-            AssertExpected(1955, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1955, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod22()
+        public int TestMethod22()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -2656,11 +2719,14 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1924, 1966 }
             );
 
-            AssertExpected(1957, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1957, actual, people);
+            return actual;
         }
 
         [TestMethod]
-        public void TestMethod23()
+        public override void Benchmark()
         {
             CensusMaximus maximizer = GetInstance();
             List<Person> people = GeneratePeople(
@@ -12675,7 +12741,9 @@ namespace SamuraiDojo.Test.Week3
                 new int[] { 1988, 1997 }
             );
 
-            AssertExpected(1962, people, maximizer);
+            int actual = maximizer.MostPopulousYear(people);
+
+            AssertExpected(1962, actual, people);
         }
     }
 }

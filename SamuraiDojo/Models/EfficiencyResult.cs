@@ -11,5 +11,7 @@ namespace SamuraiDojo.Models
         public double AverageExecutionTime { get; set; }
 
         public double StandardDeviation { get; set; }
+
+        public long MemoryAllocated { get; set; }
     }
 }

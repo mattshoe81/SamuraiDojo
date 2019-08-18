@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Battles.Week3
@@ -14,7 +10,7 @@ namespace SamuraiDojo.Battles.Week3
         {
             int mostPopulousYear = 0;
 
-            // TODO: Implement your algorithm!
+            // TODO: Implement algorithm
 
             return mostPopulousYear;
         }

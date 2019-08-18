@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Attributes\Bonus\BonusPointsAttribute.cs" />
     <Compile Include="Attributes\BattleAttribute.cs" />
+    <Compile Include="Attributes\Bonus\GoldfishAwardAttribute.cs" />
     <Compile Include="Attributes\Bonus\MostEfficientAttribute.cs" />
     <Compile Include="Attributes\Bonus\MostElegantAttribute.cs" />
     <Compile Include="Attributes\SenseiAttribute.cs" />

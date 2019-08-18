@@ -4,23 +4,31 @@ using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
+    [MemoryDiagnoser]
     public class BenchmarkInvoker
     {
-        public static Action Action { get; set; }
+        public static Func<int> Action { get; set; }
 
         [Benchmark]
         public int Run()
         {
+            int result = 0;
             try
             {
-                Action();
+                if (Action == null)
+                {
+                    for (int i = 0; i < 100; i++)
+                        Console.WriteLine("Action is not defined!!!!!!!!!!");
+                }
+                result = Action();
             }
             catch (Exception ex)
             {
-                Log.Exception(ex);
+                Console.WriteLine(ex.ToString());
+                throw;
             }
 
-            return 0;
+            return result;
         }
     }
 }

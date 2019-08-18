@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Models;
-using SamuraiDojo.Test;
-using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
     public class EfficiencyCalculator
     {
-        public double MarginScalar { get; set; } = 1.0;
+        public double MarginScalar { get; set; } = 1.5;
 
         public double Margin { get; private set; }
 
@@ -23,10 +15,11 @@ namespace SamuraiDojo.Benchmarking
 
         public EfficiencyRankCollection RankBattleResults(List<BattleResult> battleResults)
         {
-
             EfficiencyRankCollection efficiencyRankCollection = new EfficiencyRankCollection();
             minStdDev = battleResults.Min(result => result.Efficiency.StandardDeviation);
             int rank = 1;
+
+            battleResults = battleResults.OrderBy(result => result.Efficiency.AverageExecutionTime).ToList();
             while (battleResults.Count > 0)
             {
                 BattleResult nextMostEfficient = battleResults[0];
@@ -36,7 +29,7 @@ namespace SamuraiDojo.Benchmarking
                 BattleResult[] resultsWithSimilarEfficiency =
                     battleResults
                     .Where(result => IsWithinMargin(result, baseline))
-                    .OrderBy(result => result.Efficiency.AverageExecutionTime).ToArray();
+                    .OrderBy(result => result.Efficiency.MemoryAllocated).ToArray();
 
                 battleResults.RemoveAll(result => resultsWithSimilarEfficiency.Contains(result));
 

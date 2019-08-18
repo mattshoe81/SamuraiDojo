@@ -27,14 +27,14 @@ namespace SamuraiDojo.Benchmarking
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
             Console.ForegroundColor = DEFAULT_COLOR;
-            
+
         }
 
         public static void Main(string[] args)
         {
 #if DEBUG
             RejectStart();
-            return;
+            //return;
 #endif
             while (true)
                 Iterate();
@@ -79,7 +79,7 @@ namespace SamuraiDojo.Benchmarking
             PrintDivider(dividerLength);
             Console.WriteLine(battleOptionsHeader);
             for (int i = 0; i < battles.Count; i++)
-                Console.WriteLine($"\t{i}:\t''{battles[i].Name}', {battles[i].Deadline.ToShortDateString()}");
+                Console.WriteLine($"\t{i}:\t'{battles[i].Name}', {battles[i].Deadline.ToShortDateString()}");
             PrintDivider(dividerLength);
             Console.WriteLine();
             Console.ForegroundColor = DEFAULT_COLOR;
@@ -98,7 +98,8 @@ namespace SamuraiDojo.Benchmarking
                 foreach (BattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
-                    Console.WriteLine($"\t\tAverage Exec Time: \t{result.Efficiency.AverageExecutionTime} nanoseconds");
+                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
+                    Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} Bytes");
                 }
                 rank++;
             }
@@ -115,7 +116,7 @@ namespace SamuraiDojo.Benchmarking
             PrintDivider(headerString.Length);
             Console.WriteLine(headerString);
             PrintDivider(headerString.Length);
-            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}  --  (Within {efficiencyCalculator.MarginScalar * 100}% of Minimum Standard Deviation)");
+            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}  --  (Grouped as being {efficiencyCalculator.MarginScalar} standard deviation(s) from the most efficient mean in that rank.)");
             Console.WriteLine();
 
             return headerString.Length;

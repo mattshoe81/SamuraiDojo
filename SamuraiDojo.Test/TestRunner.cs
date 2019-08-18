@@ -44,31 +44,38 @@ namespace SamuraiDojo.Test
             RunTests(battleTest);
         }
 
-        public void RunTests(Type type)
+        public int RunTests(Type type)
         {
             List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
+            int passed = 0;
             foreach (MethodInfo method in methods)
-                EvaluteTest(type, method);
+                passed += EvaluteTest(type, method) ? 1 : 0;
+
+            return passed;
         }
 
-        public void RunTests(Type type, MethodInfo[] tests, bool useCallbacks = true)
+        public int RunTests(Type type, MethodInfo[] tests, bool useCallbacks = true)
         {
+            int passed = 0;
             foreach (MethodInfo method in tests)
-                EvaluteTest(type, method, false);
+                passed += EvaluteTest(type, method, false) ? 1 : 0;
+
+            return passed;
         }
 
-        private void EvaluteTest(Type type, MethodInfo method, bool useCallbacks = true)
+        private bool EvaluteTest(Type type, MethodInfo method, bool useCallbacks = true)
         {
             TestExecutionContext testExecutionContext = null;
             if (useCallbacks)
                 testExecutionContext = BuildTestExecutionContext(type, method);
-
+            bool passed = false;
             try
             {
                 InvokeAction(PreTest, testExecutionContext);
                 object instance = Activator.CreateInstance(type);
                 method.Invoke(instance, null);
 
+                passed = true;
                 InvokeAction(OnTestPass, testExecutionContext);
             }
             catch (Exception ex)
@@ -76,6 +83,8 @@ namespace SamuraiDojo.Test
                 Log.Warning($"Failed Test: {ex?.InnerException?.Message}");
                 InvokeAction(OnTestFail, testExecutionContext);
             }
+
+            return passed;
         }
 
         public TestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
