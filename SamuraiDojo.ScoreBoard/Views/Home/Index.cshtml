@@ -9,58 +9,31 @@
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
         <pre>
         <code>
+
+using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 
-namespace SamuraiDojo.Battles.Week2
+namespace SamuraiDojo.Battles.Week3
 {
-    [Battle("8/16/19", "Permutations of Character")]
-    public interface ICharacterCounter
+    [Sensei(Samurai.MATT)]
+    [Battle("8/23/19", "Census Maximus", typeof(CensusMaximus))]
+    public abstract class CensusMaximus
     {
+
         /// &lt;summary&gt;
+        /// Given a list of people containing the year they were born and 
+        /// the year they died, find the first year in which the number of
+        /// living people is maximized.
         /// 
-        /// THIS ONE'S A DOOZY! You guys solved the Clock Angler too easily! Time for a more worthy battle:
-        /// 
-        /// Given a string of integers (i.e. "657403204326320867405004724140372057560"), determine the maximum number
-        /// of alphabetic characters that we could map according to the following map of integers to alphabetic 
-        /// characters. You ONLY need to COUNT the number of possible characters you can map from the given string. 
-        /// You do not need to construct any new strings. This is just a maximization algorithm.
-        /// 
-        /// Character Map:
-        ///     A = 1,
-        ///     B = 2,
-        ///     C = 3,
-        ///     .
-        ///     .
-        ///     .
-        ///     X = 24,
-        ///     Y = 25,
-        ///     z = 26
-        /// 
-        /// ASSUMPTIONS:
-        ///     - You may assume all characters are an integer (you don't have to check)
-        ///     - You may assume every character will be an integer
-        ///     
-        /// Examples:
-        ///     "123"  =&gt; 5 since [1=A, 2=B, 3=C, 12=L, 23=W]. Thus we can map 5 characters given this string.
-        ///     "2412" =&gt; 6 since [2=B, 4=D, 1=A, 2=B, 24=X, 12=L]. Thus we can map 6 characters given this string. (NOTICE we do count duplicates!)
-        ///     "927"  =&gt; 3 since [9=I, 2=B, 7=G]. Thus we can map only 3 characters given this string.
-        ///     "7321" =&gt; 5 since [7=G, 3=C, 2=B, 1=A, 21=U]. Thus we can map 5 possible characters given this string.
-        ///     "99"   =&gt; 2 since [9=I, 9=I]. Thus we can map 2 characters given the string. (note that duplicates DO count)
-        ///     "207"  =&gt; 3 since [2=B, 7=G, 20=T]. Thus we can map 2 characters given the string (NOTICE zero is allowed)
-        /// 
-        /// NOTES:
-        ///     - There DOES exist an algorithm to perform this search in linear time (i.e. with a SINGLE loop).
-        ///     - The most elegant solution should NOT use any arrays or collections to check any mapping.
-        ///     - You are NOT required to implement it in linear time, but you will earn extra points if you 
-        ///       are the most efficient solution!
+        /// Constraints:
+        ///     - All people were born and died between 1900 and 2000 inclusive.
+        ///     - If multiple years have an equal number of people, pick the first year.
+        ///     - The list will always have at least 1 person
         /// 
         /// &lt;/summary&gt;
-        /// &lt;param name="integers"&gt;A string whose characters are all some integer&lt;/param&gt;
-        /// &lt;returns&gt;
-        ///     The maximum number of possible alphabetic characters that could have been mapped from the string of 
-        ///     integers, where A=1, B=2, C=3, ... , Y=25, Z=26.
-        /// &lt;/returns&gt;
-        int CountPossibleCharacters(string integers);
+        /// &lt;param name="people"&gt;People and their birth/death years.&lt;/param&gt;
+        /// &lt;returns&gt;The first year in which the number of living people is at its maximum.&lt;/returns&gt;
+        public abstract int MostPopulousYear(List&lt;Person&gt; people);
     }
 }
 

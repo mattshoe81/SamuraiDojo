@@ -1,0 +1,26 @@
+﻿using System.Collections.Generic;
+using SamuraiDojo.Attributes;
+
+namespace SamuraiDojo.Battles.Week3
+{
+    [Sensei(Samurai.MATT)]
+    [Battle("8/23/19", "Census Maximus", typeof(CensusMaximus))]
+    public abstract class CensusMaximus
+    {
+
+        /// <summary>
+        /// Given a list of people containing the year they were born and 
+        /// the year they died, find the first year in which the number of
+        /// living people is maximized.
+        /// 
+        /// Constraints:
+        ///     - All people were born and died between 1900 and 2000 inclusive.
+        ///     - If multiple years have an equal number of people, pick the first year.
+        ///     - The list will always have at least 1 person
+        /// 
+        /// </summary>
+        /// <param name="people">People and their birth/death years.</param>
+        /// <returns>The first year in which the number of living people is at its maximum.</returns>
+        public abstract int MostPopulousYear(List<Person> people);
+    }
+}

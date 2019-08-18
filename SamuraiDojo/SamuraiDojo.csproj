@@ -53,6 +53,9 @@
     <Compile Include="Battles\Week1\ClockAngler.cs" />
     <Compile Include="Battles\Week2\CharacterCounter.cs" />
     <Compile Include="Battles\Week2\Matt.cs" />
+    <Compile Include="Battles\Week3\CensusMaximus.cs" />
+    <Compile Include="Battles\Week3\Matt.cs" />
+    <Compile Include="Battles\Week3\Person.cs" />
     <Compile Include="Models\BattleCollection.cs" />
     <Compile Include="Models\BattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
