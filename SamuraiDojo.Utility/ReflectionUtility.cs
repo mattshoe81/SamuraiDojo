@@ -9,6 +9,35 @@ namespace SamuraiDojo.Utility
 {
     public class ReflectionUtility
     {
+        public static T GetInstance<T>()
+        {
+            T instance = default;
+            try
+            {
+                instance = Activator.CreateInstance<T>();
+            } 
+            catch (Exception ex)
+            {
+                Log.Exception(ex);
+            }
+
+            return instance;
+        }
+        public static object GetInstance(Type type)
+        {
+            object instance = default;
+            try
+            {
+                instance = Activator.CreateInstance(type);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex);
+            }
+
+            return instance;
+        }
+
         public static Type[] LoadTypes(string assemblyName)
         {
             Assembly assembly = Assembly.Load(assemblyName);
@@ -31,6 +60,14 @@ namespace SamuraiDojo.Utility
             types = types.Where((clazz) => AttributeUtility.HasAnyAttribute(clazz, attributes)).ToArray();
 
             return types;
+        }
+
+        public static Type[] GetSubTypes<T>(string assemblyName)
+        {
+            Type[] allTypes = LoadTypes(assemblyName);
+            Type[] subTypes = allTypes.Where(type => typeof(T).IsAssignableFrom(type) && type != typeof(T)).ToArray();
+
+            return subTypes;
         }
 
         public static List<MethodInfo> GetMethodsWithAttribute<T>(Type type)

@@ -13,5 +13,10 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             ViewBag.Title = "My Profile";
             return View();
         }
+        public ActionResult Awards()
+        {
+            ViewBag.Title = "Awards";
+            return View();
+        }
     }
 }

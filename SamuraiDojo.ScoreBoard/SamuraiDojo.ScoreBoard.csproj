@@ -302,6 +302,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AwardsController.cs" />
     <Compile Include="Controllers\BattleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
@@ -314,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\app.js" />
+    <Content Include="Angular\Controllers\AwardsController.js" />
     <Content Include="Angular\Controllers\HomePageController.js" />
     <Content Include="Angular\Controllers\MyProfileController.js" />
     <Content Include="Angular\Directives\DirectivesApp.js" />
@@ -1141,6 +1143,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Samurai\MyProfile.cshtml" />
+    <Content Include="Views\Samurai\Awards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

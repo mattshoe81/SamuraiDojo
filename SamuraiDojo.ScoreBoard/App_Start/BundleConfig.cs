@@ -53,7 +53,8 @@ namespace SamuraiDojo.ScoreBoard
                 .Include(
                     "~/Angular/app.js",
                     "~/Angular/Controllers/HomePageController.js",
-                    "~/Angular/Controllers/MyProfileController.js"
+                    "~/Angular/Controllers/MyProfileController.js",
+                    "~/Angular/Controllers/AwardsController.js"
                 )
             );
 

@@ -134,3 +134,7 @@ iframe {
 .h-50 {
     height: 200px;
 }
+
+.row-outdent {
+    margin-left: -30px;
+}
