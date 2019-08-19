@@ -9,5 +9,7 @@ namespace SamuraiDojo.Attributes.Bonus
     public class TigerAwardAttribute : BonusPointsAttribute
     {
         public override int Points { get; } = 2;
+
+        public override string Name { get; } = "Tiger Award";
     }
 }

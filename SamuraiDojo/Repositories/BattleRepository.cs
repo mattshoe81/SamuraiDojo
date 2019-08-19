@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Repositories
@@ -30,6 +31,22 @@ namespace SamuraiDojo.Repositories
                 battleResults.Battle = battle;
                 battleResults.AddPoint(writtenBy, points);
                 battles.Add(battleResults);
+            }
+        }
+
+        public static void AddAward(WrittenByAttribute player, BattleAttribute battle, BonusPointsAttribute award)
+        {
+            if (HasBattle(battle))
+            {
+                BattleOutcome battleOutcome = GetBattleOutcome(battle);
+                battleOutcome.AddAward(player, award);
+            }
+            else
+            {
+                BattleOutcome battleOutcome = new BattleOutcome();
+                battleOutcome.Battle = battle;
+                battleOutcome.AddAward(player, award);
+                battles.Add(battleOutcome);
             }
         }
 

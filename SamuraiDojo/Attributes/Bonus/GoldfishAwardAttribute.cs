@@ -9,5 +9,7 @@ namespace SamuraiDojo.Attributes.Bonus
     public class GoldfishAwardAttribute : BonusPointsAttribute
     {
         public override int Points { get; } = 5;
+
+        public override string Name { get; } = "Goldfish Award";
     }
 }

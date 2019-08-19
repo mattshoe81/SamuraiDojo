@@ -9,5 +9,7 @@ namespace SamuraiDojo.Attributes.Bonus
     public class MostElegantAttribute : BonusPointsAttribute
     {
         public override int Points { get; } = 6;
+
+        public override string Name { get; } = "Most Elegant";
     }
 }

@@ -89,14 +89,14 @@ namespace SamuraiDojo.Battles.Week3
                                 <tr>
                                     <th>Points</th>
                                     <th>Player</th>
-                                    <th>Rank</th>
+                                    <th>Awards</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="result in battle.Results">
                                 <tr>
                                     <td>{{result.Points}}</td>
                                     <td class="lowercase">{{result.Player.Name}}</td>
-                                    <td>{{vm.GetRank(result.Player)}}</td>
+                                    <td class="italic">{{vm.PrintAwards(result) || '--'}}</td>
                                 </tr>
                             </tbody>
                         </table>
