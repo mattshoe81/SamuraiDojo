@@ -10,7 +10,7 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
     [MemoryDiagnoser]
     public class Week2 : DojoBenchmark
     {
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public void Matt()
         {
             Run(new Test.Week2.Matt());

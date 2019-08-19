@@ -47,6 +47,7 @@ namespace SamuraiDojo.Benchmarking
         {
             BattleResult result = new BattleResult();
             result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
+            result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 
             double executionTime = GetAverageExecutionTime(benchmark, summary);
             double standardDeviation = GetStandardDeviation(benchmark, summary);
