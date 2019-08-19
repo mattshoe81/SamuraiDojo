@@ -6,13 +6,13 @@ namespace SamuraiDojo.Test.Week1
 {
     [UnderTest(typeof(ClockAngler))]
     [TestClass]
-    public abstract class ClockAnglerTestBase
+    public abstract class ClockAnglerTestBase : DojoTest
     {
 
         protected abstract int Calculate(int hour, int minute);
 
         [TestMethod]
-        public void TestMethod1()
+        public override void Benchmark()
         {
             int angle = Calculate(12, 16);
             int expected = 272;

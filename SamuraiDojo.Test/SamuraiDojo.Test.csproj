@@ -224,6 +224,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ImplementationAttribute.cs" />
     <Compile Include="Attributes\UnderTestAttribute.cs" />
+    <Compile Include="DojoTest.cs" />
     <Compile Include="Week1\ClockAnglerTestBase.cs" />
     <Compile Include="Week1\Dustin.cs" />
     <Compile Include="Week1\Jeff.cs" />
@@ -236,6 +237,8 @@
     <Compile Include="Week2\BaseCharacterCounterTest.cs" />
     <Compile Include="Week2\Dustin.cs" />
     <Compile Include="Week2\Matt.cs" />
+    <Compile Include="Week3\CensusMaximusTest.cs" />
+    <Compile Include="Week3\Matt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
