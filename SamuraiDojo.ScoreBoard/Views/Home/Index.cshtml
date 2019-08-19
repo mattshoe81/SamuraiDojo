@@ -46,7 +46,7 @@ namespace SamuraiDojo.Battles.Week3
     <div class="spacer-25"></div>
 
     <div class="row">
-        <div class="col-sm-4">
+        @*<div class="col-sm-4">
             <h3 class="inline-block underline">Leader Board:</h3>
             <table class="table table-condensed">
                 <thead>
@@ -69,9 +69,9 @@ namespace SamuraiDojo.Battles.Week3
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>*@
 
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <h3 class="underline inline-block">History:</h3>
             <div class="spacer-10"></div>
             <div ng-repeat="battle in vm.Battles | orderBy: '-Battle.Deadline'">
