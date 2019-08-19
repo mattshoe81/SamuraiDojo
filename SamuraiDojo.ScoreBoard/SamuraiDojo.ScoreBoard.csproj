@@ -1144,6 +1144,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Samurai\MyProfile.cshtml" />
     <Content Include="Views\Samurai\Awards.cshtml" />
+    <Content Include="Views\Samurai\GettingStarted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

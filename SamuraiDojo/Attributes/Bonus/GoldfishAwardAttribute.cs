@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SamuraiDojo.Attributes.Bonus
+﻿namespace SamuraiDojo.Attributes.Bonus
 {
     public class GoldfishAwardAttribute : BonusPointsAttribute
     {
