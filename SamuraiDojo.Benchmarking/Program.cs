@@ -34,8 +34,12 @@ namespace SamuraiDojo.Benchmarking
             RejectStart();
             return;
 #endif
-            while (true)
-                Iterate();
+            Console.WriteLine("You've entered the benchmarking application!");
+            if (args != null && args.Length > 0)
+                BenchmarkBattle(Convert.ToInt16(args[0]));
+            else 
+                while (true)
+                    Iterate();
         }
 
         private static void Iterate()
