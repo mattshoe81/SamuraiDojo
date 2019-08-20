@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Models
@@ -14,6 +16,13 @@ namespace SamuraiDojo.Models
         public int Points { get; set; }
 
         public EfficiencyResult Efficiency { get; set; }
+
+        public List<BonusPointsAttribute> Awards { get; set; }
+
+        public BattleResult()
+        {
+            Awards = new List<BonusPointsAttribute>();
+        }
 
         public int CompareTo(BattleResult other)
         {

@@ -9,5 +9,7 @@ namespace SamuraiDojo.Attributes.Bonus
     public abstract class BonusPointsAttribute : Attribute
     {
         public abstract int Points { get; }
+        public abstract string Name { get; }
+        public abstract string Description { get; }
     }
 }

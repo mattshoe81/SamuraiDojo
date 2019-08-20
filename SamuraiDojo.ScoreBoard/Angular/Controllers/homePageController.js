@@ -64,6 +64,19 @@
             return count;
         };
 
+        vm.PrintAwards = function (player) {
+            var result = "";
+            if (player && player.Awards && player.Awards.length > 0) {
+                for (var i = 0; i < player.Awards.length; i++) {
+                    result += "'" + player.Awards[i].Name + "'";
+                    if (i < player.Awards.length - 1)
+                        result += ", ";
+                }
+            }
+
+            return result;
+        };
+
 
     }]);
 

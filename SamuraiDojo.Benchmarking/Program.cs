@@ -22,19 +22,17 @@ namespace SamuraiDojo.Benchmarking
             DEFAULT_COLOR = ConsoleColor.Yellow;
             INFO_COLOR = ConsoleColor.DarkYellow;
             ERROR_COLOR = ConsoleColor.DarkRed;
-
-
+            
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
             Console.ForegroundColor = DEFAULT_COLOR;
-
         }
 
         public static void Main(string[] args)
         {
 #if DEBUG
             RejectStart();
-            //return;
+            return;
 #endif
             while (true)
                 Iterate();
@@ -44,6 +42,7 @@ namespace SamuraiDojo.Benchmarking
         {
             int battleIndex = 0;
             string input = GetInput();
+
             if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
                 BenchmarkBattle(battleIndex);
             else

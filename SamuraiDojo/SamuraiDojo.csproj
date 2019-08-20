@@ -47,7 +47,7 @@
     <Compile Include="Attributes\Bonus\MostEfficientAttribute.cs" />
     <Compile Include="Attributes\Bonus\MostElegantAttribute.cs" />
     <Compile Include="Attributes\SenseiAttribute.cs" />
-    <Compile Include="Attributes\Bonus\TigerAttribute.cs" />
+    <Compile Include="Attributes\Bonus\TigerAwardAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
     <Compile Include="Auditor.cs" />
     <Compile Include="Battles\Week2\Dustin.cs" />

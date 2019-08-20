@@ -302,6 +302,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AwardsController.cs" />
     <Compile Include="Controllers\BattleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
@@ -314,12 +315,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\app.js" />
+    <Content Include="Angular\Controllers\AwardsController.js" />
     <Content Include="Angular\Controllers\HomePageController.js" />
     <Content Include="Angular\Controllers\MyProfileController.js" />
     <Content Include="Angular\Directives\DirectivesApp.js" />
     <Content Include="Angular\Services\DataService.js" />
     <Content Include="Angular\Services\RequestService.js" />
     <Content Include="Angular\Services\ServicesApp.js" />
+    <Content Include="Content\Images\samuraibobble.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1141,6 +1144,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Samurai\MyProfile.cshtml" />
+    <Content Include="Views\Samurai\Awards.cshtml" />
+    <Content Include="Views\Samurai\GettingStarted.cshtml" />
+    <Content Include="Views\Samurai\Scoring.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

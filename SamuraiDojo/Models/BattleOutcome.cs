@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Models
 {
@@ -41,6 +42,23 @@ namespace SamuraiDojo.Models
             {
                 int index = Results.FindIndex(item => item.Player.Equals(writtenBy));
                 Results[index].Points += points;
+            }
+        }
+
+        public void AddAward(WrittenByAttribute player, BonusPointsAttribute award)
+        {
+            BattleResult result = Get(player.Name);
+
+            if (result != null)
+                result.Awards.Add(award);
+            else
+            {
+                Results.Add(new BattleResult
+                {
+                    Player = player,
+                    Points = 0,
+                    Awards = new List<BonusPointsAttribute> { award }
+                });
             }
         }
 

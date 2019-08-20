@@ -1,0 +1,50 @@
+﻿<div class="row">
+
+    <h2>Set up your local repository</h2>
+    <ol>
+        <li>Clone the SamuraiDojo repository on Github at <a href="https://github.com/Safelite/SamuraiDojo" target="_blank">https://github.com/Safelite/SamuraiDojo</a></li>
+        <li>
+            Open the repository in visual studio and set the SamuraiDojo.Scoreboard project as your startup project.
+            <ul>
+                <li>Set Windows Authentication to 'Enabled'</li>
+                <li>Set Anonymous Authentication to 'Disabled'</li>
+            </ul>
+        </li>
+        <li>
+            Go to the SamuraiDojo/Samurai.cs file and add your name.
+            <ul>
+                <li>NOTE: this must be your 'first.last' windows login</li>
+            </ul>
+        </li>
+    </ol>
+
+    <div class="spacer-5"></div>
+
+    <h2>Solve the puzzle!</h2>
+    <ol>
+        <li>Find the current week's puzzle at SamuraiDojo/Battles/Week#</li>
+        <li>
+            Extend that week's base class and implement the abstract method(s) with your solution
+            <ul>
+                <li>Decorate your class with the <code>[WrittenBy(Samurai.YOU)]</code> attribute</li>
+            </ul>
+        </li>
+        <li>
+            Extend the base test for the week in SamuraiDojo.Test/Week#
+            <ul>
+                <li>Decorate your class with the <code>[TestClass]</code> and <code>[WrittenBy(Samurai.YOU)]</code> attributes</li>
+                <li>You can run your tests at any time to see how many points you've won</li>
+            </ul>
+        </li>
+        <li><span class="bold">Important! </span> Make sure you decorate all of your classes with the <code>[WrittenBy(Samurai.YOU)]</code> attribute</li>
+    </ol>
+
+    <div class="spacer-5"></div>
+
+    <h2>Submit your solution</h2>
+    <ol>
+        <li>Branch from master <span class="bold">(not develop)</span> and name your branch whatever you like. (but it would be helpful if you did solution/your-name)</li>
+        <li>Pull request your branch into master <span class="bold">(not develop)</span> and request a review from the week's Sensei.</li>
+    </ol>
+
+</div>

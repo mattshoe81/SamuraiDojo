@@ -9,6 +9,7 @@ namespace SamuraiDojo.Battles.Week3
     {
 
         /// <summary>
+        /// 
         /// Given a list of people containing the year they were born and 
         /// the year they died, find the first year in which the number of
         /// living people is maximized.

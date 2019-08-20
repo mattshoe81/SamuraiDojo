@@ -7,7 +7,7 @@ namespace SamuraiDojo.Benchmarking
 {
     public class EfficiencyCalculator
     {
-        public double MarginScalar { get; set; } = 1.5;
+        public double MarginScalar { get; set; } = 2.0;
 
         public double Margin { get; private set; }
 

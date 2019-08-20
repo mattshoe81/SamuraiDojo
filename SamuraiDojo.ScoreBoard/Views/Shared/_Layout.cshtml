@@ -23,10 +23,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Samurai Dojo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Samurai Dojo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand bold" })
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Getting Started", "GettingStarted", "Samurai")</li>
+                        <li>@Html.ActionLink("Scoring", "Scoring", "Samurai")</li>
+                        <li>@Html.ActionLink("Awards", "Awards", "Samurai")</li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
                         <li>@Html.ActionLink("My Profile", "MyProfile", "Samurai")</li>
                     </ul>
                 </div>
