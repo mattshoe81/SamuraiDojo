@@ -333,6 +333,7 @@
     <Content Include="Angular\Controllers\BenchmarkingController.js" />
     <Content Include="Angular\Controllers\HomePageController.js" />
     <Content Include="Angular\Controllers\MyProfileController.js" />
+    <Content Include="Angular\Controllers\SenseiController.js" />
     <Content Include="Angular\Directives\DirectivesApp.js" />
     <Content Include="Angular\Services\BenchmarkingService.js" />
     <Content Include="Angular\Services\DataService.js" />
@@ -1165,6 +1166,7 @@
     <Content Include="Views\Samurai\GettingStarted.cshtml" />
     <Content Include="Views\Samurai\Scoring.cshtml" />
     <Content Include="Views\Samurai\Benchmarking.cshtml" />
+    <Content Include="Views\Samurai\Sensei.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

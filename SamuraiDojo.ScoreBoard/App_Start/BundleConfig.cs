@@ -55,7 +55,8 @@ namespace SamuraiDojo.ScoreBoard
                     "~/Angular/Controllers/HomePageController.js",
                     "~/Angular/Controllers/MyProfileController.js",
                     "~/Angular/Controllers/AwardsController.js",
-                    "~/Angular/Controllers/BenchmarkingController.js"
+                    "~/Angular/Controllers/BenchmarkingController.js",
+                    "~/Angular/Controllers/SenseiController.js"
                 )
             );
 
