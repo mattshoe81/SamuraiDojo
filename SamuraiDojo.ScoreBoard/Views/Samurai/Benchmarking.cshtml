@@ -13,6 +13,7 @@
             </ul>
         </li>
         <li>The console window will appear, then just select the index of the challenge you want to benchmark</li>
+        <li>Wait... (it will take a few minutes to run)</li>
     </ol>
 
     <h3 class="bold">Setting up the current week:</h3>
@@ -21,6 +22,25 @@
         <li>Just copy what the Sensei did to pass an instance of your test class to the base.Run method</li>
         <li>This does not need to be done if you don't want to benchmark your algorithm.</li>
         <li>You do not need to do this for previous weeks. The sensei will have done that if you hadn't.</li>
+    </ul>
+
+    <h3 class="bold">Measuring (Time) Efficiency:</h3>
+    <ul>
+        <li>Efficiency is measured objectively using a third party library, <a class="bold" href="https://benchmarkdotnet.org/articles/overview.html">Benchmark.NET</a></li>
+        <li>Algorithms are grouped into buckets of similar efficiency, due to the error-prone nature of performance benchmarking.</li>
+        <li>
+            The efficiency ranking algorithm first determines the mimimum measured standard deviation from results of all benchmarks
+            <ul>
+                <li>This is used to determine the margin by which algorithms' efficiencies are grouped</li>
+            </ul>
+        </li>
+        <li>
+            The ranking algorithm takes the fastest unprocessed benchmark, then groups all unprocessed algorithms whose mean execution time falls within 2 standard deviations of the fastest algorithm's mean execution time.
+            <ul>
+                <li>This group is removed and placed into a bucket (1st, 2nd, 3rd, etc)</li>
+                <li>This repeats until all benchmarks have been placed into a bucket.</li>
+            </ul>
+        </li>
     </ul>
 
 </div>
