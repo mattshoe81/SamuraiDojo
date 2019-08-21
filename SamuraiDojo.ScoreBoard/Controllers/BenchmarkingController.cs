@@ -1,11 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Threading;
-using System.Web.Hosting;
 using System.Web.Http;
-using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {

@@ -1,5 +1,29 @@
 ﻿<div class="container" ng-controller="BenchmarkingController as vm">
     <div class="spacer-25"></div>
 
+    <h3 class="bold">Setting up the current week's benchmark:</h3>
+    <ul>
+        <li>To test the efficiency of the current week's algorithm, go to the SamuraiDojo.Benchmarking/Benchmarks folder and open the current week's class.</li>
+        <li>Just copy what the Sensei did to pass an instance of your test class to the base.Run method</li>
+        <li>This does not need to be done if you don't want to benchmark your algorithm.</li>
+        <li>You do not need to do this for previous weeks. The sensei will have done that if you hadn't.</li>
+    </ul>
+
+    <div class="spacer-15"></div>
+
+    <h3 class="bold">Running Benchmarks</h3>
+    <ol>
+        <li>Set the SamuraiDojo.Benchmarking project as your startup project</li>
+        <li>Set your build configuration to RELEASE</li>
+        <li>
+            Run the project by going to Debug -> Start Without Debugging
+            <ul>
+                <li>If you use the normal start button, you will not get accurate results because the debugger will be attached and will bog down the performance testing.</li>
+            </ul>
+        </li>
+        <li>The console window will appear, then just select the index of the challenge you want to benchmark</li>
+        <li>This will likely take a few minutes to complete.</li>
+        <li>If you are trying to benchmark the current week's battle, make sure you've done the setup outlined above!</li>
+    </ol>
 
 </div>
