@@ -138,3 +138,9 @@ iframe {
 .row-outdent {
     margin-left: -30px;
 }
+
+.centered {
+    margin: auto;
+    width: 100%;
+    display: inline-block;
+}

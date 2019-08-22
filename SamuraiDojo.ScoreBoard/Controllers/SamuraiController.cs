@@ -31,5 +31,17 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             ViewBag.Title = "Scoring";
             return View();
         }
+
+        public ActionResult Benchmarking()
+        {
+            ViewBag.Title = "Benchmarking";
+            return View();
+        }
+
+        public ActionResult Sensei()
+        {
+            ViewBag.Title = "Sensei";
+            return View();
+        }
     }
 }
