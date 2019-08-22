@@ -238,6 +238,7 @@
     <Compile Include="Week2\Dustin.cs" />
     <Compile Include="Week2\Matt.cs" />
     <Compile Include="Week3\CensusMaximusTest.cs" />
+    <Compile Include="Week3\Dustin.cs" />
     <Compile Include="Week3\Matt.cs" />
   </ItemGroup>
   <ItemGroup>
