@@ -58,6 +58,7 @@
     <Compile Include="Battles\Week2\Matt.cs" />
     <Compile Include="Battles\Week3\Aaron.cs" />
     <Compile Include="Battles\Week3\CensusMaximus.cs" />
+    <Compile Include="Battles\Week3\Dustin.cs" />
     <Compile Include="Battles\Week3\Matt.cs" />
     <Compile Include="Battles\Week3\Person.cs" />
     <Compile Include="Models\BattleCollection.cs" />
