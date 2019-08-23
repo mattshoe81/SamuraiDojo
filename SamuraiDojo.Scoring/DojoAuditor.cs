@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
 
-namespace SamuraiDojo
+namespace SamuraiDojo.Scoring
 {
-    public class Auditor
+    internal class DojoAuditor
     {
         public static void Audit()
         {
@@ -21,7 +16,7 @@ namespace SamuraiDojo
                 AssignSenseisToBattles();
                 GrantBonusPoints();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Exception(ex);
             }

@@ -311,7 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\DojoConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1188,6 +1187,10 @@
     <ProjectReference Include="..\SamuraiDojo.Benchmarking\SamuraiDojo.Benchmarking.csproj">
       <Project>{7c873044-5c48-4f29-923c-80f4a349fcbb}</Project>
       <Name>SamuraiDojo.Benchmarking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SamuraiDojo.Scoring\SamuraiDojo.Scoring.csproj">
+      <Project>{ff358cff-39dd-4d1c-b689-1b22a3778094}</Project>
+      <Name>SamuraiDojo.Scoring</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
       <Project>{0E85B929-B27F-48FA-8A6C-944C887BBCEF}</Project>

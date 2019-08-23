@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using SamuraiDojo.ScoreBoard.App_Start;
+using SamuraiDojo.Scoring;
 
 namespace SamuraiDojo.ScoreBoard
 {
@@ -20,7 +21,7 @@ namespace SamuraiDojo.ScoreBoard
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DojoConfig.Init();
+            ScoreKeeper.Start();
         }
     }
 }

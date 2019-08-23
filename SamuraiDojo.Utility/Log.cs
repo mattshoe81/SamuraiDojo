@@ -52,12 +52,8 @@ namespace SamuraiDojo.Utility
         {
             if (obj != null)
                 message = obj.ToString();
-#if DEBUG
+
             Trace.WriteLine($"{Environment.NewLine}\t{message}{Environment.NewLine}", CATEGORY);
-#endif
-#if !DEBUG
-            //WriteToFile(message);
-#endif
         }
 
         private static void WriteToFile(string message)
