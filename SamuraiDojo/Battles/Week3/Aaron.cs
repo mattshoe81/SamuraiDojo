@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week3
 {
+    [MostElegant]
+    [TigerAward]
     [WrittenBy(Samurai.Aaron)]
     public class Aaron : CensusMaximus
     {

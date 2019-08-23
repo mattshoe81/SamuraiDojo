@@ -16,6 +16,12 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
         {
             Run(new Test.Week3.Dustin());
         }
+
+        [Benchmark]
+        public void Aaron()
+        {
+            Run(new Test.Week3.AaronTests());
+        }
     }
 }
 

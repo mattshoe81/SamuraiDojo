@@ -92,7 +92,7 @@ namespace SamuraiDojo.Battles.Week3
                                     <th>Awards</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="result in battle.Results">
+                            <tbody ng-repeat="result in battle.Results | orderBy: '-Points'">
                                 <tr>
                                     <td>{{result.Points}}</td>
                                     <td class="lowercase">{{result.Player.Name}}</td>

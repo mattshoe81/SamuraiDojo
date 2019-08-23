@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week3
 {
+    [MostEfficient]
+    [GoldfishAward]
     [WrittenBy(Samurai.DUSTIN)]
     public class Dustin : CensusMaximus
     {

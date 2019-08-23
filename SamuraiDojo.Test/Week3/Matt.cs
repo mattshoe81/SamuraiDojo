@@ -5,7 +5,7 @@ using SamuraiDojo.Battles.Week3;
 namespace SamuraiDojo.Test.Week3
 {
     [TestClass]
-    [WrittenBy("MattArray")]
+    [WrittenBy(Samurai.MATT)]
     public class Matt : CensusMaximusTest
     {
         protected override CensusMaximus GetInstance()
