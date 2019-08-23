@@ -7,7 +7,14 @@
         <li>
             Create a new <span class="bold">ABSTRACT CLASS</span> for your challenge (clever names and puns are encouraged)
             <ul>
-                <li>Decorate your abstract class with the <code>[Battle("XX/XX/XX", "Your Clever battle name", typeof(this))]</code> attribute</li>
+                <li>    
+                    Decorate your abstract class with the <code>[Battle("XX/XX/XX", "Your Clever battle name", typeof(this))]</code> attribute
+                    <ul>
+                        <li>The first parameter is the Deadline, which should be the Friday after the battle is announced. (The date format is pretty free-form, just put the MM/DD/YY)</li>
+                        <li>The second parameter is the name of your battle (cleverness and puns encouraged)</li>
+                        <li>The third parameter is just the Type of the class to which the attribute is attached</li>
+                    </ul>
+                </li>
                 <li>Decorate your abstract class with the <code>[Sensei(Samurai.YOU)]</code> attribute</li>
                 <li>Do <span class="bold">NOT</span> use an <span class="bold">interface</span>. Attributes are not inherited from interfaces, so the reflection used for scoring will break if you use an interface.</li>
             </ul>
@@ -18,7 +25,13 @@
             <ul>
                 <li>Decorate this class with the <code>[WrittenBy(Samurai.YOU)]</code> attribute</li>
             </ul>
-        </li>        
+        </li>    
+        <li>
+            Copy all of the text of your class, navigate to the index.cshtml page, and paste it into the &#x3C;pre&#x3E;&#x3C;code&#x3E;&#x3C;/code&#x3E;&#x3C;/pre&#x3E; tags on the page (Replace the existing text completely)
+            <ul>
+                <li>You can html-encode this if you like, but the &lt; and &gt; symbols won't cause any trouble</li>
+            </ul>
+        </li>
     </ol>
 
     <h3 class="bold">Create a test suite:</h3>
