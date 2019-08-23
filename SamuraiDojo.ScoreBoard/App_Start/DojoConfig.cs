@@ -21,7 +21,7 @@ namespace SamuraiDojo.ScoreBoard.App_Start
     {
         public static void Init()
         {
-            ClearLogFile();
+            //ClearLogFile();
             SamuraiDojo.Auditor.Audit();
             RunUnitTests();
             CalculateRanks();

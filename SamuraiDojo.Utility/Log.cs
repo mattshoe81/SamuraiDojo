@@ -56,7 +56,7 @@ namespace SamuraiDojo.Utility
             Trace.WriteLine($"{Environment.NewLine}\t{message}{Environment.NewLine}", CATEGORY);
 #endif
 #if !DEBUG
-            WriteToFile(message);
+            //WriteToFile(message);
 #endif
         }
 

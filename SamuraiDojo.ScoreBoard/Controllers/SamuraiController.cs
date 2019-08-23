@@ -43,5 +43,11 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             ViewBag.Title = "Sensei";
             return View();
         }
+
+        public ActionResult Home()
+        {
+            ViewBag.Title = "Home";
+            return View();
+        }
     }
 }
