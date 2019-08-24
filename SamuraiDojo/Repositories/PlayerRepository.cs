@@ -6,6 +6,10 @@ using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Repositories
 {
+    /// <summary>
+    /// Repository for players' statistics, such as rank, 
+    /// total historical points, sensei count, etc.
+    /// </summary>
     public class PlayerRepository 
     {
         public readonly static Dictionary<string, Player> Players;
@@ -28,7 +32,7 @@ namespace SamuraiDojo.Repositories
             return player;
         }
 
-        public static void AddPoint(string samurai, Type battle, int points = 1)
+        public static void AddPointToHistoricalTotal(string samurai, Type battle, int points = 1)
         {
             if (samurai != null)
                 samurai = samurai.ToUpper();
@@ -60,7 +64,7 @@ namespace SamuraiDojo.Repositories
             }
         }
 
-        public static void AddPlayer(string samurai)
+        public static void CreatePlayer(string samurai)
         {
             if (samurai != null)
                 samurai = samurai.ToUpper();

@@ -29,13 +29,13 @@ namespace SamuraiDojo.Benchmarking
             };
         }
 
-        public static List<BattleResult> PerformBenchmarking(BattleAttribute battle)
+        public static List<BattleStatsForPlayer> PerformBenchmarking(BattleAttribute battle)
         {
 #if DEBUG
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
 #endif
             Summary summary = BenchmarkRunner.Run(benchmarkMap[battle.Type]);
-            List<BattleResult> battleResults = new List<BattleResult>();
+            List<BattleStatsForPlayer> battleResults = new List<BattleStatsForPlayer>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));
 
@@ -44,9 +44,9 @@ namespace SamuraiDojo.Benchmarking
             return battleResults;
         }
 
-        public static BattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
+        public static BattleStatsForPlayer ProcessCase(BenchmarkCase benchmark, Summary summary)
         {
-            BattleResult result = new BattleResult();
+            BattleStatsForPlayer result = new BattleStatsForPlayer();
             result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
             result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 

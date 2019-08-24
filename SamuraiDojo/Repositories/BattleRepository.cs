@@ -9,6 +9,9 @@ using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Repositories
 {
+    /// <summary>
+    /// Repository for Battle data, tracking scores for each player for each battle.
+    /// </summary>
     public class BattleRepository
     {
         private static List<BattleOutcome> battles;
@@ -18,7 +21,7 @@ namespace SamuraiDojo.Repositories
             battles = new List<BattleOutcome>();
         }
 
-        public static void AddPlayerPoint(BattleAttribute battle, WrittenByAttribute writtenBy, int points = 1)
+        public static void GrantPointsToPlayer(BattleAttribute battle, WrittenByAttribute writtenBy, int points = 1)
         {
             if (HasBattle(battle))
             {
@@ -34,7 +37,7 @@ namespace SamuraiDojo.Repositories
             }
         }
 
-        public static void AddAward(WrittenByAttribute player, BattleAttribute battle, BonusPointsAttribute award)
+        public static void AssignAwardToPlayer(WrittenByAttribute player, BattleAttribute battle, BonusPointsAttribute award)
         {
             if (HasBattle(battle))
             {
@@ -50,7 +53,7 @@ namespace SamuraiDojo.Repositories
             }
         }
 
-        public static void AddBattle(BattleAttribute battle, SenseiAttribute sensei)
+        public static void CreateBattle(BattleAttribute battle, SenseiAttribute sensei)
         {
             if (!HasBattle(battle))
             {

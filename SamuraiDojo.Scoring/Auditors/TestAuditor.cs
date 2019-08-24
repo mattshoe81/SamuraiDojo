@@ -1,18 +1,19 @@
 ﻿using SamuraiDojo.Attributes;
 using SamuraiDojo.Repositories;
+using SamuraiDojo.Scoring.Interfaces;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
 
-namespace SamuraiDojo.Scoring
+namespace SamuraiDojo.Scoring.Auditors
 {
-    internal class TestAuditor
+    internal class TestAuditor : IAuditor
     {
-        public static void Audit()
+        public void Audit()
         {
             RunUnitTests();
         }
 
-        private static void RunUnitTests()
+        private void RunUnitTests()
         {
             TestRunner testRunner = new TestRunner();
 
@@ -22,20 +23,20 @@ namespace SamuraiDojo.Scoring
             testRunner.Run();
         }
 
-        private static void SetPreTestAction(TestRunner testRunner)
+        private void SetPreTestAction(TestRunner testRunner)
         {
             testRunner.PreTest = (context) =>
             {
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
                 BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
                 battle.Sensei = sensei;
-                PlayerRepository.AddPlayer(sensei.Name);
+                PlayerRepository.CreatePlayer(sensei.Name);
 
-                BattleRepository.AddBattle(battle, sensei);
+                BattleRepository.CreateBattle(battle, sensei);
             };
         }
 
-        private static void SetPassedTestAction(TestRunner testRunner)
+        private void SetPassedTestAction(TestRunner testRunner)
         {
             testRunner.OnTestPass = (context) =>
             {
@@ -45,8 +46,8 @@ namespace SamuraiDojo.Scoring
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
-                    PlayerRepository.AddPoint(context.WrittenBy.Name, context.ClassUnderTest, points);
-                    BattleRepository.AddPlayerPoint(battle, context.WrittenBy, points);
+                    PlayerRepository.AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    BattleRepository.GrantPointsToPlayer(battle, context.WrittenBy, points);
                 }
 
             };

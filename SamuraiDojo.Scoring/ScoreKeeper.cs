@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using SamuraiDojo.Attributes;
-using SamuraiDojo.Models;
-using SamuraiDojo.Repositories;
-using SamuraiDojo.Test;
-using SamuraiDojo.Utility;
+﻿using SamuraiDojo.Scoring.Auditors;
 
 namespace SamuraiDojo.Scoring
 {
@@ -14,9 +6,9 @@ namespace SamuraiDojo.Scoring
     {
         public static void Start()
         {
-            DojoAuditor.Audit();
-            TestAuditor.Audit();
-            RankCalculator.Calculate();
-        }       
+            new DojoAuditor().Audit();
+            new TestAuditor().Audit();
+            new RankCalculator().Calculate();
+        }
     }
 }

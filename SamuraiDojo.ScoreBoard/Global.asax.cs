@@ -21,6 +21,7 @@ namespace SamuraiDojo.ScoreBoard
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            // Kick off the reflective scoring system
             ScoreKeeper.Start();
         }
     }

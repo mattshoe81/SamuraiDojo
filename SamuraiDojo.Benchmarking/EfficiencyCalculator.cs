@@ -13,7 +13,7 @@ namespace SamuraiDojo.Benchmarking
 
         private double minStdDev;
 
-        public EfficiencyRankCollection RankBattleResults(List<BattleResult> battleResults)
+        public EfficiencyRankCollection RankBattleResults(List<BattleStatsForPlayer> battleResults)
         {
             EfficiencyRankCollection efficiencyRankCollection = new EfficiencyRankCollection();
             minStdDev = battleResults.Min(result => result.Efficiency.StandardDeviation);
@@ -22,11 +22,11 @@ namespace SamuraiDojo.Benchmarking
             battleResults = battleResults.OrderBy(result => result.Efficiency.AverageExecutionTime).ToList();
             while (battleResults.Count > 0)
             {
-                BattleResult nextMostEfficient = battleResults[0];
+                BattleStatsForPlayer nextMostEfficient = battleResults[0];
                 Margin = CalculateMargin(nextMostEfficient);
                 double baseline = nextMostEfficient.Efficiency.AverageExecutionTime;
 
-                BattleResult[] resultsWithSimilarEfficiency =
+                BattleStatsForPlayer[] resultsWithSimilarEfficiency =
                     battleResults
                     .Where(result => IsWithinMargin(result, baseline))
                     .OrderBy(result => result.Efficiency.MemoryAllocated).ToArray();
@@ -40,12 +40,12 @@ namespace SamuraiDojo.Benchmarking
             return efficiencyRankCollection;
         }
 
-        private double CalculateMargin(BattleResult result)
+        private double CalculateMargin(BattleStatsForPlayer result)
         {
             return minStdDev * MarginScalar;
         }
 
-        private bool IsWithinMargin(BattleResult battleResult, double baseline)
+        private bool IsWithinMargin(BattleStatsForPlayer battleResult, double baseline)
         {
             double difference = battleResult.Efficiency.AverageExecutionTime - baseline;
             bool result = Math.Abs(difference) <= Margin;

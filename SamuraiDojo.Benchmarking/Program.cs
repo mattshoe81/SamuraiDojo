@@ -62,7 +62,7 @@ namespace SamuraiDojo.Benchmarking
         private static void BenchmarkBattle(int index)
         {
             CurrentBattle = BattleCollection.Get(index);
-            List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
+            List<BattleStatsForPlayer> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
 
             EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
             EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
@@ -92,9 +92,9 @@ namespace SamuraiDojo.Benchmarking
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
             {
-                List<BattleResult> results = efficiencyBuckets.Get(rank);
+                List<BattleStatsForPlayer> results = efficiencyBuckets.Get(rank);
                 Console.WriteLine($"Rank {rank}");
-                foreach (BattleResult result in results)
+                foreach (BattleStatsForPlayer result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
                     Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
