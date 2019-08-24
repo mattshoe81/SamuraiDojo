@@ -9,7 +9,7 @@
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
         <pre>
         <code>
-[Sensei(Samurai.MATT)]
+[Sensei(Samurai.MATT_SHOE)]
 [Battle("8/30/19", "PalindroMania", typeof(Palindromania))]
 public abstract class Palindromania
 {
@@ -20,10 +20,13 @@ public abstract class Palindromania
     ///     
     /// HINT:
     ///     - Palindromes are symmetric about their center....
+    ///     - Difference between even and odd lengths?....
     /// 
     /// Constraints:
     ///     1. The string is never null, and always has at least 1 character in it.
-    ///     2. The characters can be ANY valid ASCII character
+    ///     2. The characters can be ANY valid ASCII character.
+    ///     2. Comparisons should be CASE-INSENSITIVE.
+    ///     3. If there are multiples, pick the first.
     /// 
     /// &lt;/summary&gt;
     /// &lt;param name="input"&gt;An arbitrarily large string.&lt;/param&gt;
