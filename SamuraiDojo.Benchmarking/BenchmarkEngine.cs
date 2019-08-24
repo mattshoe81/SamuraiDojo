@@ -10,6 +10,7 @@ using SamuraiDojo.Attributes;
 using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
+using SamuraiDojo.Battles.Week4;
 using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
@@ -25,7 +26,8 @@ namespace SamuraiDojo.Benchmarking
             {
                 { typeof(CensusMaximus), typeof(Benchmarks.Week3) },
                 { typeof(CharacterCounter), typeof(Benchmarks.Week2) },
-                { typeof(ClockAngler), typeof(Benchmarks.Week1) }
+                { typeof(ClockAngler), typeof(Benchmarks.Week1) },
+                { typeof(Palindromania), typeof(Benchmarks.Week4) }
             };
         }
 

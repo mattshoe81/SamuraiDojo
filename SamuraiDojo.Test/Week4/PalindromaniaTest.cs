@@ -13,7 +13,7 @@ namespace SamuraiDojo.Test.Week4
         private void AssertExpected(string input, string expected)
         {
             string actual = GetInstance().LargestPalindrome(input).ToUpper();
-            Assert.AreEqual(expected.ToUpper(), actual, $"Expected:\t{expected.ToUpper()}{Environment.NewLine}Found:\t{actual}");
+            Assert.AreEqual(expected.ToUpper(), actual, $"{Environment.NewLine}Expected:\t{expected.ToUpper()}{Environment.NewLine}Found:\t{actual}");
         }
 
         public override void Benchmark()
@@ -28,8 +28,8 @@ namespace SamuraiDojo.Test.Week4
         public void TestMethod1()
         {
             AssertExpected(
-                "XYZ",
-                "XYZ"
+                "XYX",
+                "XYX"
             );
         }
 
@@ -46,8 +46,8 @@ namespace SamuraiDojo.Test.Week4
         public void TestMethod3()
         {
             AssertExpected(
-                "XYZ7",
-                "XYZ"
+                "XYX7",
+                "XYX"
             );
         }
 
@@ -55,8 +55,8 @@ namespace SamuraiDojo.Test.Week4
         public void TestMethod4()
         {
             AssertExpected(
-                "7XYZ",
-                "7XY"
+                "7X7Z",
+                "7X7"
             );
         }
 
