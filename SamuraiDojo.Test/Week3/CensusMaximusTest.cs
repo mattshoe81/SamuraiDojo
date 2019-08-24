@@ -8,10 +8,8 @@ namespace SamuraiDojo.Test.Week3
 {
     [TestClass]
     [UnderTest(typeof(CensusMaximus))]
-    public abstract class CensusMaximusTest : DojoTest
+    public abstract class CensusMaximusTest : DojoTest<CensusMaximus>
     {
-        protected abstract CensusMaximus GetInstance();
-
         private List<Person> GeneratePeople(params int[][] years)
         {
             List<Person> people = new List<Person>();

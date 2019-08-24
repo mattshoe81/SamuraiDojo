@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
+using SamuraiDojo.Battles.Week1;
 
 namespace SamuraiDojo.Benchmarking.Benchmarks
 {
     [MemoryDiagnoser]
-    public class Week1 : DojoBenchmark
+    public class Week1 : DojoBenchmark<ClockAngler>
     {
         [Benchmark(Baseline = true)]
         public void Matt()
         {
-            Run(new Test.Week1.Matt());
+            Run(new Test.Week1.MattShoe());
         }
 
         [Benchmark]

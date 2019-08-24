@@ -19,7 +19,7 @@ namespace SamuraiDojo
     /// </summary>
     public class Samurai
     {
-        public const string MATT = "matthew.shoemaker";
+        public const string MATT_SHOE = "matthew.shoemaker";
         public const string DUSTIN = "dustin.mattox";
         public const string JT = "jonathan.turner";
         public const string JEFF = "jeff.moore";

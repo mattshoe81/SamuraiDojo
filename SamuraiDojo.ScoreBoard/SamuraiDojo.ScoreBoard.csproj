@@ -1184,20 +1184,12 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SamuraiDojo.Benchmarking\SamuraiDojo.Benchmarking.csproj">
-      <Project>{7c873044-5c48-4f29-923c-80f4a349fcbb}</Project>
-      <Name>SamuraiDojo.Benchmarking</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Scoring\SamuraiDojo.Scoring.csproj">
       <Project>{ff358cff-39dd-4d1c-b689-1b22a3778094}</Project>
       <Name>SamuraiDojo.Scoring</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
-      <Project>{0E85B929-B27F-48FA-8A6C-944C887BBCEF}</Project>
-      <Name>SamuraiDojo.Test</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
-      <Project>{0DC773C1-7F74-4718-88A4-886B0036CB90}</Project>
+      <Project>{0dc773c1-7f74-4718-88a4-886b0036cb90}</Project>
       <Name>SamuraiDojo.Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo\SamuraiDojo.csproj">

@@ -4,11 +4,11 @@ using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Battles.Week1
 {
-    [Sensei(Samurai.MATT)]
+    [Sensei(Samurai.MATT_SHOE)]
     [Battle("8/9/2019", "Angler of Time", typeof(ClockAngler))]
     public class ClockAngler
     {
-        [WrittenBy(Samurai.MATT)]
+        [WrittenBy(Samurai.MATT_SHOE)]
         public static int Matt_CalculateAngleBetweenHands(int hour, int minute)
         {
             int degreesPerHour = 360 / 12;

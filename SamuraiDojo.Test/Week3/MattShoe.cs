@@ -5,12 +5,12 @@ using SamuraiDojo.Battles.Week3;
 namespace SamuraiDojo.Test.Week3
 {
     [TestClass]
-    [WrittenBy(Samurai.MATT)]
-    public class Matt : CensusMaximusTest
+    [WrittenBy(Samurai.MATT_SHOE)]
+    public class MattShoe : CensusMaximusTest
     {
         protected override CensusMaximus GetInstance()
         {
-            return new SamuraiDojo.Battles.Week3.Matt();
+            return new SamuraiDojo.Battles.Week3.MattShoe();
         }
     }
 }

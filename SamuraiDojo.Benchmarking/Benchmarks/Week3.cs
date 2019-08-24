@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using SamuraiDojo.Battles.Week3;
 
 namespace SamuraiDojo.Benchmarking.Benchmarks
 {
     [MemoryDiagnoser]
-    public class Week3 : DojoBenchmark
+    public class Week3 : DojoBenchmark<CensusMaximus>
     {
         [Benchmark(Baseline = true)]
         public void Matt()
         {
-            Run(new Test.Week3.Matt());
+            Run(new Test.Week3.MattShoe());
         }
 
         [Benchmark]

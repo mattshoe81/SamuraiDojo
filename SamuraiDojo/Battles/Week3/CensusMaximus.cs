@@ -3,7 +3,7 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Battles.Week3
 {
-    [Sensei(Samurai.MATT)]
+    [Sensei(Samurai.MATT_SHOE)]
     [Battle("8/23/19", "Census Maximus", typeof(CensusMaximus))]
     public abstract class CensusMaximus
     {

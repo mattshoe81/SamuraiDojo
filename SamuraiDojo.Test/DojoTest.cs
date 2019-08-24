@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SamuraiDojo.Test
 {
-    public abstract class DojoTest
+    public abstract class DojoTest<T>
     {
         public abstract void Benchmark();
+
+        protected abstract T GetInstance();
+
     }
 }

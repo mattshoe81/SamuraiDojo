@@ -6,10 +6,8 @@ namespace SamuraiDojo.Test.Week2
 {
     [TestClass]
     [UnderTest(typeof(CharacterCounter))]
-    public abstract class BaseCharacterCounterTest : DojoTest
+    public abstract class BaseCharacterCounterTest : DojoTest<CharacterCounter>
     {
-        protected abstract CharacterCounter GetInstance();
-
         [TestMethod]
         public void TestMethod1()
         {

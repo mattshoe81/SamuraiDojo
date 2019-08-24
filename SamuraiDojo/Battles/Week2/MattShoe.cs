@@ -7,8 +7,8 @@ using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Battles.Week2
 {
-    [WrittenBy(Samurai.MATT)]
-    public class Matt : CharacterCounter
+    [WrittenBy(Samurai.MATT_SHOE)]
+    public class MattShoe : CharacterCounter
     {
         public override int CountPossibleCharacters(string integers)
         {

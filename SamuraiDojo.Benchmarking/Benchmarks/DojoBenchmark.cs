@@ -8,7 +8,7 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
     /// instance of the player's test class to the run method
     /// defined in this class for benchmarking.
     /// </summary>
-    public abstract class DojoBenchmark
+    public abstract class DojoBenchmark<T>
     {
         /// <summary>
         /// Given an instance of a player's test class, will
@@ -18,7 +18,7 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
         /// will be penalized 250ms.
         /// </summary>
         /// <param name="test"></param>
-        protected void Run(DojoTest test)
+        protected void Run(DojoTest<T> test)
         {
             try
             {

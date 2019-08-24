@@ -43,11 +43,11 @@ namespace SamuraiDojo.Scoring.Auditors
         private void GrantBonusPoints()
         {
             Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
-            foreach (Type type in battleClasses)
+            foreach (Type battle in battleClasses)
             {
-                List<BonusPointsAttribute> awards = RetrieveAwards(type);
+                List<BonusPointsAttribute> awards = RetrieveAwards(battle);
                 if (awards.Count > 0)
-                    ProcessAwards(awards);
+                    ProcessAwards(battle, awards);
             }
         }
 
@@ -64,10 +64,10 @@ namespace SamuraiDojo.Scoring.Auditors
             return awards;
         }
 
-        private void ProcessAwards(List<BonusPointsAttribute> awards)
+        private void ProcessAwards(Type battleType, List<BonusPointsAttribute> awards)
         {
-            WrittenByAttribute player = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-            BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(type);
+            WrittenByAttribute player = AttributeUtility.GetAttribute<WrittenByAttribute>(battleType);
+            BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(battleType);
 
             int bonusPoints = 0;
             foreach (BonusPointsAttribute award in awards)

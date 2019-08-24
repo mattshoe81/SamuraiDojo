@@ -6,7 +6,7 @@ namespace SamuraiDojo.Test.Week1
 {
     [UnderTest(typeof(ClockAngler))]
     [TestClass]
-    public abstract class ClockAnglerTestBase : DojoTest
+    public abstract class ClockAnglerTestBase : DojoTest<ClockAngler>
     {
 
         protected abstract int Calculate(int hour, int minute);

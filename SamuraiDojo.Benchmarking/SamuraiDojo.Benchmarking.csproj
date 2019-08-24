@@ -227,6 +227,7 @@
     <Compile Include="Benchmarks\Week1.cs" />
     <Compile Include="Benchmarks\Week2.cs" />
     <Compile Include="Benchmarks\Week3.cs" />
+    <Compile Include="Benchmarks\Week4.cs" />
     <Compile Include="EfficiencyCalculator.cs" />
     <Compile Include="EfficiencyRankCollection.cs" />
     <Compile Include="Program.cs" />

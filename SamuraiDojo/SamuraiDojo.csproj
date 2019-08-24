@@ -54,12 +54,14 @@
     <Compile Include="Battles\Week2\Dustin.cs" />
     <Compile Include="Battles\Week1\ClockAngler.cs" />
     <Compile Include="Battles\Week2\CharacterCounter.cs" />
-    <Compile Include="Battles\Week2\Matt.cs" />
+    <Compile Include="Battles\Week2\MattShoe.cs" />
     <Compile Include="Battles\Week3\Aaron.cs" />
     <Compile Include="Battles\Week3\CensusMaximus.cs" />
     <Compile Include="Battles\Week3\Dustin.cs" />
-    <Compile Include="Battles\Week3\Matt.cs" />
+    <Compile Include="Battles\Week3\MattShoe.cs" />
     <Compile Include="Battles\Week3\Person.cs" />
+    <Compile Include="Battles\Week4\MattShoe.cs" />
+    <Compile Include="Battles\Week4\Palindromania.cs" />
     <Compile Include="Models\BattleCollection.cs" />
     <Compile Include="Models\BattleStatsForPlayer.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
