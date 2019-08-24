@@ -203,5 +203,14 @@ namespace SamuraiDojo.Test.Week4
                 @"`v-kN8Ek[c0dtJ/Gg#V:x[|kKN'65ib[g\.8w0k_H,GEg@?#6~>o@X^m/&z;vlw$*w%5MDF'ruq_J,pFh}$-mkTkqZ[>6_U;kqQYeeYQqk;U_6>[ZqkTkm-$}hFp,J_qur'FDM5%w*$wlv;z&/m^X@o>~6#?@gEG,H_k0w8.\g[bi56'NKk|[x:V#gG/Jtd0c[kE8Nk-v`"
             );
         }
+
+        [TestMethod]
+        public void TestMethod21()
+        {
+            AssertExpected(
+                @"=vQ3>;HMY=>Bq{qwHvf<uK*F!xFJ7@Pc#*+e@j#6byiv~~2_%}h$k?%G]q}AQ+HD5>A$[uv2zSZyrg9};vT_cd#D.e\8||i>t]^9}}9^]t>i||8\e.D#dc_Tv;}9gryZSz2vu[$A>5DH+QA}q]G%?k$h}%_2~~viyb6#j@e+*#cP@7JFx!F*Ku<fvHwq{qB>=YMH;>3Qv=",
+                @"=vQ3>;HMY=>Bq{qwHvf<uK*F!xFJ7@Pc#*+e@j#6byiv~~2_%}h$k?%G]q}AQ+HD5>A$[uv2zSZyrg9};vT_cd#D.e\8||i>t]^9}}9^]t>i||8\e.D#dc_Tv;}9gryZSz2vu[$A>5DH+QA}q]G%?k$h}%_2~~viyb6#j@e+*#cP@7JFx!F*Ku<fvHwq{qB>=YMH;>3Qv="
+            );
+        }
     }
 }
