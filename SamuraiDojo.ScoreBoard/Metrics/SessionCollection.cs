@@ -42,10 +42,12 @@ namespace SamuraiDojo.ScoreBoard.Metrics
 
         public void Add(Session session)
         {
-            lock (sessionLock)
+            if (!Contains(session.SessionID))
             {
-                if (!Contains(session.SessionID))
+                lock (sessionLock)
+                {
                     sessions.Add(session);
+                }
             }
         }
 
