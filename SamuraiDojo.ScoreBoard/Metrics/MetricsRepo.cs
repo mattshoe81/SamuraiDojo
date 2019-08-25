@@ -30,7 +30,7 @@ namespace SamuraiDojo.ScoreBoard.Metrics
                         IP = httpContext.Request.UserHostAddress,
                         SessionID = httpContext.Session.SessionID,
                         Browser = httpContext.Request.Browser.Browser,
-                        Username = httpContext.Request.LogonUserIdentity.Name
+                        Username = httpContext.User.Identity.Name
                     };
                     Sessions.Add(session);
                 }
