@@ -20,9 +20,12 @@ namespace SamuraiDojo.ScoreBoard.Metrics
 
         public List<Page> PageLoads { get; set; }
 
+        public DateTime StartTime { get; private set; }
+
         public Session()
         {
             PageLoads = new List<Page>();
+            StartTime = DateTime.Now;
         }
 
         public override bool Equals(object obj)

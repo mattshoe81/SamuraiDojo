@@ -9,7 +9,7 @@
 }
 
 <h3 class="bold">Page Metrics</h3>
-<table class="table table-bordered">
+<table class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th>Page</th>
@@ -29,11 +29,12 @@
 
 <h3 class="bold">Session Metrics</h3>
 <h5 class="bold italic">@Model.Sessions.Where(sess => sess.IP != DUMMY_IP).Count() sessions from @Model.Sessions.DistinctBy(sess => sess.IP).Where(sess => sess.IP != DUMMY_IP).Count() IP addresses</h5>
-<table class="table table-bordered">
+<table class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th>IP Address</th>
             <th>Session ID</th>
+            <th>Started</th>
             <th>Browser</th>
             <th>Pages Visited</th>
         </tr>
@@ -48,6 +49,7 @@
                     <tr>
                         <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
                         <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
+                        <td>@session.StartTime.ToLongTimeString() -- @session.StartTime.ToLongDateString()</td>
                         <td>@session.Browser</td>
                         <td>@session.PageLoads.Count</td>
                     </tr>
