@@ -29,21 +29,21 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Session ID</th>
             <th>IP Address</th>
+            <th>Session ID</th>
             <th>Browser</th>
             <th>Pages Visited</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions)
+        @foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions.OrderBy(sess => sess.IP))
         {
-            <tr>
-                <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
-                <td>@session.IP</td>
-                <td>@session.Browser</td>
-                <td>@session.PageLoads.Count</td>
-            </tr>
+        <tr>
+            <td>@session.IP</td>
+            <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
+            <td>@session.Browser</td>
+            <td>@session.PageLoads.Count</td>
+        </tr>
         }
     </tbody>
 </table>
