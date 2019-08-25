@@ -49,7 +49,7 @@
                     <tr>
                         <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
                         <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
-                        <td>@session.StartTime.ToLongTimeString() -- @session.StartTime.ToLongDateString()</td>
+                        <td>@session.StartTime.ToVerboseDateTime()</td>
                         <td>@session.Browser</td>
                         <td>@session.PageLoads.Count</td>
                     </tr>

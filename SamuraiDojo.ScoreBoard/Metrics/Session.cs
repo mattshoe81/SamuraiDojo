@@ -25,7 +25,7 @@ namespace SamuraiDojo.ScoreBoard.Metrics
         public Session()
         {
             PageLoads = new List<Page>();
-            StartTime = DateTime.Now;
+            StartTime = DateTime.UtcNow;
         }
 
         public override bool Equals(object obj)

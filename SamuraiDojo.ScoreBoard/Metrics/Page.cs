@@ -14,7 +14,7 @@ namespace SamuraiDojo.ScoreBoard.Metrics
 
         public Page()
         {
-            TimeStamp = DateTime.Now;
+            TimeStamp = DateTime.UtcNow;
         }
 
         public override bool Equals(object obj)

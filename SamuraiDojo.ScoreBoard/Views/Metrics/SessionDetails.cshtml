@@ -1,6 +1,7 @@
 ﻿@model SamuraiDojo.ScoreBoard.Metrics.Session
 
 @using SamuraiDojo.ScoreBoard.Metrics
+@using SamuraiDojo.Utility
 
 <h3>Details:</h3>
 <table class="table table-bordered table-condensed">
@@ -44,7 +45,7 @@
             <tr>
                 <td>@(i + 1)</td>
                 <td>@Model.PageLoads[i].Name</td>
-                <td>@Model.PageLoads[i].TimeStamp.ToLongTimeString() -- @Model.PageLoads[i].TimeStamp.ToLongDateString()</td>
+                <td>@Model.PageLoads[i].TimeStamp.ToVerboseDateTime()</td>
             </tr>
         }
     </tbody>
