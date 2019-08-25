@@ -36,14 +36,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions.OrderBy(sess => sess.IP))
-        {
-        <tr>
-            <td>@session.IP</td>
-            <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
-            <td>@session.Browser</td>
-            <td>@session.PageLoads.Count</td>
-        </tr>
+        @{
+            Session lastSession = null;
+            foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions.OrderBy(sess => sess.IP))
+            {
+                <tr>
+                    <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
+                    <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
+                    <td>@session.Browser</td>
+                    <td>@session.PageLoads.Count</td>
+                </tr>
+                lastSession = session;
+            }
         }
     </tbody>
 </table>
