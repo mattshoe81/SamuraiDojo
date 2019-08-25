@@ -1,0 +1,51 @@
+﻿@model SamuraiDojo.ScoreBoard.Metrics.Session
+
+@using SamuraiDojo.ScoreBoard.Metrics
+
+<h3>Details:</h3>
+<table class="table table-bordered table-condensed">
+    <tbody>
+        <tr>
+            <td>Session ID</td>
+            <td>@Model.SessionID</td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>@Model.Username</td>
+        </tr>
+        <tr>
+            <td>IP Address</td>
+            <td>@Model.IP</td>
+        </tr>
+        <tr>
+            <td>Pages Loaded</td>
+            <td>@Model.PageLoads.Count</td>
+        </tr>
+        <tr>
+            <td>Browser</td>
+            <td>@Model.Browser</td>
+        </tr>
+    </tbody>
+</table> 
+
+
+<h3>Log</h3>
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Sequence</th>
+            <th>Page</th>
+            <th>Time of Load</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i <  Model.PageLoads.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model.PageLoads[i].Name</td>
+                <td>@Model.PageLoads[i].TimeStamp.ToLongTimeString(), @Model.PageLoads[i].TimeStamp.ToLongDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

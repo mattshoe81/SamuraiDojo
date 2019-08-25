@@ -319,11 +319,20 @@
     <Compile Include="Controllers\BenchmarkingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SamuraiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Metrics\LogMetricsAttribute.cs" />
+    <Compile Include="Metrics\MetricsRepo.cs" />
+    <Compile Include="Metrics\Page.cs" />
+    <Compile Include="Metrics\PageMetrics.cs" />
+    <Compile Include="Metrics\Session.cs" />
+    <Compile Include="Metrics\SessionCollection.cs" />
+    <Compile Include="Metrics\UserMetric.cs" />
+    <Compile Include="Models\OverviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1166,6 +1175,8 @@
     <Content Include="Views\Samurai\Scoring.cshtml" />
     <Content Include="Views\Samurai\Benchmarking.cshtml" />
     <Content Include="Views\Samurai\Sensei.cshtml" />
+    <Content Include="Views\Metrics\Overview.cshtml" />
+    <Content Include="Views\Metrics\SessionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
