@@ -2,9 +2,8 @@
 
 @using SamuraiDojo.ScoreBoard.Metrics
 @using System.Linq
+@using SamuraiDojo.Utility
 
-
-<h3>@Model.Visitors Total Sessions</h3>
 
 <h3 class="bold">Page Metrics</h3>
 <table class="table table-bordered">
@@ -15,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (SamuraiDojo.ScoreBoard.Metrics.PageMetrics page in Model.PageLoads.OrderBy(load => load.Loads))
+        @foreach (SamuraiDojo.ScoreBoard.Metrics.PageMetrics page in Model.PageLoads.OrderByDescending(load => load.Loads))
         {
             <tr>
                 <td>@page.Page.Name</td>
@@ -26,6 +25,7 @@
 </table>
 
 <h3 class="bold">Session Metrics</h3>
+<h5 class="bold italic">@Model.Sessions.Count sessions from @Model.Sessions.DistinctBy(sess => sess.IP).Count() IP addresses</h5>
 <table class="table table-bordered">
     <thead>
         <tr>

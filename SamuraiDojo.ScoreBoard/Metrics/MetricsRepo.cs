@@ -11,7 +11,7 @@ namespace SamuraiDojo.ScoreBoard.Metrics
 
         public static int VisitorCount => Sessions.Count;
 
-        private static object sessionLock = new object();
+        private static readonly object sessionLock = new object();
 
         static MetricsRepo()
         {
