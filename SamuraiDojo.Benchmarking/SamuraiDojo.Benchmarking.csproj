@@ -238,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenchmarkEngine.cs" />
+    <None Include="Benchmarks\BenchmarkTemplate.cs" />
     <Compile Include="Benchmarks\DojoBenchmark.cs" />
     <Compile Include="Benchmarks\Week1.cs" />
     <Compile Include="Benchmarks\Week2.cs" />

@@ -51,6 +51,7 @@
     <Compile Include="Attributes\SenseiAttribute.cs" />
     <Compile Include="Attributes\Bonus\TigerAwardAttribute.cs" />
     <Compile Include="Attributes\WrittenByAttribute.cs" />
+    <None Include="Battles\BattleTemplate.cs" />
     <Compile Include="Battles\Week2\Dustin.cs" />
     <Compile Include="Battles\Week1\ClockAngler.cs" />
     <Compile Include="Battles\Week2\CharacterCounter.cs" />

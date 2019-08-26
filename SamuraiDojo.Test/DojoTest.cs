@@ -11,6 +11,5 @@ namespace SamuraiDojo.Test
         public abstract void Benchmark();
 
         protected abstract T GetInstance();
-
     }
 }
