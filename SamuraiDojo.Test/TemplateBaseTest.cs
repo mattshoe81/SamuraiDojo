@@ -7,7 +7,7 @@ namespace SamuraiDojo.Test
 {
     [UnderTest(typeof(YOUR_BATTLE_CLASS))]
     [TestClass]
-    public abstract class PalindromaniaTest : DojoTest<YOUR_BATTLE_CLASS>
+    public abstract class YOUR_BATTLE_CLASSTestBase : DojoTest<YOUR_BATTLE_CLASS>
     {
 
         private void AssertExpected(INPUT_TYPE input, OUTPUT_TYPE expected)

@@ -224,8 +224,9 @@
   <ItemGroup>
     <Compile Include="Attributes\ImplementationAttribute.cs" />
     <Compile Include="Attributes\UnderTestAttribute.cs" />
-    <None Include="BaseTestTemplate.cs" />
+    <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
+    <None Include="TemplateTest.cs" />
     <Compile Include="Week1\ClockAnglerTestBase.cs" />
     <Compile Include="Week1\Dustin.cs" />
     <Compile Include="Week1\Jeff.cs" />

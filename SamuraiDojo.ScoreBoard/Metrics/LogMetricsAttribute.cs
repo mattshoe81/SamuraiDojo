@@ -12,12 +12,17 @@ namespace SamuraiDojo.ScoreBoard.Metrics
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            Session session = Metrics.MetricsRepo.RegisterSession(filterContext.HttpContext);
-            session.PageLoads.Add(new Page
+
+            // Azure sends health checks or something all the time with this IP
+            if (filterContext.HttpContext.Session.SessionID != "::1")
             {
-                Name = filterContext.HttpContext.Request.Url.LocalPath
-            });
-            filterContext.HttpContext.Session.Add(SESSION_KEY, string.Empty);
+                Session session = Metrics.MetricsRepo.RegisterSession(filterContext.HttpContext);
+                session.PageLoads.Add(new Page
+                {
+                    Name = filterContext.HttpContext.Request.Url.LocalPath
+                });
+                filterContext.HttpContext.Session.Add(SESSION_KEY, string.Empty);
+            }
         }
     }
 }

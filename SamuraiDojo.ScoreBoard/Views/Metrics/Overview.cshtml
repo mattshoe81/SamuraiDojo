@@ -4,9 +4,6 @@
 @using System.Linq
 @using SamuraiDojo.Utility
 
-@{
-    string DUMMY_IP = "::1";
-}
 
 <h3 class="bold">Page Metrics</h3>
 <table class="table table-bordered table-condensed">
@@ -28,7 +25,7 @@
 </table>
 
 <h3 class="bold">Session Metrics</h3>
-<h5 class="bold italic">@Model.Sessions.Where(sess => sess.IP != DUMMY_IP).Count() sessions from @Model.Sessions.DistinctBy(sess => sess.IP).Where(sess => sess.IP != DUMMY_IP).Count() IP addresses</h5>
+<h5 class="bold italic">@Model.Sessions.Count sessions from @Model.Sessions.DistinctBy(sess => sess.IP).Count() IP addresses</h5>
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
@@ -44,16 +41,13 @@
             Session lastSession = null;
             foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions.OrderBy(sess => sess.IP))
             {
-                if (session.IP != DUMMY_IP)
-                {
-                    <tr>
-                        <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
-                        <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
-                        <td>@session.StartTime.ToVerboseDateTime()</td>
-                        <td>@session.Browser</td>
-                        <td>@session.PageLoads.Count</td>
-                    </tr>
-                }
+                <tr>
+                    <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
+                    <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
+                    <td>@session.StartTime.ToVerboseDateTime()</td>
+                    <td>@session.Browser</td>
+                    <td>@session.PageLoads.Count</td>
+                </tr>
                 lastSession = session;
             }
         }

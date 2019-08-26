@@ -5,29 +5,21 @@
     <ol>
         <li>Create a new folder in SamuraiDojo/Battles with the appropriate week number (just increment from the previous week)</li>
         <li>
-            Create a new <span class="bold"><code>public abstract class</code></span> for your challenge (clever names and puns are encouraged)
+            Create a new class in this folder for your challenge (clever names and puns are encouraged)
             <ul>
-                <li>    
-                    Decorate your abstract class with the <code>[Battle("XX/XX/XX", "Your Clever battle name", typeof(this))]</code> attribute
-                    <ul>
-                        <li>The first parameter is the Deadline, which should be the Friday after the battle is announced. (The date format is pretty free-form, just put the MM/DD/YY)</li>
-                        <li>The second parameter is the name of your battle (cleverness and puns encouraged)</li>
-                        <li>The third parameter is just the Type of the class to which the attribute is attached</li>
-                    </ul>
-                </li>
-                <li>Decorate your abstract class with the <code>[Sensei(Samurai.YOU)]</code> attribute</li>
-                <li class="bold">Do <span class="bold">NOT</span> use an <span class="bold">interface</span>. Attributes are not inherited from interfaces, so the reflection used for scoring will break if you use an interface.</li>
+                <li>Copy the text in the <code>BattleTemplate.cs</code> file at the root of the Battles folder</li>
+                <li>Fix the errors by filling in the appropriate areas</li>
+                <li>Be sure to update the method signature(s)!</li>
             </ul>
         </li>
-        <li>In your abstract class, create a <code class="bold">public abstract</code> method for each challenge you wish to assign for the week, and give each one an xml summary in which you exhaustively define the challenge.</li>
         <li>
-            Extend your abstract class with a new <code>public class</code>, and provide an empty implementation as an example for players to follow.
+            Create another class in the same Battle folder and paste the text from the <code>PlayerTemplate.cs</code> file
             <ul>
-                <li>Decorate this class with the <code>[WrittenBy(Samurai.YOU)]</code> attribute</li>
+                <li>Just resolve the errors and update the method signature</li>
             </ul>
         </li>    
         <li>
-            Copy all of the text of your class, navigate to the index.cshtml page, and paste it into the &#x3C;pre&#x3E;&#x3C;code&#x3E;&#x3C;/code&#x3E;&#x3C;/pre&#x3E; tags on the page (Replace the existing text completely)
+            Copy all of the text of your finished battle class (the abstract class), navigate to the index.cshtml page, and paste it into the &#x3C;pre&#x3E;&#x3C;code&#x3E;&#x3C;/code&#x3E;&#x3C;/pre&#x3E; tags on the page (Replace the existing text completely)
             <ul>
                 <li>You can html-encode this if you like, but the &lt; and &gt; symbols won't cause any trouble</li>
             </ul>
@@ -38,40 +30,28 @@
     <ol>
         <li>Create a new folder at the root of the SamuraiDojo.Test project with the appropriate week number (same as your battle folder)</li>
         <li>
-            Create a new unit test class and mark it as <span class="bold">ABSTRACT and name it with a similar name as your challenge class</span>
+            Create a new unit test class paste in the text from the <code>TemplateBaseTest.cs</code> file.
             <ul>
-                <li>Decorate this class with the <code>[UnderTest(typeof({battle}))]</code> attribute, where <code>{battle}</code> is the type of the abstract class in which you defined the challenge. This is necessary for the reflection used to assign points by battle.</li>
-                <li>Make sure this class also has the <code>[TestClass]</code> attribute</li>
-            </ul>
-        </li>
-        <li>
-            Extend the <code>DojoTest&lt;T&gt;</code> class in your abstract unit test class
-            <ul>
-                <li>The generic parameter <code>&lt;T&gt;</code> must be the type of your battle (the same you used in the <code>[UnderTest]</code> attribute.</li>
-                <li>This will require you to implement a <code>public override void Benchmark()</code> method.</li>
-                <li>The <code>Benchmark()</code> method should be a test case that is moderately computationally intensive. It is used to gauge algorithm efficiency, so use large data sets or however computational intensity can be achieved.</li>
-                <li>Ensure the <code>Benchmark()</code> method is decorated with the <code>[TestMethod]</code> attribute</li>
-            </ul>
-        </li>
-        <li>
-            The <code>DojoTest&lt;T&gt;</code> class defines a <code>GetInstance()</code> method which you must use in your tests to get the implementation of the algorithm you're testing.
-            <ul>
-                <li>This method will be implemented by the PLAYERS not by you, as a sensei.</li>
-                <li>This allows you to write one set of tests into which every player can just plug in their algorithm.</li>
+                <li><code>Ctrl-F</code> will be your friend here (use Replace All)</li>
+                <li>Replace <code>YOUR_BATTLE_CLASS</code> text with the name of your battle class</li>
+                <li>Replace <code>Week#</code> with the proper week number</li>
+                <li>Update the <code>AssertExpected</code> method with the proper parameter types</li>
+                <li>Fill in your tests!</li>
             </ul>
         </li>
         <li>
             Write as many unit tests as you deem fit, keeping in mind that players will get 1 point for every test they pass.
             <ul>
+                <li>The <code>DojoTest&lt;T&gt;</code> class defines a <code>GetInstance()</code> method which you must use in your tests to get an implementation of the algorithm you're testing.</li>
                 <li>Do your best to come up with tests that will be able to poke and prod the edge cases and potential pitfalls of implementations.</li>
                 <li>I recommend using <a href="https://www.linqpad.net/">LINQPad</a> to generate some of the tests with large data sets. (i.e. write some quick code to print out some text you can paste into the actual test)</li>
             </ul>
         </li>
         <li>
-            Extend your abstract base test class and override the <code>GetInstance</code> method, returning your empty algorithm implementation from the <span class="bold">Create your challenge</span> section.
+            Create a new class in your test folder and name it after yourself, and paste in the text of the <code>TemplateTest.cs</code> file.
             <ul>
-                <li>Decorate this class with the <code>[WrittenBy(Samurai.YOU)]</code> attribute</li>
-                <li>Players will use this as a template to plug their algorithm into the test suite</li>
+                <li>Find/Replace 'Week#' with the proper week number</li>
+                <li>Other errors should be self-explanatory</li>
             </ul>
         </li>
     </ol>
@@ -80,21 +60,10 @@
     <ol>
         <li>Create a new <code>class</code> in the SamuraiDojo.Benchmarking/Benchmarks folder with the appropriate week number</li>
         <li>
-            Decorate the class with the <code>[MemoryDiagnoser]</code> attribute
+            Create a new class in the SamuraiDojo.Benchmarking/Benchmarks folder with the appropriate week number
             <ul>
-                <li>This allows BenchmarkDotNet to analyze memory allocation for each person's implementation</li>
-            </ul>
-        </li>
-        <li>
-            Extend the <code>DojoBenchmark&lt;T&gt;</code> class
-            <ul>
-                <li>The generic parameter should be the type of your battle.</li>
-            </ul>
-        </li>
-        <li>
-            Implement a method with your name and decorate it with the <code>[Benchmark(Baseline = true)]</code> attribute
-            <ul>
-                <li>ONLY call the base.Run method and pass in an instance of your test class (not the abstract class, use your concrete class in which the GetInstance() method is overridden)</li>
+                <li>Paste in the text of the <code>BenchmarkTemplate.cs</code> file</li>
+                <li>Make the necessary corections</li>
             </ul>
         </li>
         <li>
