@@ -13,8 +13,8 @@ namespace SamuraiDojo.ScoreBoard.Metrics
         {
             base.OnActionExecuting(filterContext);
 
-            // Azure sends health checks or something all the time with this IP
-            if (filterContext.HttpContext.Session.SessionID != "::1")
+            // Azure sends health checks constantly from this IP, we don't care about these
+            if (filterContext.HttpContext.Request.UserHostAddress != "::1")
             {
                 Session session = Metrics.MetricsRepo.RegisterSession(filterContext.HttpContext);
                 session.PageLoads.Add(new Page

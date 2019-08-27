@@ -7,6 +7,8 @@ namespace SamuraiDojo.ScoreBoard.Metrics
 {
     public class MetricsRepo
     {
+        public static DateTime LastDeployment { get; set; }
+
         public static SessionCollection Sessions { get; private set; }
 
         public static int VisitorCount => Sessions.Count;
@@ -16,6 +18,7 @@ namespace SamuraiDojo.ScoreBoard.Metrics
         static MetricsRepo()
         {
             Sessions = new SessionCollection();
+            LastDeployment = DateTime.UtcNow;
         }
 
         public static Session RegisterSession(HttpContextBase httpContext)

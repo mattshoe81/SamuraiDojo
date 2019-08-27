@@ -17,6 +17,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             OverviewViewModel model = new OverviewViewModel();
             model.Sessions = MetricsRepo.Sessions;
             model.Visitors = MetricsRepo.VisitorCount;
+            model.LastDeployment = MetricsRepo.LastDeployment;
             
             foreach (Session session in model.Sessions)
             {

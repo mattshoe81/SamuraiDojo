@@ -8,6 +8,8 @@ namespace SamuraiDojo.ScoreBoard.Models
 {
     public class OverviewViewModel
     {
+        public DateTime LastDeployment { get; set; }
+
         public int Visitors { get; set; }
 
         public HashSet<PageMetrics> PageLoads { get; set; }
