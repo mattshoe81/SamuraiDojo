@@ -1,11 +1,24 @@
 ﻿<div class="container" ng-controller="BenchmarkingController as vm">
     <div class="spacer-25"></div>
 
+    <h3 id="currentWeek" class="bold">Setting up the current week:</h3>
+    <ul>
+        <li>To test the efficiency of the current week's algorithm, go to the SamuraiDojo.Benchmarking/Benchmarks folder and open the current week's class.</li>
+        <li>
+            Just copy what the Sensei did to pass an instance of your test class to the base.Run method
+            <ul>
+                <li><span class="bold">IMPORTANT!!</span> Replace the <code>[Benchmark(Baseline = true)]</code> attribute on your method with <code>[Benhcmark]</code> or the system will explode into a rage of exception-filled fire and brimstone</li> 
+            </ul>
+        </li>
+        <li>This does not need to be done if you don't want to benchmark your algorithm.</li>
+        <li>You do not need to do this for previous weeks. The sensei will have done that if you hadn't.</li>
+    </ul>
+
     <h3 class="bold">Running Benchmarks</h3>
     <ol>
         <li>Set the SamuraiDojo.Benchmarking project as your startup project</li>
         <li>Set your build configuration to RELEASE</li>
-        <li>If you are trying to benchmark the current week's battle, follow the steps in the <a class="bold" href="#currentWeek">'Setting up the current week'</a> section below</li>
+        <li>If you are trying to benchmark the current week's battle, follow the steps in the <a class="bold" href="#currentWeek">'Setting up the current week'</a> section</li>
         <li>
             Run the project by going to Debug -> Start Without Debugging
             <ul>
@@ -15,14 +28,6 @@
         <li>The console window will appear, then just select the index of the challenge you want to benchmark</li>
         <li>Wait... (it will take a few minutes to run)</li>
     </ol>
-
-    <h3 id="currentWeek" class="bold">Setting up the current week:</h3>
-    <ul>
-        <li>To test the efficiency of the current week's algorithm, go to the SamuraiDojo.Benchmarking/Benchmarks folder and open the current week's class.</li>
-        <li>Just copy what the Sensei did to pass an instance of your test class to the base.Run method</li>
-        <li>This does not need to be done if you don't want to benchmark your algorithm.</li>
-        <li>You do not need to do this for previous weeks. The sensei will have done that if you hadn't.</li>
-    </ul>
 
     <h3 class="bold">Measuring (Time) Efficiency:</h3>
     <ul>

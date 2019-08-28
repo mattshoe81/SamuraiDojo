@@ -32,7 +32,7 @@ namespace SamuraiDojo.Benchmarking
         {
 #if DEBUG
             RejectStart();
-            return;
+            //return;
 #endif
             while (true)
                 Iterate();

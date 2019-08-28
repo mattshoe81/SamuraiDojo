@@ -346,6 +346,7 @@
     <Content Include="Angular\Services\DataService.js" />
     <Content Include="Angular\Services\RequestService.js" />
     <Content Include="Angular\Services\ServicesApp.js" />
+    <Content Include="Battles\Census Maximus.html" />
     <Content Include="Content\Images\samuraibobble.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1156,6 +1157,7 @@
     <Content Include="Scripts\test-bundles\angular-route.js" />
     <Content Include="Scripts\test-bundles\angular-sanitize.js" />
     <Content Include="Scripts\test-bundles\angular-touch.js" />
+    <Content Include="Battles\PalindroMania.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

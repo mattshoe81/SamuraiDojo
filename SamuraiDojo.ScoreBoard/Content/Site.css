@@ -164,3 +164,12 @@ iframe {
         clear: both;
     }
 }
+
+iframe {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    backface-visibility: hidden;
+    background-color: transparent;
+    font-size: 150%;
+}
