@@ -3,8 +3,9 @@
 @using SamuraiDojo.Models
 @using SamuraiDojo.Utility
 
+
+
     <div class="col-sm-12">
-        <h2 class="underline inline-block row-outdent">Archive:</h2>
         <div class="spacer-10"></div>
         @{
             foreach (BattleOutcome battle in Model.Battles)
@@ -12,12 +13,19 @@
 
                 <div>
                     <div class="row">
+                        <h3 class="row-buffer">
+                            <span class="bold italic">'@battle.Battle.Name'</span> 
+                        </h3>
+                        
                         <h4 class="row-buffer">
-                            <span class="bold italic">'@battle.Battle.Name'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: @battle.Battle.Deadline.ToVerboseDateTime()</span>
-                        </h4>
-                        <h5 class="row-buffer">
                             <span class="bold">Sensei: </span><span class="italic">@battle.Sensei.Name</span>
-                        </h5>
+                        </h4>
+                        <h4 class="row-buffer"><span class="italic">@battle.Battle.Deadline.ToLongDateString()</span></h4>
+                        
+                        <div>
+                            <pre><code><iframe src="@($"/Battles/{battle.Battle.Name}.html")" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
+                        </div>
+
                         <div class="col-sm-6 @(battle.Results.Count > 0 ? "" : "hidden")">
                             <table class="table table-condensed">
                                 <thead>
@@ -43,7 +51,7 @@
                             <span class="w-35 inline-block"></span><h4 class="inline-block inline">Nobody has solved <span class="italic">'@battle.Battle.Name'</span> yet!</h4>
                         </div>
                     </div>
-                    <hr />
+                    <hr class="divider-extend" />
                 </div>
 
             }

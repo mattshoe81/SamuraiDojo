@@ -174,3 +174,7 @@ iframe {
     font-size: 150%;
 }
 
+.divider-extend {
+    margin-left: -75px;
+    margin-right: -75px;
+}
