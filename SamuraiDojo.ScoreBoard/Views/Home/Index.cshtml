@@ -1,4 +1,6 @@
-﻿<div class="container" ng-controller="HomePageController as vm">
+﻿@using System.Web.Http
+
+<div class="container" ng-controller="HomePageController as vm">
 
     <div class="spacer-25"></div>
 
@@ -8,37 +10,13 @@
         <h4>Deadline: <span class="italic">{{vm.CurrentBattle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
 
-        <pre id="battleDescription"><code><iframe src="{{'/Battles/' + vm.CurrentBattle.Battle.Name + '.html'}}" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
+        <pre id="battleDescription"><code><iframe src="@($"/Battles/{ViewBag.CurrentBattle.Battle.Name}.html")" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
 
     </div>
 
     <div class="spacer-25"></div>
 
     <div class="row">
-        @*<div class="col-sm-4">
-            <h3 class="inline-block underline">Leader Board:</h3>
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Points</th>
-                        <th>Battles</th>
-                        <th>Sensei</th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="player in vm.AllPlayers">
-                    <tr>
-                        <td>{{player.Rank}}</td>
-                        <td class="lowercase">{{player.Name}}</td>
-                        <td>{{player.TotalPoints}}</td>
-                        <td>{{player.BattlesCompleted}}</td>
-                        <td>{{vm.GetSenseiCount(player, vm.Battles)}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-1"></div>*@
 
         <div class="col-sm-12">
             <h2 class="underline inline-block row-outdent">Archive:</h2>

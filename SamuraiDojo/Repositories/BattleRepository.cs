@@ -100,8 +100,8 @@ namespace SamuraiDojo.Repositories
         {
             List<BattleOutcome> battleOutcomes = GetAllBattleOutcomes();
             DateTime max = battleOutcomes.Max((battle) => battle.Battle.Deadline);
-            //BattleOutcome current = battleOutcomes.Where((battle) => battle.Battle.Deadline == max).FirstOrDefault();
-            BattleOutcome current = battleOutcomes.Where((battle) => battle.Battle.Name == "Census Maximus").FirstOrDefault();
+            BattleOutcome current = battleOutcomes.Where((battle) => battle.Battle.Deadline == max).FirstOrDefault();
+            //BattleOutcome current = battleOutcomes.Where((battle) => battle.Battle.Name == "Census Maximus").FirstOrDefault();
 
             return current;
         }

@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <script>    
         function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight - 90 + 'px';
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
         }
     </script>
 </head>
@@ -36,6 +36,7 @@
                         <li>@Html.ActionLink("Scoring", "Scoring", "Samurai")</li>
                         <li>@Html.ActionLink("Awards", "Awards", "Samurai")</li>
                         <li>@Html.ActionLink("Benchmarking", "Benchmarking", "Samurai")</li>
+                        <li>@Html.ActionLink("History", "History", "Samurai")</li>
                     </ul>
                     <ul id="nav-right" class="nav navbar-nav pull-right">
                         <li>@Html.ActionLink("Sensei", "Sensei", "Samurai")</li>
