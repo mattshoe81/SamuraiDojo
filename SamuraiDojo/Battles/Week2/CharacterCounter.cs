@@ -2,7 +2,7 @@
 
 namespace SamuraiDojo.Battles.Week2
 {
-    [Sensei(Samurai.MATT)]
+    [Sensei(Samurai.MATT_SHOE)]
     [Battle("8/16/19", "Permutations of Character", typeof(CharacterCounter))]
     public abstract class CharacterCounter
     {

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SamuraiDojo.ScoreBoard.Metrics;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
+    [LogMetrics]
     public class SamuraiController : Controller
     {
         public ActionResult MyProfile()
@@ -41,6 +43,12 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         public ActionResult Sensei()
         {
             ViewBag.Title = "Sensei";
+            return View();
+        }
+
+        public ActionResult Home()
+        {
+            ViewBag.Title = "Home";
             return View();
         }
     }

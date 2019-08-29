@@ -10,20 +10,7 @@ namespace SamuraiDojo.Utility
 {
     public class Log
     {
-
         public const string CATEGORY = "SAMURAI_DOJO";
-
-        public static string OUTPUT_PATH
-        {
-            get
-            {
-                string myDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string dojoDirectory = Path.Combine(myDocs, "SamuraiDojo");
-                Directory.CreateDirectory(dojoDirectory);
-                string logFilePath = Path.Combine(dojoDirectory, "dojo_logs.txt");
-                return logFilePath;
-            }
-        }
         
         public static void Info(string message)
         {
@@ -52,25 +39,8 @@ namespace SamuraiDojo.Utility
         {
             if (obj != null)
                 message = obj.ToString();
-#if DEBUG
+
             Trace.WriteLine($"{Environment.NewLine}\t{message}{Environment.NewLine}", CATEGORY);
-#endif
-#if !DEBUG
-            WriteToFile(message);
-#endif
-        }
-
-        private static void WriteToFile(string message)
-        {
-            
-            using (StreamWriter w = File.AppendText(OUTPUT_PATH))
-            {
-                w.Write("\r\nLog Entry : ");
-                w.WriteLine($"{DateTime.Now.ToLongTimeString()}");
-                w.WriteLine($"  :{message}");
-                w.WriteLine("-------------------------------");
-            }
-
         }
     }
 }

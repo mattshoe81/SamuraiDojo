@@ -1,0 +1,57 @@
+﻿@model SamuraiDojo.ScoreBoard.Models.OverviewViewModel
+
+@using SamuraiDojo.ScoreBoard.Metrics
+@using System.Linq
+@using SamuraiDojo.Utility
+
+<h4 class="italic"><span class="bold">Last Deployed:</span> @Model.LastDeployment.ToVerboseDateTime()</h4>
+
+<h3 class="bold">Page Metrics</h3>
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Page</th>
+            <th>Visits</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SamuraiDojo.ScoreBoard.Metrics.PageMetrics page in Model.PageLoads.OrderByDescending(load => load.Loads))
+        {
+            <tr>
+                <td>@page.Page.Name</td>
+                <td>@page.Loads</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 class="bold">Session Metrics</h3>
+<h5 class="bold italic">@Model.Sessions.Count sessions from @Model.Sessions.DistinctBy(sess => sess.IP).Count() IP addresses</h5>
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>IP Address</th>
+            <th>Session ID</th>
+            <th>Started</th>
+            <th>Browser</th>
+            <th>Pages Visited</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            Session lastSession = null;
+            foreach (SamuraiDojo.ScoreBoard.Metrics.Session session in Model.Sessions.OrderBy(sess => sess.IP))
+            {
+                <tr>
+                    <td class="@((lastSession != null && session.IP == lastSession.IP ? "invisible" : ""))">@session.IP</td>
+                    <td>@Html.ActionLink(session.SessionID, "SessionDetails", new { id = session.SessionID })</td>
+                    <td>@session.StartTime.ToVerboseDateTime()</td>
+                    <td>@session.Browser</td>
+                    <td>@session.PageLoads.Count</td>
+                </tr>
+                lastSession = session;
+            }
+        }
+    </tbody>
+</table>
+

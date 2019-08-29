@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Battles.Week1;
 
@@ -12,6 +13,11 @@ namespace SamuraiDojo.Test.Week1
         protected override int Calculate(int hour, int minute)
         {
             return ClockAngler.Dustin_CalculateAngleBetweenHands(hour, minute);
+        }
+
+        protected override ClockAngler GetInstance()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,6 +10,7 @@ using SamuraiDojo.Attributes;
 using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
+using SamuraiDojo.Battles.Week4;
 using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
@@ -25,17 +26,18 @@ namespace SamuraiDojo.Benchmarking
             {
                 { typeof(CensusMaximus), typeof(Benchmarks.Week3) },
                 { typeof(CharacterCounter), typeof(Benchmarks.Week2) },
-                { typeof(ClockAngler), typeof(Benchmarks.Week1) }
+                { typeof(ClockAngler), typeof(Benchmarks.Week1) },
+                { typeof(Palindromania), typeof(Benchmarks.Week4) }
             };
         }
 
-        public static List<BattleResult> PerformBenchmarking(BattleAttribute battle)
+        public static List<BattleStatsForPlayer> PerformBenchmarking(BattleAttribute battle)
         {
 #if DEBUG
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
 #endif
             Summary summary = BenchmarkRunner.Run(benchmarkMap[battle.Type]);
-            List<BattleResult> battleResults = new List<BattleResult>();
+            List<BattleStatsForPlayer> battleResults = new List<BattleStatsForPlayer>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));
 
@@ -44,9 +46,9 @@ namespace SamuraiDojo.Benchmarking
             return battleResults;
         }
 
-        public static BattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
+        public static BattleStatsForPlayer ProcessCase(BenchmarkCase benchmark, Summary summary)
         {
-            BattleResult result = new BattleResult();
+            BattleStatsForPlayer result = new BattleStatsForPlayer();
             result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
             result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 

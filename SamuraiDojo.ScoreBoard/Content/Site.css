@@ -144,3 +144,23 @@ iframe {
     width: 100%;
     display: inline-block;
 }
+
+#battleDescription {
+    min-width: 800px;
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar-nav {
+        float: left !important;
+    }
+
+    ul.nav.navbar-nav {
+        float: left !important;
+        clear: both;
+    }
+}

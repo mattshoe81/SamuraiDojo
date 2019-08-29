@@ -7,39 +7,32 @@
         <h3><span class="italic">'{{vm.CurrentBattle.Battle.Name}}'</span></h3>
         <h4>Deadline: <span class="italic">{{vm.CurrentBattle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
-        <pre>
-        <code>
-
-using System.Collections.Generic;
-using SamuraiDojo.Attributes;
-
-namespace SamuraiDojo.Battles.Week3
+        <pre id="battleDescription"><code>
+[Sensei(Samurai.MATT_SHOE)]
+[Battle("8/30/19", "PalindroMania", typeof(Palindromania))]
+public abstract class Palindromania
 {
-    [Sensei(Samurai.MATT)]
-    [Battle("8/23/19", "Census Maximus", typeof(CensusMaximus))]
-    public abstract class CensusMaximus
-    {
-
-        /// &lt;summary&gt;
-        /// Given a list of people containing the year they were born and 
-        /// the year they died, find the first year in which the number of
-        /// living people is maximized.
-        /// 
-        /// Constraints:
-        ///     - All people were born and died between 1900 and 2000 inclusive.
-        ///     - If multiple years have an equal number of people, pick the first year.
-        ///     - The list will always have at least 1 person
-        /// 
-        /// &lt;/summary&gt;
-        /// &lt;param name="people"&gt;People and their birth/death years.&lt;/param&gt;
-        /// &lt;returns&gt;The first year in which the number of living people is at its maximum.&lt;/returns&gt;
-        public abstract int MostPopulousYear(List&lt;Person&gt; people);
-    }
+    /// &lt;summary&gt;
+    /// A palindrome is just a string that is spelled the same forwards and backwards.
+    /// Given an arbitrarily large string, find the largest palindrome within that 
+    /// string.
+    ///     
+    /// HINT:
+    ///     - Palindromes are symmetric about their center....
+    ///     - Difference between even and odd lengths?....
+    /// 
+    /// Constraints:
+    ///     1. The string is never null, and always has at least 1 character in it.
+    ///     2. The characters can be ANY valid ASCII character.
+    ///     2. Comparisons should be CASE-INSENSITIVE.
+    ///     3. If there are multiples, pick the first.
+    /// 
+    /// &lt;/summary&gt;
+    /// &lt;param name="input"&gt;An arbitrarily large string.&lt;/param&gt;
+    /// &lt;returns&gt;The largest palindrome within the input string&lt;/returns&gt;
+    public abstract string LargestPalindrome(string input);
 }
-
-            </code>
-
-        </pre>
+        </code></pre>
 
     </div>
 
@@ -92,7 +85,7 @@ namespace SamuraiDojo.Battles.Week3
                                     <th>Awards</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="result in battle.Results">
+                            <tbody ng-repeat="result in battle.Results | orderBy: '-Points'">
                                 <tr>
                                     <td>{{result.Points}}</td>
                                     <td class="lowercase">{{result.Player.Name}}</td>

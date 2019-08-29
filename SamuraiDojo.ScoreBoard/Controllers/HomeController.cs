@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using SamuraiDojo.ScoreBoard.Metrics;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
+    [LogMetrics]
     public class HomeController : Controller
     {
         public ActionResult Index()

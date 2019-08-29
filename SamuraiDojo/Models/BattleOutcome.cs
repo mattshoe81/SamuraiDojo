@@ -8,20 +8,23 @@ using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Models
 {
+    /// <summary>
+    /// The total results of a battle for every player.
+    /// </summary>
     public class BattleOutcome : IComparable<BattleOutcome>
     {
         public BattleAttribute Battle { get; set; }
 
         public SenseiAttribute Sensei { get; set; }
 
-        public List<BattleResult> Results { get; set; }
+        public List<BattleStatsForPlayer> Results { get; set; }
 
         public BattleOutcome()
         {
-            Results = new List<BattleResult>();
+            Results = new List<BattleStatsForPlayer>();
         }
 
-        public void Add(BattleResult result, SenseiAttribute sensei)
+        public void Add(BattleStatsForPlayer result, SenseiAttribute sensei)
         {
             Results.Add(result);
             Sensei = sensei;
@@ -29,10 +32,10 @@ namespace SamuraiDojo.Models
 
         public void AddPoint(WrittenByAttribute writtenBy, int points = 1)
         {
-            BattleResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
+            BattleStatsForPlayer playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
             if (playerResult == null)
             {
-                Results.Add(new BattleResult
+                Results.Add(new BattleStatsForPlayer
                 {
                     Player = writtenBy,
                     Points = points
@@ -47,13 +50,13 @@ namespace SamuraiDojo.Models
 
         public void AddAward(WrittenByAttribute player, BonusPointsAttribute award)
         {
-            BattleResult result = Get(player.Name);
+            BattleStatsForPlayer result = Get(player.Name);
 
             if (result != null)
                 result.Awards.Add(award);
             else
             {
-                Results.Add(new BattleResult
+                Results.Add(new BattleStatsForPlayer
                 {
                     Player = player,
                     Points = 0,
@@ -64,19 +67,19 @@ namespace SamuraiDojo.Models
 
         public void SetEfficiencyScore(WrittenByAttribute writtenBy, double efficiencyScore)
         {
-            BattleResult result = Get(writtenBy.Name);
+            BattleStatsForPlayer result = Get(writtenBy.Name);
 
             //if (result != null)
             //    result.Efficiency = efficiencyScore;
         }
 
-        public BattleResult Get(string player)
+        public BattleStatsForPlayer Get(string player)
         {
-            BattleResult result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
+            BattleStatsForPlayer result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
             return result;
         }
 
-        public List<BattleResult> All()
+        public List<BattleStatsForPlayer> All()
         {
             Results.Sort();
             return Results;

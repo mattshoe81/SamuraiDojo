@@ -9,30 +9,30 @@ namespace SamuraiDojo.Benchmarking
 {
     public class EfficiencyRankCollection
     {
-        private Dictionary<int, List<BattleResult>> efficiencyBuckets;
+        private Dictionary<int, List<BattleStatsForPlayer>> efficiencyBuckets;
 
         public EfficiencyRankCollection()
         {
-            efficiencyBuckets = new Dictionary<int, List<BattleResult>>();
+            efficiencyBuckets = new Dictionary<int, List<BattleStatsForPlayer>>();
         }
 
-        public void Add(int rank, BattleResult battleResult)
+        public void Add(int rank, BattleStatsForPlayer battleResult)
         {
             if (efficiencyBuckets.ContainsKey(rank))
                 efficiencyBuckets[rank].Add(battleResult);
             else
-                efficiencyBuckets.Add(rank, new List<BattleResult> { battleResult });
+                efficiencyBuckets.Add(rank, new List<BattleStatsForPlayer> { battleResult });
         }
 
-        public void Add(int rank, IEnumerable<BattleResult> battleResults)
+        public void Add(int rank, IEnumerable<BattleStatsForPlayer> battleResults)
         {
-            foreach (BattleResult result in battleResults)
+            foreach (BattleStatsForPlayer result in battleResults)
                 Add(rank, result);
         }
 
-        public List<BattleResult> Get(int rank)
+        public List<BattleStatsForPlayer> Get(int rank)
         {
-            List<BattleResult> resultsForRank = new List<BattleResult>();
+            List<BattleStatsForPlayer> resultsForRank = new List<BattleStatsForPlayer>();
             if (efficiencyBuckets.ContainsKey(rank))
                 resultsForRank = efficiencyBuckets[rank];
 

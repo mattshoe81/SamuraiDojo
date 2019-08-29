@@ -8,9 +8,18 @@ using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
 {
+    /// <summary>
+    /// If this is your first battle, just add your name to
+    /// the list, and make sure it is the same as your windows
+    /// login. 
+    /// 
+    /// Always use this value when setting parameters on the
+    /// [WrittenBy] attribute!
+    /// 
+    /// </summary>
     public class Samurai
     {
-        public const string MATT = "matthew.shoemaker";
+        public const string MATT_SHOE = "matthew.shoemaker";
         public const string DUSTIN = "dustin.mattox";
         public const string JT = "jonathan.turner";
         public const string JEFF = "jeff.moore";

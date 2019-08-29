@@ -34,18 +34,14 @@ namespace SamuraiDojo.Benchmarking
             RejectStart();
             return;
 #endif
-            Console.WriteLine("You've entered the benchmarking application!");
-            if (args != null && args.Length > 0)
-                BenchmarkBattle(Convert.ToInt16(args[0]));
-            else 
-                while (true)
-                    Iterate();
+            while (true)
+                Iterate();
         }
 
         private static void Iterate()
         {
-            int battleIndex = 0;
             string input = GetInput();
+            int battleIndex = 0;
 
             if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
                 BenchmarkBattle(battleIndex);
@@ -66,7 +62,7 @@ namespace SamuraiDojo.Benchmarking
         private static void BenchmarkBattle(int index)
         {
             CurrentBattle = BattleCollection.Get(index);
-            List<BattleResult> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
+            List<BattleStatsForPlayer> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
 
             EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
             EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
@@ -96,9 +92,9 @@ namespace SamuraiDojo.Benchmarking
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
             {
-                List<BattleResult> results = efficiencyBuckets.Get(rank);
+                List<BattleStatsForPlayer> results = efficiencyBuckets.Get(rank);
                 Console.WriteLine($"Rank {rank}");
-                foreach (BattleResult result in results)
+                foreach (BattleStatsForPlayer result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
                     Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
@@ -146,7 +142,7 @@ namespace SamuraiDojo.Benchmarking
             Console.ForegroundColor = ERROR_COLOR;
             Console.WriteLine($"{Environment.NewLine}IN ORDER TO RUN BENCHMARKING, YOU MUST RUN IN RELEASE MODE WITHOUT DEBUGGING!!");
             Console.WriteLine($"NOTE: You must run this using 'Debug' -> 'Start Without Debugging' or you will not get real results.");
-            Console.ReadKey();
+            Console.ReadLine();
         }
 
         private static void PrintError(string message)
