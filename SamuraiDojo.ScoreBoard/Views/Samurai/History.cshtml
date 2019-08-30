@@ -11,7 +11,7 @@
             foreach (BattleOutcome battle in Model.Battles)
             {
 
-                <div>
+                <div class="jump-target" id="@battle.Battle.Deadline.ToSimpleDateString()">
                     <div class="row">
                         <h3 class="row-buffer">
                             <span class="bold italic">'@battle.Battle.Name'</span> 
@@ -41,7 +41,7 @@
                                         <tr>
                                             <td>@result.Points</td>
                                             <td class="lowercase">@result.Player.Name</td>
-                                            <td class="italic">@string.Join(", ", result.Awards.Select(award => award.Name))</td>
+                                            <td class="italic">@string.Join(", ", result.Awards.Select(award => award.Name)).DefaultIfEmpty()</td>
                                         </tr>
                                     }
                                 </tbody>

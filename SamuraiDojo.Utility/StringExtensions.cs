@@ -12,5 +12,13 @@ namespace SamuraiDojo.Utility
         {
             return value.ToUpper() == other.ToUpper();
         }
+
+        public static string DefaultIfEmpty(this string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return "--";
+            else
+                return value;
+        }
     }
 }

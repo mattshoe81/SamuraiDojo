@@ -178,3 +178,10 @@ iframe {
     margin-left: -75px;
     margin-right: -75px;
 }
+
+.jump-target::before {
+    content: "";
+    display: block;
+    height: 50px;
+    margin: -50px 0 0;
+}
