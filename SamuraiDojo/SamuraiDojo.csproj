@@ -62,6 +62,7 @@
     <Compile Include="Battles\Week3\Dustin.cs" />
     <Compile Include="Battles\Week3\MattShoe.cs" />
     <Compile Include="Battles\Week3\Person.cs" />
+    <Compile Include="Battles\Week4\Dustin.cs" />
     <Compile Include="Battles\Week4\DrewArdner.cs" />
     <Compile Include="Battles\Week4\MattShoe.cs" />
     <Compile Include="Battles\Week4\Palindromania.cs" />
