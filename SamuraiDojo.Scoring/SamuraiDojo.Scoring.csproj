@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auditors\DojoAuditor.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="RankCalculator.cs" />
     <Compile Include="ScoreKeeper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

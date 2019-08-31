@@ -15,7 +15,7 @@ namespace SamuraiDojo.Scoring.Auditors
 
         private void RunUnitTests()
         {
-            TestRunner testRunner = new TestRunner();
+            ITestRunner testRunner = Factory.Get<ITestRunner>();
 
             SetPreTestAction(testRunner);
             SetPassedTestAction(testRunner);
@@ -23,7 +23,7 @@ namespace SamuraiDojo.Scoring.Auditors
             testRunner.Run();
         }
 
-        private void SetPreTestAction(TestRunner testRunner)
+        private void SetPreTestAction(ITestRunner testRunner)
         {
             testRunner.PreTest = (context) =>
             {
@@ -36,7 +36,7 @@ namespace SamuraiDojo.Scoring.Auditors
             };
         }
 
-        private void SetPassedTestAction(TestRunner testRunner)
+        private void SetPassedTestAction(ITestRunner testRunner)
         {
             testRunner.OnTestPass = (context) =>
             {

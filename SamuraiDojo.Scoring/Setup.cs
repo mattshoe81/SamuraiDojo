@@ -4,19 +4,21 @@ using SamuraiDojo.Scoring.Auditors;
 
 namespace SamuraiDojo.Scoring
 {
-    public class Startup : IProjectSetup
+    public class Setup : ProjectSetup
     {
         private static bool initialized = false;
 
-        public void Initialize()
-        {
-            if (!initialized)
-            {
-                BindToIOC();
-                Factory.Get<IScoreKeeper>().Start();
+        protected override bool HasBeenInitialized => initialized;
 
-                initialized = true;
-            }
+        protected override void Initialize()
+        {
+            new SamuraiDojo.Setup();
+            new SamuraiDojo.Test.Setup();
+
+            BindToIOC();
+            Factory.Get<IScoreKeeper>().Start();
+
+            initialized = true;
         }
 
         private void BindToIOC()

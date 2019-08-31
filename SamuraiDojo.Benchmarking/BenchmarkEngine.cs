@@ -5,14 +5,12 @@ using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Horology;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using SamuraiDojo.Attributes;
 using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
-using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
@@ -90,7 +88,7 @@ namespace SamuraiDojo.Benchmarking
             try
             {
                 IColumn meanColumn = summary.GetColumns().Where(column => column.ColumnName.EqualsIgnoreCase(columnName)).FirstOrDefault();
-                string valueString = meanColumn.GetValue(summary, benchmark, new SummaryStyle(true, SizeUnit.B, TimeUnit.Nanosecond, false));
+                string valueString = meanColumn.GetValue(summary, benchmark, new SummaryStyle(true, SizeUnit.B, TimeUnit.Millisecond, false));
                 Console.WriteLine($"Raw value for {columnName}: {valueString}");
                 value = (T)Convert.ChangeType(valueString.Replace(",", ""), typeof(T));
             }

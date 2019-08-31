@@ -4,20 +4,21 @@ using SamuraiDojo.Test.Attributes;
 
 namespace SamuraiDojo.Test
 {
-    public class Setup : IProjectSetup
+    public class Setup : ProjectSetup
     {
         private static bool initialized = false;
 
-        public void Initialize()
-        {
-            if (!initialized)
-            {
-                Factory.Bind<ITestRunner>(typeof(TestRunner));
-                Factory.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
-                Factory.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
+        protected override bool HasBeenInitialized => initialized;
 
-                initialized = true;
-            }
+        protected override void Initialize()
+        {
+            new SamuraiDojo.Setup();
+
+            Factory.Bind<ITestRunner>(typeof(TestRunner));
+            Factory.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
+            Factory.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
+
+            initialized = true;
         }
     }
 }

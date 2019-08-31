@@ -7,8 +7,8 @@
     <ProjectGuid>{C4A99055-353F-4C33-8722-339CAAD0255D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SamuraiDojo.IOC</RootNamespace>
-    <AssemblyName>SamuraiDojo.IOC</AssemblyName>
+    <RootNamespace>SamuraiDojo.IoC</RootNamespace>
+    <AssemblyName>SamuraiDojo.IoC</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,27 +42,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory.cs" />
-    <Compile Include="Intefaces\IAuditor.cs" />
-    <Compile Include="Intefaces\IBattleAttribute.cs" />
-    <Compile Include="Intefaces\IBattleCollection.cs" />
-    <Compile Include="Intefaces\IBattleOutcome.cs" />
-    <Compile Include="Intefaces\IBattleRepository.cs" />
-    <Compile Include="Intefaces\IBenchmarkEngine.cs" />
-    <Compile Include="Intefaces\IBonusPointsAttribute.cs" />
-    <Compile Include="Intefaces\IEfficiencyCalculator.cs" />
-    <Compile Include="Intefaces\IEfficiencyRankCollection.cs" />
-    <Compile Include="Intefaces\IEfficiencyResult.cs" />
-    <Compile Include="Intefaces\IPlayer.cs" />
-    <Compile Include="Intefaces\IPlayerBattleResult.cs" />
-    <Compile Include="Intefaces\IPlayerRepository.cs" />
-    <Compile Include="Intefaces\IProjectSetup.cs" />
-    <Compile Include="Intefaces\IRankCalculator.cs" />
-    <Compile Include="Intefaces\IScoreKeeper.cs" />
-    <Compile Include="Intefaces\ISenseiAttribute.cs" />
-    <Compile Include="Intefaces\ITestExecutionContext.cs" />
-    <Compile Include="Intefaces\ITestRunner.cs" />
-    <Compile Include="Intefaces\IUnderTestAttribute.cs" />
-    <Compile Include="Intefaces\IWrittenByAttribute.cs" />
+    <Compile Include="Interfaces\IAuditor.cs" />
+    <Compile Include="Interfaces\IBattleAttribute.cs" />
+    <Compile Include="Interfaces\IBattleCollection.cs" />
+    <Compile Include="Interfaces\IBattleOutcome.cs" />
+    <Compile Include="Interfaces\IBattleRepository.cs" />
+    <Compile Include="Interfaces\IBenchmarkEngine.cs" />
+    <Compile Include="Interfaces\IBonusPointsAttribute.cs" />
+    <Compile Include="Interfaces\IEfficiencyCalculator.cs" />
+    <Compile Include="Interfaces\IEfficiencyRankCollection.cs" />
+    <Compile Include="Interfaces\IEfficiencyResult.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IPlayerBattleResult.cs" />
+    <Compile Include="Interfaces\IPlayerRepository.cs" />
+    <Compile Include="Interfaces\IRankCalculator.cs" />
+    <Compile Include="Interfaces\IScoreKeeper.cs" />
+    <Compile Include="Interfaces\ISenseiAttribute.cs" />
+    <Compile Include="Interfaces\ITestExecutionContext.cs" />
+    <Compile Include="Interfaces\ITestRunner.cs" />
+    <Compile Include="Interfaces\IUnderTestAttribute.cs" />
+    <Compile Include="Interfaces\IWrittenByAttribute.cs" />
+    <Compile Include="Interfaces\ProjectSetup.cs" />
     <Compile Include="MultiBindCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />

@@ -1,4 +1,5 @@
 ﻿@using System.Web.Http
+@using SamuraiDojo.IoC.Interfaces
 
 <div class="container" ng-controller="HomePageController as vm">
 
@@ -10,7 +11,7 @@
         <h4>Deadline: <span class="italic">{{vm.CurrentBattle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
 
-        <pre id="battleDescription"><code><iframe src="@($"/Battles/{ViewBag.CurrentBattle.Battle.Name}.html")" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
+        <pre id="battleDescription"><code><iframe src="@($"/Battles/{(ViewBag.CurrentBattle as IBattleOutcome).Battle.Name}.html")" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
 
     </div>
 

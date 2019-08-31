@@ -1,6 +1,6 @@
 ﻿@model SamuraiDojo.ScoreBoard.Models.HistoryViewModel
 
-@using SamuraiDojo.Models
+@using SamuraiDojo.IoC.Interfaces
 @using SamuraiDojo.Utility
 
 
@@ -8,7 +8,7 @@
     <div class="col-sm-12">
         <div class="spacer-10"></div>
         @{
-            foreach (BattleOutcome battle in Model.Battles)
+            foreach (IBattleOutcome battle in Model.Battles)
             {
 
                 <div class="jump-target" id="@battle.Battle.Deadline.ToSimpleDateString()">
@@ -36,7 +36,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (PlayerBattleResult result in battle.Results)
+                                    @foreach (IPlayerBattleResult result in battle.Results)
                                     {
                                         <tr>
                                             <td>@result.Points</td>

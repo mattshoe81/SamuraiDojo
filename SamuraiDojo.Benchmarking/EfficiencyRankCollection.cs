@@ -23,7 +23,7 @@ namespace SamuraiDojo.Benchmarking
 
         public void Add(int rank, IEnumerable<IPlayerBattleResult> battleResults)
         {
-            foreach (PlayerBattleResult result in battleResults)
+            foreach (IPlayerBattleResult result in battleResults)
                 Add(rank, result);
         }
 

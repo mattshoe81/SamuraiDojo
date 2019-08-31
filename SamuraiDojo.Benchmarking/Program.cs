@@ -17,7 +17,7 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
-            new Setup().Initialize();
+            new Benchmarking.Setup();
 
             WIDTH = 180;
             HEIGHT = 40;
@@ -34,7 +34,7 @@ namespace SamuraiDojo.Benchmarking
         {
 #if DEBUG
             RejectStart();
-            //return;
+            return;
 #endif
             while (true)
                 Iterate();
@@ -99,7 +99,7 @@ namespace SamuraiDojo.Benchmarking
                 foreach (IPlayerBattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
-                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
+                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} ms", result.Efficiency.AverageExecutionTime);
                     Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} Bytes");
                 }
                 rank++;

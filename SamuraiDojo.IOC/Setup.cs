@@ -2,11 +2,11 @@
 
 namespace SamuraiDojo.IoC
 {
-    public class Setup : IProjectSetup
+    public static class Setup
     {
         private static bool initialized = false;
 
-        public void Initialize()
+        public static void Initialize()
         {
             if (!initialized)
             {
