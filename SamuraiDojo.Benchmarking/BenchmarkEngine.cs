@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Columns;
+#if DEBUG
+using BenchmarkDotNet.Configs;
+#endif
 using BenchmarkDotNet.Horology;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
@@ -9,6 +12,7 @@ using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
+using SamuraiDojo.Battles.Week5;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
@@ -26,7 +30,8 @@ namespace SamuraiDojo.Benchmarking
                 { typeof(CensusMaximus), typeof(Benchmarks.Week3) },
                 { typeof(CharacterCounter), typeof(Benchmarks.Week2) },
                 { typeof(ClockAngler), typeof(Benchmarks.Week1) },
-                { typeof(Palindromania), typeof(Benchmarks.Week4) }
+                { typeof(Palindromania), typeof(Benchmarks.Week4) },
+                { typeof(Snowflake), typeof(Benchmarks.Week5) } 
             };
         }
 
