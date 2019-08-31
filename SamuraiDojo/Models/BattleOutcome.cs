@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
     /// <summary>
     /// The total results of a battle for every player.
     /// </summary>
-    public class BattleOutcome : IBattleOutcome
+    internal class BattleOutcome : IBattleOutcome
     {
         public IBattleAttribute Battle { get; set; }
 

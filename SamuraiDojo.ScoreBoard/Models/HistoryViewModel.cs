@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.ScoreBoard.Models

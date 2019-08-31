@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Net.Http.Formatting;
 using System.Linq;
 using SamuraiDojo.Models;
-using SamuraiDojo.IOC.Interfaces;
-using SamuraiDojo.IOC;
+using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.IoC;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {

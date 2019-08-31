@@ -1,6 +1,6 @@
 ﻿using SamuraiDojo.Attributes;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
 

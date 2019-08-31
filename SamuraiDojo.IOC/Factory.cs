@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamuraiDojo.IOC
+namespace SamuraiDojo.IoC
 {
     public static class Factory
     {
@@ -104,7 +104,7 @@ namespace SamuraiDojo.IOC
         /// <typeparam name="T"></typeparam>
         /// <param name="multiBindKey"></param>
         /// <returns></returns>
-        public static T New<T>(string multiBindKey)
+        public static T Get<T>(string multiBindKey)
         {
             AssertInterface<T>("Factory.New");
 

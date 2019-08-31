@@ -1,11 +1,13 @@
 ﻿using System;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Attributes
 {
     public class WrittenByAttribute : Attribute, IWrittenByAttribute
     {
         public string Name { get; set; }
+
+        public WrittenByAttribute() { }
 
         public WrittenByAttribute(string samurai)
         {

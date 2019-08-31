@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Repositories
 {
@@ -9,7 +9,7 @@ namespace SamuraiDojo.Repositories
     /// Repository for players' statistics, such as rank, 
     /// total historical points, sensei count, etc.
     /// </summary>
-    public class PlayerRepository : IPlayerRepository
+    internal class PlayerRepository : IPlayerRepository
     {
         public Dictionary<string, IPlayer> Players { get; set; }
 

@@ -10,14 +10,14 @@ using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class BenchmarkEngine : IBenchmarkEngine
+    internal class BenchmarkEngine : IBenchmarkEngine
     {
         private Dictionary<Type, Type> benchmarkMap;
 
@@ -50,19 +50,18 @@ namespace SamuraiDojo.Benchmarking
         private IPlayerBattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
         {
             IPlayerBattleResult result = Factory.Get<IPlayerBattleResult>();
-            result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
+            result.Player = Factory.Get<IWrittenByAttribute>();
+            result.Player.Name = benchmark.DisplayInfo;
             result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 
             double executionTime = GetAverageExecutionTime(benchmark, summary);
             double standardDeviation = GetStandardDeviation(benchmark, summary);
             long memoryAllocated = GetMemoryAllocated(benchmark, summary);
 
-            result.Efficiency = new EfficiencyResult
-            {
-                AverageExecutionTime = executionTime,
-                StandardDeviation = standardDeviation,
-                MemoryAllocated = memoryAllocated
-            };
+            result.Efficiency = Factory.Get<IEfficiencyResult>();
+            result.Efficiency.AverageExecutionTime = executionTime;
+            result.Efficiency.StandardDeviation = standardDeviation;
+            result.Efficiency.MemoryAllocated = memoryAllocated;
 
             return result;
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Attributes.Bonus
 {

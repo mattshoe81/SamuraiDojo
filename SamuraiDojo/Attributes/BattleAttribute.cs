@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Attributes
 {
@@ -17,6 +17,8 @@ namespace SamuraiDojo.Attributes
 
 
         private string deadlineString;
+
+        public BattleAttribute() { }
 
         public BattleAttribute(string date, string name, Type type)
         {

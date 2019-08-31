@@ -1,4 +1,4 @@
-﻿namespace SamuraiDojo.IOC.Interfaces
+﻿namespace SamuraiDojo.IoC.Interfaces
 {
     public interface IRankCalculator
     {

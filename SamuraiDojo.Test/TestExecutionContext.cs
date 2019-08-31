@@ -5,10 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Test
 {
-    public class TestExecutionContext
+    internal class TestExecutionContext : ITestExecutionContext
     {
         public Type TestClass { get; set; }
 
@@ -16,6 +17,6 @@ namespace SamuraiDojo.Test
 
         public MethodInfo Method { get; set; }
 
-        public WrittenByAttribute WrittenBy { get; set; }  
+        public IWrittenByAttribute WrittenBy { get; set; }
     }
 }

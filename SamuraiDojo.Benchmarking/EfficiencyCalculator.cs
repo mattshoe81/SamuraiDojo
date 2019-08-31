@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class EfficiencyCalculator : IEfficiencyCalculator
+    internal class EfficiencyCalculator : IEfficiencyCalculator
     {
         public double MarginScalar { get; set; } = 2.0;
 

@@ -239,7 +239,7 @@
   <ItemGroup>
     <Compile Include="BenchmarkEngine.cs" />
     <None Include="Benchmarks\BenchmarkTemplate.cs" />
-    <Compile Include="BenchmarkingStartup.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Benchmarks\DojoBenchmark.cs" />
     <Compile Include="Benchmarks\Week1.cs" />
     <Compile Include="Benchmarks\Week2.cs" />
@@ -255,9 +255,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IOC.csproj">
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IoC.csproj">
       <Project>{C4A99055-353F-4C33-8722-339CAAD0255D}</Project>
-      <Name>SamuraiDojo.IOC</Name>
+      <Name>SamuraiDojo.IoC</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
       <Project>{0e85b929-b27f-48fa-8a6c-944c887bbcef}</Project>

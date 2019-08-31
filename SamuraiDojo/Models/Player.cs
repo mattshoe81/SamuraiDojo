@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
-    public class Player : IPlayer
+    internal class Player : IPlayer
     {
         public string Name { get; set; }
 

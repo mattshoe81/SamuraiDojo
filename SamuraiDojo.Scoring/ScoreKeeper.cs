@@ -1,14 +1,14 @@
-﻿using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+﻿using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
-    public class ScoreKeeper
+    internal class ScoreKeeper : IScoreKeeper
     {
-        public static void Start()
+        public void Start()
         {
-            Factory.New<IAuditor>(Auditor.DOJO.ToString()).Audit();
-            Factory.New<IAuditor>(Auditor.TEST.ToString()).Audit();
+            Factory.Get<IAuditor>(Auditor.DOJO.ToString()).Audit();
+            Factory.Get<IAuditor>(Auditor.TEST.ToString()).Audit();
             Factory.Get<IRankCalculator>().Calculate();
         }
     }

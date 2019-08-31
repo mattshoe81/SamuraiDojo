@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamuraiDojo.IOC
+namespace SamuraiDojo.IoC
 {
     internal class MultiBindCollection
     {

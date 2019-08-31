@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Test.Attributes;
 using SamuraiDojo.Utility;
 
@@ -19,11 +21,11 @@ namespace SamuraiDojo.Test
     /// 
     /// No Action is required for execution.
     /// </summary>
-    public class TestRunner
+    internal class TestRunner : ITestRunner
     {
-        public Action<TestExecutionContext> PreTest { get; set; }
-        public Action<TestExecutionContext> OnTestPass { get; set; }
-        public Action<TestExecutionContext> OnTestFail { get; set; }
+        public Action<ITestExecutionContext> PreTest { get; set; }
+        public Action<ITestExecutionContext> OnTestPass { get; set; }
+        public Action<ITestExecutionContext> OnTestFail { get; set; }
 
         public void Run()
         {
@@ -33,7 +35,7 @@ namespace SamuraiDojo.Test
                 RunTests(type);
         }
 
-        public void Run(WrittenByAttribute writtenBy, BattleAttribute battle)
+        public void Run(IWrittenByAttribute writtenBy, IBattleAttribute battle)
         {
             Type[] allBattleTests = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
                 .Where(test => AttributeUtility.GetAttribute<WrittenByAttribute>(test) == writtenBy)?.ToArray();
@@ -65,7 +67,7 @@ namespace SamuraiDojo.Test
 
         private bool EvaluteTest(Type type, MethodInfo method, bool useCallbacks = true)
         {
-            TestExecutionContext testExecutionContext = null;
+            ITestExecutionContext testExecutionContext = null;
             if (useCallbacks)
                 testExecutionContext = BuildTestExecutionContext(type, method);
             bool passed = false;
@@ -87,22 +89,20 @@ namespace SamuraiDojo.Test
             return passed;
         }
 
-        public TestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
+        public ITestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
         {
-            WrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-            UnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
-            TestExecutionContext testExecutionContext = new TestExecutionContext
-            {
-                TestClass = type,
-                ClassUnderTest = classUnderTest?.Type,
-                Method = method,
-                WrittenBy = writtenBy
-            };
+            IWrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
+            IUnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
+            ITestExecutionContext testExecutionContext = Factory.Get<ITestExecutionContext>();
+            testExecutionContext.TestClass = type;
+            testExecutionContext.ClassUnderTest = classUnderTest?.Type;
+            testExecutionContext.Method = method;
+            testExecutionContext.WrittenBy = writtenBy;
 
             return testExecutionContext;
         }
 
-        private void InvokeAction(Action<TestExecutionContext> action, TestExecutionContext testExecutionContext)
+        private void InvokeAction(Action<ITestExecutionContext> action, ITestExecutionContext testExecutionContext)
         {
             try
             {

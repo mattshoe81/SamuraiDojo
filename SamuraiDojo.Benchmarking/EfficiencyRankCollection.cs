@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class EfficiencyRankCollection : IEfficiencyRankCollection
+    internal class EfficiencyRankCollection : IEfficiencyRankCollection
     {
         private Dictionary<int, List<IPlayerBattleResult>> efficiencyBuckets;
 

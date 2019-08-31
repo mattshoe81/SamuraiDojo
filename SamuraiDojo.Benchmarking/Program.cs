@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -17,7 +17,7 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
-            new BenchmarkingStartup().ProjectInit();
+            new Setup().Initialize();
 
             WIDTH = 180;
             HEIGHT = 40;

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.ScoreBoard.Metrics;
 

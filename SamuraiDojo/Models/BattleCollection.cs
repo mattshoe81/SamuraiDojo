@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Models
@@ -10,7 +10,7 @@ namespace SamuraiDojo.Models
     /// <summary>
     /// Collection of all BattleAttributes. They are sorted by most recent, where index 0 is most recent.
     /// </summary>
-    public class BattleCollection : IBattleCollection
+    internal class BattleCollection : IBattleCollection
     {
         public BattleCollection()
         {

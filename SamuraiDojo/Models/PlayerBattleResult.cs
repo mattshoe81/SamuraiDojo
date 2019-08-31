@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Models
@@ -11,7 +11,7 @@ namespace SamuraiDojo.Models
     /// <summary>
     /// The outcome of a battle for a specific player.
     /// </summary>
-    public class PlayerBattleResult : IPlayerBattleResult
+    internal class PlayerBattleResult : IPlayerBattleResult
     {
         public IWrittenByAttribute Player { get; set; }
 

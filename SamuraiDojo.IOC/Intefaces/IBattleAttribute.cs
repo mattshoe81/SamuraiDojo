@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SamuraiDojo.IOC.Interfaces
+namespace SamuraiDojo.IoC.Interfaces
 {
     public interface IBattleAttribute
     {

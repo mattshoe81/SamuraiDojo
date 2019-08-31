@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
 {
-    public class DojoStartup : IProjectStartup
+    public class Setup : IProjectSetup
     {
         private static bool initialized = false;
 
-        public void ProjectInit()
+        public void Initialize()
         {
             if (!initialized)
             {

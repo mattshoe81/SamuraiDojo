@@ -220,12 +220,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ImplementationAttribute.cs" />
     <Compile Include="Attributes\UnderTestAttribute.cs" />
     <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
     <None Include="TemplateTest.cs" />
-    <Compile Include="TestStartup.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Week1\ClockAnglerTestBase.cs" />
     <Compile Include="Week1\Dustin.cs" />
     <Compile Include="Week1\Jeff.cs" />
@@ -251,9 +250,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IOC.csproj">
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IoC.csproj">
       <Project>{c4a99055-353f-4c33-8722-339caad0255d}</Project>
-      <Name>SamuraiDojo.IOC</Name>
+      <Name>SamuraiDojo.IoC</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
       <Project>{0dc773c1-7f74-4718-88a4-886b0036cb90}</Project>

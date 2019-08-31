@@ -1,8 +1,8 @@
-﻿using SamuraiDojo.IOC.Interfaces;
+﻿using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
-    public class EfficiencyResult : IEfficiencyResult
+    internal class EfficiencyResult : IEfficiencyResult
     {
         public double AverageExecutionTime { get; set; }
 

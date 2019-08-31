@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
 

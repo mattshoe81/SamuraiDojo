@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Repositories
 {
     /// <summary>
     /// Repository for Battle data, tracking scores for each player for each battle.
     /// </summary>
-    public class BattleRepository : IBattleRepository
+    internal class BattleRepository : IBattleRepository
     {
         private List<IBattleOutcome> battles;
 
