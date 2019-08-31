@@ -243,6 +243,7 @@
     <Compile Include="Week3\CensusMaximusTest.cs" />
     <Compile Include="Week3\Dustin.cs" />
     <Compile Include="Week3\MattShoe.cs" />
+    <Compile Include="Week4\JT.cs" />
     <Compile Include="Week4\MattShoe.cs" />
     <Compile Include="Week4\PalindromaniaTest.cs" />
   </ItemGroup>
