@@ -1,6 +1,6 @@
 ﻿namespace SamuraiDojo.Scoring.Interfaces
 {
-    interface IAuditor
+    public interface IAuditor
     {
         void Audit();
     }
