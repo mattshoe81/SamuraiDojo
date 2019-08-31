@@ -8,14 +8,23 @@ namespace SamuraiDojo.IOC
 {
     public static class Factory
     {
+        public enum Pattern
+        {
+            SINGLETON
+        }
+
         private static IDictionary<Type, Type> typeMap;
 
-        private static MultiBindCollection multiBinds;
+        private static IDictionary<Type, object> singletons;
+
+        private static MultiBindCollection multiBindMap;
+
 
         static Factory()
         {
             typeMap = new Dictionary<Type, Type>();
-            multiBinds = new MultiBindCollection();
+            multiBindMap = new MultiBindCollection();
+            singletons = new Dictionary<Type, object>();
         }
 
         /// <summary>
@@ -32,6 +41,15 @@ namespace SamuraiDojo.IOC
             typeMap.Add(typeof(T), type);
         }
 
+        public static void BindSingleton<T>(Type type)
+        {
+            AssertInterface<T>("Factory.BindSingleton");
+            AssertImplementation("Factory.BindSingleton", type);
+
+            T instance = (T)Activator.CreateInstance(type);
+            singletons.Add(typeof(T), instance);
+        }
+
         /// <summary>
         /// Allows you to bind multiple concrete types to a single interface by specifying a
         /// unique string key for each implementation. The interface type is supplied as the
@@ -46,7 +64,16 @@ namespace SamuraiDojo.IOC
             AssertInterface<T>("Factory.MultiBind");
             AssertImplementation("Factory.MultiBind", type);
 
-            multiBinds.Bind<T>(key, type);
+            multiBindMap.Bind<T>(key, type);
+        }
+
+        public static void Bind<T>(Type type, Pattern pattern)
+        {
+            switch (pattern)
+            {
+                case Pattern.SINGLETON:
+                    break;
+            }
         }
 
         /// <summary>
@@ -55,12 +82,16 @@ namespace SamuraiDojo.IOC
         /// </summary>
         /// <typeparam name="T">The interface for which a concrete type will be instantiated.</typeparam>
         /// <returns></returns>
-        public static T New<T>()
+        public static T Get<T>()
         {
             AssertInterface<T>("Factory.New");
 
-            Type type = typeMap[typeof(T)];
-            T instance = (T)Activator.CreateInstance(type);
+            T instance;
+            if (singletons.ContainsKey(typeof(T)))
+                instance = (T)singletons[typeof(T)];
+            else
+                instance = (T)Activator.CreateInstance(typeMap[typeof(T)]);
+
             return instance;
         }
 
@@ -77,8 +108,13 @@ namespace SamuraiDojo.IOC
         {
             AssertInterface<T>("Factory.New");
 
-            T instance = (T)Activator.CreateInstance(multiBinds.Get<T>(multiBindKey));
+            T instance = (T)Activator.CreateInstance(multiBindMap.Get<T>(multiBindKey));
             return instance;
+        }
+
+        public static T Singleton<T>()
+        {
+            return (T)singletons[typeof(T)];
         }
 
         private static void AssertInterface<T>(string methodName)

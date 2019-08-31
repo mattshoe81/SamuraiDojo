@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.Attributes;
-using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.IOC;
-using SamuraiDojo.Models;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -15,7 +13,7 @@ namespace SamuraiDojo.Benchmarking
         private static readonly int WIDTH;
         private static readonly int HEIGHT;
 
-        private static BattleAttribute CurrentBattle;
+        private static IBattleAttribute CurrentBattle;
 
         static Program()
         {
@@ -26,7 +24,7 @@ namespace SamuraiDojo.Benchmarking
             DEFAULT_COLOR = ConsoleColor.Yellow;
             INFO_COLOR = ConsoleColor.DarkYellow;
             ERROR_COLOR = ConsoleColor.DarkRed;
-            
+
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
             Console.ForegroundColor = DEFAULT_COLOR;
@@ -47,7 +45,7 @@ namespace SamuraiDojo.Benchmarking
             string input = GetInput();
             int battleIndex = 0;
 
-            if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
+            if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
                 BenchmarkBattle(battleIndex);
             else
                 PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
@@ -55,7 +53,7 @@ namespace SamuraiDojo.Benchmarking
 
         private static string GetInput()
         {
-            PrintBattleOptions(BattleCollection.All);
+            PrintBattleOptions(Factory.Get<IBattleCollection>().All);
             Console.Write($"Enter the index of the battle you wish to Benchmark: ");
             string input = Console.ReadLine();
             Console.WriteLine();
@@ -65,15 +63,15 @@ namespace SamuraiDojo.Benchmarking
 
         private static void BenchmarkBattle(int index)
         {
-            CurrentBattle = BattleCollection.Get(index);
-            List<PlayerBattleResult> battleResults = Factory.New<IBenchmarkEngine>().PerformBenchmarking(CurrentBattle);
+            CurrentBattle = Factory.Get<IBattleCollection>().Get(index);
+            List<IPlayerBattleResult> battleResults = Factory.Get<IBenchmarkEngine>().PerformBenchmarking(CurrentBattle);
 
-            IEfficiencyCalculator efficiencyCalculator = Factory.New<IEfficiencyCalculator>();
+            IEfficiencyCalculator efficiencyCalculator = Factory.Get<IEfficiencyCalculator>();
             IEfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
             PrintBenchmarkingResults(ranks, efficiencyCalculator);
         }
 
-        private static void PrintBattleOptions(List<BattleAttribute> battles)
+        private static void PrintBattleOptions(List<IBattleAttribute> battles)
         {
             Console.ForegroundColor = INFO_COLOR;
             Console.WriteLine();
@@ -96,9 +94,9 @@ namespace SamuraiDojo.Benchmarking
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
             {
-                List<PlayerBattleResult> results = efficiencyBuckets.Get(rank);
+                List<IPlayerBattleResult> results = efficiencyBuckets.Get(rank);
                 Console.WriteLine($"Rank {rank}");
-                foreach (PlayerBattleResult result in results)
+                foreach (IPlayerBattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
                     Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);

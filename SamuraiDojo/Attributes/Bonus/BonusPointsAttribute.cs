@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Attributes.Bonus
 {
-    public abstract class BonusPointsAttribute : Attribute
+    public abstract class BonusPointsAttribute : Attribute, IBonusPointsAttribute
     {
         public abstract int Points { get; }
         public abstract string Name { get; }

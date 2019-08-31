@@ -1,45 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
-using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.IOC;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
     /// <summary>
     /// The total results of a battle for every player.
     /// </summary>
-    public class BattleOutcome : IComparable<BattleOutcome>
+    public class BattleOutcome : IBattleOutcome
     {
-        public BattleAttribute Battle { get; set; }
+        public IBattleAttribute Battle { get; set; }
 
-        public SenseiAttribute Sensei { get; set; }
+        public ISenseiAttribute Sensei { get; set; }
 
-        public List<PlayerBattleResult> Results { get; set; }
+        public List<IPlayerBattleResult> Results { get; set; }
 
         public BattleOutcome()
         {
-            Results = new List<PlayerBattleResult>();
+            Results = new List<IPlayerBattleResult>();
         }
 
-        public void Add(PlayerBattleResult result, SenseiAttribute sensei)
+        public void Add(IPlayerBattleResult result, ISenseiAttribute sensei)
         {
             Results.Add(result);
             Sensei = sensei;
         }
 
-        public void AddPoint(WrittenByAttribute writtenBy, int points = 1)
+        public void AddPoint(IWrittenByAttribute writtenBy, int points = 1)
         {
-            PlayerBattleResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
+            IPlayerBattleResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
             if (playerResult == null)
             {
-                Results.Add(new PlayerBattleResult
-                {
-                    Player = writtenBy,
-                    Points = points
-                });
+                IPlayerBattleResult result = Factory.Get<IPlayerBattleResult>();
+                result.Player = writtenBy;
+                result.Points = points;
+                Results.Add(result);
             }
             else
             {
@@ -48,44 +45,35 @@ namespace SamuraiDojo.Models
             }
         }
 
-        public void AddAward(WrittenByAttribute player, BonusPointsAttribute award)
+        public void AddAward(IWrittenByAttribute player, IBonusPointsAttribute award)
         {
-            PlayerBattleResult result = Get(player.Name);
+            IPlayerBattleResult result = Get(player.Name);
 
             if (result != null)
                 result.Awards.Add(award);
             else
             {
-                Results.Add(new PlayerBattleResult
-                {
-                    Player = player,
-                    Points = 0,
-                    Awards = new List<BonusPointsAttribute> { award }
-                });
+                result = Factory.Get<IPlayerBattleResult>();
+                result.Player = player;
+                result.Points = 0;
+                result.Awards = new List<IBonusPointsAttribute>();
+                Results.Add(result);
             }
         }
 
-        public void SetEfficiencyScore(WrittenByAttribute writtenBy, double efficiencyScore)
+        public IPlayerBattleResult Get(string player)
         {
-            PlayerBattleResult result = Get(writtenBy.Name);
-
-            //if (result != null)
-            //    result.Efficiency = efficiencyScore;
-        }
-
-        public PlayerBattleResult Get(string player)
-        {
-            PlayerBattleResult result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
+            IPlayerBattleResult result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
             return result;
         }
 
-        public List<PlayerBattleResult> All()
+        public List<IPlayerBattleResult> All()
         {
             Results.Sort();
             return Results;
         }
 
-        public int CompareTo(BattleOutcome other)
+        public int CompareTo(IBattleOutcome other)
         {
             DateTime thisDeadline = Battle.Deadline;
             DateTime otherDeadline = other.Battle.Deadline;

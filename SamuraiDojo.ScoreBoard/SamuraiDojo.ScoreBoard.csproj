@@ -1201,6 +1201,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IOC.csproj">
+      <Project>{c4a99055-353f-4c33-8722-339caad0255d}</Project>
+      <Name>SamuraiDojo.IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Scoring\SamuraiDojo.Scoring.csproj">
       <Project>{ff358cff-39dd-4d1c-b689-1b22a3778094}</Project>
       <Name>SamuraiDojo.Scoring</Name>

@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Attributes
 {
-    public class BattleAttribute : Attribute
+    public class BattleAttribute : Attribute, IBattleAttribute
     {
         public string Name { get; set; }
 
         public DateTime Deadline { get; set; }
 
-        public SenseiAttribute Sensei { get; set; }
+        public ISenseiAttribute Sensei { get; set; }
 
         public Type Type { get; set; }
 

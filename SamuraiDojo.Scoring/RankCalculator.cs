@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SamuraiDojo.IOC;
 using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
@@ -23,7 +24,7 @@ namespace SamuraiDojo.Scoring
         /// </summary>
         public void Calculate()
         {
-            List<Player> players = PlayerRepository.Players.Values.ToList();
+            List<IPlayer> players = Factory.Get<IPlayerRepository>().Players.Values.ToList();
             players.Sort();
 
             HashSet<int> rankings = new HashSet<int>();

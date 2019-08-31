@@ -9,7 +9,7 @@ namespace SamuraiDojo.Scoring
         {
             Factory.New<IAuditor>(Auditor.DOJO.ToString()).Audit();
             Factory.New<IAuditor>(Auditor.TEST.ToString()).Audit();
-            Factory.New<IRankCalculator>().Calculate();
+            Factory.Get<IRankCalculator>().Calculate();
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Models
@@ -11,22 +10,19 @@ namespace SamuraiDojo.Models
     /// <summary>
     /// Collection of all BattleAttributes. They are sorted by most recent, where index 0 is most recent.
     /// </summary>
-    public class BattleCollection
+    public class BattleCollection : IBattleCollection
     {
-        static BattleCollection()
+        public BattleCollection()
         {
-            All = new List<BattleAttribute>();
+            All = new List<IBattleAttribute>();
             Load();
         }
 
-        public static int Count
-        {
-            get => All.Count;
-        }
+        public int Count => All.Count;
 
-        public static List<BattleAttribute> All { get; private set; }
+        public List<IBattleAttribute> All { get; private set; }
 
-        public static BattleAttribute Get(int i)
+        public IBattleAttribute Get(int i)
         {
             if (i < Count && i >= 0)
                 return All[i];
@@ -34,7 +30,7 @@ namespace SamuraiDojo.Models
                 return null;
         }
 
-        private static void Load()
+        private void Load()
         {
             Type[] battleTypes =
                    ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo")

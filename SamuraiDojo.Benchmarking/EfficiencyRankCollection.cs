@@ -1,35 +1,35 @@
 ﻿using System.Collections.Generic;
-using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {
     public class EfficiencyRankCollection : IEfficiencyRankCollection
     {
-        private Dictionary<int, List<PlayerBattleResult>> efficiencyBuckets;
+        private Dictionary<int, List<IPlayerBattleResult>> efficiencyBuckets;
 
         public EfficiencyRankCollection()
         {
-            efficiencyBuckets = new Dictionary<int, List<PlayerBattleResult>>();
+            efficiencyBuckets = new Dictionary<int, List<IPlayerBattleResult>>();
         }
 
-        public void Add(int rank, PlayerBattleResult battleResult)
+        public void Add(int rank, IPlayerBattleResult battleResult)
         {
             if (efficiencyBuckets.ContainsKey(rank))
                 efficiencyBuckets[rank].Add(battleResult);
             else
-                efficiencyBuckets.Add(rank, new List<PlayerBattleResult> { battleResult });
+                efficiencyBuckets.Add(rank, new List<IPlayerBattleResult> { battleResult });
         }
 
-        public void Add(int rank, IEnumerable<PlayerBattleResult> battleResults)
+        public void Add(int rank, IEnumerable<IPlayerBattleResult> battleResults)
         {
             foreach (PlayerBattleResult result in battleResults)
                 Add(rank, result);
         }
 
-        public List<PlayerBattleResult> Get(int rank)
+        public List<IPlayerBattleResult> Get(int rank)
         {
-            List<PlayerBattleResult> resultsForRank = new List<PlayerBattleResult>();
+            List<IPlayerBattleResult> resultsForRank = new List<IPlayerBattleResult>();
             if (efficiencyBuckets.ContainsKey(rank))
                 resultsForRank = efficiencyBuckets[rank];
 

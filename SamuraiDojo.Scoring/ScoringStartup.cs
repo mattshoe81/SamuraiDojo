@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Intefaces;
+﻿using SamuraiDojo.IOC;
 using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Scoring.Auditors;
 

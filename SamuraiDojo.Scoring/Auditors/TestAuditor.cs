@@ -1,6 +1,6 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.IOC;
 using SamuraiDojo.IOC.Interfaces;
-using SamuraiDojo.Repositories;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
 
@@ -30,9 +30,9 @@ namespace SamuraiDojo.Scoring.Auditors
                 SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
                 BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
                 battle.Sensei = sensei;
-                PlayerRepository.CreatePlayer(sensei.Name);
+                Factory.Get<IPlayerRepository>().CreatePlayer(sensei.Name);
 
-                BattleRepository.CreateBattle(battle, sensei);
+                Factory.Get<IBattleRepository>().CreateBattle(battle, sensei);
             };
         }
 
@@ -46,8 +46,8 @@ namespace SamuraiDojo.Scoring.Auditors
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
-                    PlayerRepository.AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
-                    BattleRepository.GrantPointsToPlayer(battle, context.WrittenBy, points);
+                    Factory.Get<IPlayerRepository>().AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    Factory.Get<IBattleRepository>().GrantPointsToPlayer(battle, context.WrittenBy, points);
                 }
 
             };

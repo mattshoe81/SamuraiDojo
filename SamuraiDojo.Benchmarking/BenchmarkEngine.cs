@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Columns;
-using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Horology;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
@@ -11,7 +10,8 @@ using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
-using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.IOC;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
@@ -32,13 +32,13 @@ namespace SamuraiDojo.Benchmarking
             };
         }
 
-        public List<PlayerBattleResult> PerformBenchmarking(BattleAttribute battle)
+        public List<IPlayerBattleResult> PerformBenchmarking(IBattleAttribute battle)
         {
 #if DEBUG
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
 #endif
             Summary summary = BenchmarkRunner.Run(benchmarkMap[battle.Type]);
-            List<PlayerBattleResult> battleResults = new List<PlayerBattleResult>();
+            List<IPlayerBattleResult> battleResults = new List<IPlayerBattleResult>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));
 
@@ -47,9 +47,9 @@ namespace SamuraiDojo.Benchmarking
             return battleResults;
         }
 
-        private PlayerBattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
+        private IPlayerBattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
         {
-            PlayerBattleResult result = new PlayerBattleResult();
+            IPlayerBattleResult result = Factory.Get<IPlayerBattleResult>();
             result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
             result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.IOC;
 using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
@@ -34,9 +35,9 @@ namespace SamuraiDojo.Scoring.Auditors
             Type[] types = ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo");
             foreach (Type type in types)
             {
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(type);
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(type);
-                BattleRepository.CreateBattle(battle, sensei);
+                IBattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(type);
+                ISenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(type);
+                Factory.Get<IBattleRepository>().CreateBattle(battle, sensei);
             }
         }
 
@@ -45,39 +46,39 @@ namespace SamuraiDojo.Scoring.Auditors
             Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
             foreach (Type battle in battleClasses)
             {
-                List<BonusPointsAttribute> awards = RetrieveAwards(battle);
+                List<IBonusPointsAttribute> awards = RetrieveAwards(battle);
                 if (awards.Count > 0)
                     ProcessAwards(battle, awards);
             }
         }
 
-        private List<BonusPointsAttribute> RetrieveAwards(Type type)
+        private List<IBonusPointsAttribute> RetrieveAwards(Type type)
         {
-            List<BonusPointsAttribute> awards = new List<BonusPointsAttribute>();
+            List<IBonusPointsAttribute> awards = new List<IBonusPointsAttribute>();
 
             foreach (Attribute attribute in type.GetCustomAttributes(false))
             {
-                if (attribute is BonusPointsAttribute)
-                    awards.Add(attribute as BonusPointsAttribute);
+                if (attribute is IBonusPointsAttribute)
+                    awards.Add(attribute as IBonusPointsAttribute);
             }
 
             return awards;
         }
 
-        private void ProcessAwards(Type battleType, List<BonusPointsAttribute> awards)
+        private void ProcessAwards(Type battleType, List<IBonusPointsAttribute> awards)
         {
-            WrittenByAttribute player = AttributeUtility.GetAttribute<WrittenByAttribute>(battleType);
-            BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(battleType);
+            IWrittenByAttribute player = AttributeUtility.GetAttribute<WrittenByAttribute>(battleType);
+            IBattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(battleType);
 
             int bonusPoints = 0;
-            foreach (BonusPointsAttribute award in awards)
+            foreach (IBonusPointsAttribute award in awards)
             {
                 bonusPoints += award.Points;
-                BattleRepository.AssignAwardToPlayer(player, battle, award);
+                Factory.Get<IBattleRepository>().AssignAwardToPlayer(player, battle, award);
             }
 
-            PlayerRepository.AddPointToHistoricalTotal(player.Name, battle.Type, bonusPoints);
-            BattleRepository.GrantPointsToPlayer(battle, player, bonusPoints);
+            Factory.Get<IPlayerRepository>().AddPointToHistoricalTotal(player.Name, battle.Type, bonusPoints);
+            Factory.Get<IBattleRepository>().GrantPointsToPlayer(battle, player, bonusPoints);
         }
     }
 }

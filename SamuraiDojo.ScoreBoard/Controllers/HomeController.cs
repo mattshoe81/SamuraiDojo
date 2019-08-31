@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using SamuraiDojo.IOC;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.ScoreBoard.Metrics;
 
@@ -15,7 +17,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home";
-            ViewBag.CurrentBattle = BattleRepository.CurrentBattle();
+            ViewBag.CurrentBattle = Factory.Get<IBattleRepository>().CurrentBattle();
             return View();
         }
     }

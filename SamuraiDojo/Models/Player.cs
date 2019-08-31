@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
-    public class Player : IComparable<Player>
+    public class Player : IPlayer
     {
         public string Name { get; set; }
 
@@ -16,10 +14,7 @@ namespace SamuraiDojo.Models
 
         public Dictionary<Type, int> PointsByBattle { get; set; }
 
-        public int BattlesCompleted
-        {
-            get => PointsByBattle == null ? 0 : PointsByBattle.Keys.Count;
-        }
+        public int BattlesCompleted => PointsByBattle == null ? 0 : PointsByBattle.Keys.Count;
 
         public int Rank { get; set; }
 
@@ -28,7 +23,7 @@ namespace SamuraiDojo.Models
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public int CompareTo(Player player)
+        public int CompareTo(IPlayer player)
         {
             int result = 0;
             if (TotalPoints > player.TotalPoints)

@@ -67,6 +67,7 @@
     <Compile Include="Battles\Week4\DrewArdner.cs" />
     <Compile Include="Battles\Week4\MattShoe.cs" />
     <Compile Include="Battles\Week4\Palindromania.cs" />
+    <Compile Include="DojoStartup.cs" />
     <Compile Include="Models\BattleCollection.cs" />
     <Compile Include="Models\PlayerBattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
@@ -79,6 +80,10 @@
     <Compile Include="Repositories\PlayerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IOC.csproj">
+      <Project>{C4A99055-353F-4C33-8722-339CAAD0255D}</Project>
+      <Name>SamuraiDojo.IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
       <Project>{0DC773C1-7F74-4718-88A4-886B0036CB90}</Project>
       <Name>SamuraiDojo.Utility</Name>

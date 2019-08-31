@@ -1,6 +1,5 @@
-﻿using SamuraiDojo.Benchmarking.Interfaces;
-using SamuraiDojo.IOC;
-using SamuraiDojo.IOC.Intefaces;
+﻿using SamuraiDojo.IOC;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -8,6 +7,7 @@ namespace SamuraiDojo.Benchmarking
     {
         public void ProjectInit()
         {
+            new DojoStartup().ProjectInit();
             Factory.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
             Factory.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
             Factory.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));

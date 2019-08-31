@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Models
 {
-    public class EfficiencyResult
+    public class EfficiencyResult : IEfficiencyResult
     {
         public double AverageExecutionTime { get; set; }
 
