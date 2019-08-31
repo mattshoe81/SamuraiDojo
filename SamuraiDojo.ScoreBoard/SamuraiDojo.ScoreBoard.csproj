@@ -351,6 +351,7 @@
     <Content Include="Battles\Census Maximus.html" />
     <Content Include="Battles\Angler of Time.html" />
     <Content Include="Battles\Permutations of Character.html" />
+    <Content Include="Battles\Snowflake.html" />
     <Content Include="Content\Images\samuraibobble.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

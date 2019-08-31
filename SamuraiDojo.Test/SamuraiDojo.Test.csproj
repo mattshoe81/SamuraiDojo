@@ -221,6 +221,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UnderTestAttribute.cs" />
+    <Compile Include="Week5\MattShoe.cs" />
+    <Compile Include="Week5\SnowflakeBaseTest.cs" />
     <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
     <None Include="TemplateTest.cs" />

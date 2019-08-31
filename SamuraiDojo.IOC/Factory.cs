@@ -139,7 +139,9 @@ namespace SamuraiDojo.IoC
         {
             if (concreteType.IsInterface)
                 throw new InvalidCastException($"Concrete type for {methodName} must NOT be an interface.");
-            if (!(concreteType is T))
+
+            bool implementsInterface = typeof(T).IsAssignableFrom(concreteType);
+            if (!implementsInterface)
                 throw new InvalidCastException($"Concrete type does not implement the specified interface.");
         }
 
@@ -158,11 +160,12 @@ namespace SamuraiDojo.IoC
         private static void BindSingleton<T>(Type concreteType)
         {
             Type interfaceType = typeof(T);
+            T singleton = (T)Activator.CreateInstance(concreteType);
 
             if (singletonMap.ContainsKey(interfaceType))
-                singletonMap[interfaceType] = (T)Activator.CreateInstance(concreteType);
+                singletonMap[interfaceType] = singleton;
             else
-                singletonMap.Add(interfaceType, concreteType);
+                singletonMap.Add(interfaceType, singleton);
         }
 
         private static void BindInstance<T>(Type concreteType)
