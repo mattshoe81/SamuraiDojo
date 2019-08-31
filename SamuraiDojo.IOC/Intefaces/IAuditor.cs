@@ -1,4 +1,4 @@
-﻿namespace SamuraiDojo.Scoring.Interfaces
+﻿namespace SamuraiDojo.IOC.Interfaces
 {
     public interface IAuditor
     {

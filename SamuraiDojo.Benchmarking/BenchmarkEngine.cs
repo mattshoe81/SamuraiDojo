@@ -11,16 +11,17 @@ using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
+using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class BenchmarkEngine
+    public class BenchmarkEngine : IBenchmarkEngine
     {
-        private static Dictionary<Type, Type> benchmarkMap;
+        private Dictionary<Type, Type> benchmarkMap;
 
-        static BenchmarkEngine()
+        public BenchmarkEngine()
         {
             benchmarkMap = new Dictionary<Type, Type>
             {
@@ -31,13 +32,13 @@ namespace SamuraiDojo.Benchmarking
             };
         }
 
-        public static List<BattleStatsForPlayer> PerformBenchmarking(BattleAttribute battle)
+        public List<PlayerBattleResult> PerformBenchmarking(BattleAttribute battle)
         {
 #if DEBUG
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
 #endif
             Summary summary = BenchmarkRunner.Run(benchmarkMap[battle.Type]);
-            List<BattleStatsForPlayer> battleResults = new List<BattleStatsForPlayer>();
+            List<PlayerBattleResult> battleResults = new List<PlayerBattleResult>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));
 
@@ -46,9 +47,9 @@ namespace SamuraiDojo.Benchmarking
             return battleResults;
         }
 
-        public static BattleStatsForPlayer ProcessCase(BenchmarkCase benchmark, Summary summary)
+        private PlayerBattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)
         {
-            BattleStatsForPlayer result = new BattleStatsForPlayer();
+            PlayerBattleResult result = new PlayerBattleResult();
             result.Player = new WrittenByAttribute(benchmark.DisplayInfo);
             result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
 
@@ -66,25 +67,25 @@ namespace SamuraiDojo.Benchmarking
             return result;
         }
 
-        private static double GetAverageExecutionTime(BenchmarkCase benchmark, Summary summary)
+        private double GetAverageExecutionTime(BenchmarkCase benchmark, Summary summary)
         {
             double exeutionTime = GetValue<double>("MEAN", benchmark, summary);
             return exeutionTime;
         }
 
-        private static double GetStandardDeviation(BenchmarkCase benchmark, Summary summary)
+        private double GetStandardDeviation(BenchmarkCase benchmark, Summary summary)
         {
             double standardDeviation = GetValue<double>("STDDEV", benchmark, summary);
             return standardDeviation;
         }
 
-        private static long GetMemoryAllocated(BenchmarkCase benchmark, Summary summary)
+        private long GetMemoryAllocated(BenchmarkCase benchmark, Summary summary)
         {
             long memory = GetValue<long>("ALLOCATED", benchmark, summary);
             return memory;
         }
 
-        private static T GetValue<T>(string columnName, BenchmarkCase benchmark, Summary summary) where T : IConvertible
+        private T GetValue<T>(string columnName, BenchmarkCase benchmark, Summary summary) where T : IConvertible
         {
             T value = default;
             try

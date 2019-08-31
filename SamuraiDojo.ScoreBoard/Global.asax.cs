@@ -22,7 +22,7 @@ namespace SamuraiDojo.ScoreBoard
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Kick off the reflective scoring system
-            ScoreKeeper.Start();
+            new ScoringStartup().ProjectInit();
         }
     }
 }

@@ -17,14 +17,14 @@ namespace SamuraiDojo.Models
 
         public SenseiAttribute Sensei { get; set; }
 
-        public List<BattleStatsForPlayer> Results { get; set; }
+        public List<PlayerBattleResult> Results { get; set; }
 
         public BattleOutcome()
         {
-            Results = new List<BattleStatsForPlayer>();
+            Results = new List<PlayerBattleResult>();
         }
 
-        public void Add(BattleStatsForPlayer result, SenseiAttribute sensei)
+        public void Add(PlayerBattleResult result, SenseiAttribute sensei)
         {
             Results.Add(result);
             Sensei = sensei;
@@ -32,10 +32,10 @@ namespace SamuraiDojo.Models
 
         public void AddPoint(WrittenByAttribute writtenBy, int points = 1)
         {
-            BattleStatsForPlayer playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
+            PlayerBattleResult playerResult = Results.Where((result) => result.Player.Name == writtenBy.Name)?.FirstOrDefault();
             if (playerResult == null)
             {
-                Results.Add(new BattleStatsForPlayer
+                Results.Add(new PlayerBattleResult
                 {
                     Player = writtenBy,
                     Points = points
@@ -50,13 +50,13 @@ namespace SamuraiDojo.Models
 
         public void AddAward(WrittenByAttribute player, BonusPointsAttribute award)
         {
-            BattleStatsForPlayer result = Get(player.Name);
+            PlayerBattleResult result = Get(player.Name);
 
             if (result != null)
                 result.Awards.Add(award);
             else
             {
-                Results.Add(new BattleStatsForPlayer
+                Results.Add(new PlayerBattleResult
                 {
                     Player = player,
                     Points = 0,
@@ -67,19 +67,19 @@ namespace SamuraiDojo.Models
 
         public void SetEfficiencyScore(WrittenByAttribute writtenBy, double efficiencyScore)
         {
-            BattleStatsForPlayer result = Get(writtenBy.Name);
+            PlayerBattleResult result = Get(writtenBy.Name);
 
             //if (result != null)
             //    result.Efficiency = efficiencyScore;
         }
 
-        public BattleStatsForPlayer Get(string player)
+        public PlayerBattleResult Get(string player)
         {
-            BattleStatsForPlayer result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
+            PlayerBattleResult result = Results.Where((battleResult) => battleResult.Player.Name == player).FirstOrDefault();
             return result;
         }
 
-        public List<BattleStatsForPlayer> All()
+        public List<PlayerBattleResult> All()
         {
             Results.Sort();
             return Results;

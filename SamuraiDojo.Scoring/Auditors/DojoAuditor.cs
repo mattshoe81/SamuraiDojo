@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Repositories;
-using SamuraiDojo.Scoring.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Scoring.Auditors

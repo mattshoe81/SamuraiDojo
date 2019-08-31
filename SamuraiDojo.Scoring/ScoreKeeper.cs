@@ -1,5 +1,5 @@
-﻿using SamuraiDojo.Scoring.Auditors;
-using SamuraiDojo.Scoring.Interfaces;
+﻿using SamuraiDojo.IOC;
+using SamuraiDojo.IOC.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
@@ -7,8 +7,8 @@ namespace SamuraiDojo.Scoring
     {
         public static void Start()
         {
-            Factory.New(Auditor.DOJO).Audit();
-            Factory.New(Auditor.TEST).Audit();
+            Factory.New<IAuditor>(Auditor.DOJO.ToString()).Audit();
+            Factory.New<IAuditor>(Auditor.TEST.ToString()).Audit();
             Factory.New<IRankCalculator>().Calculate();
         }
     }

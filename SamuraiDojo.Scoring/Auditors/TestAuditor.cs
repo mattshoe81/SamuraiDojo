@@ -1,6 +1,6 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.IOC.Interfaces;
 using SamuraiDojo.Repositories;
-using SamuraiDojo.Scoring.Interfaces;
 using SamuraiDojo.Test;
 using SamuraiDojo.Utility;
 

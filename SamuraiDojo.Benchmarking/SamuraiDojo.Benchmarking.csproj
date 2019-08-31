@@ -239,6 +239,7 @@
   <ItemGroup>
     <Compile Include="BenchmarkEngine.cs" />
     <None Include="Benchmarks\BenchmarkTemplate.cs" />
+    <Compile Include="BenchmarkingStartup.cs" />
     <Compile Include="Benchmarks\DojoBenchmark.cs" />
     <Compile Include="Benchmarks\Week1.cs" />
     <Compile Include="Benchmarks\Week2.cs" />
@@ -246,6 +247,9 @@
     <Compile Include="Benchmarks\Week4.cs" />
     <Compile Include="EfficiencyCalculator.cs" />
     <Compile Include="EfficiencyRankCollection.cs" />
+    <Compile Include="Interfaces\IBenchmarkEngine.cs" />
+    <Compile Include="Interfaces\IEfficiencyRankCollection.cs" />
+    <Compile Include="Interfaces\IEfficiencyCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -254,6 +258,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IOC.csproj">
+      <Project>{C4A99055-353F-4C33-8722-339CAAD0255D}</Project>
+      <Name>SamuraiDojo.IOC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
       <Project>{0e85b929-b27f-48fa-8a6c-944c887bbcef}</Project>
       <Name>SamuraiDojo.Test</Name>

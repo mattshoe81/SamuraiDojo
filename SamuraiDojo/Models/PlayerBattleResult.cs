@@ -9,7 +9,7 @@ namespace SamuraiDojo.Models
     /// <summary>
     /// The outcome of a battle for a specific player.
     /// </summary>
-    public class BattleStatsForPlayer : IComparable<BattleStatsForPlayer>
+    public class PlayerBattleResult : IComparable<PlayerBattleResult>
     {
         public WrittenByAttribute Player { get; set; }
 
@@ -19,12 +19,12 @@ namespace SamuraiDojo.Models
 
         public List<BonusPointsAttribute> Awards { get; set; }
 
-        public BattleStatsForPlayer()
+        public PlayerBattleResult()
         {
             Awards = new List<BonusPointsAttribute>();
         }
 
-        public int CompareTo(BattleStatsForPlayer other)
+        public int CompareTo(PlayerBattleResult other)
         {
             int comparison = other.Points - Points;
             if (comparison == 0)
@@ -49,8 +49,8 @@ namespace SamuraiDojo.Models
                 return false;
             else if (object.ReferenceEquals(this, obj))
                 return true;
-            else if (obj is BattleStatsForPlayer)
-                return Player.Name == ((BattleStatsForPlayer)obj).Player.Name;
+            else if (obj is PlayerBattleResult)
+                return Player.Name == ((PlayerBattleResult)obj).Player.Name;
 
             return false;
         }

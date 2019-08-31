@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.IOC;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
@@ -17,6 +19,8 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
+            new BenchmarkingStartup().ProjectInit();
+
             WIDTH = 180;
             HEIGHT = 40;
             DEFAULT_COLOR = ConsoleColor.Yellow;
@@ -62,10 +66,10 @@ namespace SamuraiDojo.Benchmarking
         private static void BenchmarkBattle(int index)
         {
             CurrentBattle = BattleCollection.Get(index);
-            List<BattleStatsForPlayer> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
+            List<PlayerBattleResult> battleResults = Factory.New<IBenchmarkEngine>().PerformBenchmarking(CurrentBattle);
 
-            EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
-            EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
+            IEfficiencyCalculator efficiencyCalculator = Factory.New<IEfficiencyCalculator>();
+            IEfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
             PrintBenchmarkingResults(ranks, efficiencyCalculator);
         }
 
@@ -84,7 +88,7 @@ namespace SamuraiDojo.Benchmarking
             Console.ForegroundColor = DEFAULT_COLOR;
         }
 
-        private static void PrintBenchmarkingResults(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
+        private static void PrintBenchmarkingResults(IEfficiencyRankCollection efficiencyBuckets, IEfficiencyCalculator efficiencyCalculator)
         {
             Console.ForegroundColor = INFO_COLOR;
             int headerLength = PrintBenchmarkHeader(efficiencyBuckets, efficiencyCalculator);
@@ -92,9 +96,9 @@ namespace SamuraiDojo.Benchmarking
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
             {
-                List<BattleStatsForPlayer> results = efficiencyBuckets.Get(rank);
+                List<PlayerBattleResult> results = efficiencyBuckets.Get(rank);
                 Console.WriteLine($"Rank {rank}");
-                foreach (BattleStatsForPlayer result in results)
+                foreach (PlayerBattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
                     Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
@@ -106,7 +110,7 @@ namespace SamuraiDojo.Benchmarking
             PrintBenchmarkFooter(headerLength);
         }
 
-        private static int PrintBenchmarkHeader(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
+        private static int PrintBenchmarkHeader(IEfficiencyRankCollection efficiencyBuckets, IEfficiencyCalculator efficiencyCalculator)
         {
             Console.WriteLine();
             Console.WriteLine();
