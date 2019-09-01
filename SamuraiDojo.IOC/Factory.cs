@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SamuraiDojo.IoC
 {
@@ -91,11 +89,11 @@ namespace SamuraiDojo.IoC
                     result = (T)singletonMap[interfaceType];
                     break;
                 case BindingConfig.Transient:
-                    // Let this fall through for now
+                // Let this fall through for now
                 default:
                     result = (T)Resolve(interfaceType);
                     break;
-            }            
+            }
 
             return result;
         }
@@ -133,7 +131,15 @@ namespace SamuraiDojo.IoC
             Type interfaceType = typeof(T);
             Debind(interfaceType, config);
         }
-
+        
+        /// <summary>
+        /// Removes the binding associated with an interface. The optional parameter allows you
+        /// to specify whether to debind only singleton bindings or debind only transient bindings.
+        /// The default behavior is to remove all singleton AND transient bindings. This method
+        /// does NOT affect multibindings.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="config"></param>
         public static void Debind(Type interfaceType, BindingConfig config = BindingConfig.Default)
         {
             switch (config)
@@ -152,7 +158,7 @@ namespace SamuraiDojo.IoC
         }
 
         public static void Resolve()
-        { 
+        {
             // TODO - maybe resolve all singleton dependencies at once to improve performance?
         }
 
