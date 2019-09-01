@@ -35,12 +35,14 @@ namespace SamuraiDojo.Benchmarking
             };
         }
 
+        public void PerformBenchmarking(Type type)
+        {
+            StartBenchmarking(type);
+        }
+
         public List<IPlayerBattleResult> PerformBenchmarking(IBattleAttribute battle)
         {
-#if DEBUG
-            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
-#endif
-            Summary summary = BenchmarkRunner.Run(benchmarkMap[battle.Type]);
+            Summary summary = StartBenchmarking(benchmarkMap[battle.Type]);
             List<IPlayerBattleResult> battleResults = new List<IPlayerBattleResult>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));
@@ -48,6 +50,16 @@ namespace SamuraiDojo.Benchmarking
             battleResults.OrderBy(result => result.Efficiency.AverageExecutionTime);
 
             return battleResults;
+        }
+
+        private Summary StartBenchmarking(Type type)
+        {
+#if DEBUG
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(new string[0], new DebugInProcessConfig());
+#endif
+            Summary summary = BenchmarkRunner.Run(type);
+
+            return summary;
         }
 
         private IPlayerBattleResult ProcessCase(BenchmarkCase benchmark, Summary summary)

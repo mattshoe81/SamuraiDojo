@@ -12,6 +12,8 @@
 
             if (!HasBeenInitialized)
                 Initialize();
+
+            Factory.Resolve();
         }
     }
 }

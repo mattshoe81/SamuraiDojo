@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Horology;
+using SamuraiDojo.Benchmarking.Benchmarks.IoC;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
@@ -69,14 +70,19 @@ namespace SamuraiDojo.Benchmarking
         {
             string[] input = GetInput();
 
-            SetUnits(input);
-
-            int battleIndex = 0;
-
-            if (input.Length > 0 && int.TryParse(input[0], out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
-                BenchmarkBattle(battleIndex);
+            if (input[0].Trim().EqualsIgnoreCase("ioc"))
+                BenchmarkIoC(input);
             else
-                PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
+            {
+                SetUnits(input);
+
+                int battleIndex = 0;
+
+                if (input.Length > 0 && int.TryParse(input[0], out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
+                    BenchmarkBattle(battleIndex);
+                else
+                    PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
+            }
         }
 
         private static string[] GetInput()
@@ -149,6 +155,11 @@ namespace SamuraiDojo.Benchmarking
             Console.ReadKey();
             Console.WriteLine();
             Console.ForegroundColor = DEFAULT_COLOR;
+        }
+
+        private static void BenchmarkIoC(string[] input)
+        {
+            Factory.Get<IBenchmarkEngine>().PerformBenchmarking(typeof(IoCBenchmarking));
         }
 
         private static void BenchmarkBattle(int index)
