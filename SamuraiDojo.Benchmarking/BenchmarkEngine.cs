@@ -93,7 +93,7 @@ namespace SamuraiDojo.Benchmarking
             try
             {
                 IColumn meanColumn = summary.GetColumns().Where(column => column.ColumnName.EqualsIgnoreCase(columnName)).FirstOrDefault();
-                string valueString = meanColumn.GetValue(summary, benchmark, new SummaryStyle(true, SizeUnit.B, TimeUnit.Millisecond, false));
+                string valueString = meanColumn.GetValue(summary, benchmark, new SummaryStyle(true, Program.SizeUnit, Program.TimeUnit, false));
                 Console.WriteLine($"Raw value for {columnName}: {valueString}");
                 value = (T)Convert.ChangeType(valueString.Replace(",", ""), typeof(T));
             }

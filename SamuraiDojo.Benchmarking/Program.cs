@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Horology;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -12,6 +16,11 @@ namespace SamuraiDojo.Benchmarking
         private static readonly ConsoleColor ERROR_COLOR;
         private static readonly int WIDTH;
         private static readonly int HEIGHT;
+        private static readonly Dictionary<TimeUnit, string> timeUnits;
+        private static readonly Dictionary<SizeUnit, string> sizeUnits;
+
+        public static TimeUnit TimeUnit { get; set; } = TimeUnit.Millisecond;
+        public static SizeUnit SizeUnit { get; set; } = SizeUnit.B;
 
         private static IBattleAttribute CurrentBattle;
 
@@ -28,13 +37,29 @@ namespace SamuraiDojo.Benchmarking
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
             Console.ForegroundColor = DEFAULT_COLOR;
+
+            timeUnits = new Dictionary<TimeUnit, string>
+            {
+                { TimeUnit.Nanosecond, "ns" },
+                { TimeUnit.Microsecond, "micros" },
+                { TimeUnit.Millisecond, "ms" },
+                { TimeUnit.Second, "s" },
+                { TimeUnit.Minute, "mins" }
+            };
+            sizeUnits = new Dictionary<SizeUnit, string>
+            {
+                { SizeUnit.B, "B" },
+                { SizeUnit.KB, "KB" },
+                { SizeUnit.MB, "MB" },
+                { SizeUnit.GB, "GB" }
+            };
         }
 
         public static void Main(string[] args)
         {
 #if DEBUG
-            RejectStart();
-            return;
+            //RejectStart();
+            //return;
 #endif
             while (true)
                 Iterate();
@@ -42,23 +67,88 @@ namespace SamuraiDojo.Benchmarking
 
         private static void Iterate()
         {
-            string input = GetInput();
+            string[] input = GetInput();
+
+            SetUnits(input);
+
             int battleIndex = 0;
 
-            if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
+            if (input.Length > 0 && int.TryParse(input[0], out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
                 BenchmarkBattle(battleIndex);
             else
                 PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
         }
 
-        private static string GetInput()
+        private static string[] GetInput()
         {
             PrintBattleOptions(Factory.Get<IBattleCollection>().All);
-            Console.Write($"Enter the index of the battle you wish to Benchmark: ");
+            Console.Write($"Select Battle (type 'help' for a list of commands): ");
+
+            string[] result = new string[0];
             string input = Console.ReadLine();
+            if (input.Trim().EqualsIgnoreCase("help"))
+                PrintHelp();
+            else
+                result = input.Split(' ');
+
             Console.WriteLine();
 
-            return input;
+            return result;
+        }
+
+        private static void SetUnits(string[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                KeyValuePair<TimeUnit, string> timeUnit = timeUnits.Where(pair => pair.Value.EqualsIgnoreCase(input[i].Trim())).FirstOrDefault();
+                if (timeUnit.Key != null)
+                    TimeUnit = timeUnit.Key;
+                else
+                {
+                    KeyValuePair<SizeUnit, string> sizeUnit = sizeUnits.Where(pair => pair.Value.EqualsIgnoreCase(input[i].Trim())).FirstOrDefault();
+                    if (sizeUnit.Key != null)
+                        SizeUnit = sizeUnit.Key;
+                }
+            }
+        }
+
+        private static void PrintHelp()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
+            PrintDivider(100);
+            Console.WriteLine("\tHow to use this command line");
+            PrintDivider(100);
+            Console.WriteLine();
+
+            Console.WriteLine($"You must always enter a battle index (except to load this view)");
+            Console.WriteLine($"You can also specify one or both of the units for time and memory you wish to use.");
+            Console.WriteLine($"Simply enter the battle index, one or both of the units you want, separating each by at least one space.");
+            Console.WriteLine($"The order in which you enter the unit arguments does not matter, but the battle index MUST be first");
+            Console.WriteLine();
+
+            Console.WriteLine("Time Units:");
+            foreach (KeyValuePair<TimeUnit, string> pair in timeUnits)
+                Console.WriteLine($"\t{pair.Value}");
+
+            Console.WriteLine("Size Units:");
+            foreach (KeyValuePair<SizeUnit, string> pair in sizeUnits)
+                Console.WriteLine($"\t{pair.Value}");
+
+            Console.WriteLine();
+            Console.WriteLine("Examples:");
+            Console.WriteLine("\t2 milliseconds kilobytes");
+            Console.WriteLine("\t0 bytes nanoseconds");
+            Console.WriteLine("\t3 microseconds");
+            Console.WriteLine("\t1 megabytes");
+
+            Console.WriteLine();
+            PrintDivider(100);
+            Console.WriteLine();
+            Console.Write("Press any key to continue ");
+            Console.ReadKey();
+            Console.WriteLine();
+            Console.ForegroundColor = DEFAULT_COLOR;
         }
 
         private static void BenchmarkBattle(int index)
@@ -99,8 +189,8 @@ namespace SamuraiDojo.Benchmarking
                 foreach (IPlayerBattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
-                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} ms", result.Efficiency.AverageExecutionTime);
-                    Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} Bytes");
+                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} {1}", result.Efficiency.AverageExecutionTime, timeUnits[TimeUnit]);
+                    Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} {sizeUnits[SizeUnit]}");
                 }
                 rank++;
             }
