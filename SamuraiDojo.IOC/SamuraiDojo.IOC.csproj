@@ -49,9 +49,13 @@
     <Compile Include="Interfaces\IBattleRepository.cs" />
     <Compile Include="Interfaces\IBenchmarkEngine.cs" />
     <Compile Include="Interfaces\IBonusPointsAttribute.cs" />
+    <Compile Include="Interfaces\Test\IChild1.cs" />
+    <Compile Include="Interfaces\Test\IChild2.cs" />
     <Compile Include="Interfaces\IEfficiencyCalculator.cs" />
     <Compile Include="Interfaces\IEfficiencyRankCollection.cs" />
     <Compile Include="Interfaces\IEfficiencyResult.cs" />
+    <Compile Include="Interfaces\Test\INestedParent.cs" />
+    <Compile Include="Interfaces\Test\IParent.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlayerBattleResult.cs" />
     <Compile Include="Interfaces\IPlayerRepository.cs" />

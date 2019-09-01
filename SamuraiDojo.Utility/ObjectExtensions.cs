@@ -19,5 +19,13 @@ namespace SamuraiDojo.Utility
 
             return false;
         }
+
+        public static bool IsDefaultOrNull(this object self)
+        {
+            if (self == default || self == null)
+                return true;
+
+            return false;
+        }
     }
 }

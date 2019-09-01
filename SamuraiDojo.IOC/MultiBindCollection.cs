@@ -9,23 +9,23 @@ namespace SamuraiDojo.IoC
     internal class MultiBindCollection
     {
         private Dictionary<Type, Dictionary<string, object>> singletonMultiBinds;
-        private Dictionary<Type, Dictionary<string, Type>> instanceMultiBinds;
+        private Dictionary<Type, Dictionary<string, Type>> transientMultiBinds;
 
         public MultiBindCollection()
         {
             singletonMultiBinds = new Dictionary<Type, Dictionary<string, object>>();
-            instanceMultiBinds = new Dictionary<Type, Dictionary<string, Type>>();
+            transientMultiBinds = new Dictionary<Type, Dictionary<string, Type>>();
         }
 
-        public void Bind<T>(string key, Type concreteType, BindingConfig config = BindingConfig.DEFAULT)
+        public void Bind<T>(string key, Type concreteType, BindingConfig config = BindingConfig.Default)
         {
             switch (config)
             {
-                case BindingConfig.SINGLETON:
+                case BindingConfig.Singleton:
                     BindSingleton<T>(key, concreteType);
                     break;
-                case BindingConfig.INSTANCE:
-                    BindInstance<T>(key, concreteType);
+                case BindingConfig.Transient:
+                    BindTransient<T>(key, concreteType);
                     break;
                 default:
                     BindDefault<T>(key, concreteType);
@@ -33,17 +33,17 @@ namespace SamuraiDojo.IoC
             }
         }
 
-        public T Get<T>(string key, BindingConfig config = BindingConfig.DEFAULT)
+        public T Get<T>(string key, BindingConfig config = BindingConfig.Default)
         {
             T result;
             
             switch (config)
             {
-                case BindingConfig.SINGLETON:
+                case BindingConfig.Singleton:
                     result = GetSingleton<T>(key);
                     break;
-                case BindingConfig.INSTANCE:
-                    result = GetInstance<T>(key);
+                case BindingConfig.Transient:
+                    result = GetTransient<T>(key);
                     break;
                 default:
                     result = GetDefault<T>(key);
@@ -51,6 +51,12 @@ namespace SamuraiDojo.IoC
             }
 
             return result;
+        }
+
+        public void Clear()
+        {
+            transientMultiBinds.Clear();
+            singletonMultiBinds.Clear();
         }
 
         private void BindSingleton<T>(string key, Type concreteType)
@@ -70,20 +76,20 @@ namespace SamuraiDojo.IoC
                 singletonMultiBinds.Add(interfaceType, new Dictionary<string, object> { { key, singleton } });
         }
 
-        private void BindInstance<T>(string key, Type concreteType)
+        private void BindTransient<T>(string key, Type concreteType)
         {
             Type interfaceType = typeof(T);
 
-            if (instanceMultiBinds.ContainsKey(interfaceType))
+            if (transientMultiBinds.ContainsKey(interfaceType))
             {
-                Dictionary<string, Type> multiBinds = instanceMultiBinds[interfaceType];
+                Dictionary<string, Type> multiBinds = transientMultiBinds[interfaceType];
                 if (multiBinds.ContainsKey(key))
                     multiBinds[key] = concreteType;
                 else
                     multiBinds.Add(key, concreteType);
             }
             else
-                instanceMultiBinds.Add(interfaceType, new Dictionary<string, Type> { { key, concreteType } });
+                transientMultiBinds.Add(interfaceType, new Dictionary<string, Type> { { key, concreteType } });
         }
 
         private void BindDefault<T>(string key, Type concreteType)
@@ -93,7 +99,7 @@ namespace SamuraiDojo.IoC
             if (singletonMultiBinds.ContainsKey(interfaceType))
                 BindSingleton<T>(key, concreteType);
             else
-                BindInstance<T>(key, concreteType);
+                BindTransient<T>(key, concreteType);
         }
 
         private T GetSingleton<T>(string key)
@@ -103,10 +109,10 @@ namespace SamuraiDojo.IoC
             return (T)singletonMultiBinds[interfaceType][key];
         }
 
-        private T GetInstance<T>(string key)
+        private T GetTransient<T>(string key)
         {
             Type interfaceType = typeof(T);
-            Type concreteType = instanceMultiBinds[interfaceType][key];
+            Type concreteType = transientMultiBinds[interfaceType][key];
             return (T)Activator.CreateInstance(concreteType);
         }
 
@@ -117,7 +123,7 @@ namespace SamuraiDojo.IoC
             if (singletonMultiBinds.ContainsKey(interfaceType))
                 instance = GetSingleton<T>(key);
             else
-                instance = GetInstance<T>(key);
+                instance = GetTransient<T>(key);
 
             return instance;
         }

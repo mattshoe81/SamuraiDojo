@@ -22,9 +22,9 @@ namespace SamuraiDojo
             Factory.Bind<ISenseiAttribute>(typeof(SenseiAttribute));
             Factory.Bind<IWrittenByAttribute>(typeof(WrittenByAttribute));
 
-            Factory.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.SINGLETON);
-            Factory.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.SINGLETON);
-            Factory.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.SINGLETON);
+            Factory.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.Singleton);
+            Factory.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.Singleton);
+            Factory.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.Singleton);
 
             initialized = true;
         }

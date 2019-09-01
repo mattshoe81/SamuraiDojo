@@ -221,6 +221,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UnderTestAttribute.cs" />
+    <Compile Include="IoC\Models\Child1.cs" />
+    <Compile Include="IoC\Models\Child2.cs" />
+    <Compile Include="IoC\DependencyInjectionTest.cs" />
+    <Compile Include="IoC\Models\NestedParent.cs" />
+    <Compile Include="IoC\Models\Parent.cs" />
     <Compile Include="Week5\MattShoe.cs" />
     <Compile Include="Week5\SnowflakeBaseTest.cs" />
     <None Include="TemplateBaseTest.cs" />
