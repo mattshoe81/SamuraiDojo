@@ -41,7 +41,7 @@
                                         <tr>
                                             <td>@result.Points</td>
                                             <td class="lowercase">@result.Player.Name</td>
-                                            <td class="italic">@string.Join(", ", result.Awards.Select(award => award.Name)).DefaultIfEmpty()</td>
+                                            <td class="italic">@string.Join(", ", result.Awards == null ? new string[0] : result?.Awards?.Select(award => award.Name)?.DefaultIfEmpty())</td>
                                         </tr>
                                     }
                                 </tbody>
