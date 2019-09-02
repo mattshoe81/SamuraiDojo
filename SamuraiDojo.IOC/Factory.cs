@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SamuraiDojo.IoC.Abstractions;
 
 namespace SamuraiDojo.IoC
 {
@@ -14,15 +15,18 @@ namespace SamuraiDojo.IoC
 
     public static class Factory
     {
-        private static IDictionary<Type, Type> transientMap;
-        private static IDictionary<Type, object> singletonMap;
-        private static MultiBindCollection multiBindMap;
+        private static readonly IMultiBindCollection multiBindMap;
+        private static readonly IDependencyRepository dependencies;
+        private static readonly IDependencyInjector injector;
+        private static readonly IDependencyBinder binder;
 
 
         static Factory()
         {
-            transientMap = new Dictionary<Type, Type>();
-            singletonMap = new Dictionary<Type, object>();
+            dependencies = new DependencyRepository();
+            injector = new DependencyInjector(dependencies);
+            binder = new DependencyBinder(dependencies, injector);
+
             multiBindMap = new MultiBindCollection();
         }
 
@@ -38,19 +42,7 @@ namespace SamuraiDojo.IoC
         public static void Bind<T>(Type concreteType, BindingConfig config = BindingConfig.Default)
         {
             ValidateBinding<T>("Factory.Bind", concreteType);
-
-            switch (config)
-            {
-                case BindingConfig.Singleton:
-                    BindSingleton<T>(concreteType);
-                    break;
-                case BindingConfig.Transient:
-                    BindTransient<T>(concreteType);
-                    break;
-                default:
-                    BindDefault<T>(concreteType);
-                    break;
-            }
+            binder.Bind<T>(concreteType, config);
         }
 
         /// <summary>
@@ -67,7 +59,6 @@ namespace SamuraiDojo.IoC
         public static void MultiBind<T>(string key, Type concreteType, BindingConfig config = BindingConfig.Default)
         {
             ValidateBinding<T>("Factory.MultiBind", concreteType);
-
             multiBindMap.Bind<T>(key, concreteType, config);
         }
 
@@ -86,12 +77,12 @@ namespace SamuraiDojo.IoC
             switch (config)
             {
                 case BindingConfig.Singleton:
-                    result = (T)singletonMap[interfaceType];
+                    result = (T)dependencies.Singleton[interfaceType];
                     break;
                 case BindingConfig.Transient:
                 // Let this fall through for now
                 default:
-                    result = (T)Resolve(interfaceType);
+                    result = (T)injector.ResolveInterface(interfaceType);
                     break;
             }
 
@@ -128,8 +119,7 @@ namespace SamuraiDojo.IoC
         /// <param name="config"></param>
         public static void Debind<T>(BindingConfig config = BindingConfig.Default)
         {
-            Type interfaceType = typeof(T);
-            Debind(interfaceType, config);
+            binder.Debind<T>(config);
         }
         
         /// <summary>
@@ -142,24 +132,16 @@ namespace SamuraiDojo.IoC
         /// <param name="config"></param>
         public static void Debind(Type interfaceType, BindingConfig config = BindingConfig.Default)
         {
-            switch (config)
-            {
-                case BindingConfig.Singleton:
-                    singletonMap.Remove(interfaceType);
-                    break;
-                case BindingConfig.Transient:
-                    transientMap.Remove(interfaceType);
-                    break;
-                default:
-                    singletonMap.Remove(interfaceType);
-                    transientMap.Remove(interfaceType);
-                    break;
-            }
+            binder.Debind(interfaceType, config);
         }
 
+        /// <summary>
+        /// Resolve the dependencies for registerd bindings. This MUST be performed after
+        /// all bindings have been made.
+        /// </summary>
         public static void Resolve()
         {
-            // TODO - maybe resolve all singleton dependencies at once to improve performance?
+            binder.Resolve();
         }
 
         /// <summary>
@@ -167,8 +149,8 @@ namespace SamuraiDojo.IoC
         /// </summary>
         public static void Reset()
         {
-            transientMap.Clear();
-            singletonMap.Clear();
+            dependencies.Transient.Clear();
+            dependencies.Singleton.Clear();
             multiBindMap.Clear();
         }
 
@@ -180,7 +162,8 @@ namespace SamuraiDojo.IoC
 
         private static void AssertInterface<T>(string methodName)
         {
-            if (!typeof(T).IsInterface)
+            // Interface type must be abstract or interface
+            if (!(typeof(T).IsInterface || typeof(T).IsAbstract))
                 throw new InvalidCastException($"Generic type parameter for {methodName} must be an interface.");
         }
 
@@ -195,124 +178,6 @@ namespace SamuraiDojo.IoC
             bool implementsInterface = typeof(T).IsAssignableFrom(concreteType);
             if (!implementsInterface)
                 throw new InvalidCastException($"Concrete type does not implement the specified interface.");
-        }
-
-        private static void BindDefault<T>(Type concreteType)
-        {
-            Type interfaceType = typeof(T);
-
-            if (singletonMap.ContainsKey(interfaceType))
-                BindSingleton<T>(concreteType);
-            else if (transientMap.ContainsKey(interfaceType))
-                BindTransient<T>(concreteType);
-            else
-                transientMap.Add(interfaceType, concreteType);
-        }
-
-        private static void BindSingleton<T>(Type concreteType)
-        {
-            Type interfaceType = typeof(T);
-
-            // If it is already bound, remove the binding to allow rebind
-            if (singletonMap.ContainsKey(interfaceType))
-                singletonMap.Remove(interfaceType);
-
-            T singleton = (T)ResolveConcreteType(concreteType);
-
-            if (singletonMap.ContainsKey(interfaceType))
-                singletonMap[interfaceType] = singleton;
-            else
-                singletonMap.Add(interfaceType, singleton);
-        }
-
-        private static void BindTransient<T>(Type concreteType)
-        {
-            Type interfaceType = typeof(T);
-
-            if (transientMap.ContainsKey(interfaceType))
-                transientMap[interfaceType] = concreteType;
-            else
-                transientMap.Add(interfaceType, concreteType);
-        }
-
-        private static object Resolve(Type interfaceType)
-        {
-            object instance = default;
-
-            // No need to resolve if we have a singleton
-            if (singletonMap.ContainsKey(interfaceType))
-                instance = singletonMap[interfaceType];
-            else if (transientMap.ContainsKey(interfaceType))
-            {
-                Type concreteType = transientMap[interfaceType];
-                instance = ResolveConcreteType(concreteType);
-
-                if (instance == default || instance == null)
-                    throw new InvalidOperationException($"Unable to resolve dependencies for {interfaceType.FullName} and it has no parameterless constructor.");
-            }
-
-            return instance;
-        }
-
-        private static object ResolveConcreteType(Type concreteType)
-        {
-            object instance = default;
-
-            ConstructorInfo[] constructors = concreteType.GetConstructors();
-            foreach (ConstructorInfo constructor in constructors)
-            {
-                instance = ResolveConstructor(constructor);
-                if (instance != null)
-                    break;
-            }
-
-            if (instance == default || instance == null)
-            {
-                ConstructorInfo emptyConstructor = constructors?.Where(constructor => constructor.GetParameters().Length == 0).FirstOrDefault();
-                instance = emptyConstructor?.Invoke(new object[0]);
-            }
-
-            return instance;
-        }
-
-        private static object ResolveConstructor(ConstructorInfo constructor)
-        {
-            object instance = default;
-            ParameterInfo[] parameterDefinitions = constructor.GetParameters();
-            if (parameterDefinitions.Length == 0)
-                return instance;
-
-            object[] parameters = ResolveParameters(parameterDefinitions);
-
-            // If any params are null then we couldn't resolve
-            if (!parameters.Any(param => param == default || param == null))
-                instance = constructor.Invoke(parameters);
-
-            return instance;
-        }
-
-        private static object[] ResolveParameters(ParameterInfo[] parameterDefinitions)
-        {
-            object[] parameters = new object[parameterDefinitions.Length];
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                object parameter = default;
-                try
-                {
-                    Type parameterType = parameterDefinitions[i].ParameterType;
-                    if (!parameterType.IsInterface)
-                        throw new Exception();
-
-                    parameter = Resolve(parameterType);
-                    parameters[i] = parameter;
-                }
-                catch
-                {
-                    break;
-                }
-            }
-
-            return parameters;
         }
     }
 }

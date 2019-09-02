@@ -139,5 +139,16 @@ namespace SamuraiDojo.Test.IoC
             Assert.ThrowsException<InvalidOperationException>(() => Factory.Bind<IChild1>(null));
         }
 
+        [TestMethod]
+        public void CircularDependency_Singleton()
+        {
+            Factory.Reset();
+            Factory.Bind<ICircularDependency1>(typeof(CircularDependency1), BindingConfig.Singleton);
+            Factory.Bind<ICircularDependency2>(typeof(CircularDependency2), BindingConfig.Singleton);
+            Assert.ThrowsException<InvalidOperationException>(() => Factory.Resolve());
+        }
+
+
+
     }
 }

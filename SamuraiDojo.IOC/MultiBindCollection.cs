@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.IoC.Abstractions;
 
 namespace SamuraiDojo.IoC
 {
-    internal class MultiBindCollection
+    internal class MultiBindCollection : IMultiBindCollection
     {
         private Dictionary<Type, Dictionary<string, object>> singletonMultiBinds;
         private Dictionary<Type, Dictionary<string, Type>> transientMultiBinds;
@@ -36,7 +37,7 @@ namespace SamuraiDojo.IoC
         public T Get<T>(string key, BindingConfig config = BindingConfig.Default)
         {
             T result;
-            
+
             switch (config)
             {
                 case BindingConfig.Singleton:

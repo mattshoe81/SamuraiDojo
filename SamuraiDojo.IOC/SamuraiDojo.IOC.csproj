@@ -41,7 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyBinder.cs" />
+    <Compile Include="DependencyInjector.cs" />
+    <Compile Include="DependencyRepository.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Abstractions\IDependencyBinder.cs" />
+    <Compile Include="Abstractions\IDependencyInjector.cs" />
+    <Compile Include="Abstractions\IDependencyRepository.cs" />
+    <Compile Include="Abstractions\IMultiBindCollection.cs" />
     <Compile Include="Interfaces\IAttributeUtility.cs" />
     <Compile Include="Interfaces\IAuditor.cs" />
     <Compile Include="Interfaces\IBattleAttribute.cs" />
@@ -59,6 +66,8 @@
     <Compile Include="Interfaces\IEfficiencyCalculator.cs" />
     <Compile Include="Interfaces\IEfficiencyRankCollection.cs" />
     <Compile Include="Interfaces\IEfficiencyResult.cs" />
+    <Compile Include="Interfaces\Test\ICircularDependency1.cs" />
+    <Compile Include="Interfaces\Test\ICircularDependency2.cs" />
     <Compile Include="Interfaces\Test\INestedParent.cs" />
     <Compile Include="Interfaces\Test\IParent.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />

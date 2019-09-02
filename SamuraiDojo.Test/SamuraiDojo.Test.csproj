@@ -224,6 +224,8 @@
     <Compile Include="IoC\Models\Child1.cs" />
     <Compile Include="IoC\Models\Child2.cs" />
     <Compile Include="IoC\DependencyInjectionTests.cs" />
+    <Compile Include="IoC\Models\CircularDependency1.cs" />
+    <Compile Include="IoC\Models\CircularDependency2.cs" />
     <Compile Include="IoC\Models\NestedParent.cs" />
     <Compile Include="IoC\Models\Parent.cs" />
     <Compile Include="IoC\Models\ParentMultipleConstructors.cs" />
