@@ -8,9 +8,7 @@ namespace SamuraiDojo
 {
     public class Setup : ProjectSetup
     {
-        private static bool initialized = false;
-
-        protected override bool HasBeenInitialized => initialized;
+        protected override bool HasBeenInitialized { get; set; }
 
         protected override void Initialize()
         {
@@ -26,7 +24,7 @@ namespace SamuraiDojo
             Factory.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.Singleton);
             Factory.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.Singleton);
 
-            initialized = true;
+            HasBeenInitialized = true;
         }
     }
 }

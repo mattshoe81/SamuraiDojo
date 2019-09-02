@@ -27,9 +27,20 @@ namespace SamuraiDojo.Test
         public Action<ITestExecutionContext> OnTestPass { get; set; }
         public Action<ITestExecutionContext> OnTestFail { get; set; }
 
+        private IReflectionUtility reflectionUtility;
+        private IAttributeUtility attributeUtility;
+        private ILog log;
+
+        public TestRunner(IReflectionUtility reflectionUtility, IAttributeUtility attributeUtility, ILog log)
+        {
+            this.reflectionUtility = reflectionUtility;
+            this.attributeUtility = attributeUtility;
+            this.log = log;
+        }
+
         public void Run()
         {
-            Type[] types = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
+            Type[] types = reflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test");
 
             foreach (Type type in types)
                 RunTests(type);
@@ -37,18 +48,18 @@ namespace SamuraiDojo.Test
 
         public void Run(IWrittenByAttribute writtenBy, IBattleAttribute battle)
         {
-            Type[] allBattleTests = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
-                .Where(test => AttributeUtility.GetAttribute<WrittenByAttribute>(test) == writtenBy)?.ToArray();
+            Type[] allBattleTests = reflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo.Test")
+                .Where(test => attributeUtility.GetAttribute<WrittenByAttribute>(test) == writtenBy)?.ToArray();
 
             Type battleTest = allBattleTests
-                .Where(testClass => AttributeUtility.GetAttribute<UnderTestAttribute>(testClass).Type.FullName == battle.Type.FullName).FirstOrDefault();
+                .Where(testClass => attributeUtility.GetAttribute<UnderTestAttribute>(testClass).Type.FullName == battle.Type.FullName).FirstOrDefault();
 
             RunTests(battleTest);
         }
 
         public int RunTests(Type type)
         {
-            List<MethodInfo> methods = ReflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
+            List<MethodInfo> methods = reflectionUtility.GetMethodsWithAttribute<TestMethodAttribute>(type);
             int passed = 0;
             foreach (MethodInfo method in methods)
                 passed += EvaluteTest(type, method) ? 1 : 0;
@@ -82,7 +93,7 @@ namespace SamuraiDojo.Test
             }
             catch (Exception ex)
             {
-                Log.Warning($"Failed Test: {ex?.InnerException?.Message}");
+                log.Warning($"Failed Test: {ex?.InnerException?.Message}");
                 InvokeAction(OnTestFail, testExecutionContext);
             }
 
@@ -91,8 +102,8 @@ namespace SamuraiDojo.Test
 
         public ITestExecutionContext BuildTestExecutionContext(Type type, MethodInfo method)
         {
-            IWrittenByAttribute writtenBy = AttributeUtility.GetAttribute<WrittenByAttribute>(type);
-            IUnderTestAttribute classUnderTest = AttributeUtility.GetAttribute<UnderTestAttribute>(type);
+            IWrittenByAttribute writtenBy = attributeUtility.GetAttribute<WrittenByAttribute>(type);
+            IUnderTestAttribute classUnderTest = attributeUtility.GetAttribute<UnderTestAttribute>(type);
             ITestExecutionContext testExecutionContext = Factory.Get<ITestExecutionContext>();
             testExecutionContext.TestClass = type;
             testExecutionContext.ClassUnderTest = classUnderTest?.Type;
@@ -111,7 +122,7 @@ namespace SamuraiDojo.Test
             }
             catch (Exception ex)
             {
-                Log.Exception(ex);
+                log.Exception(ex);
             }
         }
     }

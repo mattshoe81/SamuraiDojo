@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SamuraiDojo.IoC.Interfaces;
+﻿using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 
-namespace SamuraiDojo.ScoreBoard
+namespace SamuraiDojo.Utility
 {
     public class Setup : ProjectSetup
     {
@@ -13,8 +9,9 @@ namespace SamuraiDojo.ScoreBoard
 
         protected override void Initialize()
         {
-            new SamuraiDojo.Utility.Setup();
-            new SamuraiDojo.Scoring.Setup();
+            Factory.Bind<IReflectionUtility>(typeof(ReflectionUtility));
+            Factory.Bind<IAttributeUtility>(typeof(AttributeUtility));
+            Factory.Bind<ILog>(typeof(Log));
 
             HasBeenInitialized = true;
         }

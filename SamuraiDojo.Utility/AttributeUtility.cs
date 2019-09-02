@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Utility
 {
-    public class AttributeUtility
+    public class AttributeUtility : IAttributeUtility
     {
+        private ILog log;
 
-        public static bool HasAttribute<T>(Type type)
+        public AttributeUtility(ILog log)
+        {
+            this.log = log;
+        }
+
+        public bool HasAttribute<T>(Type type)
         {
             bool result;
             try
@@ -18,7 +21,7 @@ namespace SamuraiDojo.Utility
                 Attribute attribute = Attribute.GetCustomAttribute(type, typeof(T));
                 result = attribute != null;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 LogException(ex);
                 result = false;
@@ -27,7 +30,7 @@ namespace SamuraiDojo.Utility
             return result;
         }
 
-        public static bool HasAttribute<T>(MemberInfo member)
+        public bool HasAttribute<T>(MemberInfo member)
         {
             bool result;
             try
@@ -44,7 +47,7 @@ namespace SamuraiDojo.Utility
             return result;
         }
 
-        public static T GetAttribute<T>(Type type) where T : Attribute
+        public T GetAttribute<T>(Type type) where T : Attribute
         {
             T attribute;
             try
@@ -60,7 +63,7 @@ namespace SamuraiDojo.Utility
             return attribute;
         }
 
-        public static Attribute GetAttribute(Type type, Attribute attribute)
+        public Attribute GetAttribute(Type type, Attribute attribute)
         {
             Attribute result;
             try
@@ -75,8 +78,8 @@ namespace SamuraiDojo.Utility
 
             return result;
         }
-        
-        public static Attribute GetAttribute(MemberInfo member, Attribute attribute)
+
+        public Attribute GetAttribute(MemberInfo member, Attribute attribute)
         {
             Attribute result;
             try
@@ -92,17 +95,17 @@ namespace SamuraiDojo.Utility
             return result;
         }
 
-        public static bool HasAttribute(Type type, Attribute attribute)
+        public bool HasAttribute(Type type, Attribute attribute)
         {
             return GetAttribute(type, attribute) != null;
         }
 
-        public static bool HasAttribute(MemberInfo member, Attribute attribute)
+        public bool HasAttribute(MemberInfo member, Attribute attribute)
         {
             return GetAttribute(member, attribute) != null;
         }
 
-        public static bool HasAnyAttribute(Type type, params Attribute[] attributes)
+        public bool HasAnyAttribute(Type type, params Attribute[] attributes)
         {
             foreach (Attribute attribute in attributes)
             {
@@ -113,7 +116,7 @@ namespace SamuraiDojo.Utility
             return false;
         }
 
-        public static bool HasAnyAttribute(MemberInfo member, params Attribute[] attributes)
+        public bool HasAnyAttribute(MemberInfo member, params Attribute[] attributes)
         {
             foreach (Attribute attribute in attributes)
             {
@@ -124,9 +127,9 @@ namespace SamuraiDojo.Utility
             return false;
         }
 
-        private static void LogException(Exception ex)
+        private void LogException(Exception ex)
         {
-            Log.Exception(ex, "Exception in AttributeUtility");
+            log.Exception(ex, "Exception in AttributeUtility");
         }
     }
 }

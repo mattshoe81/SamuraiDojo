@@ -14,10 +14,17 @@ namespace SamuraiDojo.ScoreBoard.Controllers
     [LogMetrics]
     public class HomeController : Controller
     {
+        private IBattleRepository battleRepository;
+
+        public HomeController()
+        {
+            battleRepository = Factory.Get<IBattleRepository>();
+        }
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home";
-            ViewBag.CurrentBattle = Factory.Get<IBattleRepository>().CurrentBattle();
+            ViewBag.CurrentBattle = battleRepository.CurrentBattle();
             return View();
         }
     }

@@ -13,6 +13,13 @@ namespace SamuraiDojo.Models
     /// </summary>
     internal class PlayerBattleResult : IPlayerBattleResult
     {
+        private IPlayerRepository playerRepository;
+
+        public PlayerBattleResult(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
         public IWrittenByAttribute Player { get; set; }
 
         public int Points { get; set; }
@@ -31,8 +38,8 @@ namespace SamuraiDojo.Models
             int comparison = other.Points - Points;
             if (comparison == 0)
             {
-                IPlayer thisPlayer = Factory.Get<IPlayerRepository>().GetPlayer(Player.Name);
-                IPlayer otherPlayer = Factory.Get<IPlayerRepository>().GetPlayer(other.Player.Name);
+                IPlayer thisPlayer = playerRepository.GetPlayer(Player.Name);
+                IPlayer otherPlayer = playerRepository.GetPlayer(other.Player.Name);
 
                 if (thisPlayer.Rank < otherPlayer.Rank)
                     comparison = -1;

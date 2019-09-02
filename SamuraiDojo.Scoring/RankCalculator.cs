@@ -15,6 +15,13 @@ namespace SamuraiDojo.Scoring
     /// </summary>
     internal class RankCalculator : IRankCalculator
     {
+        private IPlayerRepository playerRepository;
+
+        public RankCalculator(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
         /// <summary>
         /// Players are ranked according to total historical points. If you have the 
         /// same number of total points, then the player who has participated in 
@@ -24,7 +31,7 @@ namespace SamuraiDojo.Scoring
         /// </summary>
         public void Calculate()
         {
-            List<IPlayer> players = Factory.Get<IPlayerRepository>().Players.Values.ToList();
+            List<IPlayer> players = playerRepository.Players.Values.ToList();
             players.Sort();
 
             HashSet<int> rankings = new HashSet<int>();

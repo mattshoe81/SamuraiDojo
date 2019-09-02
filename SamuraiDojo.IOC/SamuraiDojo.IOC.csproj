@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory.cs" />
+    <Compile Include="Interfaces\IAttributeUtility.cs" />
     <Compile Include="Interfaces\IAuditor.cs" />
     <Compile Include="Interfaces\IBattleAttribute.cs" />
     <Compile Include="Interfaces\IBattleCollection.cs" />
@@ -49,6 +50,10 @@
     <Compile Include="Interfaces\IBattleRepository.cs" />
     <Compile Include="Interfaces\IBenchmarkEngine.cs" />
     <Compile Include="Interfaces\IBonusPointsAttribute.cs" />
+    <Compile Include="Interfaces\IDojoAuditor.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="Interfaces\IReflectionUtility.cs" />
+    <Compile Include="Interfaces\ITestAuditor.cs" />
     <Compile Include="Interfaces\Test\IChild1.cs" />
     <Compile Include="Interfaces\Test\IChild2.cs" />
     <Compile Include="Interfaces\IEfficiencyCalculator.cs" />

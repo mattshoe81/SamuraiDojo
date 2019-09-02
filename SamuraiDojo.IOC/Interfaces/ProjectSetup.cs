@@ -4,7 +4,7 @@
     {
         protected abstract void Initialize();
 
-        protected abstract bool HasBeenInitialized { get; }
+        protected abstract bool HasBeenInitialized { get; set; }
 
         public ProjectSetup()
         {

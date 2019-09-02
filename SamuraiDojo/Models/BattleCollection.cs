@@ -12,8 +12,13 @@ namespace SamuraiDojo.Models
     /// </summary>
     internal class BattleCollection : IBattleCollection
     {
-        public BattleCollection()
+        IReflectionUtility reflectionUtility;
+        IAttributeUtility attributeUtility;
+
+        public BattleCollection(IReflectionUtility reflectionUtility, IAttributeUtility attributeUtility)
         {
+            this.reflectionUtility = reflectionUtility;
+            this.attributeUtility = attributeUtility;
             All = new List<IBattleAttribute>();
             Load();
         }
@@ -33,13 +38,13 @@ namespace SamuraiDojo.Models
         private void Load()
         {
             Type[] battleTypes =
-                   ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo")
-                   .Where(type => !AttributeUtility.HasAttribute<WrittenByAttribute>(type))
-                   .OrderByDescending(type => AttributeUtility.GetAttribute<BattleAttribute>(type).Deadline).ToArray();
+                   reflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo")
+                   .Where(type => !attributeUtility.HasAttribute<WrittenByAttribute>(type))
+                   .OrderByDescending(type => attributeUtility.GetAttribute<BattleAttribute>(type).Deadline).ToArray();
 
             for (int i = 0; i < battleTypes.Length; i++)
             {
-                BattleAttribute battleAttribute = AttributeUtility.GetAttribute<BattleAttribute>(battleTypes[i]);
+                IBattleAttribute battleAttribute = attributeUtility.GetAttribute<BattleAttribute>(battleTypes[i]);
                 battleAttribute.Type = battleTypes[i];
                 All.Add(battleAttribute);
             }

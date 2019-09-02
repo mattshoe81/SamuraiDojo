@@ -14,6 +14,13 @@ namespace SamuraiDojo.ScoreBoard.Controllers
 {
     public class PlayerController : BaseApiController
     {
+        private IPlayerRepository playerRepository;
+
+        public PlayerController()
+        {
+            playerRepository = Factory.Get<IPlayerRepository>();
+        }
+
         [HttpGet]
         public HttpResponseMessage Get()
         {
@@ -37,7 +44,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         public HttpResponseMessage All()
         {
             List<IPlayer> players = new List<IPlayer>();
-            foreach (KeyValuePair<string, IPlayer> pair in Factory.Get<IPlayerRepository>().Players)
+            foreach (KeyValuePair<string, IPlayer> pair in playerRepository.Players)
             {
                 IPlayer player = GetPlayer(pair.Key);
                 if (player != null) 
@@ -50,7 +57,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         
         private IPlayer GetPlayer(string playerName)
         {
-            IPlayer player = Factory.Get<IPlayerRepository>().GetPlayer(playerName);
+            IPlayer player = playerRepository.GetPlayer(playerName);
             return player;
         } 
     }

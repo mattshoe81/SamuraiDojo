@@ -6,27 +6,27 @@ namespace SamuraiDojo.Scoring
 {
     public class Setup : ProjectSetup
     {
-        private static bool initialized = false;
-
-        protected override bool HasBeenInitialized => initialized;
+        protected override bool HasBeenInitialized { get; set; }
 
         protected override void Initialize()
         {
             new SamuraiDojo.Setup();
+            new SamuraiDojo.Utility.Setup();
             new SamuraiDojo.Test.Setup();
 
             BindToIOC();
+
             Factory.Get<IScoreKeeper>().Start();
 
-            initialized = true;
+            HasBeenInitialized = true;
         }
 
         private void BindToIOC()
         {
             Factory.Bind<IRankCalculator>(typeof(RankCalculator));
             Factory.Bind<IScoreKeeper>(typeof(ScoreKeeper));
-            Factory.MultiBind<IAuditor>(Auditor.DOJO.ToString(), typeof(DojoAuditor));
-            Factory.MultiBind<IAuditor>(Auditor.TEST.ToString(), typeof(TestAuditor));
+            Factory.Bind<IDojoAuditor>(typeof(DojoAuditor));
+            Factory.Bind<ITestAuditor>(typeof(TestAuditor));
         }
     }
 

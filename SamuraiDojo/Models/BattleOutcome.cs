@@ -57,6 +57,7 @@ namespace SamuraiDojo.Models
                 result.Player = player;
                 result.Points = 0;
                 result.Awards = new List<IBonusPointsAttribute>();
+                result.Awards.Add(award);
                 Results.Add(result);
             }
         }

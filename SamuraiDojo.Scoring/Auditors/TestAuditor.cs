@@ -5,17 +5,27 @@ using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Scoring.Auditors
 {
-    internal class TestAuditor : IAuditor
+    internal class TestAuditor : ITestAuditor
     {
-        public void Audit()
+        private ITestRunner testRunner;
+        private IAttributeUtility attributeUtility;
+        private IBattleRepository battleRepository;
+        private IPlayerRepository playerRepository;
+
+        public TestAuditor(
+            ITestRunner testRunner, 
+            IAttributeUtility attributeUtility,
+            IBattleRepository battleRepository,
+            IPlayerRepository playerRepository)
         {
-            RunUnitTests();
+            this.testRunner = testRunner;
+            this.attributeUtility = attributeUtility;
+            this.battleRepository = battleRepository;
+            this.playerRepository = playerRepository;
         }
 
-        private void RunUnitTests()
+        public void Audit()
         {
-            ITestRunner testRunner = Factory.Get<ITestRunner>();
-
             SetPreTestAction(testRunner);
             SetPassedTestAction(testRunner);
 
@@ -26,12 +36,12 @@ namespace SamuraiDojo.Scoring.Auditors
         {
             testRunner.PreTest = (context) =>
             {
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
+                ISenseiAttribute sensei = attributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+                IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
                 battle.Sensei = sensei;
-                Factory.Get<IPlayerRepository>().CreatePlayer(sensei.Name);
+                playerRepository.CreatePlayer(sensei.Name);
 
-                Factory.Get<IBattleRepository>().CreateBattle(battle, sensei);
+                battleRepository.CreateBattle(battle, sensei);
             };
         }
 
@@ -39,14 +49,14 @@ namespace SamuraiDojo.Scoring.Auditors
         {
             testRunner.OnTestPass = (context) =>
             {
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+                IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
+                ISenseiAttribute sensei = attributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
 
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
-                    Factory.Get<IPlayerRepository>().AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
-                    Factory.Get<IBattleRepository>().GrantPointsToPlayer(battle, context.WrittenBy, points);
+                    playerRepository.AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    battleRepository.GrantPointsToPlayer(battle, context.WrittenBy, points);
                 }
 
             };

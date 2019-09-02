@@ -2,28 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Utility
 {
-    public class ReflectionUtility
+    internal class ReflectionUtility : IReflectionUtility
     {
-        public static T GetInstance<T>()
-        {
-            T instance = default;
-            try
-            {
-                instance = Activator.CreateInstance<T>();
-            } 
-            catch (Exception ex)
-            {
-                Log.Exception(ex);
-            }
+        private IAttributeUtility attributeUtility;
+        private ILog log;
 
-            return instance;
+        public ReflectionUtility(IAttributeUtility attributeUtility, ILog log)
+        {
+            this.attributeUtility = attributeUtility;
+            this.log = log;
         }
-        public static object GetInstance(Type type)
+
+        public object GetInstance(Type type)
         {
             object instance = default;
             try
@@ -32,37 +26,37 @@ namespace SamuraiDojo.Utility
             }
             catch (Exception ex)
             {
-                Log.Exception(ex);
+                log.Exception(ex);
             }
 
             return instance;
         }
 
-        public static Type[] LoadTypes(string assemblyName)
+        public Type[] LoadTypes(string assemblyName)
         {
             Assembly assembly = Assembly.Load(assemblyName);
             Type[] types = assembly.GetTypes();
             return types;
         }
 
-        public static Type[] LoadTypesWithAttribute<T>(string assemblyName)
+        public Type[] LoadTypesWithAttribute<T>(string assemblyName)
             where T : Attribute
         {
             Type[] types = LoadTypes(assemblyName);
-            types = types.Where((clazz) => AttributeUtility.HasAttribute<T>(clazz)).ToArray();
+            types = types.Where((clazz) => attributeUtility.HasAttribute<T>(clazz)).ToArray();
 
             return types;
         }
 
-        public static Type[] LoadTypesWithAnyAttribute(string assemblyName, params Attribute[] attributes)
+        public Type[] LoadTypesWithAnyAttribute(string assemblyName, params Attribute[] attributes)
         {
             Type[] types = LoadTypes(assemblyName);
-            types = types.Where((clazz) => AttributeUtility.HasAnyAttribute(clazz, attributes)).ToArray();
+            types = types.Where((clazz) => attributeUtility.HasAnyAttribute(clazz, attributes)).ToArray();
 
             return types;
         }
 
-        public static Type[] GetSubTypes<T>(string assemblyName)
+        public Type[] GetSubTypes<T>(string assemblyName)
         {
             Type[] allTypes = LoadTypes(assemblyName);
             Type[] subTypes = allTypes.Where(type => typeof(T).IsAssignableFrom(type) && type != typeof(T)).ToArray();
@@ -70,26 +64,26 @@ namespace SamuraiDojo.Utility
             return subTypes;
         }
 
-        public static List<MethodInfo> GetMethodsWithAttribute<T>(Type type)
+        public List<MethodInfo> GetMethodsWithAttribute<T>(Type type)
         {
             MethodInfo[] allMethods = type.GetMethods();
             List<MethodInfo> methods = new List<MethodInfo>();
             foreach (MethodInfo method in allMethods)
             {
-                if (AttributeUtility.HasAttribute<T>(method))
+                if (attributeUtility.HasAttribute<T>(method))
                     methods.Add(method);
             }
 
             return methods;
         }
 
-        public static List<MethodInfo> GetMethodsWithAnyAttribute(Type type, params Attribute[] attributes)
+        public List<MethodInfo> GetMethodsWithAnyAttribute(Type type, params Attribute[] attributes)
         {
             MethodInfo[] allMethods = type.GetMethods();
             List<MethodInfo> methods = new List<MethodInfo>();
             foreach (MethodInfo method in allMethods)
             {
-                if (AttributeUtility.HasAnyAttribute(method, attributes))
+                if (attributeUtility.HasAnyAttribute(method, attributes))
                     methods.Add(method);
             }
 

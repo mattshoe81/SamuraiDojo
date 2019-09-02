@@ -18,7 +18,6 @@ namespace SamuraiDojo.ScoreBoard
 
             // Kick off the reflective scoring system
             new ScoreBoard.Setup();
-            new Scoring.Setup();
         }
     }
 }

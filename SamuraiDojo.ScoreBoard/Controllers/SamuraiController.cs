@@ -14,6 +14,13 @@ namespace SamuraiDojo.ScoreBoard.Controllers
     [LogMetrics]
     public class SamuraiController : Controller
     {
+        private IBattleRepository battleRepository;
+
+        public SamuraiController()
+        {
+            battleRepository = Factory.Get<IBattleRepository>();
+        }
+
         public ActionResult MyProfile()
         {
             ViewBag.Title = "My Profile";
@@ -55,7 +62,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             ViewBag.Title = "History";
 
             HistoryViewModel model = new HistoryViewModel();
-            model.Battles = Factory.Get<IBattleRepository>().GetAllBattleOutcomes();
+            model.Battles = battleRepository.GetAllBattleOutcomes();
             model.Battles.OrderByDescending(battle => battle.Battle.Deadline).ToList();
 
             return View(model);

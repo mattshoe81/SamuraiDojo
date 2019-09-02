@@ -5,9 +5,7 @@ namespace SamuraiDojo.Benchmarking
 {
     public class Setup : ProjectSetup
     {
-        private static bool initialized = false;
-
-        protected override bool HasBeenInitialized => initialized;
+        protected override bool HasBeenInitialized { get; set; }
 
         protected override void Initialize()
         {
@@ -17,7 +15,7 @@ namespace SamuraiDojo.Benchmarking
             Factory.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
             Factory.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));
 
-            initialized = true;
+            HasBeenInitialized = true;
         }
     }
 }

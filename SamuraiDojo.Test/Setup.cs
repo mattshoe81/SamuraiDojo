@@ -6,19 +6,18 @@ namespace SamuraiDojo.Test
 {
     public class Setup : ProjectSetup
     {
-        private static bool initialized = false;
-
-        protected override bool HasBeenInitialized => initialized;
+        protected override bool HasBeenInitialized { get; set; }
 
         protected override void Initialize()
         {
             new SamuraiDojo.Setup();
+            new SamuraiDojo.Utility.Setup();
 
             Factory.Bind<ITestRunner>(typeof(TestRunner));
             Factory.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
             Factory.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
 
-            initialized = true;
+            HasBeenInitialized = true;
         }
     }
 }

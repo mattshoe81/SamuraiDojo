@@ -16,10 +16,17 @@ namespace SamuraiDojo.ScoreBoard.Controllers
 {
     public class BattleController : BaseApiController
     {
+        private IBattleRepository battleRepository;
+
+        public BattleController()
+        {
+            battleRepository = Factory.Get<IBattleRepository>();
+        }
+
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            IBattleOutcome battle = Factory.Get<IBattleRepository>().CurrentBattle();
+            IBattleOutcome battle = battleRepository.CurrentBattle();
 
             return Request.CreateResponse(HttpStatusCode.OK, battle);
         }
@@ -28,7 +35,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         [Route("api/Battle/All")]
         public HttpResponseMessage All()
         {
-            List<IBattleOutcome> battles = Factory.Get<IBattleRepository>().GetAllBattleOutcomes();
+            List<IBattleOutcome> battles = battleRepository.GetAllBattleOutcomes();
 
             return Request.CreateResponse(HttpStatusCode.OK, battles);
         }
