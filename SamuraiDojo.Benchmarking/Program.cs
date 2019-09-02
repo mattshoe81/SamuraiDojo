@@ -23,11 +23,13 @@ namespace SamuraiDojo.Benchmarking
         public static TimeUnit TimeUnit { get; set; } = TimeUnit.Millisecond;
         public static SizeUnit SizeUnit { get; set; } = SizeUnit.B;
 
-        private static IBattleAttribute CurrentBattle;
+        private static IBattleAttribute SelectedBattle;
+        private static IBattleCollection battleCollection;
 
         static Program()
         {
             new Benchmarking.Setup();
+            battleCollection = Factory.Get<IBattleCollection>();
 
             WIDTH = 180;
             HEIGHT = 40;
@@ -87,7 +89,7 @@ namespace SamuraiDojo.Benchmarking
 
         private static string[] GetInput()
         {
-            PrintBattleOptions(Factory.Get<IBattleCollection>().All);
+            PrintBattleOptions(battleCollection.All);
             Console.Write($"Select Battle (type 'help' for a list of commands): ");
 
             string[] result = new string[0];
@@ -164,8 +166,8 @@ namespace SamuraiDojo.Benchmarking
 
         private static void BenchmarkBattle(int index)
         {
-            CurrentBattle = Factory.Get<IBattleCollection>().Get(index);
-            List<IPlayerBattleResult> battleResults = Factory.Get<IBenchmarkEngine>().PerformBenchmarking(CurrentBattle);
+            SelectedBattle = Factory.Get<IBattleCollection>().Get(index);
+            List<IPlayerBattleResult> battleResults = Factory.Get<IBenchmarkEngine>().PerformBenchmarking(SelectedBattle);
 
             IEfficiencyCalculator efficiencyCalculator = Factory.Get<IEfficiencyCalculator>();
             IEfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
@@ -214,7 +216,7 @@ namespace SamuraiDojo.Benchmarking
             Console.WriteLine();
             Console.WriteLine();
 
-            string headerString = $"=====   Benchmarking for '{CurrentBattle.Name}'   ======";
+            string headerString = $"=====   Benchmarking for '{SelectedBattle.Name}'   ======";
             PrintDivider(headerString.Length);
             Console.WriteLine(headerString);
             PrintDivider(headerString.Length);

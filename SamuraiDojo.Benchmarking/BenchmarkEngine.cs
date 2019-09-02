@@ -67,7 +67,7 @@ namespace SamuraiDojo.Benchmarking
             IPlayerBattleResult result = Factory.Get<IPlayerBattleResult>();
             result.Player = Factory.Get<IWrittenByAttribute>();
             result.Player.Name = benchmark.DisplayInfo;
-            result.Player.Name = result.Player.Name.Replace("DEFAULTJOB", "");
+            result.Player.Name = result.Player.Name.Replace("DefaultJob", "");
 
             double executionTime = GetAverageExecutionTime(benchmark, summary);
             double standardDeviation = GetStandardDeviation(benchmark, summary);

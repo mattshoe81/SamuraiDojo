@@ -10,6 +10,7 @@ namespace SamuraiDojo.Benchmarking
         protected override void Initialize()
         {
             new SamuraiDojo.Setup();
+            new Utility.Setup();
 
             Factory.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
             Factory.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));

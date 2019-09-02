@@ -1,9 +1,11 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SamuraiDojo.Battles.Week4
 {
+    [MostElegant]
     [WrittenBy(Samurai.Drew)]
     public class DrewArdner : Palindromania
     {

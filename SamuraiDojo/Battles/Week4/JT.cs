@@ -1,9 +1,13 @@
 ﻿using SamuraiDojo.Attributes;
 using System.Linq;
 using System;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week4
 {
+    [MostEfficient]
+    [TigerAward]
+    [GoldfishAward]
     [WrittenBy(Samurai.JT)]
     public class JT : Palindromania
     {

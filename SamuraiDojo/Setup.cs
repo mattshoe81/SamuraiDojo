@@ -12,6 +12,8 @@ namespace SamuraiDojo
 
         protected override void Initialize()
         {
+            new Utility.Setup();
+
             Factory.Bind<IBattleOutcome>(typeof(BattleOutcome));
             Factory.Bind<IEfficiencyResult>(typeof(EfficiencyResult));
             Factory.Bind<IPlayer>(typeof(Player));
@@ -20,9 +22,9 @@ namespace SamuraiDojo
             Factory.Bind<ISenseiAttribute>(typeof(SenseiAttribute));
             Factory.Bind<IWrittenByAttribute>(typeof(WrittenByAttribute));
 
-            Factory.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.Singleton);
             Factory.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.Singleton);
             Factory.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.Singleton);
+            Factory.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.Singleton);
 
             HasBeenInitialized = true;
         }
