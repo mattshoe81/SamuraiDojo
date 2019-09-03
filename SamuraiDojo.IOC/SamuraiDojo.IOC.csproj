@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyBinder.cs" />
-    <Compile Include="DependencyInjector.cs" />
-    <Compile Include="DependencyRepository.cs" />
+    <Compile Include="DependencyManagement\DependencyBinder.cs" />
+    <Compile Include="DependencyManagement\DependencyInjector.cs" />
+    <Compile Include="DependencyManagement\DependencyRepository.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="Abstractions\IDependencyBinder.cs" />
-    <Compile Include="Abstractions\IDependencyInjector.cs" />
-    <Compile Include="Abstractions\IDependencyRepository.cs" />
-    <Compile Include="Abstractions\IMultiBindCollection.cs" />
+    <Compile Include="DependencyManagement\Interfaces\IDependencyBinder.cs" />
+    <Compile Include="DependencyManagement\Interfaces\IDependencyInjector.cs" />
+    <Compile Include="DependencyManagement\Interfaces\IDependencyRepository.cs" />
+    <Compile Include="DependencyManagement\Interfaces\IMultiBindCollection.cs" />
     <Compile Include="Interfaces\IAttributeUtility.cs" />
     <Compile Include="Interfaces\IAuditor.cs" />
     <Compile Include="Interfaces\IBattleAttribute.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Interfaces\IUnderTestAttribute.cs" />
     <Compile Include="Interfaces\IWrittenByAttribute.cs" />
     <Compile Include="Interfaces\ProjectSetup.cs" />
-    <Compile Include="MultiBindCollection.cs" />
+    <Compile Include="DependencyManagement\MultiBindCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
   </ItemGroup>

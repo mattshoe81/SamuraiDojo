@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.IoC.Abstractions;
+using SamuraiDojo.IoC.DependencyManagement.Interfaces;
 
-namespace SamuraiDojo.IoC
+namespace SamuraiDojo.IoC.DependencyManagement
 {
     internal class MultiBindCollection : IMultiBindCollection
     {

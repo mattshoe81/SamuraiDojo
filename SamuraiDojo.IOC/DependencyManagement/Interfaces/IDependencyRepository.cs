@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SamuraiDojo.IoC.Abstractions
+namespace SamuraiDojo.IoC.DependencyManagement.Interfaces
 {
     internal interface IDependencyRepository
     {

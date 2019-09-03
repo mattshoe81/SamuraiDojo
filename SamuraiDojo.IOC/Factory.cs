@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using SamuraiDojo.IoC.Abstractions;
+using SamuraiDojo.IoC.DependencyManagement;
+using SamuraiDojo.IoC.DependencyManagement.Interfaces;
 
 namespace SamuraiDojo.IoC
 {
@@ -121,7 +119,7 @@ namespace SamuraiDojo.IoC
         {
             binder.Debind<T>(config);
         }
-        
+
         /// <summary>
         /// Removes the binding associated with an interface. The optional parameter allows you
         /// to specify whether to debind only singleton bindings or debind only transient bindings.

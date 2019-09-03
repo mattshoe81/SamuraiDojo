@@ -18,13 +18,13 @@ namespace SamuraiDojo.Benchmarking
         public IEfficiencyRankCollection RankBattleResults(List<IPlayerBattleResult> battleResults)
         {
             IEfficiencyRankCollection efficiencyRankCollection = Factory.Get<IEfficiencyRankCollection>();
-            minStdDev = battleResults.Min(result => result.Efficiency.StandardDeviation);
             int rank = 1;
 
             battleResults = battleResults.OrderBy(result => result.Efficiency.AverageExecutionTime).ToList();
             while (battleResults.Count > 0)
             {
                 IPlayerBattleResult nextMostEfficient = battleResults[0];
+                minStdDev = battleResults[0].Efficiency.StandardDeviation;
                 Margin = CalculateMargin(nextMostEfficient);
                 double baseline = nextMostEfficient.Efficiency.AverageExecutionTime;
 

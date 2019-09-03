@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SamuraiDojo.IoC.Abstractions
+namespace SamuraiDojo.IoC.DependencyManagement.Interfaces
 {
     internal interface IMultiBindCollection
     {

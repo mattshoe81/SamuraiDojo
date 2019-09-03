@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using SamuraiDojo.IoC.Abstractions;
+using SamuraiDojo.IoC.DependencyManagement.Interfaces;
 
-namespace SamuraiDojo.IoC
+namespace SamuraiDojo.IoC.DependencyManagement
 {
     internal class DependencyInjector : IDependencyInjector
     {

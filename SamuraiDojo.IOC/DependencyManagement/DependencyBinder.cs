@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IoC.Abstractions;
+using SamuraiDojo.IoC.DependencyManagement.Interfaces;
 
-namespace SamuraiDojo.IoC
+namespace SamuraiDojo.IoC.DependencyManagement
 {
     internal class DependencyBinder : IDependencyBinder
     {
@@ -68,7 +68,7 @@ namespace SamuraiDojo.IoC
         /// 
         /// This essentially allows you to keep looking through the dependencies forwards, then backwards,
         /// over and over again, until you're able to resolve all dependencies or until you run into a 
-        /// circular dependency. I am only 70% sure this will never get stuck in a loop if there is no 
+        /// circular dependency. I am only 40% sure this will never get stuck in a loop if there is no 
         /// circular dependency. There is probably a way to prove one way or the other.
         /// 
         /// TODO: Prove, mathematically, the viability of this algorithm. In other words, prove whether

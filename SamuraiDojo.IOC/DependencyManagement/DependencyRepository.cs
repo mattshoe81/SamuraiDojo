@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IoC.Abstractions;
+using SamuraiDojo.IoC.DependencyManagement.Interfaces;
 
-namespace SamuraiDojo.IoC
+namespace SamuraiDojo.IoC.DependencyManagement
 {
     internal class DependencyRepository : IDependencyRepository
     {

@@ -61,8 +61,8 @@ namespace SamuraiDojo.Benchmarking
         public static void Main(string[] args)
         {
 #if DEBUG
-            //RejectStart();
-            //return;
+            RejectStart();
+            return;
 #endif
             while (true)
                 Iterate();
@@ -74,6 +74,8 @@ namespace SamuraiDojo.Benchmarking
 
             if (input[0].Trim().EqualsIgnoreCase("ioc"))
                 BenchmarkIoC(input);
+            else if (input[0].Trim().EqualsIgnoreCase("help"))
+                PrintHelp();
             else
             {
                 SetUnits(input);
@@ -92,11 +94,10 @@ namespace SamuraiDojo.Benchmarking
             PrintBattleOptions(battleCollection.All);
             Console.Write($"Select Battle (type 'help' for a list of commands): ");
 
-            string[] result = new string[0];
+            string[] result = new string[] { string.Empty };
             string input = Console.ReadLine();
-            if (input.Trim().EqualsIgnoreCase("help"))
-                PrintHelp();
-            else
+
+            if (!string.IsNullOrWhiteSpace(input))
                 result = input.Split(' ');
 
             Console.WriteLine();
@@ -145,10 +146,10 @@ namespace SamuraiDojo.Benchmarking
 
             Console.WriteLine();
             Console.WriteLine("Examples:");
-            Console.WriteLine("\t2 milliseconds kilobytes");
-            Console.WriteLine("\t0 bytes nanoseconds");
-            Console.WriteLine("\t3 microseconds");
-            Console.WriteLine("\t1 megabytes");
+            Console.WriteLine("\t2 ms kb");
+            Console.WriteLine("\t0 b ns");
+            Console.WriteLine("\t3 micros");
+            Console.WriteLine("\t1 mb");
 
             Console.WriteLine();
             PrintDivider(100);
@@ -220,7 +221,7 @@ namespace SamuraiDojo.Benchmarking
             PrintDivider(headerString.Length);
             Console.WriteLine(headerString);
             PrintDivider(headerString.Length);
-            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}  --  (Grouped as being {efficiencyCalculator.MarginScalar} standard deviation(s) from the most efficient mean in that rank.)");
+            Console.WriteLine($"Players are grouped into ranks where each rank contains all players whose mean is {efficiencyCalculator.MarginScalar} standard deviation(s) from the most efficient mean in that rank.");
             Console.WriteLine();
 
             return headerString.Length;
