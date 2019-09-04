@@ -28,7 +28,7 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
-            IoC.Setup.Initialize();
+            IoC.ReflectiveBinder.Start();
 
             battleCollection = Factory.Get<IBattleCollection>();
 
@@ -63,7 +63,7 @@ namespace SamuraiDojo.Benchmarking
         {
 #if DEBUG
             RejectStart();
-            return;
+            //return;
 #endif
             while (true)
                 Iterate();

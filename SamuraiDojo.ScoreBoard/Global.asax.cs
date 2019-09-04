@@ -22,7 +22,7 @@ namespace SamuraiDojo.ScoreBoard
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            IoC.Setup.Initialize();
+            IoC.ReflectiveBinder.Start();
 
             // Kick off the reflective scoring system
             Factory.Get<IScoreKeeper>().Start();

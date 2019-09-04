@@ -87,7 +87,7 @@
     <Compile Include="Interfaces\IProjectSetup.cs" />
     <Compile Include="DependencyManagement\MultiBindCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Setup.cs" />
+    <Compile Include="ReflectiveBinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

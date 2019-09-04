@@ -1,4 +1,5 @@
-﻿using SamuraiDojo.IoC;
+﻿using System.Reflection;
+using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
