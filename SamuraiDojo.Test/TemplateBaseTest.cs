@@ -15,7 +15,8 @@ namespace SamuraiDojo.Test
             OUTPUT_TYPE actual = GetInstance().RenameThis(input);
             Assert.AreEqual(expected, actual, $"{Environment.NewLine}Expected:\t{expected.ToString()}{Environment.NewLine}Found:\t{actual.ToString()}");
         }
-
+        
+        [TestMethod]
         public override void Benchmark()
         {
             AssertExpected(

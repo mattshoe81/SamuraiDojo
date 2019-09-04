@@ -1,76 +1,31 @@
-﻿<div class="container" ng-controller="HomePageController as vm">
+﻿@using System.Web.Http
+@using SamuraiDojo.IoC.Interfaces
+
+<div class="container" ng-controller="HomePageController as vm">
 
     <div class="spacer-25"></div>
 
     <div class="row row-outdent">
 
-        <h3><span class="italic">'{{vm.CurrentBattle.Battle.Name}}'</span></h3>
+        <h3><span class="bold italic">'{{vm.CurrentBattle.Battle.Name}}'</span></h3>
         <h4>Deadline: <span class="italic">{{vm.CurrentBattle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span></h4>
         <h4>Sensei: <span class="italic">{{vm.CurrentBattle.Sensei.Name}}</span></h4>
-        <pre id="battleDescription"><code>
-[Sensei(Samurai.MATT_SHOE)]
-[Battle("8/30/19", "PalindroMania", typeof(Palindromania))]
-public abstract class Palindromania
-{
-    /// &lt;summary&gt;
-    /// A palindrome is just a string that is spelled the same forwards and backwards.
-    /// Given an arbitrarily large string, find the largest palindrome within that 
-    /// string.
-    ///     
-    /// HINT:
-    ///     - Palindromes are symmetric about their center....
-    ///     - Difference between even and odd lengths?....
-    /// 
-    /// Constraints:
-    ///     1. The string is never null, and always has at least 1 character in it.
-    ///     2. The characters can be ANY valid ASCII character.
-    ///     2. Comparisons should be CASE-INSENSITIVE.
-    ///     3. If there are multiples, pick the first.
-    /// 
-    /// &lt;/summary&gt;
-    /// &lt;param name="input"&gt;An arbitrarily large string.&lt;/param&gt;
-    /// &lt;returns&gt;The largest palindrome within the input string&lt;/returns&gt;
-    public abstract string LargestPalindrome(string input);
-}
-        </code></pre>
+
+        <pre id="battleDescription"><code><iframe src="@($"/Battles/{(ViewBag.CurrentBattle as IBattleOutcome).Battle.Name}.html")" scrolling="no" onload="resizeIframe(this)"></iframe></code></pre>
 
     </div>
 
     <div class="spacer-25"></div>
 
     <div class="row">
-        @*<div class="col-sm-4">
-            <h3 class="inline-block underline">Leader Board:</h3>
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Points</th>
-                        <th>Battles</th>
-                        <th>Sensei</th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="player in vm.AllPlayers">
-                    <tr>
-                        <td>{{player.Rank}}</td>
-                        <td class="lowercase">{{player.Name}}</td>
-                        <td>{{player.TotalPoints}}</td>
-                        <td>{{player.BattlesCompleted}}</td>
-                        <td>{{vm.GetSenseiCount(player, vm.Battles)}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-1"></div>*@
 
         <div class="col-sm-12">
-            <h2 class="underline inline-block row-outdent">Archive:</h2>
+            <h2 class="underline inline-block row-outdent">History:</h2>
             <div class="spacer-10"></div>
             <div ng-repeat="battle in vm.Battles | orderBy: '-Battle.Deadline'">
                 <div class="row">
                     <h4 class="row-buffer">
-                        <span class="bold italic">'{{battle.Battle.Name}}'</span> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{battle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
+                        <a class="bold italic" href="{{'/Samurai/History#' + vm.ToSimpleDateString(battle.Battle.Deadline)}}">'{{battle.Battle.Name}}'</a> <span class="w-25 inline-block"></span> <span class="italic">Deadline: {{battle.Battle.Deadline | date:'EEEE, MM/dd/yyyy'}}</span>
                     </h4>
                     <h5 class="row-buffer">
                         <span class="bold">Sensei: </span><span class="italic">{{battle.Sensei.Name}}</span>

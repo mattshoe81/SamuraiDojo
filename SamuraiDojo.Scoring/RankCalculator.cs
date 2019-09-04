@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
-using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
@@ -14,6 +15,13 @@ namespace SamuraiDojo.Scoring
     /// </summary>
     internal class RankCalculator : IRankCalculator
     {
+        private IPlayerRepository playerRepository;
+
+        public RankCalculator(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
         /// <summary>
         /// Players are ranked according to total historical points. If you have the 
         /// same number of total points, then the player who has participated in 
@@ -23,7 +31,7 @@ namespace SamuraiDojo.Scoring
         /// </summary>
         public void Calculate()
         {
-            List<Player> players = PlayerRepository.Players.Values.ToList();
+            List<IPlayer> players = playerRepository.Players.Values.ToList();
             players.Sort();
 
             HashSet<int> rankings = new HashSet<int>();

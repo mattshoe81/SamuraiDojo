@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.Attributes;
-using SamuraiDojo.Models;
+using System.Linq;
+using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Horology;
+using SamuraiDojo.Benchmarking.Benchmarks.IoC;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -12,20 +17,45 @@ namespace SamuraiDojo.Benchmarking
         private static readonly ConsoleColor ERROR_COLOR;
         private static readonly int WIDTH;
         private static readonly int HEIGHT;
+        private static readonly Dictionary<TimeUnit, string> timeUnits;
+        private static readonly Dictionary<SizeUnit, string> sizeUnits;
 
-        private static BattleAttribute CurrentBattle;
+        public static TimeUnit TimeUnit { get; set; } = TimeUnit.Millisecond;
+        public static SizeUnit SizeUnit { get; set; } = SizeUnit.B;
+
+        private static IBattleAttribute SelectedBattle;
+        private static IBattleCollection battleCollection;
 
         static Program()
         {
+            new Benchmarking.Setup();
+            battleCollection = Factory.Get<IBattleCollection>();
+
             WIDTH = 180;
             HEIGHT = 40;
             DEFAULT_COLOR = ConsoleColor.Yellow;
             INFO_COLOR = ConsoleColor.DarkYellow;
             ERROR_COLOR = ConsoleColor.DarkRed;
-            
+
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT;
             Console.ForegroundColor = DEFAULT_COLOR;
+
+            timeUnits = new Dictionary<TimeUnit, string>
+            {
+                { TimeUnit.Nanosecond, "ns" },
+                { TimeUnit.Microsecond, "micros" },
+                { TimeUnit.Millisecond, "ms" },
+                { TimeUnit.Second, "s" },
+                { TimeUnit.Minute, "mins" }
+            };
+            sizeUnits = new Dictionary<SizeUnit, string>
+            {
+                { SizeUnit.B, "B" },
+                { SizeUnit.KB, "KB" },
+                { SizeUnit.MB, "MB" },
+                { SizeUnit.GB, "GB" }
+            };
         }
 
         public static void Main(string[] args)
@@ -40,36 +70,112 @@ namespace SamuraiDojo.Benchmarking
 
         private static void Iterate()
         {
-            string input = GetInput();
-            int battleIndex = 0;
+            string[] input = GetInput();
 
-            if (int.TryParse(input, out battleIndex) && battleIndex >= 0 && battleIndex < BattleCollection.Count)
-                BenchmarkBattle(battleIndex);
+            if (input[0].Trim().EqualsIgnoreCase("ioc"))
+                BenchmarkIoC(input);
+            else if (input[0].Trim().EqualsIgnoreCase("help"))
+                PrintHelp();
             else
-                PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
+            {
+                SetUnits(input);
+
+                int battleIndex = 0;
+
+                if (input.Length > 0 && int.TryParse(input[0], out battleIndex) && battleIndex >= 0 && battleIndex < Factory.Get<IBattleCollection>().Count)
+                    BenchmarkBattle(battleIndex);
+                else
+                    PrintError($"{Environment.NewLine}Invalid Input!{Environment.NewLine}");
+            }
         }
 
-        private static string GetInput()
+        private static string[] GetInput()
         {
-            PrintBattleOptions(BattleCollection.All);
-            Console.Write($"Enter the index of the battle you wish to Benchmark: ");
+            PrintBattleOptions(battleCollection.All);
+            Console.Write($"Select Battle (type 'help' for a list of commands): ");
+
+            string[] result = new string[] { string.Empty };
             string input = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(input))
+                result = input.Split(' ');
+
             Console.WriteLine();
 
-            return input;
+            return result;
+        }
+
+        private static void SetUnits(string[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                KeyValuePair<TimeUnit, string> timeUnit = timeUnits.Where(pair => pair.Value.EqualsIgnoreCase(input[i].Trim())).FirstOrDefault();
+                if (timeUnit.Key != null)
+                    TimeUnit = timeUnit.Key;
+                else
+                {
+                    KeyValuePair<SizeUnit, string> sizeUnit = sizeUnits.Where(pair => pair.Value.EqualsIgnoreCase(input[i].Trim())).FirstOrDefault();
+                    if (sizeUnit.Key != null)
+                        SizeUnit = sizeUnit.Key;
+                }
+            }
+        }
+
+        private static void PrintHelp()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
+            PrintDivider(100);
+            Console.WriteLine("\tHow to use this command line");
+            PrintDivider(100);
+            Console.WriteLine();
+
+            Console.WriteLine($"You must always enter a battle index (except to load this view)");
+            Console.WriteLine($"You can also specify one or both of the units for time and memory you wish to use.");
+            Console.WriteLine($"Simply enter the battle index, one or both of the units you want, separating each by at least one space.");
+            Console.WriteLine($"The order in which you enter the unit arguments does not matter, but the battle index MUST be first");
+            Console.WriteLine();
+
+            Console.WriteLine("Time Units:");
+            foreach (KeyValuePair<TimeUnit, string> pair in timeUnits)
+                Console.WriteLine($"\t{pair.Value}");
+
+            Console.WriteLine("Size Units:");
+            foreach (KeyValuePair<SizeUnit, string> pair in sizeUnits)
+                Console.WriteLine($"\t{pair.Value}");
+
+            Console.WriteLine();
+            Console.WriteLine("Examples:");
+            Console.WriteLine("\t2 ms kb");
+            Console.WriteLine("\t0 b ns");
+            Console.WriteLine("\t3 micros");
+            Console.WriteLine("\t1 mb");
+
+            Console.WriteLine();
+            PrintDivider(100);
+            Console.WriteLine();
+            Console.Write("Press any key to continue ");
+            Console.ReadKey();
+            Console.WriteLine();
+            Console.ForegroundColor = DEFAULT_COLOR;
+        }
+
+        private static void BenchmarkIoC(string[] input)
+        {
+            Factory.Get<IBenchmarkEngine>().PerformBenchmarking(typeof(IoCBenchmarking));
         }
 
         private static void BenchmarkBattle(int index)
         {
-            CurrentBattle = BattleCollection.Get(index);
-            List<BattleStatsForPlayer> battleResults = BenchmarkEngine.PerformBenchmarking(CurrentBattle);
+            SelectedBattle = Factory.Get<IBattleCollection>().Get(index);
+            List<IPlayerBattleResult> battleResults = Factory.Get<IBenchmarkEngine>().PerformBenchmarking(SelectedBattle);
 
-            EfficiencyCalculator efficiencyCalculator = new EfficiencyCalculator();
-            EfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
+            IEfficiencyCalculator efficiencyCalculator = Factory.Get<IEfficiencyCalculator>();
+            IEfficiencyRankCollection ranks = efficiencyCalculator.RankBattleResults(battleResults);
             PrintBenchmarkingResults(ranks, efficiencyCalculator);
         }
 
-        private static void PrintBattleOptions(List<BattleAttribute> battles)
+        private static void PrintBattleOptions(List<IBattleAttribute> battles)
         {
             Console.ForegroundColor = INFO_COLOR;
             Console.WriteLine();
@@ -84,7 +190,7 @@ namespace SamuraiDojo.Benchmarking
             Console.ForegroundColor = DEFAULT_COLOR;
         }
 
-        private static void PrintBenchmarkingResults(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
+        private static void PrintBenchmarkingResults(IEfficiencyRankCollection efficiencyBuckets, IEfficiencyCalculator efficiencyCalculator)
         {
             Console.ForegroundColor = INFO_COLOR;
             int headerLength = PrintBenchmarkHeader(efficiencyBuckets, efficiencyCalculator);
@@ -92,13 +198,13 @@ namespace SamuraiDojo.Benchmarking
             int rank = 1;
             while (efficiencyBuckets.HasRank(rank))
             {
-                List<BattleStatsForPlayer> results = efficiencyBuckets.Get(rank);
+                List<IPlayerBattleResult> results = efficiencyBuckets.Get(rank);
                 Console.WriteLine($"Rank {rank}");
-                foreach (BattleStatsForPlayer result in results)
+                foreach (IPlayerBattleResult result in results)
                 {
                     Console.WriteLine($"\t{result.Player.Name}");
-                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} nanoseconds", result.Efficiency.AverageExecutionTime);
-                    Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} Bytes");
+                    Console.WriteLine("\t\tAverage Exec Time: \t{0:0,0.000} {1}", result.Efficiency.AverageExecutionTime, timeUnits[TimeUnit]);
+                    Console.WriteLine($"\t\tMemory Allocated: \t{result.Efficiency.MemoryAllocated.ToString("N0")} {sizeUnits[SizeUnit]}");
                 }
                 rank++;
             }
@@ -106,16 +212,16 @@ namespace SamuraiDojo.Benchmarking
             PrintBenchmarkFooter(headerLength);
         }
 
-        private static int PrintBenchmarkHeader(EfficiencyRankCollection efficiencyBuckets, EfficiencyCalculator efficiencyCalculator)
+        private static int PrintBenchmarkHeader(IEfficiencyRankCollection efficiencyBuckets, IEfficiencyCalculator efficiencyCalculator)
         {
             Console.WriteLine();
             Console.WriteLine();
 
-            string headerString = $"=====   Benchmarking for '{CurrentBattle.Name}'   ======";
+            string headerString = $"=====   Benchmarking for '{SelectedBattle.Name}'   ======";
             PrintDivider(headerString.Length);
             Console.WriteLine(headerString);
             PrintDivider(headerString.Length);
-            Console.WriteLine($"Margin: {efficiencyCalculator.Margin}  --  (Grouped as being {efficiencyCalculator.MarginScalar} standard deviation(s) from the most efficient mean in that rank.)");
+            Console.WriteLine($"Players are grouped into ranks where each rank contains all players whose mean is {efficiencyCalculator.MarginScalar} standard deviation(s) from the most efficient mean in that rank.");
             Console.WriteLine();
 
             return headerString.Length;

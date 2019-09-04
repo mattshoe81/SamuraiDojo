@@ -1,38 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class EfficiencyRankCollection
+    internal class EfficiencyRankCollection : IEfficiencyRankCollection
     {
-        private Dictionary<int, List<BattleStatsForPlayer>> efficiencyBuckets;
+        private Dictionary<int, List<IPlayerBattleResult>> efficiencyBuckets;
 
         public EfficiencyRankCollection()
         {
-            efficiencyBuckets = new Dictionary<int, List<BattleStatsForPlayer>>();
+            efficiencyBuckets = new Dictionary<int, List<IPlayerBattleResult>>();
         }
 
-        public void Add(int rank, BattleStatsForPlayer battleResult)
+        public void Add(int rank, IPlayerBattleResult battleResult)
         {
             if (efficiencyBuckets.ContainsKey(rank))
                 efficiencyBuckets[rank].Add(battleResult);
             else
-                efficiencyBuckets.Add(rank, new List<BattleStatsForPlayer> { battleResult });
+                efficiencyBuckets.Add(rank, new List<IPlayerBattleResult> { battleResult });
         }
 
-        public void Add(int rank, IEnumerable<BattleStatsForPlayer> battleResults)
+        public void Add(int rank, IEnumerable<IPlayerBattleResult> battleResults)
         {
-            foreach (BattleStatsForPlayer result in battleResults)
+            foreach (IPlayerBattleResult result in battleResults)
                 Add(rank, result);
         }
 
-        public List<BattleStatsForPlayer> Get(int rank)
+        public List<IPlayerBattleResult> Get(int rank)
         {
-            List<BattleStatsForPlayer> resultsForRank = new List<BattleStatsForPlayer>();
+            List<IPlayerBattleResult> resultsForRank = new List<IPlayerBattleResult>();
             if (efficiencyBuckets.ContainsKey(rank))
                 resultsForRank = efficiencyBuckets[rank];
 

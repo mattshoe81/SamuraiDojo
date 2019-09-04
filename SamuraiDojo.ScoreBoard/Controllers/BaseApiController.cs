@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
@@ -11,10 +13,12 @@ namespace SamuraiDojo.ScoreBoard.Controllers
     public class BaseApiController : ApiController
     {
         protected MediaTypeFormatter Formatter;
+        protected ILog Log;
 
         public BaseApiController() : base()
         {
             Init();
+            Log = Factory.Get<ILog>();
         }
 
         private void Init()

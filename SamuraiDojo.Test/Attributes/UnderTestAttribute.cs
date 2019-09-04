@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Test.Attributes
 {
-    public class UnderTestAttribute : Attribute
+    public class UnderTestAttribute : Attribute, IUnderTestAttribute
     {
         public Type Type { get; set; }
+
+        public UnderTestAttribute() { }
 
         public UnderTestAttribute(Type type)
         {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Attributes.Bonus;
-using SamuraiDojo.Repositories;
-using SamuraiDojo.Scoring.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Scoring.Auditors
@@ -13,8 +12,28 @@ namespace SamuraiDojo.Scoring.Auditors
     /// reflectively gathering all battles, determining their sensei, and 
     /// assigning bonus points to players for each battle.
     /// </summary>
-    internal class DojoAuditor : IAuditor
+    internal class DojoAuditor : IDojoAuditor
     {
+        private IReflectionUtility reflectionUtility;
+        private IAttributeUtility attributeUtility;
+        private IBattleRepository battleRepository;
+        private IPlayerRepository playerRepository;
+        private ILog log;
+
+        public DojoAuditor(
+            IReflectionUtility reflectionUtility,
+            IAttributeUtility attributeUtility,
+            IBattleRepository battleRepository,
+            IPlayerRepository playerRepository,
+            ILog log)
+        {
+            this.reflectionUtility = reflectionUtility;
+            this.attributeUtility = attributeUtility;
+            this.battleRepository = battleRepository;
+            this.playerRepository = playerRepository;
+            this.log = log;
+        }
+
         public void Audit()
         {
             try
@@ -24,60 +43,60 @@ namespace SamuraiDojo.Scoring.Auditors
             }
             catch (Exception ex)
             {
-                Log.Exception(ex);
+                log.Exception(ex);
             }
         }
 
         private void AssignSenseisToBattles()
         {
             // Load up all of the battles, assign their sensei, and send to the repository
-            Type[] types = ReflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo");
+            Type[] types = reflectionUtility.LoadTypesWithAttribute<BattleAttribute>("SamuraiDojo");
             foreach (Type type in types)
             {
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(type);
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(type);
-                BattleRepository.CreateBattle(battle, sensei);
+                IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(type);
+                ISenseiAttribute sensei = attributeUtility.GetAttribute<SenseiAttribute>(type);
+                battleRepository.CreateBattle(battle, sensei);
             }
         }
 
         private void GrantBonusPoints()
         {
-            Type[] battleClasses = ReflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
+            Type[] battleClasses = reflectionUtility.LoadTypesWithAttribute<WrittenByAttribute>("SamuraiDojo");
             foreach (Type battle in battleClasses)
             {
-                List<BonusPointsAttribute> awards = RetrieveAwards(battle);
+                List<IBonusPointsAttribute> awards = RetrieveAwards(battle);
                 if (awards.Count > 0)
                     ProcessAwards(battle, awards);
             }
         }
 
-        private List<BonusPointsAttribute> RetrieveAwards(Type type)
+        private List<IBonusPointsAttribute> RetrieveAwards(Type type)
         {
-            List<BonusPointsAttribute> awards = new List<BonusPointsAttribute>();
+            List<IBonusPointsAttribute> awards = new List<IBonusPointsAttribute>();
 
             foreach (Attribute attribute in type.GetCustomAttributes(false))
             {
-                if (attribute is BonusPointsAttribute)
-                    awards.Add(attribute as BonusPointsAttribute);
+                if (attribute is IBonusPointsAttribute)
+                    awards.Add(attribute as IBonusPointsAttribute);
             }
 
             return awards;
         }
 
-        private void ProcessAwards(Type battleType, List<BonusPointsAttribute> awards)
+        private void ProcessAwards(Type battleType, List<IBonusPointsAttribute> awards)
         {
-            WrittenByAttribute player = AttributeUtility.GetAttribute<WrittenByAttribute>(battleType);
-            BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(battleType);
+            IWrittenByAttribute player = attributeUtility.GetAttribute<WrittenByAttribute>(battleType);
+            IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(battleType);
 
             int bonusPoints = 0;
-            foreach (BonusPointsAttribute award in awards)
+            foreach (IBonusPointsAttribute award in awards)
             {
                 bonusPoints += award.Points;
-                BattleRepository.AssignAwardToPlayer(player, battle, award);
+                battleRepository.AssignAwardToPlayer(player, battle, award);
             }
 
-            PlayerRepository.AddPointToHistoricalTotal(player.Name, battle.Type, bonusPoints);
-            BattleRepository.GrantPointsToPlayer(battle, player, bonusPoints);
+            playerRepository.AddPointToHistoricalTotal(player.Name, battle.Type, bonusPoints);
+            battleRepository.GrantPointsToPlayer(battle, player, bonusPoints);
         }
     }
 }

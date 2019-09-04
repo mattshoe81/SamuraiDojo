@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Attributes
 {
-    public class WrittenByAttribute : Attribute
+    public class WrittenByAttribute : Attribute, IWrittenByAttribute
     {
         public string Name { get; set; }
+
+        public WrittenByAttribute() { }
 
         public WrittenByAttribute(string samurai)
         {

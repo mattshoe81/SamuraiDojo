@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 using SamuraiDojo.Repositories;
 using SamuraiDojo.Utility;
@@ -14,10 +16,17 @@ namespace SamuraiDojo.ScoreBoard.Controllers
 {
     public class BattleController : BaseApiController
     {
+        private IBattleRepository battleRepository;
+
+        public BattleController()
+        {
+            battleRepository = Factory.Get<IBattleRepository>();
+        }
+
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            BattleOutcome battle = BattleRepository.CurrentBattle();
+            IBattleOutcome battle = battleRepository.CurrentBattle();
 
             return Request.CreateResponse(HttpStatusCode.OK, battle);
         }
@@ -26,7 +35,7 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         [Route("api/Battle/All")]
         public HttpResponseMessage All()
         {
-            List<BattleOutcome> battles = BattleRepository.GetAllBattleOutcomes();
+            List<IBattleOutcome> battles = battleRepository.GetAllBattleOutcomes();
 
             return Request.CreateResponse(HttpStatusCode.OK, battles);
         }

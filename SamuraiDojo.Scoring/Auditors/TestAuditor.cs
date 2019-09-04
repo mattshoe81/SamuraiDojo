@@ -1,53 +1,62 @@
 ﻿using SamuraiDojo.Attributes;
-using SamuraiDojo.Repositories;
-using SamuraiDojo.Scoring.Interfaces;
-using SamuraiDojo.Test;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.Scoring.Auditors
 {
-    internal class TestAuditor : IAuditor
+    internal class TestAuditor : ITestAuditor
     {
-        public void Audit()
+        private ITestRunner testRunner;
+        private IAttributeUtility attributeUtility;
+        private IBattleRepository battleRepository;
+        private IPlayerRepository playerRepository;
+
+        public TestAuditor(
+            ITestRunner testRunner, 
+            IAttributeUtility attributeUtility,
+            IBattleRepository battleRepository,
+            IPlayerRepository playerRepository)
         {
-            RunUnitTests();
+            this.testRunner = testRunner;
+            this.attributeUtility = attributeUtility;
+            this.battleRepository = battleRepository;
+            this.playerRepository = playerRepository;
         }
 
-        private void RunUnitTests()
+        public void Audit()
         {
-            TestRunner testRunner = new TestRunner();
-
             SetPreTestAction(testRunner);
             SetPassedTestAction(testRunner);
 
             testRunner.Run();
         }
 
-        private void SetPreTestAction(TestRunner testRunner)
+        private void SetPreTestAction(ITestRunner testRunner)
         {
             testRunner.PreTest = (context) =>
             {
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
+                ISenseiAttribute sensei = attributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+                IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
                 battle.Sensei = sensei;
-                PlayerRepository.CreatePlayer(sensei.Name);
+                playerRepository.CreatePlayer(sensei.Name);
 
-                BattleRepository.CreateBattle(battle, sensei);
+                battleRepository.CreateBattle(battle, sensei);
             };
         }
 
-        private void SetPassedTestAction(TestRunner testRunner)
+        private void SetPassedTestAction(ITestRunner testRunner)
         {
             testRunner.OnTestPass = (context) =>
             {
-                BattleAttribute battle = AttributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
-                SenseiAttribute sensei = AttributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
+                IBattleAttribute battle = attributeUtility.GetAttribute<BattleAttribute>(context.ClassUnderTest);
+                ISenseiAttribute sensei = attributeUtility.GetAttribute<SenseiAttribute>(context.ClassUnderTest);
 
                 if (!sensei.Name.EqualsIgnoreCase(context.WrittenBy.Name))
                 {
                     int points = 1;
-                    PlayerRepository.AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
-                    BattleRepository.GrantPointsToPlayer(battle, context.WrittenBy, points);
+                    playerRepository.AddPointToHistoricalTotal(context.WrittenBy.Name, context.ClassUnderTest, points);
+                    battleRepository.GrantPointsToPlayer(battle, context.WrittenBy, points);
                 }
 
             };

@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Repositories;
 using SamuraiDojo.ScoreBoard.Metrics;
+using SamuraiDojo.ScoreBoard.Models;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
     [LogMetrics]
     public class SamuraiController : Controller
     {
+        private IBattleRepository battleRepository;
+
+        public SamuraiController()
+        {
+            battleRepository = Factory.Get<IBattleRepository>();
+        }
+
         public ActionResult MyProfile()
         {
             ViewBag.Title = "My Profile";
@@ -46,10 +57,15 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             return View();
         }
 
-        public ActionResult Home()
+        public ActionResult History()
         {
-            ViewBag.Title = "Home";
-            return View();
+            ViewBag.Title = "History";
+
+            HistoryViewModel model = new HistoryViewModel();
+            model.Battles = battleRepository.GetAllBattleOutcomes();
+            model.Battles.OrderByDescending(battle => battle.Battle.Deadline).ToList();
+
+            return View(model);
         }
     }
 }

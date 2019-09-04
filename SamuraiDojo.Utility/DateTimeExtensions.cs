@@ -15,5 +15,11 @@ namespace SamuraiDojo.Utility
 
             return result;
         }
+
+        public static string ToSimpleDateString(this DateTime date)
+        {
+            string result = date.ToString("MM-dd-yyyy");
+            return result;
+        }
     }
 }

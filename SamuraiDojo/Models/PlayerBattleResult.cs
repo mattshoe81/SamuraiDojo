@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
 using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo.Models
@@ -9,28 +11,35 @@ namespace SamuraiDojo.Models
     /// <summary>
     /// The outcome of a battle for a specific player.
     /// </summary>
-    public class BattleStatsForPlayer : IComparable<BattleStatsForPlayer>
+    internal class PlayerBattleResult : IPlayerBattleResult
     {
-        public WrittenByAttribute Player { get; set; }
+        private IPlayerRepository playerRepository;
+
+        public PlayerBattleResult(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
+        public IWrittenByAttribute Player { get; set; }
 
         public int Points { get; set; }
 
-        public EfficiencyResult Efficiency { get; set; }
+        public IEfficiencyResult Efficiency { get; set; }
 
-        public List<BonusPointsAttribute> Awards { get; set; }
+        public List<IBonusPointsAttribute> Awards { get; set; }
 
-        public BattleStatsForPlayer()
+        public PlayerBattleResult()
         {
-            Awards = new List<BonusPointsAttribute>();
+            Awards = new List<IBonusPointsAttribute>();
         }
 
-        public int CompareTo(BattleStatsForPlayer other)
+        public int CompareTo(IPlayerBattleResult other)
         {
             int comparison = other.Points - Points;
             if (comparison == 0)
             {
-                Player thisPlayer = PlayerRepository.GetPlayer(Player.Name);
-                Player otherPlayer = PlayerRepository.GetPlayer(other.Player.Name);
+                IPlayer thisPlayer = playerRepository.GetPlayer(Player.Name);
+                IPlayer otherPlayer = playerRepository.GetPlayer(other.Player.Name);
 
                 if (thisPlayer.Rank < otherPlayer.Rank)
                     comparison = -1;
@@ -49,8 +58,8 @@ namespace SamuraiDojo.Models
                 return false;
             else if (object.ReferenceEquals(this, obj))
                 return true;
-            else if (obj is BattleStatsForPlayer)
-                return Player.Name == ((BattleStatsForPlayer)obj).Player.Name;
+            else if (obj is IPlayerBattleResult)
+                return Player.Name == ((IPlayerBattleResult)obj).Player.Name;
 
             return false;
         }

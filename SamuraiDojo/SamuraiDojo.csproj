@@ -46,6 +46,7 @@
     <Compile Include="Attributes\Bonus\BonusPointsAttribute.cs" />
     <Compile Include="Attributes\BattleAttribute.cs" />
     <Compile Include="Attributes\Bonus\GoldfishAwardAttribute.cs" />
+    <Compile Include="Attributes\Bonus\InceptorAward.cs" />
     <Compile Include="Attributes\Bonus\MostEfficientAttribute.cs" />
     <Compile Include="Attributes\Bonus\MostElegantAttribute.cs" />
     <Compile Include="Attributes\SenseiAttribute.cs" />
@@ -62,11 +63,16 @@
     <Compile Include="Battles\Week3\Dustin.cs" />
     <Compile Include="Battles\Week3\MattShoe.cs" />
     <Compile Include="Battles\Week3\Person.cs" />
+    <Compile Include="Battles\Week4\JT.cs" />
     <Compile Include="Battles\Week4\Dustin.cs" />
+    <Compile Include="Battles\Week4\DrewArdner.cs" />
     <Compile Include="Battles\Week4\MattShoe.cs" />
     <Compile Include="Battles\Week4\Palindromania.cs" />
+    <Compile Include="Battles\Week5\MattShoe.cs" />
+    <Compile Include="Battles\Week5\Snowflake.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Models\BattleCollection.cs" />
-    <Compile Include="Models\BattleStatsForPlayer.cs" />
+    <Compile Include="Models\PlayerBattleResult.cs" />
     <Compile Include="Models\BattleOutcome.cs" />
     <Compile Include="Models\EfficiencyResult.cs" />
     <Compile Include="Battles\Week2\Aaron.cs" />
@@ -77,6 +83,10 @@
     <Compile Include="Repositories\PlayerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SamuraiDojo.IOC\SamuraiDojo.IoC.csproj">
+      <Project>{C4A99055-353F-4C33-8722-339CAAD0255D}</Project>
+      <Name>SamuraiDojo.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
       <Project>{0DC773C1-7F74-4718-88A4-886B0036CB90}</Project>
       <Name>SamuraiDojo.Utility</Name>
@@ -92,6 +102,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\OctoPack.3.6.4\build\OctoPack.targets" Condition="Exists('..\packages\OctoPack.3.6.4\build\OctoPack.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

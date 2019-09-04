@@ -11,11 +11,19 @@ namespace SamuraiDojo.Utility
         public static bool StandardEquals<T>(this T self, object other, Func<T, bool> assertion)
         {
             if (other is null)
-                return true;
+                return false;
             else if (object.ReferenceEquals(self, other))
                 return true;
             else if (other is T)
                 return assertion((T)other);
+
+            return false;
+        }
+
+        public static bool IsDefaultOrNull(this object self)
+        {
+            if (self == default || self == null)
+                return true;
 
             return false;
         }

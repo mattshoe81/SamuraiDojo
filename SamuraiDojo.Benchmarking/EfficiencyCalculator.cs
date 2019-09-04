@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class EfficiencyCalculator
+    internal class EfficiencyCalculator : IEfficiencyCalculator
     {
         public double MarginScalar { get; set; } = 2.0;
 
@@ -13,20 +15,20 @@ namespace SamuraiDojo.Benchmarking
 
         private double minStdDev;
 
-        public EfficiencyRankCollection RankBattleResults(List<BattleStatsForPlayer> battleResults)
+        public IEfficiencyRankCollection RankBattleResults(List<IPlayerBattleResult> battleResults)
         {
-            EfficiencyRankCollection efficiencyRankCollection = new EfficiencyRankCollection();
-            minStdDev = battleResults.Min(result => result.Efficiency.StandardDeviation);
+            IEfficiencyRankCollection efficiencyRankCollection = Factory.Get<IEfficiencyRankCollection>();
             int rank = 1;
 
             battleResults = battleResults.OrderBy(result => result.Efficiency.AverageExecutionTime).ToList();
             while (battleResults.Count > 0)
             {
-                BattleStatsForPlayer nextMostEfficient = battleResults[0];
+                IPlayerBattleResult nextMostEfficient = battleResults[0];
+                minStdDev = battleResults[0].Efficiency.StandardDeviation;
                 Margin = CalculateMargin(nextMostEfficient);
                 double baseline = nextMostEfficient.Efficiency.AverageExecutionTime;
 
-                BattleStatsForPlayer[] resultsWithSimilarEfficiency =
+                IPlayerBattleResult[] resultsWithSimilarEfficiency =
                     battleResults
                     .Where(result => IsWithinMargin(result, baseline))
                     .OrderBy(result => result.Efficiency.MemoryAllocated).ToArray();
@@ -40,12 +42,12 @@ namespace SamuraiDojo.Benchmarking
             return efficiencyRankCollection;
         }
 
-        private double CalculateMargin(BattleStatsForPlayer result)
+        private double CalculateMargin(IPlayerBattleResult result)
         {
             return minStdDev * MarginScalar;
         }
 
-        private bool IsWithinMargin(BattleStatsForPlayer battleResult, double baseline)
+        private bool IsWithinMargin(IPlayerBattleResult battleResult, double baseline)
         {
             double difference = battleResult.Efficiency.AverageExecutionTime - baseline;
             bool result = Math.Abs(difference) <= Margin;

@@ -1,14 +1,29 @@
-﻿using SamuraiDojo.Scoring.Auditors;
+﻿using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
-    public class ScoreKeeper
+    internal class ScoreKeeper : IScoreKeeper
     {
-        public static void Start()
+        IDojoAuditor dojoAuditor;
+        ITestAuditor testAuditor;
+        IRankCalculator rankCalculator;
+
+        public ScoreKeeper(
+            ITestAuditor testAuditor, 
+            IDojoAuditor dojoAuditor, 
+            IRankCalculator rankCalculator)
         {
-            new DojoAuditor().Audit();
-            new TestAuditor().Audit();
-            new RankCalculator().Calculate();
+            this.dojoAuditor = dojoAuditor;
+            this.testAuditor = testAuditor;
+            this.rankCalculator = rankCalculator;
+        }
+
+        public void Start()
+        {
+            dojoAuditor.Audit();
+            testAuditor.Audit();
+            rankCalculator.Calculate();
         }
     }
 }

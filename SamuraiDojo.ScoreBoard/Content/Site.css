@@ -164,3 +164,24 @@ iframe {
         clear: both;
     }
 }
+
+iframe {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    backface-visibility: hidden;
+    background-color: transparent;
+    font-size: 150%;
+}
+
+.divider-extend {
+    margin-left: -75px;
+    margin-right: -75px;
+}
+
+.jump-target::before {
+    content: "";
+    display: block;
+    height: 50px;
+    margin: -50px 0 0;
+}

@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
-using System.Web;
 using System.Web.Http;
 using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
     public class AwardsController : BaseApiController
     {
+        private IReflectionUtility reflectionUtility;
+
+        public AwardsController()
+        {
+            this.reflectionUtility = Factory.Get<IReflectionUtility>();
+        }
+
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            Type[] awardTypes = ReflectionUtility.GetSubTypes<BonusPointsAttribute>("SamuraiDojo");
-            List<BonusPointsAttribute> awards = new List<BonusPointsAttribute>();
+            Type[] awardTypes = reflectionUtility.GetSubTypes<BonusPointsAttribute>("SamuraiDojo");
+            List<IBonusPointsAttribute> awards = new List<IBonusPointsAttribute>();
 
             foreach (Type type in awardTypes)
             {
-                BonusPointsAttribute award = (BonusPointsAttribute)ReflectionUtility.GetInstance(type);
+                IBonusPointsAttribute award = (BonusPointsAttribute)reflectionUtility.GetInstance(type);
                 awards.Add(award);
             }
 
