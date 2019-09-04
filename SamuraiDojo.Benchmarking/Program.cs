@@ -28,7 +28,8 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
-            new Benchmarking.Setup();
+            IoC.Setup.Initialize();
+
             battleCollection = Factory.Get<IBattleCollection>();
 
             WIDTH = 180;

@@ -4,19 +4,13 @@ using SamuraiDojo.Scoring.Auditors;
 
 namespace SamuraiDojo.Scoring
 {
-    public class Setup : ProjectSetup
+    public class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new SamuraiDojo.Setup();
-            new SamuraiDojo.Utility.Setup();
-            new SamuraiDojo.Test.Setup();
-
             BindToIOC();
-
-            Factory.Get<IScoreKeeper>().Start();
 
             HasBeenInitialized = true;
         }
@@ -24,15 +18,9 @@ namespace SamuraiDojo.Scoring
         private void BindToIOC()
         {
             Factory.Bind<IRankCalculator>(typeof(RankCalculator));
-            Factory.Bind<IScoreKeeper>(typeof(ScoreKeeper));
             Factory.Bind<IDojoAuditor>(typeof(DojoAuditor));
             Factory.Bind<ITestAuditor>(typeof(TestAuditor));
+            Factory.Bind<IScoreKeeper>(typeof(ScoreKeeper));
         }
-    }
-
-    public enum Auditor
-    {
-        DOJO,
-        TEST
     }
 }

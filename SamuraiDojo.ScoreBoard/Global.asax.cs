@@ -1,7 +1,13 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Configuration;
+using System.Linq;
+using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SamuraiDojo.IoC;
+using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.ScoreBoard.App_Start;
 
 namespace SamuraiDojo.ScoreBoard
@@ -16,8 +22,10 @@ namespace SamuraiDojo.ScoreBoard
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            IoC.Setup.Initialize();
+
             // Kick off the reflective scoring system
-            new ScoreBoard.Setup();
+            Factory.Get<IScoreKeeper>().Start();
         }
     }
 }

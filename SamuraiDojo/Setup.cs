@@ -6,14 +6,12 @@ using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
 {
-    public class Setup : ProjectSetup
+    internal class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new Utility.Setup();
-
             Factory.Bind<IBattleOutcome>(typeof(BattleOutcome));
             Factory.Bind<IEfficiencyResult>(typeof(EfficiencyResult));
             Factory.Bind<IPlayer>(typeof(Player));

@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,9 @@
     <Compile Include="DependencyManagement\DependencyBinder.cs" />
     <Compile Include="DependencyManagement\DependencyInjector.cs" />
     <Compile Include="DependencyManagement\DependencyRepository.cs" />
+    <Compile Include="DependentAssemblyCollection.cs" />
+    <Compile Include="DependentAssemblyElement.cs" />
+    <Compile Include="DependentAssemblySettings.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="DependencyManagement\Interfaces\IDependencyBinder.cs" />
     <Compile Include="DependencyManagement\Interfaces\IDependencyInjector.cs" />
@@ -80,11 +84,13 @@
     <Compile Include="Interfaces\ITestRunner.cs" />
     <Compile Include="Interfaces\IUnderTestAttribute.cs" />
     <Compile Include="Interfaces\IWrittenByAttribute.cs" />
-    <Compile Include="Interfaces\ProjectSetup.cs" />
+    <Compile Include="Interfaces\IProjectSetup.cs" />
     <Compile Include="DependencyManagement\MultiBindCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
