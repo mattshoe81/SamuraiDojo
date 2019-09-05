@@ -13,7 +13,7 @@ namespace SamuraiDojo.Benchmarking
     public class Program
     {
         private static readonly ConsoleColor DEFAULT_COLOR;
-        private static readonly ConsoleColor INFO_COLOR;
+        private static readonly ConsoleColor INFO_COLOR; 
         private static readonly ConsoleColor ERROR_COLOR;
         private static readonly int WIDTH;
         private static readonly int HEIGHT;
