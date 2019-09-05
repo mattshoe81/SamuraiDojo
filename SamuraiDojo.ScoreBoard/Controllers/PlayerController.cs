@@ -9,6 +9,7 @@ using System.Linq;
 using SamuraiDojo.Models;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.IoC;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {

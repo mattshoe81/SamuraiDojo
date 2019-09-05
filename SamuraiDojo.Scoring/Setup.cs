@@ -18,10 +18,10 @@ namespace SamuraiDojo.Scoring
 
         private void BindToIOC()
         {
-            Factory.Bind<IRankCalculator>(typeof(RankCalculator));
-            Factory.Bind<IDojoAuditor>(typeof(DojoAuditor));
-            Factory.Bind<ITestAuditor>(typeof(TestAuditor));
-            Factory.Bind<IScoreKeeper>(typeof(ScoreKeeper));
+            Dojector.Bind<IRankCalculator>(typeof(RankCalculator));
+            Dojector.Bind<IDojoAuditor>(typeof(DojoAuditor));
+            Dojector.Bind<ITestAuditor>(typeof(TestAuditor));
+            Dojector.Bind<IScoreKeeper>(typeof(ScoreKeeper));
         }
     }
 }

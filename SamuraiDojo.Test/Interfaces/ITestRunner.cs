@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.Test.Interfaces
 {

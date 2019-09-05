@@ -4,9 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SamuraiDojo.Attributes.Bonus;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {

@@ -1,8 +1,10 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Scoring.Interfaces;
 using SamuraiDojo.Test.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Scoring.Auditors
 {

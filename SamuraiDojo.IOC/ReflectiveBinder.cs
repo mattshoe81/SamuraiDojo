@@ -8,14 +8,12 @@ using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.IoC
 {
-    public static class ReflectiveBinder
+    internal static class ReflectiveBinder
     {
-        private static bool initialized;
         private static HashSet<string> loadedAssemblies;
 
         static ReflectiveBinder()
         {
-            initialized = false;
             loadedAssemblies = new HashSet<string>();
         }
 
@@ -25,41 +23,36 @@ namespace SamuraiDojo.IoC
         /// Initialize() method. This allows all assemblies to keep their implementations 
         /// so as to only expose the interface to other assemblies.
         /// </summary>
-        public static void Start()
+        public static void Start(Assembly callingAssembly)
         {
-            if (!initialized)
-            {
-                Assembly callingAssembly = Assembly.GetCallingAssembly();
-                AssemblyName[] assemblies = callingAssembly.GetReferencedAssemblies();
-                BindAssembly(callingAssembly.GetName().FullName);
-                BindAssemblies(assemblies);
-
-                Factory.Resolve();
-
-                initialized = true;
-            }
+            RecursiveAssemblyBinder(callingAssembly.GetName().FullName);
+            Dojector.Resolve();
         }
 
-        private static void BindAssemblies(AssemblyName[] assemblies)
-        {
-            foreach (AssemblyName element in assemblies)
-            {
-                try
-                {
-                    if (!loadedAssemblies.Contains(element.FullName))
-                        BindAssembly(element.FullName);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Unable to load assembly:{Environment.NewLine}{ex.ToString()}");
-                }
-            }
-        }
-
-        private static void BindAssembly(string name)
+        /// <summary>
+        /// Will load up the specified assembly, and if it has an implementation of the IProjectSetup 
+        /// interface, it will invoke its Initialize() method. Then it will load all assemblies 
+        /// referenced by that assembly and do this all over again, recursively. This will ensure that
+        /// every assembly and all of its dependencies are loaded and checked.
+        /// </summary>
+        /// <param name="name"></param>
+        private static void RecursiveAssemblyBinder(string name)
         {
             Assembly assembly = Assembly.Load(name);
 
+            InvokeSetupIfPossible(assembly);
+
+            // Remember this assembly so we don't load it again!
+            loadedAssemblies.Add(name);
+
+            // Recursively load all assemblies referenced by this assembly and try to bind them
+            AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
+            if (referencedAssemblies.Length > 0)
+                BindAssemblies(assembly.GetReferencedAssemblies());
+        }
+
+        private static void InvokeSetupIfPossible(Assembly assembly)
+        {
             Type[] types = assembly.GetTypes().Where(type => typeof(IProjectSetup).IsAssignableFrom(type) && type != typeof(IProjectSetup)).ToArray();
             try
             {
@@ -74,15 +67,23 @@ namespace SamuraiDojo.IoC
                     Debug.WriteLine($"Assembly '{assembly.GetName().Name}' does not have in implementation of IProjectSetup, so no dependencies could be bound in this project.");
                 }
             }
-            catch (Exception ex)
-            {
-                //throw new InvalidOperationException($"Assembly {assembly.GetName().Name} does not contain an implementation for IProjectSetup.");
-            }
+            catch { }
+        }
 
-            loadedAssemblies.Add(name);
-            AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
-            if (referencedAssemblies.Length > 0)
-                BindAssemblies(assembly.GetReferencedAssemblies());
+        private static void BindAssemblies(AssemblyName[] assemblies)
+        {
+            foreach (AssemblyName element in assemblies)
+            {
+                try
+                {
+                    if (!loadedAssemblies.Contains(element.FullName))
+                        RecursiveAssemblyBinder(element.FullName);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Unable to load assembly:{Environment.NewLine}{ex.ToString()}");
+                }
+            }
         }
     }
 

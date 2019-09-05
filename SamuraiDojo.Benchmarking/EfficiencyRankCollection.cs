@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking

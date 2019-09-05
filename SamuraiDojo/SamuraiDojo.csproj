@@ -70,6 +70,17 @@
     <Compile Include="Battles\Week4\Palindromania.cs" />
     <Compile Include="Battles\Week5\MattShoe.cs" />
     <Compile Include="Battles\Week5\Snowflake.cs" />
+    <Compile Include="Interfaces\IBattleAttribute.cs" />
+    <Compile Include="Interfaces\IBattleCollection.cs" />
+    <Compile Include="Interfaces\IBattleOutcome.cs" />
+    <Compile Include="Interfaces\IBattleRepository.cs" />
+    <Compile Include="Interfaces\IBonusPointsAttribute.cs" />
+    <Compile Include="Interfaces\IEfficiencyResult.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IPlayerBattleResult.cs" />
+    <Compile Include="Interfaces\IPlayerRepository.cs" />
+    <Compile Include="Interfaces\ISenseiAttribute.cs" />
+    <Compile Include="Interfaces\IWrittenByAttribute.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Models\BattleCollection.cs" />
     <Compile Include="Models\PlayerBattleResult.cs" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using SamuraiDojo.Interfaces;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Benchmarking.Interfaces
 {
     public interface IEfficiencyCalculator
     {

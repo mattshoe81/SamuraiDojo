@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Scoring.Interfaces;
 

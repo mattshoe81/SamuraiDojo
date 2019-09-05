@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SamuraiDojo.IoC.Interfaces;
-using SamuraiDojo.Models;
+﻿using System.Collections.Generic;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.ScoreBoard.Models
 {
     public class HistoryViewModel
     {
-        public List<IBattleOutcome> Battles { get; set; }    
+        public List<IBattleOutcome> Battles { get; set; }
 
         public HistoryViewModel()
         {

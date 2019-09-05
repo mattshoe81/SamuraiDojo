@@ -14,8 +14,9 @@ using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
 using SamuraiDojo.Battles.Week5;
 using SamuraiDojo.IoC;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
 {

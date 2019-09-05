@@ -4,6 +4,8 @@ using System.Linq;
 using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Horology;
 using SamuraiDojo.Benchmarking.Benchmarks.IoC;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
@@ -28,7 +30,7 @@ namespace SamuraiDojo.Benchmarking
 
         static Program()
         {
-            IoC.ReflectiveBinder.Start();
+            IoC.Dojector.BindAssembliesReflectively();
 
             battleCollection = Factory.Get<IBattleCollection>();
 

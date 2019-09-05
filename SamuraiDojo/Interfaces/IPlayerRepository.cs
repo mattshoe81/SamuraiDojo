@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Interfaces
 {
     public interface IPlayerRepository
     {

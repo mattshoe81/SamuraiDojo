@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Interfaces;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Interfaces
 {
     public interface IBattleOutcome : IComparable<IBattleOutcome>
     {

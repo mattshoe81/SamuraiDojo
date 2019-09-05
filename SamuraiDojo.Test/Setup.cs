@@ -11,9 +11,9 @@ namespace SamuraiDojo.Test
 
         public void Initialize()
         {
-            Factory.Bind<ITestRunner>(typeof(TestRunner));
-            Factory.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
-            Factory.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
+            Dojector.Bind<ITestRunner>(typeof(TestRunner));
+            Dojector.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
+            Dojector.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
 
             HasBeenInitialized = true;
         }

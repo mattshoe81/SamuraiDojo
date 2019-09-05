@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Utility
 {

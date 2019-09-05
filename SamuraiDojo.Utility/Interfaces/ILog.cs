@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Utility.Interfaces
 {
     public interface ILog
     {

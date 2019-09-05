@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 
@@ -10,9 +11,9 @@ namespace SamuraiDojo.Benchmarking
 
         public void Initialize()
         {
-            Factory.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
-            Factory.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
-            Factory.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));
+            Dojector.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
+            Dojector.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
+            Dojector.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));
 
             HasBeenInitialized = true;
         }
