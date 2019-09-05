@@ -68,7 +68,7 @@ namespace SamuraiDojo.IoC
         /// <returns>An instance of the concrete type bound to the specified interface.</returns>
         public static T Get<T>(BindingConfig config = BindingConfig.Default)
         {
-            AssertInterface<T>("Factory.New");
+            AssertInterface<T>("Factory.New"); 
 
             T result;
             Type interfaceType = typeof(T);
