@@ -12,16 +12,16 @@ namespace SamuraiDojo.Test.IoC
         [TestInitialize]
         public void Setup()
         {
-            Factory.Bind<IChild1>(typeof(Child1));
-            Factory.Bind<IChild2>(typeof(Child2));
-            Factory.Bind<IParent>(typeof(Parent));
-            Factory.Bind<INestedParent>(typeof(NestedParent));
+            Dojector.Bind<IChild1>(typeof(Child1));
+            Dojector.Bind<IChild2>(typeof(Child2));
+            Dojector.Bind<IParent>(typeof(Parent));
+            Dojector.Bind<INestedParent>(typeof(NestedParent));
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            Factory.Reset();
+            Dojector.Reset();
         }
 
         [TestMethod]
@@ -53,10 +53,10 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void MissingDependency()
         {
-            Factory.Reset();
-            Factory.Bind<IChild2>(typeof(Child2));
-            Factory.Bind<IParent>(typeof(Parent));
-            Factory.Bind<INestedParent>(typeof(NestedParent));
+            Dojector.Reset();
+            Dojector.Bind<IChild2>(typeof(Child2));
+            Dojector.Bind<IParent>(typeof(Parent));
+            Dojector.Bind<INestedParent>(typeof(NestedParent));
 
             Assert.ThrowsException<InvalidOperationException>(() => Factory.Get<INestedParent>());
         }
@@ -64,31 +64,31 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void InvalidBind_NonImplementation()
         {
-            Assert.ThrowsException<InvalidCastException>(() => Factory.Bind<IChild1>(typeof(Child2)));
+            Assert.ThrowsException<InvalidCastException>(() => Dojector.Bind<IChild1>(typeof(Child2)));
         }
 
         [TestMethod]
         public void InvalidBind_NonInterfaceType()
         {
-            Assert.ThrowsException<InvalidCastException>(() => Factory.Bind<Child1>(typeof(Child1)));
+            Assert.ThrowsException<InvalidCastException>(() => Dojector.Bind<Child1>(typeof(Child1)));
         }
 
         [TestMethod]
         public void InvalidBind_ImplementationAsInterface()
         {
-            Assert.ThrowsException<InvalidCastException>(() => Factory.Bind<IChild1>(typeof(IChild1)));
+            Assert.ThrowsException<InvalidCastException>(() => Dojector.Bind<IChild1>(typeof(IChild1)));
         }
 
         [TestMethod]
         public void InvalidBind_Backwards()
         {
-            Assert.ThrowsException<InvalidCastException>(() => Factory.Bind<Child1>(typeof(IChild1)));
+            Assert.ThrowsException<InvalidCastException>(() => Dojector.Bind<Child1>(typeof(IChild1)));
         }
 
         [TestMethod]
         public void Parent_MultipleConstructors()
         {
-            Factory.Bind<IParent>(typeof(ParentMultipleConstructors));
+            Dojector.Bind<IParent>(typeof(ParentMultipleConstructors));
 
             IParent parent = Factory.Get<IParent>();
             IChild1 child1 = parent.Child1;
@@ -102,8 +102,8 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void Singleton_NoDependencies()
         {
-            Factory.Reset();
-            Factory.Bind<IChild1>(typeof(Child1), BindingConfig.Singleton);
+            Dojector.Reset();
+            Dojector.Bind<IChild1>(typeof(Child1), BindingConfig.Singleton);
 
             IChild1 instance1 = Factory.Get<IChild1>();
             IChild1 instance2 = Factory.Get<IChild1>();
@@ -119,7 +119,7 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void Debind_BrokenDependency()
         {
-            Factory.Debind<IChild1>();
+            Dojector.Debind<IChild1>();
 
             Assert.ThrowsException<InvalidOperationException>(() => Factory.Get<IParent>());
         }
@@ -127,7 +127,7 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void Debind_NullInstance()
         {
-            Factory.Debind<IChild1>();
+            Dojector.Debind<IChild1>();
             IChild1 child1 = Factory.Get<IChild1>();
 
             Assert.IsNull(child1, "Child1 was debound but is not null on retrieval");
@@ -136,16 +136,16 @@ namespace SamuraiDojo.Test.IoC
         [TestMethod]
         public void NullImplementation()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => Factory.Bind<IChild1>(null));
+            Assert.ThrowsException<InvalidOperationException>(() => Dojector.Bind<IChild1>(null));
         }
 
         [TestMethod]
         public void CircularDependency_Singleton()
         {
-            Factory.Reset();
-            Factory.Bind<ICircularDependency1>(typeof(CircularDependency1), BindingConfig.Singleton);
-            Factory.Bind<ICircularDependency2>(typeof(CircularDependency2), BindingConfig.Singleton);
-            Assert.ThrowsException<InvalidOperationException>(() => Factory.Resolve());
+            Dojector.Reset();
+            Dojector.Bind<ICircularDependency1>(typeof(CircularDependency1), BindingConfig.Singleton);
+            Dojector.Bind<ICircularDependency2>(typeof(CircularDependency2), BindingConfig.Singleton);
+            Assert.ThrowsException<InvalidOperationException>(() => Dojector.Resolve());
         }
 
 

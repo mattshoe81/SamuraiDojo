@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Test.Interfaces;
 
 namespace SamuraiDojo.Test
 {

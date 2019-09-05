@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SamuraiDojo.IoC;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
-using SamuraiDojo.Models;
-using SamuraiDojo.Repositories;
+using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {

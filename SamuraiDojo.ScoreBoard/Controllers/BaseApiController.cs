@@ -7,6 +7,7 @@ using System.Web.Http;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {

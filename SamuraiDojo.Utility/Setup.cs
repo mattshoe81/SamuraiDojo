@@ -1,17 +1,19 @@
 ﻿using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Utility
 {
-    public class Setup : ProjectSetup
+    public class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            Factory.Bind<IReflectionUtility>(typeof(ReflectionUtility));
-            Factory.Bind<IAttributeUtility>(typeof(AttributeUtility));
-            Factory.Bind<ILog>(typeof(Log));
+            Dojector.Bind<IReflectionUtility>(typeof(ReflectionUtility));
+            Dojector.Bind<IAttributeUtility>(typeof(AttributeUtility));
+
+            Dojector.Bind<ILog>(typeof(Log));
 
             HasBeenInitialized = true;
         }

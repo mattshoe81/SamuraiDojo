@@ -1,7 +1,10 @@
 ﻿using SamuraiDojo.Attributes;
-using SamuraiDojo.IoC;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Scoring.Interfaces;
+using SamuraiDojo.Test.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Scoring.Auditors
 {
@@ -13,7 +16,7 @@ namespace SamuraiDojo.Scoring.Auditors
         private IPlayerRepository playerRepository;
 
         public TestAuditor(
-            ITestRunner testRunner, 
+            ITestRunner testRunner,
             IAttributeUtility attributeUtility,
             IBattleRepository battleRepository,
             IPlayerRepository playerRepository)

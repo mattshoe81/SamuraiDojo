@@ -1,21 +1,19 @@
 ﻿using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Test.Attributes;
+using SamuraiDojo.Test.Interfaces;
 
 namespace SamuraiDojo.Test
 {
-    public class Setup : ProjectSetup
+    public class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new SamuraiDojo.Setup();
-            new SamuraiDojo.Utility.Setup();
-
-            Factory.Bind<ITestRunner>(typeof(TestRunner));
-            Factory.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
-            Factory.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
+            Dojector.Bind<ITestRunner>(typeof(TestRunner));
+            Dojector.Bind<ITestExecutionContext>(typeof(TestExecutionContext));
+            Dojector.Bind<IUnderTestAttribute>(typeof(UnderTestAttribute));
 
             HasBeenInitialized = true;
         }

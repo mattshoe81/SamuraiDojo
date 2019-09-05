@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Utility.Interfaces
 {
     public interface IReflectionUtility
     {

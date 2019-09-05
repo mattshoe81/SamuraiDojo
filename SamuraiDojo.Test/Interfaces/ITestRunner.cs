@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using SamuraiDojo.Interfaces;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Test.Interfaces
 {
     public interface ITestRunner
     {

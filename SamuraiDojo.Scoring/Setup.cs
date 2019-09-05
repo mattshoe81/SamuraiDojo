@@ -1,38 +1,27 @@
 ﻿using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Scoring.Auditors;
+using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
-    public class Setup : ProjectSetup
+    public class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new SamuraiDojo.Setup();
-            new SamuraiDojo.Utility.Setup();
-            new SamuraiDojo.Test.Setup();
-
             BindToIOC();
-
-            Factory.Get<IScoreKeeper>().Start();
 
             HasBeenInitialized = true;
         }
 
         private void BindToIOC()
         {
-            Factory.Bind<IRankCalculator>(typeof(RankCalculator));
-            Factory.Bind<IScoreKeeper>(typeof(ScoreKeeper));
-            Factory.Bind<IDojoAuditor>(typeof(DojoAuditor));
-            Factory.Bind<ITestAuditor>(typeof(TestAuditor));
+            Dojector.Bind<IRankCalculator>(typeof(RankCalculator));
+            Dojector.Bind<IDojoAuditor>(typeof(DojoAuditor));
+            Dojector.Bind<ITestAuditor>(typeof(TestAuditor));
+            Dojector.Bind<IScoreKeeper>(typeof(ScoreKeeper));
         }
-    }
-
-    public enum Auditor
-    {
-        DOJO,
-        TEST
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Models;
@@ -6,25 +7,23 @@ using SamuraiDojo.Repositories;
 
 namespace SamuraiDojo
 {
-    public class Setup : ProjectSetup
+    internal class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new Utility.Setup();
+            Dojector.Bind<IBattleOutcome>(typeof(BattleOutcome));
+            Dojector.Bind<IEfficiencyResult>(typeof(EfficiencyResult));
+            Dojector.Bind<IPlayer>(typeof(Player));
+            Dojector.Bind<IPlayerBattleResult>(typeof(PlayerBattleResult));
+            Dojector.Bind<IBattleAttribute>(typeof(BattleAttribute));
+            Dojector.Bind<ISenseiAttribute>(typeof(SenseiAttribute));
+            Dojector.Bind<IWrittenByAttribute>(typeof(WrittenByAttribute));
 
-            Factory.Bind<IBattleOutcome>(typeof(BattleOutcome));
-            Factory.Bind<IEfficiencyResult>(typeof(EfficiencyResult));
-            Factory.Bind<IPlayer>(typeof(Player));
-            Factory.Bind<IPlayerBattleResult>(typeof(PlayerBattleResult));
-            Factory.Bind<IBattleAttribute>(typeof(BattleAttribute));
-            Factory.Bind<ISenseiAttribute>(typeof(SenseiAttribute));
-            Factory.Bind<IWrittenByAttribute>(typeof(WrittenByAttribute));
-
-            Factory.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.Singleton);
-            Factory.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.Singleton);
-            Factory.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.Singleton);
+            Dojector.Bind<IBattleCollection>(typeof(BattleCollection), BindingConfig.Singleton);
+            Dojector.Bind<IBattleRepository>(typeof(BattleRepository), BindingConfig.Singleton);
+            Dojector.Bind<IPlayerRepository>(typeof(PlayerRepository), BindingConfig.Singleton);
 
             HasBeenInitialized = true;
         }

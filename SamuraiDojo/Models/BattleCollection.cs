@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.Utility;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Models
 {

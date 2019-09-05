@@ -1,4 +1,4 @@
-﻿using SamuraiDojo.IoC.Interfaces;
+﻿using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.Models
 {

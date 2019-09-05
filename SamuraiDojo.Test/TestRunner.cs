@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Test.Attributes;
+using SamuraiDojo.Test.Interfaces;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Test
 {

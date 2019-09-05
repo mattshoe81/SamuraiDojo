@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Reflection;
+using SamuraiDojo.Interfaces;
+using SamuraiDojo.IoC.Interfaces;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Test.Interfaces
 {
     public interface ITestExecutionContext
     {

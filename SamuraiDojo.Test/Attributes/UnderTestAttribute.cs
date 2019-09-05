@@ -1,5 +1,6 @@
 ﻿using System;
 using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Test.Interfaces;
 
 namespace SamuraiDojo.Test.Attributes
 {

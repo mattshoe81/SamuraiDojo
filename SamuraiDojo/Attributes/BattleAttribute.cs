@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.Attributes
 {

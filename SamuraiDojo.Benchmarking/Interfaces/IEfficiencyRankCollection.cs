@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC.Interfaces;
 
-namespace SamuraiDojo.IoC.Interfaces
+namespace SamuraiDojo.Benchmarking.Interfaces
 {
     public interface IEfficiencyRankCollection
     {

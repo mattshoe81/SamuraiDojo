@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Utility.Interfaces;
 
 namespace SamuraiDojo.Utility
 {
