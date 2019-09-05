@@ -56,6 +56,7 @@ namespace SamuraiDojo.ScoreBoard
                     "~/Angular/Controllers/MyProfileController.js",
                     "~/Angular/Controllers/AwardsController.js",
                     "~/Angular/Controllers/BenchmarkingController.js",
+                    "~/Angular/Controllers/HistoryController.js",
                     "~/Angular/Controllers/SenseiController.js"
                 )
             );
@@ -72,7 +73,8 @@ namespace SamuraiDojo.ScoreBoard
             bundles.Add(
                 new ScriptBundle("~/bundles/angularjs/directives")
                 .Include(
-                    "~/Angular/Directives/DirectivesApp.js"
+                    "~/Angular/Directives/DirectivesApp.js",
+                    "~/Angular/Directives/CodeBox.js"
                 )
             );
         }
