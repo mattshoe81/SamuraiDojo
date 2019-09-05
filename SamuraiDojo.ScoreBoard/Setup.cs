@@ -9,7 +9,7 @@ namespace SamuraiDojo.ScoreBoard
 {
     public class Setup : ProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        protected override bool HasBeenInitialized { get; set; } 
 
         protected override void Initialize()
         {
