@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
-using SamuraiDojo.Utility;
+using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.Scoring.Auditors
 {

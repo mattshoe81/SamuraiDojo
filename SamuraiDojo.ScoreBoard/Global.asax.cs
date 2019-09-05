@@ -9,6 +9,7 @@ using System.Web.Routing;
 using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.ScoreBoard.App_Start;
+using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.ScoreBoard
 {

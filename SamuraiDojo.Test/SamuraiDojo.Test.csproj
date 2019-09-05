@@ -221,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UnderTestAttribute.cs" />
+    <Compile Include="Interfaces\ITestExecutionContext.cs" />
+    <Compile Include="Interfaces\ITestRunner.cs" />
+    <Compile Include="Interfaces\IUnderTestAttribute.cs" />
     <Compile Include="IoC\Models\Child1.cs" />
     <Compile Include="IoC\Models\Child2.cs" />
     <Compile Include="IoC\DependencyInjectionTests.cs" />

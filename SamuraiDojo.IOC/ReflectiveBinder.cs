@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +10,14 @@ namespace SamuraiDojo.IoC
 {
     public static class ReflectiveBinder
     {
-        private static bool initialized = false;
+        private static bool initialized;
+        private static HashSet<string> loadedAssemblies;
+
+        static ReflectiveBinder()
+        {
+            initialized = false;
+            loadedAssemblies = new HashSet<string>();
+        }
 
         /// <summary>
         /// Will load all assemblies referenced by the calling assembly, then look for
@@ -23,7 +31,7 @@ namespace SamuraiDojo.IoC
             {
                 Assembly callingAssembly = Assembly.GetCallingAssembly();
                 AssemblyName[] assemblies = callingAssembly.GetReferencedAssemblies();
-                BindAssembly(callingAssembly.GetName().Name);
+                BindAssembly(callingAssembly.GetName().FullName);
                 BindAssemblies(assemblies);
 
                 Factory.Resolve();
@@ -38,7 +46,8 @@ namespace SamuraiDojo.IoC
             {
                 try
                 {
-                    BindAssembly(element.Name);
+                    if (!loadedAssemblies.Contains(element.FullName))
+                        BindAssembly(element.FullName);
                 }
                 catch (Exception ex)
                 {
@@ -50,6 +59,7 @@ namespace SamuraiDojo.IoC
         private static void BindAssembly(string name)
         {
             Assembly assembly = Assembly.Load(name);
+
             Type[] types = assembly.GetTypes().Where(type => typeof(IProjectSetup).IsAssignableFrom(type) && type != typeof(IProjectSetup)).ToArray();
             try
             {
@@ -68,6 +78,11 @@ namespace SamuraiDojo.IoC
             {
                 //throw new InvalidOperationException($"Assembly {assembly.GetName().Name} does not contain an implementation for IProjectSetup.");
             }
+
+            loadedAssemblies.Add(name);
+            AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
+            if (referencedAssemblies.Length > 0)
+                BindAssemblies(assembly.GetReferencedAssemblies());
         }
     }
 

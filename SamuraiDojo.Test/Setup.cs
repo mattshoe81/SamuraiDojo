@@ -1,6 +1,7 @@
 ﻿using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.Test.Attributes;
+using SamuraiDojo.Test.Interfaces;
 
 namespace SamuraiDojo.Test
 {

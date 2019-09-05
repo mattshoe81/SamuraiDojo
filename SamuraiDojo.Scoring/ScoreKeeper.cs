@@ -1,5 +1,4 @@
-﻿using SamuraiDojo.IoC;
-using SamuraiDojo.IoC.Interfaces;
+﻿using SamuraiDojo.Scoring.Interfaces;
 
 namespace SamuraiDojo.Scoring
 {
@@ -10,8 +9,8 @@ namespace SamuraiDojo.Scoring
         IRankCalculator rankCalculator;
 
         public ScoreKeeper(
-            ITestAuditor testAuditor, 
-            IDojoAuditor dojoAuditor, 
+            ITestAuditor testAuditor,
+            IDojoAuditor dojoAuditor,
             IRankCalculator rankCalculator)
         {
             this.dojoAuditor = dojoAuditor;

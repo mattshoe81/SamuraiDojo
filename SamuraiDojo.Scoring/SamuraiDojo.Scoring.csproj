@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auditors\DojoAuditor.cs" />
+    <Compile Include="Interfaces\IAuditor.cs" />
+    <Compile Include="Interfaces\IDojoAuditor.cs" />
+    <Compile Include="Interfaces\IRankCalculator.cs" />
+    <Compile Include="Interfaces\IScoreKeeper.cs" />
+    <Compile Include="Interfaces\ITestAuditor.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="RankCalculator.cs" />
     <Compile Include="ScoreKeeper.cs" />
@@ -69,5 +74,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
