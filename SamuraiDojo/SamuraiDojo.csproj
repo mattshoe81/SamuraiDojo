@@ -71,6 +71,8 @@
     <Compile Include="Battles\Week5\JT.cs" />
     <Compile Include="Battles\Week5\MattShoe.cs" />
     <Compile Include="Battles\Week5\Snowflake.cs" />
+    <Compile Include="Battles\Week6\MattShoe.cs" />
+    <Compile Include="Battles\Week6\SuperfluousSansLoop.cs" />
     <Compile Include="Interfaces\IBattleAttribute.cs" />
     <Compile Include="Interfaces\IBattleCollection.cs" />
     <Compile Include="Interfaces\IBattleOutcome.cs" />

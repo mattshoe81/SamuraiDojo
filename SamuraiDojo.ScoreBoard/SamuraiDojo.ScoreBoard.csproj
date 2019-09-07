@@ -355,6 +355,7 @@
     <Content Include="Battles\Angler of Time.html" />
     <Content Include="Battles\Permutations of Character.html" />
     <Content Include="Battles\Snowflake.html" />
+    <Content Include="Battles\Superfluous Sans Loop.html" />
     <Content Include="Content\Images\samuraibobble.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1171,6 +1172,7 @@
     <Content Include="Solutions\PalindroMania.html" />
     <Content Include="Solutions\Permutations of Character.html" />
     <Content Include="Solutions\Snowflake.html" />
+    <Content Include="Solutions\Superfluous Sans Loop.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
