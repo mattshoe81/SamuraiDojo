@@ -17,6 +17,7 @@ using SamuraiDojo.IoC;
 using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Utility;
 using SamuraiDojo.Interfaces;
+using SamuraiDojo.Battles.Week6;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -32,7 +33,8 @@ namespace SamuraiDojo.Benchmarking
                 { typeof(CharacterCounter), typeof(Benchmarks.Week2) },
                 { typeof(ClockAngler), typeof(Benchmarks.Week1) },
                 { typeof(Palindromania), typeof(Benchmarks.Week4) },
-                { typeof(Snowflake), typeof(Benchmarks.Week5) } 
+                { typeof(Snowflake), typeof(Benchmarks.Week5) } ,
+                { typeof(SuperfluousSansLoop), typeof(Benchmarks.Week6) }
             };
         }
 
