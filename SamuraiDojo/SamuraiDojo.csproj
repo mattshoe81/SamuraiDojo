@@ -68,6 +68,7 @@
     <Compile Include="Battles\Week4\DrewArdner.cs" />
     <Compile Include="Battles\Week4\MattShoe.cs" />
     <Compile Include="Battles\Week4\Palindromania.cs" />
+    <Compile Include="Battles\Week5\Dustin.cs" />
     <Compile Include="Battles\Week5\JT.cs" />
     <Compile Include="Battles\Week5\MattShoe.cs" />
     <Compile Include="Battles\Week5\Snowflake.cs" />
