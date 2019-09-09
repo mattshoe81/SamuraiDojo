@@ -6,9 +6,9 @@ namespace SamuraiDojo.Test.Week6
 {
     [TestClass]
     [WrittenBy(Samurai.MATT_SHOE)]
-    public class MattShoe : BASE_TEST
+    public class MattShoe : SuperfluousSansLoopTestBase
     {
-        protected override SuperflousSansLoop GetInstance()
+        protected override SuperfluousSansLoop GetInstance()
         {
             return new SamuraiDojo.Battles.Week6.MattShoe();
         }
