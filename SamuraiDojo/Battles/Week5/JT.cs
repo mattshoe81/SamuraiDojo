@@ -1,8 +1,12 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 using System.Linq;
 
 namespace SamuraiDojo.Battles.Week5
 {
+    [MostEfficient]
+    [TigerAward]
+    [MostElegant]
     [WrittenBy(Samurai.JT)]
     public class JT : Snowflake
     {
