@@ -316,7 +316,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AwardsController.cs" />
     <Compile Include="Controllers\BattleController.cs" />
-    <Compile Include="Controllers\BenchmarkingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
@@ -1220,6 +1219,10 @@
     <ProjectReference Include="..\SamuraiDojo.Scoring\SamuraiDojo.Scoring.csproj">
       <Project>{ff358cff-39dd-4d1c-b689-1b22a3778094}</Project>
       <Name>SamuraiDojo.Scoring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SamuraiDojo.Services\SamuraiDojo.Services.csproj">
+      <Project>{242446f6-8e01-4e44-8243-fb50acfe56fc}</Project>
+      <Name>SamuraiDojo.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
       <Project>{0e85b929-b27f-48fa-8a6c-944c887bbcef}</Project>
