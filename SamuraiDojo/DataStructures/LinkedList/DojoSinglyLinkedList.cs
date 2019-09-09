@@ -54,5 +54,7 @@ namespace SamuraiDojo.DataStructures.LinkedList
         public abstract void Remove(T item);
 
         public abstract bool Contains(T item);
+
+        public abstract int Size();
     }
 }

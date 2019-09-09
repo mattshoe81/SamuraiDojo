@@ -21,5 +21,7 @@ namespace SamuraiDojo.DataStructures.Queue
         public abstract void Dequeue(T item);
 
         public abstract void Contains(T item);
+
+        public abstract int Size();
     }
 }

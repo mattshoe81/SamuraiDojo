@@ -9,12 +9,13 @@ namespace SamuraiDojo.DataStructures.LinkedList
     public abstract class DojoDoublyLinkedList<T> : IDojoLinkedList<T>
     {
         /// <summary>
-        /// A linked list is simply a chain of nodes. 
+        /// A linked list is simply a chain of nodes, and each node holds some data of type T.
         /// 
-        /// In a doubly linked list, each node holds a reference to the next 
-        /// node in the list, the previous node in the list, the node at the 
-        /// front of the list, the node at the back of the list, and the 
-        /// data stored at that particular node.
+        /// In a doubly linked list, each node also holds a reference to: 
+        ///     - Next node in the list
+        ///     - Previous node in the list
+        ///     - Front node of the list
+        ///     - Back of the list
         /// </summary>
         protected class Node
         {
@@ -60,5 +61,7 @@ namespace SamuraiDojo.DataStructures.LinkedList
         public abstract bool Contains(T item);
 
         public abstract void Remove(T item);
+
+        public abstract int Size();
     }
 }

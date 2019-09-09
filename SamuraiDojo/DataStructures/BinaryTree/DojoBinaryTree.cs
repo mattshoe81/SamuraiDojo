@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SamuraiDojo.DataStructures.BinaryTree
+﻿namespace SamuraiDojo.DataStructures.BinaryTree
 {
     public abstract class DojoBinaryTree<T>
     {
@@ -28,13 +22,15 @@ namespace SamuraiDojo.DataStructures.BinaryTree
 
         public abstract bool Contains(T data);
 
-        public string PrettyPrint()
+        public abstract int Size();
+
+        public override string ToString()
         {
-            string leftString = LeftSubTree == null ? string.Empty : LeftSubTree.PrettyPrint();
-            string rightString = RightSubTree == null ? string.Empty : RightSubTree.PrettyPrint();
+            string leftString = LeftSubTree == null ? string.Empty : LeftSubTree.ToString();
+            string rightString = RightSubTree == null ? string.Empty : RightSubTree.ToString();
 
             return $"{Data.ToString()}({leftString})({rightString})";
         }
-        
+
     }
 }

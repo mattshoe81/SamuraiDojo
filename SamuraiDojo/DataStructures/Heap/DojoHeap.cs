@@ -23,5 +23,7 @@ namespace SamuraiDojo.DataStructures.Heap
         public abstract void Add(T item);
 
         public abstract void Contains(T item);
+
+        public abstract int Size();
     }
 }

@@ -21,5 +21,7 @@ namespace SamuraiDojo.DataStructures.Stack
         public abstract T Pop();
 
         public abstract bool Contains(T item);
+
+        public abstract int Size();
     }
 }

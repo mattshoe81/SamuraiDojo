@@ -14,5 +14,6 @@ namespace SamuraiDojo.DataStructures.Set
         public abstract void Add(T item);
         public abstract bool Contains(T item);
         public abstract void Remove(T item);
+        public abstract int Size();
     }
 }

@@ -17,6 +17,8 @@ namespace SamuraiDojo.DataStructures.Dictionary
 
         public abstract bool Contains(K key);
 
+        public abstract int KeyCount();
+
         public class KVPair<TKey, TValue>
         {
             TKey Key { get; set; }
