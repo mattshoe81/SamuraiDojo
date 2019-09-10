@@ -27,5 +27,6 @@ namespace SamuraiDojo
         public const string Aaron = "aaron.petry";
         public const string Drew = "drew.ardner";
         public const string Hugo = "Hugo.FloresCaballero";
+        public const string JEREMY_ZIMMERMAN = "jeremy.zimmerman";
     }
 }

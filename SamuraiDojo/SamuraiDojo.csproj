@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -72,6 +72,7 @@
     <Compile Include="Battles\Week5\JT.cs" />
     <Compile Include="Battles\Week5\MattShoe.cs" />
     <Compile Include="Battles\Week5\Snowflake.cs" />
+    <Compile Include="Battles\Week6\JZ.cs" />
     <Compile Include="Battles\Week6\Hugo.cs" />
     <Compile Include="DataStructures\BinaryTree\DojoBinaryTree.cs" />
     <Compile Include="DataStructures\Dictionary\DojoDictionary.cs" />
