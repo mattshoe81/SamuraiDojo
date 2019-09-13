@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BenchmarkDotNet.Columns;
 #if DEBUG
 using BenchmarkDotNet.Configs;
 #endif
-using BenchmarkDotNet.Horology;
+using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using SamuraiDojo.Battles.Week1;
@@ -18,6 +17,7 @@ using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Utility;
 using SamuraiDojo.Interfaces;
 using SamuraiDojo.Battles.Week6;
+using SamuraiDojo.Battles.Week7;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -34,7 +34,8 @@ namespace SamuraiDojo.Benchmarking
                 { typeof(ClockAngler), typeof(Benchmarks.Week1) },
                 { typeof(Palindromania), typeof(Benchmarks.Week4) },
                 { typeof(Snowflake), typeof(Benchmarks.Week5) } ,
-                { typeof(SuperfluousSansLoop), typeof(Benchmarks.Week6) }
+                { typeof(SuperfluousSansLoop), typeof(Benchmarks.Week6) },
+                { typeof(SinglyLinkedList_Part1<int>), typeof(Benchmarks.Week7) }
             };
         }
 

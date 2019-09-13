@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using SamuraiDojo.Battles.Week5;
 using SamuraiDojo.Battles.Week6;
 
 namespace SamuraiDojo.Benchmarking.Benchmarks

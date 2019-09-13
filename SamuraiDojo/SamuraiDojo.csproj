@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -74,13 +74,14 @@
     <Compile Include="Battles\Week5\Snowflake.cs" />
     <Compile Include="Battles\Week6\JZ.cs" />
     <Compile Include="Battles\Week6\Hugo.cs" />
+    <Compile Include="Battles\Week7\SinglyLinkedList_Part1.cs" />
+    <Compile Include="Battles\Week7\MattShoe.cs" />
     <Compile Include="DataStructures\BinaryTree\DojoBinaryTree.cs" />
     <Compile Include="DataStructures\Dictionary\DojoDictionary.cs" />
     <Compile Include="DataStructures\HashTable\DojoHashTable.cs" />
     <Compile Include="DataStructures\Heap\DojoHeap.cs" />
-    <Compile Include="DataStructures\LinkedList\DojoDoublyLinkedList.cs" />
-    <Compile Include="DataStructures\LinkedList\IDojoLinkedList.cs" />
-    <Compile Include="DataStructures\LinkedList\DojoSinglyLinkedList.cs" />
+    <Compile Include="DataStructures\LinkedList\DojoLinkedList.cs" />
+    <Compile Include="DataStructures\LinkedList\FrameworkLinkedList.cs" />
     <Compile Include="DataStructures\Queue\DojoQueue.cs" />
     <Compile Include="DataStructures\Set\DojoHashSet.cs" />
     <Compile Include="DataStructures\Set\DojoTreeSet.cs" />
