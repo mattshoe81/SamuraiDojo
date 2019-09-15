@@ -72,6 +72,7 @@
     <Compile Include="Battles\Week5\JT.cs" />
     <Compile Include="Battles\Week5\MattShoe.cs" />
     <Compile Include="Battles\Week5\Snowflake.cs" />
+    <Compile Include="Battles\Week6\JT.cs" />
     <Compile Include="DataStructures\BinaryTree\DojoBinaryTree.cs" />
     <Compile Include="DataStructures\Dictionary\DojoDictionary.cs" />
     <Compile Include="DataStructures\HashTable\DojoHashTable.cs" />
