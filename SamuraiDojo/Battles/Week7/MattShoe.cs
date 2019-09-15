@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Battles.Week7
 {
+    [WrittenBy(Samurai.MATT_SHOE)]
     public class MattShoe<T> : SinglyLinkedList_Part1<T>
     {        
         public MattShoe()

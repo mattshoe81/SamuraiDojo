@@ -22,7 +22,7 @@ namespace SamuraiDojo.Benchmarking
         private static readonly Dictionary<TimeUnit, string> timeUnits;
         private static readonly Dictionary<SizeUnit, string> sizeUnits;
 
-        public static TimeUnit TimeUnit { get; set; } = TimeUnit.Millisecond;
+        public static TimeUnit TimeUnit { get; set; } = TimeUnit.Microsecond;
         public static SizeUnit SizeUnit { get; set; } = SizeUnit.B;
 
         private static IBattleAttribute SelectedBattle;
