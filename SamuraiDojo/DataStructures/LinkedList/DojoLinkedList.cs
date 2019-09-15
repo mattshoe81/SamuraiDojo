@@ -60,6 +60,7 @@ namespace SamuraiDojo.DataStructures.LinkedList
         /// </summary>
         protected class DojoListNode
         {
+            public bool IsDummyNode { get; set; }
             /// <summary>
             /// The data contained at this node of the linked list.
             /// </summary>
@@ -79,6 +80,7 @@ namespace SamuraiDojo.DataStructures.LinkedList
 
             public DojoListNode()
             {
+                IsDummyNode = false;
                 Data = default;
                 Next = default;
                 Previous = default;
@@ -92,7 +94,9 @@ namespace SamuraiDojo.DataStructures.LinkedList
             while (current != null)
             {
                 string separator = current.Next == null ? "" : ", ";
-                result += $"{current.Data.ToString()}{separator}";
+                if (!current.IsDummyNode)
+                    result += $"{current.Data.ToString()}{separator}";
+
                 current = current.Next;
             }
             result += "]";

@@ -18,7 +18,8 @@ namespace SamuraiDojo.Battles.Week7
          * Constraints:
          *     - You cannot use any collection types to implement this.
          *     - You must use the Node class contained in the DojoSinglyLinkedList base class
-         *     - You may use Dummy node(s) if you wish, that's just a matter of preference
+         *     - You may use Dummy node(s) if you wish, that's just a matter of preference,
+         *       but if you do, make sure you set the IsDummyNode property to true
          *     - The collection must be generic
          * 
          */
