@@ -1,7 +1,10 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week6
 {
+    [InceptorAward]
+    [TigerAward]
     [WrittenBy(Samurai.JT)]
     public class JT : SuperfluousSansLoop
     {

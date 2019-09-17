@@ -1,8 +1,13 @@
 ﻿using System.Collections.Generic;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week6
 {
+    [MostEfficient]
+    [GoldfishAward]
+    [MostElegant]
+    [InceptorAward]
     [WrittenBy(Samurai.Hugo)]
     public class Hugo : SuperfluousSansLoop
     {
@@ -23,6 +28,5 @@ namespace SamuraiDojo.Battles.Week6
                 PushNumbers(n);
             }
         }
-
     }
 }

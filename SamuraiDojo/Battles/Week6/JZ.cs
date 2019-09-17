@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week6
 {
+    [InceptorAward]
     [WrittenBy(Samurai.JEREMY_ZIMMERMAN)]
     public class JZ : SuperfluousSansLoop
     {
