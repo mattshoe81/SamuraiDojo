@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
-using SamuraiDojo.IoC.Interfaces;
-using SamuraiDojo.Models;
 
 namespace SamuraiDojo.Benchmarking
 {

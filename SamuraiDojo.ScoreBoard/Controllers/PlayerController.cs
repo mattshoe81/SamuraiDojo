@@ -9,16 +9,18 @@ using System.Linq;
 using SamuraiDojo.Models;
 using SamuraiDojo.IoC.Interfaces;
 using SamuraiDojo.IoC;
+using SamuraiDojo.Interfaces;
+using SamuraiDojo.Services;
 
 namespace SamuraiDojo.ScoreBoard.Controllers
 {
     public class PlayerController : BaseApiController
     {
-        private IPlayerRepository playerRepository;
+        private IPlayerService playerService;
 
         public PlayerController()
         {
-            playerRepository = Factory.Get<IPlayerRepository>();
+            playerService = Factory.Get<IPlayerService>();
         }
 
         [HttpGet]
@@ -35,7 +37,8 @@ namespace SamuraiDojo.ScoreBoard.Controllers
             if (playerName == null)
                 playerName = GetCurrentUsername();
 
-            IPlayer player = GetPlayer(playerName);
+            IPlayer player = playerService.GetPlayer(name);
+
             return Request.CreateResponse(HttpStatusCode.OK, player);
         }
         
@@ -43,22 +46,9 @@ namespace SamuraiDojo.ScoreBoard.Controllers
         [Route("api/Player/All")]
         public HttpResponseMessage All()
         {
-            List<IPlayer> players = new List<IPlayer>();
-            foreach (KeyValuePair<string, IPlayer> pair in playerRepository.Players)
-            {
-                IPlayer player = GetPlayer(pair.Key);
-                if (player != null) 
-                    players.Add(player);
-            }
-            players.Sort();
+            List<IPlayer> players = playerService.GetAllPlayers();
 
             return Request.CreateResponse(HttpStatusCode.OK, players);
         }
-        
-        private IPlayer GetPlayer(string playerName)
-        {
-            IPlayer player = playerRepository.GetPlayer(playerName);
-            return player;
-        } 
     }
 }

@@ -221,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UnderTestAttribute.cs" />
+    <Compile Include="Interfaces\ITestExecutionContext.cs" />
+    <Compile Include="Interfaces\ITestRunner.cs" />
+    <Compile Include="Interfaces\IUnderTestAttribute.cs" />
     <Compile Include="IoC\Models\Child1.cs" />
     <Compile Include="IoC\Models\Child2.cs" />
     <Compile Include="IoC\DependencyInjectionTests.cs" />
@@ -230,8 +233,11 @@
     <Compile Include="IoC\Models\Parent.cs" />
     <Compile Include="IoC\Models\ParentMultipleConstructors.cs" />
     <Compile Include="Week5\Dustin.cs" />
+    <Compile Include="Week5\JT.cs" />
     <Compile Include="Week5\MattShoe.cs" />
     <Compile Include="Week5\SnowflakeBaseTest.cs" />
+    <Compile Include="Week6\MattShoe.cs" />
+    <Compile Include="Week6\SuperfluousSansLoopTestBase.cs" />
     <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
     <None Include="TemplateTest.cs" />

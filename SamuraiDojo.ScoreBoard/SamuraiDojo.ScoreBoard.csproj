@@ -316,7 +316,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AwardsController.cs" />
     <Compile Include="Controllers\BattleController.cs" />
-    <Compile Include="Controllers\BenchmarkingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
@@ -341,9 +340,12 @@
     <Content Include="Angular\app.js" />
     <Content Include="Angular\Controllers\AwardsController.js" />
     <Content Include="Angular\Controllers\BenchmarkingController.js" />
+    <Content Include="Angular\Controllers\HistoryController.js" />
     <Content Include="Angular\Controllers\HomePageController.js" />
     <Content Include="Angular\Controllers\MyProfileController.js" />
     <Content Include="Angular\Controllers\SenseiController.js" />
+    <Content Include="Angular\Directives\CodeBox.html" />
+    <Content Include="Angular\Directives\CodeBox.js" />
     <Content Include="Angular\Directives\DirectivesApp.js" />
     <Content Include="Angular\Services\DataService.js" />
     <Content Include="Angular\Services\RequestService.js" />
@@ -352,6 +354,7 @@
     <Content Include="Battles\Angler of Time.html" />
     <Content Include="Battles\Permutations of Character.html" />
     <Content Include="Battles\Snowflake.html" />
+    <Content Include="Battles\Superfluous Sans Loop.html" />
     <Content Include="Content\Images\samuraibobble.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1163,6 +1166,12 @@
     <Content Include="Scripts\test-bundles\angular-sanitize.js" />
     <Content Include="Scripts\test-bundles\angular-touch.js" />
     <Content Include="Battles\PalindroMania.html" />
+    <Content Include="Solutions\Angler of Time.html" />
+    <Content Include="Solutions\Census Maximus.html" />
+    <Content Include="Solutions\PalindroMania.html" />
+    <Content Include="Solutions\Permutations of Character.html" />
+    <Content Include="Solutions\Snowflake.html" />
+    <Content Include="Solutions\Superfluous Sans Loop.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1210,6 +1219,14 @@
     <ProjectReference Include="..\SamuraiDojo.Scoring\SamuraiDojo.Scoring.csproj">
       <Project>{ff358cff-39dd-4d1c-b689-1b22a3778094}</Project>
       <Name>SamuraiDojo.Scoring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SamuraiDojo.Services\SamuraiDojo.Services.csproj">
+      <Project>{242446f6-8e01-4e44-8243-fb50acfe56fc}</Project>
+      <Name>SamuraiDojo.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SamuraiDojo.Test\SamuraiDojo.Test.csproj">
+      <Project>{0e85b929-b27f-48fa-8a6c-944c887bbcef}</Project>
+      <Name>SamuraiDojo.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\SamuraiDojo.Utility\SamuraiDojo.Utility.csproj">
       <Project>{0dc773c1-7f74-4718-88a4-886b0036cb90}</Project>

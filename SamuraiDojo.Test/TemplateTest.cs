@@ -1,16 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SamuraiDojo.Attributes;
-using SamuraiDojo.Battles.Week#;
+using SamuraiDojo.Battles.Week6;
 
-namespace SamuraiDojo.Test.Week#
+namespace SamuraiDojo.Test.Week6
 {
     [TestClass]
-    [WrittenBy(Samurai.YOU)]
-    public class #YOU : BASE_TEST
+    [WrittenBy(Samurai.MATT_SHOE)]
+    public class MattShoe : BASE_TEST
     {
-        protected override YOUR_BATTLE_CLASS GetInstance()
+        protected override SuperflousSansLoop GetInstance()
         {
-            return new SamuraiDojo.Battles.Week#.YOU();
+            return new SamuraiDojo.Battles.Week6.MattShoe();
         }
     }
 }

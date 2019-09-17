@@ -1,20 +1,19 @@
-﻿using SamuraiDojo.IoC;
+﻿using System.Reflection;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.IoC;
 using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Benchmarking
 {
-    public class Setup : ProjectSetup
+    public class Setup : IProjectSetup
     {
-        protected override bool HasBeenInitialized { get; set; }
+        public bool HasBeenInitialized { get; set; }
 
-        protected override void Initialize()
+        public void Initialize()
         {
-            new SamuraiDojo.Setup();
-            new Utility.Setup();
-
-            Factory.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
-            Factory.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
-            Factory.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));
+            Dojector.Bind<IEfficiencyCalculator>(typeof(EfficiencyCalculator));
+            Dojector.Bind<IEfficiencyRankCollection>(typeof(EfficiencyRankCollection));
+            Dojector.Bind<IBenchmarkEngine>(typeof(BenchmarkEngine));
 
             HasBeenInitialized = true;
         }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using SamuraiDojo.Interfaces;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.IoC;
-using SamuraiDojo.IoC.Interfaces;
 
 namespace SamuraiDojo.Repositories
 {

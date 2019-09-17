@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SamuraiDojo.IoC.Interfaces;
+using SamuraiDojo.Interfaces;
 
 namespace SamuraiDojo.Models
 {
