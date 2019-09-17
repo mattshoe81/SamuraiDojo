@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Interfaces;
 using SamuraiDojo.Models;
@@ -33,6 +34,8 @@ namespace SamuraiDojo.Benchmarking
             List<IPlayerBattleResult> resultsForRank = new List<IPlayerBattleResult>();
             if (efficiencyBuckets.ContainsKey(rank))
                 resultsForRank = efficiencyBuckets[rank];
+
+            resultsForRank.OrderBy(player => player.Efficiency.MemoryAllocated).GroupBy(player => player.Efficiency.AverageExecutionTime);
 
             return resultsForRank;
         }

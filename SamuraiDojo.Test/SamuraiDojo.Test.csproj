@@ -236,8 +236,13 @@
     <Compile Include="Week5\JT.cs" />
     <Compile Include="Week5\MattShoe.cs" />
     <Compile Include="Week5\SnowflakeBaseTest.cs" />
+    <Compile Include="Week6\JT.cs" />
+    <Compile Include="Week6\JZ.cs" />
+    <Compile Include="Week6\Hugo.cs" />
     <Compile Include="Week6\MattShoe.cs" />
     <Compile Include="Week6\SuperfluousSansLoopTestBase.cs" />
+    <Compile Include="Week7\MattShoe.cs" />
+    <Compile Include="Week7\SinglyLinkedListAddOperationBaseTest.cs" />
     <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
     <None Include="TemplateTest.cs" />

@@ -242,6 +242,7 @@
     <Compile Include="Benchmarks\IoC\IoCBenchmarking.cs" />
     <Compile Include="Benchmarks\Week5.cs" />
     <Compile Include="Benchmarks\Week6.cs" />
+    <Compile Include="Benchmarks\Week7.cs" />
     <Compile Include="Interfaces\IBenchmarkEngine.cs" />
     <Compile Include="Interfaces\IEfficiencyCalculator.cs" />
     <Compile Include="Interfaces\IEfficiencyRankCollection.cs" />

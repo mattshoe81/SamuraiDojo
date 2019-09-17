@@ -9,9 +9,9 @@ namespace SamuraiDojo.DataStructures.Queue
 {
     public abstract class DojoQueue<T>
     {
-        protected IDojoLinkedList<T> linkedList;
+        protected DojoLinkedList<T> linkedList;
 
-        public DojoQueue(IDojoLinkedList<T> linkedList)
+        public DojoQueue(DojoLinkedList<T> linkedList)
         {
             this.linkedList = linkedList;
         }

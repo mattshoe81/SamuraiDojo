@@ -12,11 +12,22 @@ namespace SamuraiDojo.Battles.Week6
     {
         public override string Print1toNWithoutLoops(int n)
         {
-            string prettyString = string.Empty;
+            // Use StringBuilder to improve memory efficiency
+            return BuildStringRecursively(new StringBuilder(), n).ToString();
+        }
 
-            // TODO: non-loopy stuff
+        private StringBuilder BuildStringRecursively(StringBuilder stringBuilder, int n)
+        {
+            if (n == 0)
+                stringBuilder.Append('0');
+            else
+            {
+                BuildStringRecursively(stringBuilder, n - 1);
+                stringBuilder.Append(new char[] { ',', ' ' });
+                stringBuilder.Append(n.ToString());
+            }
 
-            return prettyString;
+            return stringBuilder;
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BenchmarkDotNet.Columns;
 #if DEBUG
 using BenchmarkDotNet.Configs;
 #endif
-using BenchmarkDotNet.Horology;
+using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using SamuraiDojo.Battles.Week1;
@@ -18,23 +17,25 @@ using SamuraiDojo.Benchmarking.Interfaces;
 using SamuraiDojo.Utility;
 using SamuraiDojo.Interfaces;
 using SamuraiDojo.Battles.Week6;
+using SamuraiDojo.Battles.Week7;
 
 namespace SamuraiDojo.Benchmarking
 {
     internal class BenchmarkEngine : IBenchmarkEngine
     {
-        private Dictionary<Type, Type> benchmarkMap;
+        private Dictionary<string, Type> benchmarkMap;
 
         public BenchmarkEngine()
         {
-            benchmarkMap = new Dictionary<Type, Type>
+            benchmarkMap = new Dictionary<string, Type>
             {
-                { typeof(CensusMaximus), typeof(Benchmarks.Week3) },
-                { typeof(CharacterCounter), typeof(Benchmarks.Week2) },
-                { typeof(ClockAngler), typeof(Benchmarks.Week1) },
-                { typeof(Palindromania), typeof(Benchmarks.Week4) },
-                { typeof(Snowflake), typeof(Benchmarks.Week5) } ,
-                { typeof(SuperfluousSansLoop), typeof(Benchmarks.Week6) }
+                { typeof(CensusMaximus).Name, typeof(Benchmarks.Week3) },
+                { typeof(CharacterCounter).Name, typeof(Benchmarks.Week2) },
+                { typeof(ClockAngler).Name, typeof(Benchmarks.Week1) },
+                { typeof(Palindromania).Name, typeof(Benchmarks.Week4) },
+                { typeof(Snowflake).Name, typeof(Benchmarks.Week5) } ,
+                { typeof(SuperfluousSansLoop).Name, typeof(Benchmarks.Week6) },
+                { typeof(SinglyLinkedList_Part1<int>).Name, typeof(Benchmarks.Week7) }
             };
         }
 
@@ -45,7 +46,7 @@ namespace SamuraiDojo.Benchmarking
 
         public List<IPlayerBattleResult> PerformBenchmarking(IBattleAttribute battle)
         {
-            Summary summary = StartBenchmarking(benchmarkMap[battle.Type]);
+            Summary summary = StartBenchmarking(benchmarkMap[battle.Type.Name]);
             List<IPlayerBattleResult> battleResults = new List<IPlayerBattleResult>();
             foreach (BenchmarkCase benchmark in summary.BenchmarksCases)
                 battleResults.Add(ProcessCase(benchmark, summary));

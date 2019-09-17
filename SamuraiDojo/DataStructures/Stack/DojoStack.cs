@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.DataStructures.LinkedList;
+﻿using SamuraiDojo.DataStructures.LinkedList;
 
 namespace SamuraiDojo.DataStructures.Stack
 {
     public abstract class DojoStack<T>
     {
-        private IDojoLinkedList<T> linkedList;
+        private DojoLinkedList<T> linkedList;
 
-        public DojoStack(IDojoLinkedList<T> linkedList)
+        public DojoStack(DojoLinkedList<T> linkedList)
         {
             this.linkedList = linkedList;
         }
