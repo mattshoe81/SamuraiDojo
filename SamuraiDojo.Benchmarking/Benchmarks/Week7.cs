@@ -11,9 +11,16 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
             Run(new Test.Week7.MattShoe());
         }
 
+        [Benchmark]
         public void Dustin()
         {
             Run(new Test.Week7.Dustin());
+        }
+
+        [Benchmark]
+        public void Gould()
+        {
+            Run(new Test.Week7.Gould());
         }
     }
 }

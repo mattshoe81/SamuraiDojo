@@ -9,24 +9,28 @@ namespace SamuraiDojo.Battles.Week7
 {
     [WrittenBy(Samurai.MATT_SHOE)]
     public class MattShoe<T> : SinglyLinkedList_Part1<T>
-    {        
-        public MattShoe()
-        {
-            // Do some initialization if you need
-        }
+    {
+        private int size = 0;
 
         public override void Add(T item)
         {
-            // TODO: Link some list nodes and stuff
+            DojoListNode node = new DojoListNode();
+            node.Data = item;
 
-            //DojoListNode newNode = new DojoListNode();
-            //base.Front = stuff and thingz
-            //base.Back = other thingz and stuff
+            if (FrontNode == null)
+            {
+                FrontNode = node;
+                BackNode = node;
+            }
+            else
+            {
+                BackNode.Next = node;
+                BackNode = node;
+            }
+
+            size++;
         }
 
-        public override int Size()
-        {
-            return int.MaxValue;
-        }
+        public override int Size() => size;
     }
 }
