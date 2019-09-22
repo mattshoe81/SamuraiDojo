@@ -1,7 +1,9 @@
 ﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week7
 {
+    [MostElegant]
     [WrittenBy(Samurai.GOULD)]
     public class Gould<T> : SinglyLinkedList_Part1<T>
     {

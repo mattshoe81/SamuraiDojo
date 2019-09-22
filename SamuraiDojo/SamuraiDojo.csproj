@@ -80,6 +80,8 @@
     <Compile Include="Battles\Week7\SinglyLinkedList_Part1.cs" />
     <Compile Include="Battles\Week7\MattShoe.cs" />
     <Compile Include="Battles\Week6\JT.cs" />
+    <Compile Include="Battles\Week8\MattShoe.cs" />
+    <Compile Include="Battles\Week8\SinglyLinkedList_Part2.cs" />
     <Compile Include="DataStructures\BinaryTree\DojoBinaryTree.cs" />
     <Compile Include="DataStructures\Dictionary\DojoDictionary.cs" />
     <Compile Include="DataStructures\HashTable\DojoHashTable.cs" />

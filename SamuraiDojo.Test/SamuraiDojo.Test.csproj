@@ -246,6 +246,8 @@
     <Compile Include="Week7\MattShoe.cs" />
     <Compile Include="Week7\Gould.cs" />
     <Compile Include="Week7\SinglyLinkedListAddOperationBaseTest.cs" />
+    <Compile Include="Week8\MattShoe.cs" />
+    <Compile Include="Week8\SinglyLinkedList_Part2BaseTest.cs" />
     <None Include="TemplateBaseTest.cs" />
     <Compile Include="DojoTest.cs" />
     <None Include="TemplateTest.cs" />

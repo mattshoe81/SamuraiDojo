@@ -7,17 +7,18 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using SamuraiDojo.Benchmarking.Interfaces;
+using SamuraiDojo.IoC;
+using SamuraiDojo.Utility;
+using SamuraiDojo.Interfaces;
 using SamuraiDojo.Battles.Week1;
 using SamuraiDojo.Battles.Week2;
 using SamuraiDojo.Battles.Week3;
 using SamuraiDojo.Battles.Week4;
 using SamuraiDojo.Battles.Week5;
-using SamuraiDojo.IoC;
-using SamuraiDojo.Benchmarking.Interfaces;
-using SamuraiDojo.Utility;
-using SamuraiDojo.Interfaces;
 using SamuraiDojo.Battles.Week6;
 using SamuraiDojo.Battles.Week7;
+using SamuraiDojo.Battles.Week8;
 
 namespace SamuraiDojo.Benchmarking
 {
@@ -35,7 +36,8 @@ namespace SamuraiDojo.Benchmarking
                 { typeof(Palindromania).Name, typeof(Benchmarks.Week4) },
                 { typeof(Snowflake).Name, typeof(Benchmarks.Week5) } ,
                 { typeof(SuperfluousSansLoop).Name, typeof(Benchmarks.Week6) },
-                { typeof(SinglyLinkedList_Part1<int>).Name, typeof(Benchmarks.Week7) }
+                { typeof(SinglyLinkedList_Part1<int>).Name, typeof(Benchmarks.Week7) },
+                { typeof(SinglyLinkedList_Part2<int>).Name, typeof(Benchmarks.Week8) }
             };
         }
 

@@ -3,6 +3,7 @@ using SamuraiDojo.Battles.Week7;
 
 namespace SamuraiDojo.Benchmarking.Benchmarks
 {
+    [MemoryDiagnoser]
     public class Week7 : DojoBenchmark<SinglyLinkedList_Part1<int>>
     {
         [Benchmark(Baseline = true)]
@@ -21,6 +22,12 @@ namespace SamuraiDojo.Benchmarking.Benchmarks
         public void Gould()
         {
             Run(new Test.Week7.Gould());
+        }
+
+        [Benchmark]
+        public void JT()
+        {
+            Run(new Test.Week7.JT());
         }
     }
 }

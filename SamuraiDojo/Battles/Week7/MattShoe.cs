@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
+﻿using SamuraiDojo.Attributes;
 
 namespace SamuraiDojo.Battles.Week7
 {
-    [WrittenBy(Samurai.MATT_SHOE)]
-    public class MattShoe<T> : SinglyLinkedList_Part1<T>
+[WrittenBy(Samurai.MATT_SHOE)]
+public class MattShoe<T> : SinglyLinkedList_Part1<T>
+{
+    private int size = 0;
+
+    public override void Add(T item)
     {
-        private int size = 0;
+        DojoListNode node = new DojoListNode();
+        node.Data = item;
 
-        public override void Add(T item)
+        if (FrontNode == null)
         {
-            DojoListNode node = new DojoListNode();
-            node.Data = item;
-
-            if (FrontNode == null)
-            {
-                FrontNode = node;
-                BackNode = node;
-            }
-            else
-            {
-                BackNode.Next = node;
-                BackNode = node;
-            }
-
-            size++;
+            FrontNode = node;
+            BackNode = node;
+        }
+        else
+        {
+            BackNode.Next = node;
+            BackNode = node;
         }
 
-        public override int Size() => size;
+        size++;
     }
+
+    public override int Size() => size;
+}
 }

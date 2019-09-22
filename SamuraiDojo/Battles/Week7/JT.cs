@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SamuraiDojo.Attributes;
+﻿using SamuraiDojo.Attributes;
+using SamuraiDojo.Attributes.Bonus;
 
 namespace SamuraiDojo.Battles.Week7
 {
+    [TigerAward]
     [WrittenBy(Samurai.JT)]
     public class JT<T> : SinglyLinkedList_Part1<T>
     {
