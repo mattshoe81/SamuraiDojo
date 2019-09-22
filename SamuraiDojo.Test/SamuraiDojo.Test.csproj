@@ -241,6 +241,7 @@
     <Compile Include="Week6\Hugo.cs" />
     <Compile Include="Week6\MattShoe.cs" />
     <Compile Include="Week6\SuperfluousSansLoopTestBase.cs" />
+    <Compile Include="Week7\JT.cs" />
     <Compile Include="Week7\Dustin.cs" />
     <Compile Include="Week7\MattShoe.cs" />
     <Compile Include="Week7\Gould.cs" />

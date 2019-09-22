@@ -74,6 +74,7 @@
     <Compile Include="Battles\Week5\Snowflake.cs" />
     <Compile Include="Battles\Week6\JZ.cs" />
     <Compile Include="Battles\Week6\Hugo.cs" />
+    <Compile Include="Battles\Week7\JT.cs" />
     <Compile Include="Battles\Week7\Gould.cs" />
     <Compile Include="Battles\Week7\Dustin.cs" />
     <Compile Include="Battles\Week7\SinglyLinkedList_Part1.cs" />
